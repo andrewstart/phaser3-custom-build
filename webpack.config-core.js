@@ -65,10 +65,16 @@ module.exports = {
 
        new CleanWebpackPlugin(),
        new CopyPlugin({
-           patterns: [{
+           patterns: [
+               {
                from: "node_modules/phaser/plugins/spine/dist/",
                to: "../plugins/spine/dist/"
-           }, ],
+                },
+                {
+                    from: "node_modules/phaser/types/",
+                    to: "../types/"
+                },
+            ],
        }),
    ],
 
