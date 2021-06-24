@@ -515,6 +515,77 @@ module.exports = NOOP;
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+//  Source object
+//  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
+//  The default value to use if the key doesn't exist
+
+/**
+ * Retrieves a value from an object.
+ *
+ * @function Phaser.Utils.Objects.GetValue
+ * @since 3.0.0
+ *
+ * @param {object} source - The object to retrieve the value from.
+ * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
+ * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
+ *
+ * @return {*} The value of the requested key.
+ */
+var GetValue = function (source, key, defaultValue)
+{
+    if (!source || typeof source === 'number')
+    {
+        return defaultValue;
+    }
+    else if (source.hasOwnProperty(key))
+    {
+        return source[key];
+    }
+    else if (key.indexOf('.') !== -1)
+    {
+        var keys = key.split('.');
+        var parent = source;
+        var value = defaultValue;
+
+        //  Use for loop here so we can break early
+        for (var i = 0; i < keys.length; i++)
+        {
+            if (parent.hasOwnProperty(keys[i]))
+            {
+                //  Yes it has a key property, let's carry on down
+                value = parent[keys[i]];
+
+                parent = parent[keys[i]];
+            }
+            else
+            {
+                //  Can't go any further, so reset to default
+                value = defaultValue;
+                break;
+            }
+        }
+
+        return value;
+    }
+    else
+    {
+        return defaultValue;
+    }
+};
+
+module.exports = GetValue;
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -854,77 +925,6 @@ EventEmitter.EventEmitter = EventEmitter;
 if (true) {
   module.exports = EventEmitter;
 }
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-//  Source object
-//  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
-//  The default value to use if the key doesn't exist
-
-/**
- * Retrieves a value from an object.
- *
- * @function Phaser.Utils.Objects.GetValue
- * @since 3.0.0
- *
- * @param {object} source - The object to retrieve the value from.
- * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
- * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
- *
- * @return {*} The value of the requested key.
- */
-var GetValue = function (source, key, defaultValue)
-{
-    if (!source || typeof source === 'number')
-    {
-        return defaultValue;
-    }
-    else if (source.hasOwnProperty(key))
-    {
-        return source[key];
-    }
-    else if (key.indexOf('.') !== -1)
-    {
-        var keys = key.split('.');
-        var parent = source;
-        var value = defaultValue;
-
-        //  Use for loop here so we can break early
-        for (var i = 0; i < keys.length; i++)
-        {
-            if (parent.hasOwnProperty(keys[i]))
-            {
-                //  Yes it has a key property, let's carry on down
-                value = parent[keys[i]];
-
-                parent = parent[keys[i]];
-            }
-            else
-            {
-                //  Can't go any further, so reset to default
-                value = defaultValue;
-                break;
-            }
-        }
-
-        return value;
-    }
-    else
-    {
-        return defaultValue;
-    }
-};
-
-module.exports = GetValue;
 
 
 /***/ }),
@@ -2580,6 +2580,75 @@ module.exports = IsPlainObject;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
+var types = {};
+
+/**
+ * @namespace Phaser.Loader.FileTypesManager
+ */
+
+var FileTypesManager = {
+
+    /**
+     * Static method called when a LoaderPlugin is created.
+     * 
+     * Loops through the local types object and injects all of them as
+     * properties into the LoaderPlugin instance.
+     *
+     * @method Phaser.Loader.FileTypesManager.install
+     * @since 3.0.0
+     * 
+     * @param {Phaser.Loader.LoaderPlugin} loader - The LoaderPlugin to install the types into.
+     */
+    install: function (loader)
+    {
+        for (var key in types)
+        {
+            loader[key] = types[key];
+        }
+    },
+
+    /**
+     * Static method called directly by the File Types.
+     * 
+     * The key is a reference to the function used to load the files via the Loader, i.e. `image`.
+     *
+     * @method Phaser.Loader.FileTypesManager.register
+     * @since 3.0.0
+     * 
+     * @param {string} key - The key that will be used as the method name in the LoaderPlugin.
+     * @param {function} factoryFunction - The function that will be called when LoaderPlugin.key is invoked.
+     */
+    register: function (key, factoryFunction)
+    {
+        types[key] = factoryFunction;
+    },
+
+    /**
+     * Removed all associated file types.
+     *
+     * @method Phaser.Loader.FileTypesManager.destroy
+     * @since 3.0.0
+     */
+    destroy: function ()
+    {
+        types = {};
+    }
+
+};
+
+module.exports = FileTypesManager;
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
 //  Contains the plugins that Phaser uses globally and locally.
 //  These are the source objects, not instantiated.
 var corePlugins = {};
@@ -2780,75 +2849,6 @@ module.exports = PluginCache;
 
 
 /***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var types = {};
-
-/**
- * @namespace Phaser.Loader.FileTypesManager
- */
-
-var FileTypesManager = {
-
-    /**
-     * Static method called when a LoaderPlugin is created.
-     * 
-     * Loops through the local types object and injects all of them as
-     * properties into the LoaderPlugin instance.
-     *
-     * @method Phaser.Loader.FileTypesManager.install
-     * @since 3.0.0
-     * 
-     * @param {Phaser.Loader.LoaderPlugin} loader - The LoaderPlugin to install the types into.
-     */
-    install: function (loader)
-    {
-        for (var key in types)
-        {
-            loader[key] = types[key];
-        }
-    },
-
-    /**
-     * Static method called directly by the File Types.
-     * 
-     * The key is a reference to the function used to load the files via the Loader, i.e. `image`.
-     *
-     * @method Phaser.Loader.FileTypesManager.register
-     * @since 3.0.0
-     * 
-     * @param {string} key - The key that will be used as the method name in the LoaderPlugin.
-     * @param {function} factoryFunction - The function that will be called when LoaderPlugin.key is invoked.
-     */
-    register: function (key, factoryFunction)
-    {
-        types[key] = factoryFunction;
-    },
-
-    /**
-     * Removed all associated file types.
-     *
-     * @method Phaser.Loader.FileTypesManager.destroy
-     * @since 3.0.0
-     */
-    destroy: function ()
-    {
-        types = {};
-    }
-
-};
-
-module.exports = FileTypesManager;
-
-
-/***/ }),
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2859,7 +2859,7 @@ module.exports = FileTypesManager;
  */
 
 var MATH = __webpack_require__(107);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 
 /**
  * Retrieves a value from an object. Allows for more advanced selection options, including:
@@ -4435,7 +4435,7 @@ module.exports = Vector3;
  */
 
 var Class = __webpack_require__(0);
-var PluginCache = __webpack_require__(14);
+var PluginCache = __webpack_require__(15);
 var SceneEvents = __webpack_require__(11);
 
 /**
@@ -4615,7 +4615,7 @@ module.exports = GameObjectCreator;
  */
 
 var Class = __webpack_require__(0);
-var PluginCache = __webpack_require__(14);
+var PluginCache = __webpack_require__(15);
 var SceneEvents = __webpack_require__(11);
 
 /**
@@ -5990,7 +5990,7 @@ module.exports = TransformMatrix;
 
 var Class = __webpack_require__(0);
 var DeepCopy = __webpack_require__(100);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(216);
 var GetFastValue = __webpack_require__(1);
 var Matrix4 = __webpack_require__(35);
@@ -12725,7 +12725,7 @@ module.exports = BuildGameObject;
 var Class = __webpack_require__(0);
 var ComponentsToJSON = __webpack_require__(101);
 var DataManager = __webpack_require__(59);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(82);
 
 /**
@@ -16739,9 +16739,9 @@ module.exports = Contains;
 var Class = __webpack_require__(0);
 var CONST = __webpack_require__(27);
 var File = __webpack_require__(28);
-var FileTypesManager = __webpack_require__(15);
+var FileTypesManager = __webpack_require__(14);
 var GetFastValue = __webpack_require__(1);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var IsPlainObject = __webpack_require__(13);
 
 /**
@@ -18582,7 +18582,7 @@ module.exports = CONST;
 
 var Class = __webpack_require__(0);
 var Clone = __webpack_require__(36);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(37);
 var GameEvents = __webpack_require__(9);
 var NOOP = __webpack_require__(3);
@@ -19295,7 +19295,7 @@ module.exports = BaseSoundManager;
  */
 
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(37);
 var Extend = __webpack_require__(12);
 var NOOP = __webpack_require__(3);
@@ -21707,7 +21707,7 @@ module.exports = Vertex;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 
 //  Contains the plugins that Phaser uses globally and locally.
 //  These are the source objects, not instantiated.
@@ -21915,7 +21915,7 @@ module.exports = XHRSettings;
 var Class = __webpack_require__(0);
 var CONST = __webpack_require__(27);
 var File = __webpack_require__(28);
-var FileTypesManager = __webpack_require__(15);
+var FileTypesManager = __webpack_require__(14);
 var GetFastValue = __webpack_require__(1);
 var IsPlainObject = __webpack_require__(13);
 
@@ -22502,7 +22502,7 @@ var GetEaseFunction = __webpack_require__(47);
 var GetNewValue = __webpack_require__(92);
 var GetProps = __webpack_require__(333);
 var GetTargets = __webpack_require__(143);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var GetValueOp = __webpack_require__(144);
 var Tween = __webpack_require__(146);
 var TweenData = __webpack_require__(148);
@@ -22687,7 +22687,7 @@ var Class = __webpack_require__(0);
 var Events = __webpack_require__(65);
 var FindClosestInSorted = __webpack_require__(149);
 var Frame = __webpack_require__(150);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var SortByDigits = __webpack_require__(151);
 
 /**
@@ -23676,7 +23676,7 @@ module.exports = Pad;
 var Class = __webpack_require__(0);
 var Components = __webpack_require__(23);
 var DegToRad = __webpack_require__(67);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(19);
 var Rectangle = __webpack_require__(10);
 var TransformMatrix = __webpack_require__(25);
@@ -31982,7 +31982,7 @@ var ComponentsVisible = __webpack_require__(176);
 var Ellipse = __webpack_require__(83);
 var GameObject = __webpack_require__(40);
 var GetFastValue = __webpack_require__(1);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var MATH_CONST = __webpack_require__(8);
 var PIPELINES_CONST = __webpack_require__(68);
 var Render = __webpack_require__(732);
@@ -33628,7 +33628,7 @@ var Class = __webpack_require__(0);
 var Components = __webpack_require__(23);
 var ComponentsToJSON = __webpack_require__(101);
 var DataManager = __webpack_require__(59);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var GameObjectEvents = __webpack_require__(82);
 var List = __webpack_require__(118);
 var Render = __webpack_require__(737);
@@ -35006,7 +35006,7 @@ var Components = __webpack_require__(23);
 var GameEvents = __webpack_require__(9);
 var GameObject = __webpack_require__(40);
 var GetTextSize = __webpack_require__(743);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var RemoveFromDOM = __webpack_require__(241);
 var TextRender = __webpack_require__(744);
 var TextStyle = __webpack_require__(747);
@@ -37724,7 +37724,7 @@ module.exports = MergeXHRSettings;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 
 /**
  * Extracts an array of targets from a Tween configuration object.
@@ -38086,7 +38086,7 @@ module.exports = TWEEN_DEFAULTS;
  */
 
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(147);
 var GameObjectCreator = __webpack_require__(21);
 var GameObjectFactory = __webpack_require__(22);
@@ -40201,11 +40201,11 @@ module.exports = SortByDigits;
 var Animation = __webpack_require__(95);
 var Class = __webpack_require__(0);
 var CustomMap = __webpack_require__(49);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(65);
 var GameEvents = __webpack_require__(9);
 var GetFastValue = __webpack_require__(1);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var Pad = __webpack_require__(96);
 var NumberArray = __webpack_require__(153);
 
@@ -43179,7 +43179,7 @@ module.exports = AnimationState;
 
 var Class = __webpack_require__(0);
 var CustomMap = __webpack_require__(49);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(156);
 
 /**
@@ -47465,7 +47465,7 @@ var Class = __webpack_require__(0);
 var CONST = __webpack_require__(18);
 var Device = __webpack_require__(192);
 var GetFastValue = __webpack_require__(1);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var IsPlainObject = __webpack_require__(13);
 var PhaserMath = __webpack_require__(107);
 var NOOP = __webpack_require__(3);
@@ -50553,7 +50553,7 @@ var CameraEvents = __webpack_require__(19);
 var CanvasSnapshot = __webpack_require__(211);
 var Class = __webpack_require__(0);
 var CONST = __webpack_require__(18);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(42);
 var GetBlendModes = __webpack_require__(212);
 var ScaleEvents = __webpack_require__(53);
@@ -51554,7 +51554,7 @@ var ArrayRemove = __webpack_require__(43);
 var CameraEvents = __webpack_require__(19);
 var Class = __webpack_require__(0);
 var CONST = __webpack_require__(18);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(42);
 var GameEvents = __webpack_require__(9);
 var IsSizePowerOfTwo = __webpack_require__(73);
@@ -60080,7 +60080,7 @@ module.exports = DebugHeader;
  */
 
 var Class = __webpack_require__(0);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var NOOP = __webpack_require__(3);
 var RequestAnimationFrame = __webpack_require__(229);
 
@@ -61776,7 +61776,7 @@ module.exports = RemoveFromDOM;
 
 var Class = __webpack_require__(0);
 var CONST = __webpack_require__(114);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(34);
 var GameEvents = __webpack_require__(9);
 var Keyboard = __webpack_require__(243);
@@ -65577,12 +65577,12 @@ module.exports = TouchManager;
 
 var Class = __webpack_require__(0);
 var GameEvents = __webpack_require__(9);
-var EventEmitter = __webpack_require__(4);
-var FileTypesManager = __webpack_require__(15);
+var EventEmitter = __webpack_require__(5);
+var FileTypesManager = __webpack_require__(14);
 var GameObjectCreator = __webpack_require__(21);
 var GameObjectFactory = __webpack_require__(22);
 var GetFastValue = __webpack_require__(1);
-var PluginCache = __webpack_require__(14);
+var PluginCache = __webpack_require__(15);
 var Remove = __webpack_require__(43);
 
 /**
@@ -66479,7 +66479,7 @@ module.exports = PluginManager;
 
 var CONST = __webpack_require__(113);
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(53);
 var GameEvents = __webpack_require__(9);
 var GetInnerHeight = __webpack_require__(233);
@@ -68950,7 +68950,7 @@ var Class = __webpack_require__(0);
 var CONST = __webpack_require__(77);
 var Events = __webpack_require__(11);
 var GameEvents = __webpack_require__(9);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var LoaderEvents = __webpack_require__(60);
 var NOOP = __webpack_require__(3);
 var Scene = __webpack_require__(251);
@@ -70995,7 +70995,7 @@ module.exports = GetScenePlugins;
  */
 
 var CONST = __webpack_require__(77);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var Merge = __webpack_require__(255);
 var InjectionMap = __webpack_require__(650);
 
@@ -71140,11 +71140,11 @@ var CanvasTexture = __webpack_require__(257);
 var Class = __webpack_require__(0);
 var Color = __webpack_require__(32);
 var CONST = __webpack_require__(18);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(56);
 var GameEvents = __webpack_require__(9);
 var GenerateTexture = __webpack_require__(651);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var Parser = __webpack_require__(260);
 var Texture = __webpack_require__(117);
 
@@ -75854,7 +75854,7 @@ module.exports = HTML5AudioSound;
 
 var BaseSoundManager = __webpack_require__(78);
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var NoAudioSound = __webpack_require__(267);
 var NOOP = __webpack_require__(3);
 
@@ -75972,7 +75972,7 @@ module.exports = NoAudioSoundManager;
 
 var BaseSound = __webpack_require__(79);
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Extend = __webpack_require__(12);
 
 var returnFalse = function ()
@@ -78001,7 +78001,7 @@ module.exports = Shuffle;
  */
 
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(277);
 
 /**
@@ -81290,7 +81290,7 @@ module.exports = Button;
 var Axis = __webpack_require__(319);
 var Button = __webpack_require__(320);
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Vector2 = __webpack_require__(6);
 
 /**
@@ -82061,7 +82061,7 @@ module.exports = Gamepad;
  */
 
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(88);
 
 /**
@@ -82997,7 +82997,7 @@ module.exports = XHRLoader;
 var Class = __webpack_require__(0);
 var CONST = __webpack_require__(27);
 var File = __webpack_require__(28);
-var FileTypesManager = __webpack_require__(15);
+var FileTypesManager = __webpack_require__(14);
 var GetFastValue = __webpack_require__(1);
 var HTML5AudioFile = __webpack_require__(329);
 var IsPlainObject = __webpack_require__(13);
@@ -84476,7 +84476,7 @@ module.exports = GetProps;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 
 /**
  * Internal function used by the Timeline Builder.
@@ -84529,7 +84529,7 @@ var GetAdvancedValue = __webpack_require__(16);
 var GetBoolean = __webpack_require__(50);
 var GetEaseFunction = __webpack_require__(47);
 var GetNewValue = __webpack_require__(92);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var GetValueOp = __webpack_require__(144);
 var Tween = __webpack_require__(146);
 var TweenData = __webpack_require__(148);
@@ -84655,7 +84655,7 @@ module.exports = NumberTweenBuilder;
  */
 
 var GetEaseFunction = __webpack_require__(47);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var MATH_CONST = __webpack_require__(8);
 
 /**
@@ -84908,7 +84908,7 @@ var GetEaseFunction = __webpack_require__(47);
 var GetNewValue = __webpack_require__(92);
 var GetTargets = __webpack_require__(143);
 var GetTweens = __webpack_require__(334);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var Timeline = __webpack_require__(338);
 var TweenBuilder = __webpack_require__(93);
 
@@ -85055,7 +85055,7 @@ module.exports = TimelineBuilder;
  */
 
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(147);
 var TweenBuilder = __webpack_require__(93);
 var TWEEN_CONST = __webpack_require__(51);
@@ -86065,7 +86065,7 @@ var Phaser = {
             XMLFile: __webpack_require__(933)
         },
         File: __webpack_require__(28),
-        FileTypesManager: __webpack_require__(15),
+        FileTypesManager: __webpack_require__(14),
         GetURL: __webpack_require__(141),
         LoaderPlugin: __webpack_require__(934),
         MergeXHRSettings: __webpack_require__(142),
@@ -88886,7 +88886,7 @@ module.exports = Origin;
 
 var DegToRad = __webpack_require__(67);
 var GetBoolean = __webpack_require__(50);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var TWEEN_CONST = __webpack_require__(51);
 var Vector2 = __webpack_require__(6);
 
@@ -94214,7 +94214,7 @@ module.exports = Zoom;
 var Camera = __webpack_require__(158);
 var Class = __webpack_require__(0);
 var GetFastValue = __webpack_require__(1);
-var PluginCache = __webpack_require__(14);
+var PluginCache = __webpack_require__(15);
 var RectangleContains = __webpack_require__(41);
 var ScaleEvents = __webpack_require__(53);
 var SceneEvents = __webpack_require__(11);
@@ -100308,7 +100308,7 @@ module.exports = 'setdata';
 
 var Class = __webpack_require__(0);
 var DataManager = __webpack_require__(59);
-var PluginCache = __webpack_require__(14);
+var PluginCache = __webpack_require__(15);
 var SceneEvents = __webpack_require__(11);
 
 /**
@@ -100479,184 +100479,455 @@ module.exports = Dom;
 /* 591 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var Class = __webpack_require__(0);
-var EE = __webpack_require__(4);
-var PluginCache = __webpack_require__(14);
 
-/**
- * @classdesc
- * EventEmitter is a Scene Systems plugin compatible version of eventemitter3.
- *
- * @class EventEmitter
- * @memberof Phaser.Events
- * @constructor
- * @since 3.0.0
- */
-var EventEmitter = new Class({
 
-    Extends: EE,
+var R = typeof Reflect === 'object' ? Reflect : null
+var ReflectApply = R && typeof R.apply === 'function'
+  ? R.apply
+  : function ReflectApply(target, receiver, args) {
+    return Function.prototype.apply.call(target, receiver, args);
+  }
 
-    initialize:
+var ReflectOwnKeys
+if (R && typeof R.ownKeys === 'function') {
+  ReflectOwnKeys = R.ownKeys
+} else if (Object.getOwnPropertySymbols) {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target)
+      .concat(Object.getOwnPropertySymbols(target));
+  };
+} else {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target);
+  };
+}
 
-    function EventEmitter ()
-    {
-        EE.call(this);
-    },
+function ProcessEmitWarning(warning) {
+  if (console && console.warn) console.warn(warning);
+}
 
-    /**
-     * Removes all listeners.
-     *
-     * @method Phaser.Events.EventEmitter#shutdown
-     * @since 3.0.0
-     */
-    shutdown: function ()
-    {
-        this.removeAllListeners();
-    },
+var NumberIsNaN = Number.isNaN || function NumberIsNaN(value) {
+  return value !== value;
+}
 
-    /**
-     * Removes all listeners.
-     *
-     * @method Phaser.Events.EventEmitter#destroy
-     * @since 3.0.0
-     */
-    destroy: function ()
-    {
-        this.removeAllListeners();
+function EventEmitter() {
+  EventEmitter.init.call(this);
+}
+module.exports = EventEmitter;
+
+// Backwards-compat with node 0.10.x
+EventEmitter.EventEmitter = EventEmitter;
+
+EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._eventsCount = 0;
+EventEmitter.prototype._maxListeners = undefined;
+
+// By default EventEmitters will print a warning if more than 10 listeners are
+// added to it. This is a useful default which helps finding memory leaks.
+var defaultMaxListeners = 10;
+
+Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
+  enumerable: true,
+  get: function() {
+    return defaultMaxListeners;
+  },
+  set: function(arg) {
+    if (typeof arg !== 'number' || arg < 0 || NumberIsNaN(arg)) {
+      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + '.');
     }
-
+    defaultMaxListeners = arg;
+  }
 });
 
-/**
- * Return an array listing the events for which the emitter has registered listeners.
- *
- * @method Phaser.Events.EventEmitter#eventNames
- * @since 3.0.0
- *
- * @return {Array.<string|symbol>}
- */
+EventEmitter.init = function() {
 
-/**
- * Return the listeners registered for a given event.
- *
- * @method Phaser.Events.EventEmitter#listeners
- * @since 3.0.0
- *
- * @param {(string|symbol)} event - The event name.
- *
- * @return {Function[]} The registered listeners.
- */
+  if (this._events === undefined ||
+      this._events === Object.getPrototypeOf(this)._events) {
+    this._events = Object.create(null);
+    this._eventsCount = 0;
+  }
 
-/**
- * Return the number of listeners listening to a given event.
- *
- * @method Phaser.Events.EventEmitter#listenerCount
- * @since 3.0.0
- *
- * @param {(string|symbol)} event - The event name.
- *
- * @return {number} The number of listeners.
- */
+  this._maxListeners = this._maxListeners || undefined;
+};
 
-/**
- * Calls each of the listeners registered for a given event.
- *
- * @method Phaser.Events.EventEmitter#emit
- * @since 3.0.0
- *
- * @param {(string|symbol)} event - The event name.
- * @param {...*} [args] - Additional arguments that will be passed to the event handler.
- *
- * @return {boolean} `true` if the event had listeners, else `false`.
- */
+// Obviously not all Emitters should be limited to 10. This function allows
+// that to be increased. Set to zero for unlimited.
+EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
+  if (typeof n !== 'number' || n < 0 || NumberIsNaN(n)) {
+    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + '.');
+  }
+  this._maxListeners = n;
+  return this;
+};
 
-/**
- * Add a listener for a given event.
- *
- * @method Phaser.Events.EventEmitter#on
- * @since 3.0.0
- *
- * @param {(string|symbol)} event - The event name.
- * @param {function} fn - The listener function.
- * @param {*} [context=this] - The context to invoke the listener with.
- *
- * @return {this} `this`.
- */
+function $getMaxListeners(that) {
+  if (that._maxListeners === undefined)
+    return EventEmitter.defaultMaxListeners;
+  return that._maxListeners;
+}
 
-/**
- * Add a listener for a given event.
- *
- * @method Phaser.Events.EventEmitter#addListener
- * @since 3.0.0
- *
- * @param {(string|symbol)} event - The event name.
- * @param {function} fn - The listener function.
- * @param {*} [context=this] - The context to invoke the listener with.
- *
- * @return {this} `this`.
- */
+EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
+  return $getMaxListeners(this);
+};
 
-/**
- * Add a one-time listener for a given event.
- *
- * @method Phaser.Events.EventEmitter#once
- * @since 3.0.0
- *
- * @param {(string|symbol)} event - The event name.
- * @param {function} fn - The listener function.
- * @param {*} [context=this] - The context to invoke the listener with.
- *
- * @return {this} `this`.
- */
+EventEmitter.prototype.emit = function emit(type) {
+  var args = [];
+  for (var i = 1; i < arguments.length; i++) args.push(arguments[i]);
+  var doError = (type === 'error');
 
-/**
- * Remove the listeners of a given event.
- *
- * @method Phaser.Events.EventEmitter#removeListener
- * @since 3.0.0
- *
- * @param {(string|symbol)} event - The event name.
- * @param {function} [fn] - Only remove the listeners that match this function.
- * @param {*} [context] - Only remove the listeners that have this context.
- * @param {boolean} [once] - Only remove one-time listeners.
- *
- * @return {this} `this`.
- */
+  var events = this._events;
+  if (events !== undefined)
+    doError = (doError && events.error === undefined);
+  else if (!doError)
+    return false;
 
-/**
- * Remove the listeners of a given event.
- *
- * @method Phaser.Events.EventEmitter#off
- * @since 3.0.0
- *
- * @param {(string|symbol)} event - The event name.
- * @param {function} [fn] - Only remove the listeners that match this function.
- * @param {*} [context] - Only remove the listeners that have this context.
- * @param {boolean} [once] - Only remove one-time listeners.
- *
- * @return {this} `this`.
- */
+  // If there is no 'error' event listener then throw.
+  if (doError) {
+    var er;
+    if (args.length > 0)
+      er = args[0];
+    if (er instanceof Error) {
+      // Note: The comments on the `throw` lines are intentional, they show
+      // up in Node's output if this results in an unhandled exception.
+      throw er; // Unhandled 'error' event
+    }
+    // At least give some kind of context to the user
+    var err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
+    err.context = er;
+    throw err; // Unhandled 'error' event
+  }
 
-/**
- * Remove all listeners, or those of the specified event.
- *
- * @method Phaser.Events.EventEmitter#removeAllListeners
- * @since 3.0.0
- *
- * @param {(string|symbol)} [event] - The event name.
- *
- * @return {this} `this`.
- */
+  var handler = events[type];
 
-PluginCache.register('EventEmitter', EventEmitter, 'events');
+  if (handler === undefined)
+    return false;
 
-module.exports = EventEmitter;
+  if (typeof handler === 'function') {
+    ReflectApply(handler, this, args);
+  } else {
+    var len = handler.length;
+    var listeners = arrayClone(handler, len);
+    for (var i = 0; i < len; ++i)
+      ReflectApply(listeners[i], this, args);
+  }
+
+  return true;
+};
+
+function _addListener(target, type, listener, prepend) {
+  var m;
+  var events;
+  var existing;
+
+  if (typeof listener !== 'function') {
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+  }
+
+  events = target._events;
+  if (events === undefined) {
+    events = target._events = Object.create(null);
+    target._eventsCount = 0;
+  } else {
+    // To avoid recursion in the case that type === "newListener"! Before
+    // adding it to the listeners, first emit "newListener".
+    if (events.newListener !== undefined) {
+      target.emit('newListener', type,
+                  listener.listener ? listener.listener : listener);
+
+      // Re-assign `events` because a newListener handler could have caused the
+      // this._events to be assigned to a new object
+      events = target._events;
+    }
+    existing = events[type];
+  }
+
+  if (existing === undefined) {
+    // Optimize the case of one listener. Don't need the extra array object.
+    existing = events[type] = listener;
+    ++target._eventsCount;
+  } else {
+    if (typeof existing === 'function') {
+      // Adding the second element, need to change to array.
+      existing = events[type] =
+        prepend ? [listener, existing] : [existing, listener];
+      // If we've already got an array, just append.
+    } else if (prepend) {
+      existing.unshift(listener);
+    } else {
+      existing.push(listener);
+    }
+
+    // Check for listener leak
+    m = $getMaxListeners(target);
+    if (m > 0 && existing.length > m && !existing.warned) {
+      existing.warned = true;
+      // No error code for this since it is a Warning
+      // eslint-disable-next-line no-restricted-syntax
+      var w = new Error('Possible EventEmitter memory leak detected. ' +
+                          existing.length + ' ' + String(type) + ' listeners ' +
+                          'added. Use emitter.setMaxListeners() to ' +
+                          'increase limit');
+      w.name = 'MaxListenersExceededWarning';
+      w.emitter = target;
+      w.type = type;
+      w.count = existing.length;
+      ProcessEmitWarning(w);
+    }
+  }
+
+  return target;
+}
+
+EventEmitter.prototype.addListener = function addListener(type, listener) {
+  return _addListener(this, type, listener, false);
+};
+
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+EventEmitter.prototype.prependListener =
+    function prependListener(type, listener) {
+      return _addListener(this, type, listener, true);
+    };
+
+function onceWrapper() {
+  var args = [];
+  for (var i = 0; i < arguments.length; i++) args.push(arguments[i]);
+  if (!this.fired) {
+    this.target.removeListener(this.type, this.wrapFn);
+    this.fired = true;
+    ReflectApply(this.listener, this.target, args);
+  }
+}
+
+function _onceWrap(target, type, listener) {
+  var state = { fired: false, wrapFn: undefined, target: target, type: type, listener: listener };
+  var wrapped = onceWrapper.bind(state);
+  wrapped.listener = listener;
+  state.wrapFn = wrapped;
+  return wrapped;
+}
+
+EventEmitter.prototype.once = function once(type, listener) {
+  if (typeof listener !== 'function') {
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+  }
+  this.on(type, _onceWrap(this, type, listener));
+  return this;
+};
+
+EventEmitter.prototype.prependOnceListener =
+    function prependOnceListener(type, listener) {
+      if (typeof listener !== 'function') {
+        throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+      }
+      this.prependListener(type, _onceWrap(this, type, listener));
+      return this;
+    };
+
+// Emits a 'removeListener' event if and only if the listener was removed.
+EventEmitter.prototype.removeListener =
+    function removeListener(type, listener) {
+      var list, events, position, i, originalListener;
+
+      if (typeof listener !== 'function') {
+        throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+      }
+
+      events = this._events;
+      if (events === undefined)
+        return this;
+
+      list = events[type];
+      if (list === undefined)
+        return this;
+
+      if (list === listener || list.listener === listener) {
+        if (--this._eventsCount === 0)
+          this._events = Object.create(null);
+        else {
+          delete events[type];
+          if (events.removeListener)
+            this.emit('removeListener', type, list.listener || listener);
+        }
+      } else if (typeof list !== 'function') {
+        position = -1;
+
+        for (i = list.length - 1; i >= 0; i--) {
+          if (list[i] === listener || list[i].listener === listener) {
+            originalListener = list[i].listener;
+            position = i;
+            break;
+          }
+        }
+
+        if (position < 0)
+          return this;
+
+        if (position === 0)
+          list.shift();
+        else {
+          spliceOne(list, position);
+        }
+
+        if (list.length === 1)
+          events[type] = list[0];
+
+        if (events.removeListener !== undefined)
+          this.emit('removeListener', type, originalListener || listener);
+      }
+
+      return this;
+    };
+
+EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+
+EventEmitter.prototype.removeAllListeners =
+    function removeAllListeners(type) {
+      var listeners, events, i;
+
+      events = this._events;
+      if (events === undefined)
+        return this;
+
+      // not listening for removeListener, no need to emit
+      if (events.removeListener === undefined) {
+        if (arguments.length === 0) {
+          this._events = Object.create(null);
+          this._eventsCount = 0;
+        } else if (events[type] !== undefined) {
+          if (--this._eventsCount === 0)
+            this._events = Object.create(null);
+          else
+            delete events[type];
+        }
+        return this;
+      }
+
+      // emit removeListener for all listeners on all events
+      if (arguments.length === 0) {
+        var keys = Object.keys(events);
+        var key;
+        for (i = 0; i < keys.length; ++i) {
+          key = keys[i];
+          if (key === 'removeListener') continue;
+          this.removeAllListeners(key);
+        }
+        this.removeAllListeners('removeListener');
+        this._events = Object.create(null);
+        this._eventsCount = 0;
+        return this;
+      }
+
+      listeners = events[type];
+
+      if (typeof listeners === 'function') {
+        this.removeListener(type, listeners);
+      } else if (listeners !== undefined) {
+        // LIFO order
+        for (i = listeners.length - 1; i >= 0; i--) {
+          this.removeListener(type, listeners[i]);
+        }
+      }
+
+      return this;
+    };
+
+function _listeners(target, type, unwrap) {
+  var events = target._events;
+
+  if (events === undefined)
+    return [];
+
+  var evlistener = events[type];
+  if (evlistener === undefined)
+    return [];
+
+  if (typeof evlistener === 'function')
+    return unwrap ? [evlistener.listener || evlistener] : [evlistener];
+
+  return unwrap ?
+    unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
+}
+
+EventEmitter.prototype.listeners = function listeners(type) {
+  return _listeners(this, type, true);
+};
+
+EventEmitter.prototype.rawListeners = function rawListeners(type) {
+  return _listeners(this, type, false);
+};
+
+EventEmitter.listenerCount = function(emitter, type) {
+  if (typeof emitter.listenerCount === 'function') {
+    return emitter.listenerCount(type);
+  } else {
+    return listenerCount.call(emitter, type);
+  }
+};
+
+EventEmitter.prototype.listenerCount = listenerCount;
+function listenerCount(type) {
+  var events = this._events;
+
+  if (events !== undefined) {
+    var evlistener = events[type];
+
+    if (typeof evlistener === 'function') {
+      return 1;
+    } else if (evlistener !== undefined) {
+      return evlistener.length;
+    }
+  }
+
+  return 0;
+}
+
+EventEmitter.prototype.eventNames = function eventNames() {
+  return this._eventsCount > 0 ? ReflectOwnKeys(this._events) : [];
+};
+
+function arrayClone(arr, n) {
+  var copy = new Array(n);
+  for (var i = 0; i < n; ++i)
+    copy[i] = arr[i];
+  return copy;
+}
+
+function spliceOne(list, index) {
+  for (; index + 1 < list.length; index++)
+    list[index] = list[index + 1];
+  list.pop();
+}
+
+function unwrapListeners(arr) {
+  var ret = new Array(arr.length);
+  for (var i = 0; i < ret.length; ++i) {
+    ret[i] = arr[i].listener || arr[i];
+  }
+  return ret;
+}
 
 
 /***/ }),
@@ -100681,10 +100952,10 @@ var DataManager = __webpack_require__(59);
 var DebugHeader = __webpack_require__(227);
 var Device = __webpack_require__(192);
 var DOMContentLoaded = __webpack_require__(232);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(9);
 var InputManager = __webpack_require__(242);
-var PluginCache = __webpack_require__(14);
+var PluginCache = __webpack_require__(15);
 var PluginManager = __webpack_require__(247);
 var ScaleManager = __webpack_require__(248);
 var SceneManager = __webpack_require__(250);
@@ -103266,7 +103537,7 @@ module.exports = InjectionMap;
 
 var Arne16 = __webpack_require__(652);
 var CanvasPool = __webpack_require__(17);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 
 /**
  * Generates a texture based on the given Create configuration object.
@@ -105022,7 +105293,7 @@ module.exports = 'volume';
 
 var Class = __webpack_require__(0);
 var List = __webpack_require__(118);
-var PluginCache = __webpack_require__(14);
+var PluginCache = __webpack_require__(15);
 var GameObjectEvents = __webpack_require__(82);
 var SceneEvents = __webpack_require__(11);
 var StableSort = __webpack_require__(81);
@@ -106415,7 +106686,7 @@ module.exports = NumberArrayStep;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var Shuffle = __webpack_require__(275);
 
 var BuildChunk = function (a, b, qty)
@@ -107245,7 +107516,7 @@ module.exports = 'unlocked';
 
 var Class = __webpack_require__(0);
 var ProcessQueue = __webpack_require__(276);
-var PluginCache = __webpack_require__(14);
+var PluginCache = __webpack_require__(15);
 var SceneEvents = __webpack_require__(11);
 
 /**
@@ -108945,7 +109216,7 @@ module.exports = TextCanvasRenderer;
 
 var Class = __webpack_require__(0);
 var GetAdvancedValue = __webpack_require__(16);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var MeasureText = __webpack_require__(748);
 
 //  Key: [ Object Key, Default Value ]
@@ -117740,10 +118011,10 @@ module.exports = 'up';
  */
 
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(140);
 var Gamepad = __webpack_require__(321);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var InputPluginCache = __webpack_require__(87);
 var InputEvents = __webpack_require__(34);
 
@@ -118558,12 +118829,12 @@ var DistanceBetween = __webpack_require__(72);
 var Ellipse = __webpack_require__(83);
 var EllipseContains = __webpack_require__(61);
 var Events = __webpack_require__(34);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var GetFastValue = __webpack_require__(1);
 var GEOM_CONST = __webpack_require__(24);
 var InputPluginCache = __webpack_require__(87);
 var IsPlainObject = __webpack_require__(13);
-var PluginCache = __webpack_require__(14);
+var PluginCache = __webpack_require__(15);
 var Rectangle = __webpack_require__(10);
 var RectangleContains = __webpack_require__(41);
 var SceneEvents = __webpack_require__(11);
@@ -122036,10 +122307,10 @@ module.exports = 'up';
  */
 
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(88);
 var GameEvents = __webpack_require__(9);
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var InputEvents = __webpack_require__(34);
 var InputPluginCache = __webpack_require__(87);
 var Key = __webpack_require__(322);
@@ -123202,7 +123473,7 @@ module.exports = {
  */
 
 var Class = __webpack_require__(0);
-var FileTypesManager = __webpack_require__(15);
+var FileTypesManager = __webpack_require__(14);
 var JSONFile = __webpack_require__(64);
 var LoaderEvents = __webpack_require__(60);
 
@@ -123403,7 +123674,7 @@ module.exports = AnimationJSONFile;
  */
 
 var Class = __webpack_require__(0);
-var FileTypesManager = __webpack_require__(15);
+var FileTypesManager = __webpack_require__(14);
 var GetFastValue = __webpack_require__(1);
 var ImageFile = __webpack_require__(90);
 var IsPlainObject = __webpack_require__(13);
@@ -123653,7 +123924,7 @@ module.exports = AtlasJSONFile;
 
 var AudioFile = __webpack_require__(328);
 var Class = __webpack_require__(0);
-var FileTypesManager = __webpack_require__(15);
+var FileTypesManager = __webpack_require__(14);
 var GetFastValue = __webpack_require__(1);
 var IsPlainObject = __webpack_require__(13);
 var JSONFile = __webpack_require__(64);
@@ -123942,7 +124213,7 @@ FileTypesManager.register('audioSprite', function (key, jsonURL, audioURL, audio
  */
 
 var Class = __webpack_require__(0);
-var FileTypesManager = __webpack_require__(15);
+var FileTypesManager = __webpack_require__(14);
 var GetFastValue = __webpack_require__(1);
 var ImageFile = __webpack_require__(90);
 var IsPlainObject = __webpack_require__(13);
@@ -124277,7 +124548,7 @@ module.exports = MultiAtlasFile;
 var Class = __webpack_require__(0);
 var CONST = __webpack_require__(27);
 var File = __webpack_require__(28);
-var FileTypesManager = __webpack_require__(15);
+var FileTypesManager = __webpack_require__(14);
 var GetFastValue = __webpack_require__(1);
 var IsPlainObject = __webpack_require__(13);
 
@@ -124489,7 +124760,7 @@ module.exports = PluginFile;
 var Class = __webpack_require__(0);
 var CONST = __webpack_require__(27);
 var File = __webpack_require__(28);
-var FileTypesManager = __webpack_require__(15);
+var FileTypesManager = __webpack_require__(14);
 var GetFastValue = __webpack_require__(1);
 var IsPlainObject = __webpack_require__(13);
 
@@ -124658,7 +124929,7 @@ module.exports = ScriptFile;
  */
 
 var Class = __webpack_require__(0);
-var FileTypesManager = __webpack_require__(15);
+var FileTypesManager = __webpack_require__(14);
 var ImageFile = __webpack_require__(90);
 
 /**
@@ -124851,7 +125122,7 @@ module.exports = SpriteSheetFile;
 var Class = __webpack_require__(0);
 var CONST = __webpack_require__(27);
 var File = __webpack_require__(28);
-var FileTypesManager = __webpack_require__(15);
+var FileTypesManager = __webpack_require__(14);
 var GetFastValue = __webpack_require__(1);
 var IsPlainObject = __webpack_require__(13);
 
@@ -125030,7 +125301,7 @@ module.exports = TextFile;
 var Class = __webpack_require__(0);
 var CONST = __webpack_require__(27);
 var File = __webpack_require__(28);
-var FileTypesManager = __webpack_require__(15);
+var FileTypesManager = __webpack_require__(14);
 var GetFastValue = __webpack_require__(1);
 var IsPlainObject = __webpack_require__(13);
 var ParseXML = __webpack_require__(240);
@@ -125215,11 +125486,11 @@ module.exports = XMLFile;
 var Class = __webpack_require__(0);
 var CONST = __webpack_require__(27);
 var CustomSet = __webpack_require__(330);
-var EventEmitter = __webpack_require__(4);
+var EventEmitter = __webpack_require__(5);
 var Events = __webpack_require__(60);
-var FileTypesManager = __webpack_require__(15);
+var FileTypesManager = __webpack_require__(14);
 var GetFastValue = __webpack_require__(1);
-var PluginCache = __webpack_require__(14);
+var PluginCache = __webpack_require__(15);
 var SceneEvents = __webpack_require__(11);
 var XHRSettings = __webpack_require__(89);
 
@@ -126303,7 +126574,7 @@ module.exports = {
 
     BasePlugin: __webpack_require__(331),
     DefaultPlugins: __webpack_require__(110),
-    PluginCache: __webpack_require__(14),
+    PluginCache: __webpack_require__(15),
     PluginManager: __webpack_require__(247),
     ScenePlugin: __webpack_require__(936)
 
@@ -127210,7 +127481,7 @@ var Clamp = __webpack_require__(7);
 var Class = __webpack_require__(0);
 var Events = __webpack_require__(11);
 var GetFastValue = __webpack_require__(1);
-var PluginCache = __webpack_require__(14);
+var PluginCache = __webpack_require__(15);
 
 /**
  * @classdesc
@@ -128974,7 +129245,7 @@ module.exports = {
  */
 
 var Class = __webpack_require__(0);
-var PluginCache = __webpack_require__(14);
+var PluginCache = __webpack_require__(15);
 var SceneEvents = __webpack_require__(11);
 var TimerEvent = __webpack_require__(332);
 var Remove = __webpack_require__(43);
@@ -130131,7 +130402,7 @@ module.exports = 'yoyo';
 var ArrayRemove = __webpack_require__(43);
 var Class = __webpack_require__(0);
 var NumberTweenBuilder = __webpack_require__(335);
-var PluginCache = __webpack_require__(14);
+var PluginCache = __webpack_require__(15);
 var SceneEvents = __webpack_require__(11);
 var StaggerBuilder = __webpack_require__(336);
 var TimelineBuilder = __webpack_require__(337);
@@ -131034,7 +131305,7 @@ module.exports = {
     GetAdvancedValue: __webpack_require__(16),
     GetFastValue: __webpack_require__(1),
     GetMinMaxValue: __webpack_require__(975),
-    GetValue: __webpack_require__(5),
+    GetValue: __webpack_require__(4),
     HasAll: __webpack_require__(976),
     HasAny: __webpack_require__(977),
     HasValue: __webpack_require__(339),
@@ -131057,7 +131328,7 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetValue = __webpack_require__(5);
+var GetValue = __webpack_require__(4);
 var Clamp = __webpack_require__(7);
 
 /**

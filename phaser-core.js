@@ -24,7 +24,7 @@ var Phaser = {
     Data: require('data'),
     Display: { Masks: require('display/mask') },
     DOM: require('dom'),
-    Events: require('events/EventEmitter'),
+    Events: require('events'),
     Game: require('core/Game'),
     GameObjects: {
         DisplayList: require('gameobjects/DisplayList'),
