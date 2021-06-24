@@ -30,9 +30,12 @@
   "dependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "eventemitter3": "^4.0.7",
-    "phaser": "^3.50.0",
+    "phaser": "andrewstart/phaser#f1f8b505307c7d7beab40a9184ec0497b09b5dc9",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^6.4.0"
   }
 }

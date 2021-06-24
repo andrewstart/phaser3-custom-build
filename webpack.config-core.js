@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
 
@@ -62,7 +63,13 @@ module.exports = {
            "typeof PLUGIN_FBINSTANT": JSON.stringify(false)
        }),
 
-       new CleanWebpackPlugin()
+       new CleanWebpackPlugin(),
+       new CopyPlugin({
+           patterns: [{
+               from: "node_modules/phaser/plugins/spine/dist/",
+               to: "../plugins/spine/dist/"
+           }, ],
+       }),
    ],
 
    devtool: 'source-map'
