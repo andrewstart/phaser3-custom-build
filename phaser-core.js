@@ -35,24 +35,30 @@ var Phaser = {
         BuildGameObject: require('gameobjects/BuildGameObject'),
         BuildGameObjectAnimation: require('gameobjects/BuildGameObjectAnimation'),
         GameObject: require('gameobjects/GameObject'),
+        Container: require('gameobjects/container/Container.js'),
         Graphics: require('gameobjects/graphics/Graphics.js'),
         Image: require('gameobjects/image/Image'),
         Layer: require('gameobjects/layer/Layer'),
         Sprite: require('gameobjects/sprite/Sprite'),
         Text: require('gameobjects/text/Text'),
+        TileSprite: require('gameobjects/tilesprite/TileSprite'),
         Factories: {
+            Container: require('gameobjects/container/ContainerFactory'),
             Graphics: require('gameobjects/graphics/GraphicsFactory'),
             Image: require('gameobjects/image/ImageFactory'),
             Layer: require('gameobjects/layer/LayerFactory'),
             Sprite: require('gameobjects/sprite/SpriteFactory'),
-            Text: require('gameobjects/text/TextFactory')
+            Text: require('gameobjects/text/TextFactory'),
+            TileSprite: require('gameobjects/tilesprite/TileSpriteFactory'),
         },
         Creators: {
+            Container: require('gameobjects/container/ContainerCreator'),
             Graphics: require('gameobjects/graphics/GraphicsCreator'),
             Image: require('gameobjects/image/ImageCreator'),
             Layer: require('gameobjects/layer/LayerCreator'),
             Sprite: require('gameobjects/sprite/SpriteCreator'),
-            Text: require('gameobjects/text/TextCreator')
+            Text: require('gameobjects/text/TextCreator'),
+            TileSprite: require('gameobjects/tilesprite/TileSpriteCreator'),
         }
     },
     Geom: require('geom'),
