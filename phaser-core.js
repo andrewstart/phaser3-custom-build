@@ -55,6 +55,7 @@ var Phaser = {
             Text: require('gameobjects/text/TextCreator')
         }
     },
+    Geom: require('geom'),
     Input: require('input'),
     Loader: {
         FileTypes: {

@@ -91,7 +91,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 273);
+/******/ 	return __webpack_require__(__webpack_require__.s = 332);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -395,6 +395,99 @@ module.exports = GetFastValue;
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Class = __webpack_require__(0);
+var GEOM_CONST = __webpack_require__(21);
+
+/**
+ * @classdesc
+ * Defines a Point in 2D space, with an x and y component.
+ *
+ * @class Point
+ * @memberof Phaser.Geom
+ * @constructor
+ * @since 3.0.0
+ *
+ * @param {number} [x=0] - The x coordinate of this Point.
+ * @param {number} [y=x] - The y coordinate of this Point.
+ */
+var Point = new Class({
+
+    initialize:
+
+    function Point (x, y)
+    {
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = x; }
+
+        /**
+         * The geometry constant type of this object: `GEOM_CONST.POINT`.
+         * Used for fast type comparisons.
+         *
+         * @name Phaser.Geom.Point#type
+         * @type {number}
+         * @readonly
+         * @since 3.19.0
+         */
+        this.type = GEOM_CONST.POINT;
+
+        /**
+         * The x coordinate of this Point.
+         *
+         * @name Phaser.Geom.Point#x
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.x = x;
+
+        /**
+         * The y coordinate of this Point.
+         *
+         * @name Phaser.Geom.Point#y
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.y = y;
+    },
+
+    /**
+     * Set the x and y coordinates of the point to the given values.
+     *
+     * @method Phaser.Geom.Point#setTo
+     * @since 3.0.0
+     *
+     * @param {number} [x=0] - The x coordinate of this Point.
+     * @param {number} [y=x] - The y coordinate of this Point.
+     *
+     * @return {this} This Point object.
+     */
+    setTo: function (x, y)
+    {
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = x; }
+
+        this.x = x;
+        this.y = y;
+
+        return this;
+    }
+
+});
+
+module.exports = Point;
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -737,7 +830,7 @@ if (true) {
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 /**
@@ -764,7 +857,7 @@ module.exports = NOOP;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 /**
@@ -835,36 +928,6 @@ module.exports = GetValue;
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * Force a value within the boundaries by clamping it to the range `min`, `max`.
- *
- * @function Phaser.Math.Clamp
- * @since 3.0.0
- *
- * @param {number} value - The value to be clamped.
- * @param {number} min - The minimum bounds.
- * @param {number} max - The maximum bounds.
- *
- * @return {number} The clamped value.
- */
-var Clamp = function (value, min, max)
-{
-    return Math.max(min, Math.min(max, value));
-};
-
-module.exports = Clamp;
-
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -878,7 +941,7 @@ module.exports = Clamp;
 //  and [vecmath](https://github.com/mattdesl/vecmath) by mattdesl
 
 var Class = __webpack_require__(0);
-var FuzzyEqual = __webpack_require__(82);
+var FuzzyEqual = __webpack_require__(98);
 
 /**
  * @classdesc
@@ -1642,6 +1705,128 @@ module.exports = Vector2;
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var MATH_CONST = {
+
+    /**
+     * The value of PI * 2.
+     * 
+     * @name Phaser.Math.PI2
+     * @type {number}
+     * @since 3.0.0
+     */
+    PI2: Math.PI * 2,
+
+    /**
+     * The value of PI * 0.5.
+     * 
+     * @name Phaser.Math.TAU
+     * @type {number}
+     * @since 3.0.0
+     */
+    TAU: Math.PI * 0.5,
+
+    /**
+     * An epsilon value (1.0e-6)
+     * 
+     * @name Phaser.Math.EPSILON
+     * @type {number}
+     * @since 3.0.0
+     */
+    EPSILON: 1.0e-6,
+
+    /**
+     * For converting degrees to radians (PI / 180)
+     * 
+     * @name Phaser.Math.DEG_TO_RAD
+     * @type {number}
+     * @since 3.0.0
+     */
+    DEG_TO_RAD: Math.PI / 180,
+
+    /**
+     * For converting radians to degrees (180 / PI)
+     * 
+     * @name Phaser.Math.RAD_TO_DEG
+     * @type {number}
+     * @since 3.0.0
+     */
+    RAD_TO_DEG: 180 / Math.PI,
+
+    /**
+     * An instance of the Random Number Generator.
+     * This is not set until the Game boots.
+     * 
+     * @name Phaser.Math.RND
+     * @type {Phaser.Math.RandomDataGenerator}
+     * @since 3.0.0
+     */
+    RND: null,
+
+    /**
+     * The minimum safe integer this browser supports.
+     * We use a const for backward compatibility with Internet Explorer.
+     * 
+     * @name Phaser.Math.MIN_SAFE_INTEGER
+     * @type {number}
+     * @since 3.21.0
+     */
+    MIN_SAFE_INTEGER: Number.MIN_SAFE_INTEGER || -9007199254740991,
+
+    /**
+     * The maximum safe integer this browser supports.
+     * We use a const for backward compatibility with Internet Explorer.
+     * 
+     * @name Phaser.Math.MAX_SAFE_INTEGER
+     * @type {number}
+     * @since 3.21.0
+     */
+    MAX_SAFE_INTEGER: Number.MAX_SAFE_INTEGER || 9007199254740991
+
+};
+
+module.exports = MATH_CONST;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Force a value within the boundaries by clamping it to the range `min`, `max`.
+ *
+ * @function Phaser.Math.Clamp
+ * @since 3.0.0
+ *
+ * @param {number} value - The value to be clamped.
+ * @param {number} min - The minimum bounds.
+ * @param {number} max - The maximum bounds.
+ *
+ * @return {number} The clamped value.
+ */
+var Clamp = function (value, min, max)
+{
+    return Math.max(min, Math.min(max, value));
+};
+
+module.exports = Clamp;
+
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1656,28 +1841,539 @@ module.exports = Vector2;
 
 module.exports = {
 
-    BLUR: __webpack_require__(296),
-    BOOT: __webpack_require__(297),
-    CONTEXT_LOST: __webpack_require__(298),
-    CONTEXT_RESTORED: __webpack_require__(299),
-    DESTROY: __webpack_require__(300),
-    FOCUS: __webpack_require__(301),
-    HIDDEN: __webpack_require__(302),
-    PAUSE: __webpack_require__(303),
-    POST_RENDER: __webpack_require__(304),
-    POST_STEP: __webpack_require__(305),
-    PRE_RENDER: __webpack_require__(306),
-    PRE_STEP: __webpack_require__(307),
-    READY: __webpack_require__(308),
-    RESUME: __webpack_require__(309),
-    STEP: __webpack_require__(310),
-    VISIBLE: __webpack_require__(311)
+    BLUR: __webpack_require__(355),
+    BOOT: __webpack_require__(356),
+    CONTEXT_LOST: __webpack_require__(357),
+    CONTEXT_RESTORED: __webpack_require__(358),
+    DESTROY: __webpack_require__(359),
+    FOCUS: __webpack_require__(360),
+    HIDDEN: __webpack_require__(361),
+    PAUSE: __webpack_require__(362),
+    POST_RENDER: __webpack_require__(363),
+    POST_STEP: __webpack_require__(364),
+    PRE_RENDER: __webpack_require__(365),
+    PRE_STEP: __webpack_require__(366),
+    READY: __webpack_require__(367),
+    RESUME: __webpack_require__(368),
+    STEP: __webpack_require__(369),
+    VISIBLE: __webpack_require__(370)
 
 };
 
 
 /***/ }),
-/* 8 */
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Class = __webpack_require__(0);
+var Contains = __webpack_require__(38);
+var GetPoint = __webpack_require__(97);
+var GetPoints = __webpack_require__(156);
+var GEOM_CONST = __webpack_require__(21);
+var Line = __webpack_require__(26);
+var Random = __webpack_require__(160);
+
+/**
+ * @classdesc
+ * Encapsulates a 2D rectangle defined by its corner point in the top-left and its extends in x (width) and y (height)
+ *
+ * @class Rectangle
+ * @memberof Phaser.Geom
+ * @constructor
+ * @since 3.0.0
+ *
+ * @param {number} [x=0] - The X coordinate of the top left corner of the Rectangle.
+ * @param {number} [y=0] - The Y coordinate of the top left corner of the Rectangle.
+ * @param {number} [width=0] - The width of the Rectangle.
+ * @param {number} [height=0] - The height of the Rectangle.
+ */
+var Rectangle = new Class({
+
+    initialize:
+
+    function Rectangle (x, y, width, height)
+    {
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = 0; }
+        if (width === undefined) { width = 0; }
+        if (height === undefined) { height = 0; }
+
+        /**
+         * The geometry constant type of this object: `GEOM_CONST.RECTANGLE`.
+         * Used for fast type comparisons.
+         *
+         * @name Phaser.Geom.Rectangle#type
+         * @type {number}
+         * @readonly
+         * @since 3.19.0
+         */
+        this.type = GEOM_CONST.RECTANGLE;
+
+        /**
+         * The X coordinate of the top left corner of the Rectangle.
+         *
+         * @name Phaser.Geom.Rectangle#x
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.x = x;
+
+        /**
+         * The Y coordinate of the top left corner of the Rectangle.
+         *
+         * @name Phaser.Geom.Rectangle#y
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.y = y;
+
+        /**
+         * The width of the Rectangle, i.e. the distance between its left side (defined by `x`) and its right side.
+         *
+         * @name Phaser.Geom.Rectangle#width
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.width = width;
+
+        /**
+         * The height of the Rectangle, i.e. the distance between its top side (defined by `y`) and its bottom side.
+         *
+         * @name Phaser.Geom.Rectangle#height
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.height = height;
+    },
+
+    /**
+     * Checks if the given point is inside the Rectangle's bounds.
+     *
+     * @method Phaser.Geom.Rectangle#contains
+     * @since 3.0.0
+     *
+     * @param {number} x - The X coordinate of the point to check.
+     * @param {number} y - The Y coordinate of the point to check.
+     *
+     * @return {boolean} `true` if the point is within the Rectangle's bounds, otherwise `false`.
+     */
+    contains: function (x, y)
+    {
+        return Contains(this, x, y);
+    },
+
+    /**
+     * Calculates the coordinates of a point at a certain `position` on the Rectangle's perimeter.
+     * 
+     * The `position` is a fraction between 0 and 1 which defines how far into the perimeter the point is.
+     * 
+     * A value of 0 or 1 returns the point at the top left corner of the rectangle, while a value of 0.5 returns the point at the bottom right corner of the rectangle. Values between 0 and 0.5 are on the top or the right side and values between 0.5 and 1 are on the bottom or the left side.
+     *
+     * @method Phaser.Geom.Rectangle#getPoint
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point} O - [output,$return]
+     *
+     * @param {number} position - The normalized distance into the Rectangle's perimeter to return.
+     * @param {(Phaser.Geom.Point|object)} [output] - An object to update with the `x` and `y` coordinates of the point.
+     *
+     * @return {(Phaser.Geom.Point|object)} The updated `output` object, or a new Point if no `output` object was given.
+     */
+    getPoint: function (position, output)
+    {
+        return GetPoint(this, position, output);
+    },
+
+    /**
+     * Returns an array of points from the perimeter of the Rectangle, each spaced out based on the quantity or step required.
+     *
+     * @method Phaser.Geom.Rectangle#getPoints
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point[]} O - [output,$return]
+     *
+     * @param {number} quantity - The number of points to return. Set to `false` or 0 to return an arbitrary number of points (`perimeter / stepRate`) evenly spaced around the Rectangle based on the `stepRate`.
+     * @param {number} [stepRate] - If `quantity` is 0, determines the normalized distance between each returned point.
+     * @param {(array|Phaser.Geom.Point[])} [output] - An array to which to append the points.
+     *
+     * @return {(array|Phaser.Geom.Point[])} The modified `output` array, or a new array if none was provided.
+     */
+    getPoints: function (quantity, stepRate, output)
+    {
+        return GetPoints(this, quantity, stepRate, output);
+    },
+
+    /**
+     * Returns a random point within the Rectangle's bounds.
+     *
+     * @method Phaser.Geom.Rectangle#getRandomPoint
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point} O - [point,$return]
+     *
+     * @param {Phaser.Geom.Point} [point] - The object in which to store the `x` and `y` coordinates of the point.
+     *
+     * @return {Phaser.Geom.Point} The updated `point`, or a new Point if none was provided.
+     */
+    getRandomPoint: function (point)
+    {
+        return Random(this, point);
+    },
+
+    /**
+     * Sets the position, width, and height of the Rectangle.
+     *
+     * @method Phaser.Geom.Rectangle#setTo
+     * @since 3.0.0
+     *
+     * @param {number} x - The X coordinate of the top left corner of the Rectangle.
+     * @param {number} y - The Y coordinate of the top left corner of the Rectangle.
+     * @param {number} width - The width of the Rectangle.
+     * @param {number} height - The height of the Rectangle.
+     *
+     * @return {this} This Rectangle object.
+     */
+    setTo: function (x, y, width, height)
+    {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+
+        return this;
+    },
+
+    /**
+     * Resets the position, width, and height of the Rectangle to 0.
+     *
+     * @method Phaser.Geom.Rectangle#setEmpty
+     * @since 3.0.0
+     *
+     * @return {this} This Rectangle object.
+     */
+    setEmpty: function ()
+    {
+        return this.setTo(0, 0, 0, 0);
+    },
+
+    /**
+     * Sets the position of the Rectangle.
+     *
+     * @method Phaser.Geom.Rectangle#setPosition
+     * @since 3.0.0
+     *
+     * @param {number} x - The X coordinate of the top left corner of the Rectangle.
+     * @param {number} [y=x] - The Y coordinate of the top left corner of the Rectangle.
+     *
+     * @return {this} This Rectangle object.
+     */
+    setPosition: function (x, y)
+    {
+        if (y === undefined) { y = x; }
+
+        this.x = x;
+        this.y = y;
+
+        return this;
+    },
+
+    /**
+     * Sets the width and height of the Rectangle.
+     *
+     * @method Phaser.Geom.Rectangle#setSize
+     * @since 3.0.0
+     *
+     * @param {number} width - The width to set the Rectangle to.
+     * @param {number} [height=width] - The height to set the Rectangle to.
+     *
+     * @return {this} This Rectangle object.
+     */
+    setSize: function (width, height)
+    {
+        if (height === undefined) { height = width; }
+
+        this.width = width;
+        this.height = height;
+
+        return this;
+    },
+
+    /**
+     * Determines if the Rectangle is empty. A Rectangle is empty if its width or height is less than or equal to 0.
+     *
+     * @method Phaser.Geom.Rectangle#isEmpty
+     * @since 3.0.0
+     *
+     * @return {boolean} `true` if the Rectangle is empty. A Rectangle object is empty if its width or height is less than or equal to 0.
+     */
+    isEmpty: function ()
+    {
+        return (this.width <= 0 || this.height <= 0);
+    },
+
+    /**
+     * Returns a Line object that corresponds to the top of this Rectangle.
+     *
+     * @method Phaser.Geom.Rectangle#getLineA
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Line} O - [line,$return]
+     *
+     * @param {Phaser.Geom.Line} [line] - A Line object to set the results in. If `undefined` a new Line will be created.
+     *
+     * @return {Phaser.Geom.Line} A Line object that corresponds to the top of this Rectangle.
+     */
+    getLineA: function (line)
+    {
+        if (line === undefined) { line = new Line(); }
+
+        line.setTo(this.x, this.y, this.right, this.y);
+
+        return line;
+    },
+
+    /**
+     * Returns a Line object that corresponds to the right of this Rectangle.
+     *
+     * @method Phaser.Geom.Rectangle#getLineB
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Line} O - [line,$return]
+     *
+     * @param {Phaser.Geom.Line} [line] - A Line object to set the results in. If `undefined` a new Line will be created.
+     *
+     * @return {Phaser.Geom.Line} A Line object that corresponds to the right of this Rectangle.
+     */
+    getLineB: function (line)
+    {
+        if (line === undefined) { line = new Line(); }
+
+        line.setTo(this.right, this.y, this.right, this.bottom);
+
+        return line;
+    },
+
+    /**
+     * Returns a Line object that corresponds to the bottom of this Rectangle.
+     *
+     * @method Phaser.Geom.Rectangle#getLineC
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Line} O - [line,$return]
+     *
+     * @param {Phaser.Geom.Line} [line] - A Line object to set the results in. If `undefined` a new Line will be created.
+     *
+     * @return {Phaser.Geom.Line} A Line object that corresponds to the bottom of this Rectangle.
+     */
+    getLineC: function (line)
+    {
+        if (line === undefined) { line = new Line(); }
+
+        line.setTo(this.right, this.bottom, this.x, this.bottom);
+
+        return line;
+    },
+
+    /**
+     * Returns a Line object that corresponds to the left of this Rectangle.
+     *
+     * @method Phaser.Geom.Rectangle#getLineD
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Line} O - [line,$return]
+     *
+     * @param {Phaser.Geom.Line} [line] - A Line object to set the results in. If `undefined` a new Line will be created.
+     *
+     * @return {Phaser.Geom.Line} A Line object that corresponds to the left of this Rectangle.
+     */
+    getLineD: function (line)
+    {
+        if (line === undefined) { line = new Line(); }
+
+        line.setTo(this.x, this.bottom, this.x, this.y);
+
+        return line;
+    },
+
+    /**
+     * The x coordinate of the left of the Rectangle.
+     * Changing the left property of a Rectangle object has no effect on the y and height properties. However it does affect the width property, whereas changing the x value does not affect the width property.
+     *
+     * @name Phaser.Geom.Rectangle#left
+     * @type {number}
+     * @since 3.0.0
+     */
+    left: {
+
+        get: function ()
+        {
+            return this.x;
+        },
+
+        set: function (value)
+        {
+            if (value >= this.right)
+            {
+                this.width = 0;
+            }
+            else
+            {
+                this.width = this.right - value;
+            }
+
+            this.x = value;
+        }
+
+    },
+
+    /**
+     * The sum of the x and width properties.
+     * Changing the right property of a Rectangle object has no effect on the x, y and height properties, however it does affect the width property.
+     *
+     * @name Phaser.Geom.Rectangle#right
+     * @type {number}
+     * @since 3.0.0
+     */
+    right: {
+
+        get: function ()
+        {
+            return this.x + this.width;
+        },
+
+        set: function (value)
+        {
+            if (value <= this.x)
+            {
+                this.width = 0;
+            }
+            else
+            {
+                this.width = value - this.x;
+            }
+        }
+
+    },
+
+    /**
+     * The y coordinate of the top of the Rectangle. Changing the top property of a Rectangle object has no effect on the x and width properties.
+     * However it does affect the height property, whereas changing the y value does not affect the height property.
+     *
+     * @name Phaser.Geom.Rectangle#top
+     * @type {number}
+     * @since 3.0.0
+     */
+    top: {
+
+        get: function ()
+        {
+            return this.y;
+        },
+
+        set: function (value)
+        {
+            if (value >= this.bottom)
+            {
+                this.height = 0;
+            }
+            else
+            {
+                this.height = (this.bottom - value);
+            }
+
+            this.y = value;
+        }
+
+    },
+
+    /**
+     * The sum of the y and height properties.
+     * Changing the bottom property of a Rectangle object has no effect on the x, y and width properties, but does change the height property.
+     *
+     * @name Phaser.Geom.Rectangle#bottom
+     * @type {number}
+     * @since 3.0.0
+     */
+    bottom: {
+
+        get: function ()
+        {
+            return this.y + this.height;
+        },
+
+        set: function (value)
+        {
+            if (value <= this.y)
+            {
+                this.height = 0;
+            }
+            else
+            {
+                this.height = value - this.y;
+            }
+        }
+
+    },
+
+    /**
+     * The x coordinate of the center of the Rectangle.
+     *
+     * @name Phaser.Geom.Rectangle#centerX
+     * @type {number}
+     * @since 3.0.0
+     */
+    centerX: {
+
+        get: function ()
+        {
+            return this.x + (this.width / 2);
+        },
+
+        set: function (value)
+        {
+            this.x = value - (this.width / 2);
+        }
+
+    },
+
+    /**
+     * The y coordinate of the center of the Rectangle.
+     *
+     * @name Phaser.Geom.Rectangle#centerY
+     * @type {number}
+     * @since 3.0.0
+     */
+    centerY: {
+
+        get: function ()
+        {
+            return this.y + (this.height / 2);
+        },
+
+        set: function (value)
+        {
+            this.y = value - (this.height / 2);
+        }
+
+    }
+
+});
+
+module.exports = Rectangle;
+
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1692,33 +2388,33 @@ module.exports = {
 
 module.exports = {
 
-    ADDED_TO_SCENE: __webpack_require__(408),
-    BOOT: __webpack_require__(409),
-    CREATE: __webpack_require__(410),
-    DESTROY: __webpack_require__(411),
-    PAUSE: __webpack_require__(412),
-    POST_UPDATE: __webpack_require__(413),
-    PRE_UPDATE: __webpack_require__(414),
-    READY: __webpack_require__(415),
-    REMOVED_FROM_SCENE: __webpack_require__(416),
-    RENDER: __webpack_require__(417),
-    RESUME: __webpack_require__(418),
-    SHUTDOWN: __webpack_require__(419),
-    SLEEP: __webpack_require__(420),
-    START: __webpack_require__(421),
-    TRANSITION_COMPLETE: __webpack_require__(422),
-    TRANSITION_INIT: __webpack_require__(423),
-    TRANSITION_OUT: __webpack_require__(424),
-    TRANSITION_START: __webpack_require__(425),
-    TRANSITION_WAKE: __webpack_require__(426),
-    UPDATE: __webpack_require__(427),
-    WAKE: __webpack_require__(428)
+    ADDED_TO_SCENE: __webpack_require__(461),
+    BOOT: __webpack_require__(462),
+    CREATE: __webpack_require__(463),
+    DESTROY: __webpack_require__(464),
+    PAUSE: __webpack_require__(465),
+    POST_UPDATE: __webpack_require__(466),
+    PRE_UPDATE: __webpack_require__(467),
+    READY: __webpack_require__(468),
+    REMOVED_FROM_SCENE: __webpack_require__(469),
+    RENDER: __webpack_require__(470),
+    RESUME: __webpack_require__(471),
+    SHUTDOWN: __webpack_require__(472),
+    SLEEP: __webpack_require__(473),
+    START: __webpack_require__(474),
+    TRANSITION_COMPLETE: __webpack_require__(475),
+    TRANSITION_INIT: __webpack_require__(476),
+    TRANSITION_OUT: __webpack_require__(477),
+    TRANSITION_START: __webpack_require__(478),
+    TRANSITION_WAKE: __webpack_require__(479),
+    UPDATE: __webpack_require__(480),
+    WAKE: __webpack_require__(481)
 
 };
 
 
 /***/ }),
-/* 9 */
+/* 12 */
 /***/ (function(module, exports) {
 
 /**
@@ -1927,7 +2623,7 @@ module.exports = PluginCache;
 
 
 /***/ }),
-/* 10 */
+/* 13 */
 /***/ (function(module, exports) {
 
 /**
@@ -1996,247 +2692,6 @@ module.exports = FileTypesManager;
 
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * This is a slightly modified version of jQuery.isPlainObject.
- * A plain object is an object whose internal class property is [object Object].
- *
- * @function Phaser.Utils.Objects.IsPlainObject
- * @since 3.0.0
- *
- * @param {object} obj - The object to inspect.
- *
- * @return {boolean} `true` if the object is plain, otherwise `false`.
- */
-var IsPlainObject = function (obj)
-{
-    // Not plain objects:
-    // - Any object or value whose internal [[Class]] property is not "[object Object]"
-    // - DOM nodes
-    // - window
-    if (typeof(obj) !== 'object' || obj.nodeType || obj === obj.window)
-    {
-        return false;
-    }
-
-    // Support: Firefox <20
-    // The try/catch suppresses exceptions thrown when attempting to access
-    // the "constructor" property of certain host objects, ie. |window.location|
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
-    try
-    {
-        if (obj.constructor && !({}).hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf'))
-        {
-            return false;
-        }
-    }
-    catch (e)
-    {
-        return false;
-    }
-
-    // If the function hasn't returned already, we're confident that
-    // |obj| is a plain object, created by {} or constructed with new Object
-    return true;
-};
-
-module.exports = IsPlainObject;
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Class = __webpack_require__(0);
-var GEOM_CONST = __webpack_require__(29);
-
-/**
- * @classdesc
- * Defines a Point in 2D space, with an x and y component.
- *
- * @class Point
- * @memberof Phaser.Geom
- * @constructor
- * @since 3.0.0
- *
- * @param {number} [x=0] - The x coordinate of this Point.
- * @param {number} [y=x] - The y coordinate of this Point.
- */
-var Point = new Class({
-
-    initialize:
-
-    function Point (x, y)
-    {
-        if (x === undefined) { x = 0; }
-        if (y === undefined) { y = x; }
-
-        /**
-         * The geometry constant type of this object: `GEOM_CONST.POINT`.
-         * Used for fast type comparisons.
-         *
-         * @name Phaser.Geom.Point#type
-         * @type {number}
-         * @readonly
-         * @since 3.19.0
-         */
-        this.type = GEOM_CONST.POINT;
-
-        /**
-         * The x coordinate of this Point.
-         *
-         * @name Phaser.Geom.Point#x
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x = x;
-
-        /**
-         * The y coordinate of this Point.
-         *
-         * @name Phaser.Geom.Point#y
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y = y;
-    },
-
-    /**
-     * Set the x and y coordinates of the point to the given values.
-     *
-     * @method Phaser.Geom.Point#setTo
-     * @since 3.0.0
-     *
-     * @param {number} [x=0] - The x coordinate of this Point.
-     * @param {number} [y=x] - The y coordinate of this Point.
-     *
-     * @return {this} This Point object.
-     */
-    setTo: function (x, y)
-    {
-        if (x === undefined) { x = 0; }
-        if (y === undefined) { y = x; }
-
-        this.x = x;
-        this.y = y;
-
-        return this;
-    }
-
-});
-
-module.exports = Point;
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var MATH_CONST = {
-
-    /**
-     * The value of PI * 2.
-     * 
-     * @name Phaser.Math.PI2
-     * @type {number}
-     * @since 3.0.0
-     */
-    PI2: Math.PI * 2,
-
-    /**
-     * The value of PI * 0.5.
-     * 
-     * @name Phaser.Math.TAU
-     * @type {number}
-     * @since 3.0.0
-     */
-    TAU: Math.PI * 0.5,
-
-    /**
-     * An epsilon value (1.0e-6)
-     * 
-     * @name Phaser.Math.EPSILON
-     * @type {number}
-     * @since 3.0.0
-     */
-    EPSILON: 1.0e-6,
-
-    /**
-     * For converting degrees to radians (PI / 180)
-     * 
-     * @name Phaser.Math.DEG_TO_RAD
-     * @type {number}
-     * @since 3.0.0
-     */
-    DEG_TO_RAD: Math.PI / 180,
-
-    /**
-     * For converting radians to degrees (180 / PI)
-     * 
-     * @name Phaser.Math.RAD_TO_DEG
-     * @type {number}
-     * @since 3.0.0
-     */
-    RAD_TO_DEG: 180 / Math.PI,
-
-    /**
-     * An instance of the Random Number Generator.
-     * This is not set until the Game boots.
-     * 
-     * @name Phaser.Math.RND
-     * @type {Phaser.Math.RandomDataGenerator}
-     * @since 3.0.0
-     */
-    RND: null,
-
-    /**
-     * The minimum safe integer this browser supports.
-     * We use a const for backward compatibility with Internet Explorer.
-     * 
-     * @name Phaser.Math.MIN_SAFE_INTEGER
-     * @type {number}
-     * @since 3.21.0
-     */
-    MIN_SAFE_INTEGER: Number.MIN_SAFE_INTEGER || -9007199254740991,
-
-    /**
-     * The maximum safe integer this browser supports.
-     * We use a const for backward compatibility with Internet Explorer.
-     * 
-     * @name Phaser.Math.MAX_SAFE_INTEGER
-     * @type {number}
-     * @since 3.21.0
-     */
-    MAX_SAFE_INTEGER: Number.MAX_SAFE_INTEGER || 9007199254740991
-
-};
-
-module.exports = MATH_CONST;
-
-
-/***/ }),
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2246,7 +2701,7 @@ module.exports = MATH_CONST;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var IsPlainObject = __webpack_require__(11);
+var IsPlainObject = __webpack_require__(15);
 
 // @param {boolean} deep - Perform a deep copy?
 // @param {object} target - The target object to copy to.
@@ -2339,6 +2794,62 @@ module.exports = Extend;
 
 /***/ }),
 /* 15 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * This is a slightly modified version of jQuery.isPlainObject.
+ * A plain object is an object whose internal class property is [object Object].
+ *
+ * @function Phaser.Utils.Objects.IsPlainObject
+ * @since 3.0.0
+ *
+ * @param {object} obj - The object to inspect.
+ *
+ * @return {boolean} `true` if the object is plain, otherwise `false`.
+ */
+var IsPlainObject = function (obj)
+{
+    // Not plain objects:
+    // - Any object or value whose internal [[Class]] property is not "[object Object]"
+    // - DOM nodes
+    // - window
+    if (typeof(obj) !== 'object' || obj.nodeType || obj === obj.window)
+    {
+        return false;
+    }
+
+    // Support: Firefox <20
+    // The try/catch suppresses exceptions thrown when attempting to access
+    // the "constructor" property of certain host objects, ie. |window.location|
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
+    try
+    {
+        if (obj.constructor && !({}).hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf'))
+        {
+            return false;
+        }
+    }
+    catch (e)
+    {
+        return false;
+    }
+
+    // If the function hasn't returned already, we're confident that
+    // |obj| is a plain object, created by {} or constructed with new Object
+    return true;
+};
+
+module.exports = IsPlainObject;
+
+
+/***/ }),
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2365,9 +2876,9 @@ var CONST = {
      */
     VERSION: '3.53.0',
 
-    BlendModes: __webpack_require__(27),
+    BlendModes: __webpack_require__(32),
 
-    ScaleModes: __webpack_require__(77),
+    ScaleModes: __webpack_require__(94),
 
     /**
      * This setting will auto-detect if the browser is capable of suppporting WebGL.
@@ -2482,7 +2993,7 @@ module.exports = CONST;
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2497,30 +3008,30 @@ module.exports = CONST;
 
 module.exports = {
 
-    DESTROY: __webpack_require__(336),
-    FADE_IN_COMPLETE: __webpack_require__(337),
-    FADE_IN_START: __webpack_require__(338),
-    FADE_OUT_COMPLETE: __webpack_require__(339),
-    FADE_OUT_START: __webpack_require__(340),
-    FLASH_COMPLETE: __webpack_require__(341),
-    FLASH_START: __webpack_require__(342),
-    FOLLOW_UPDATE: __webpack_require__(343),
-    PAN_COMPLETE: __webpack_require__(344),
-    PAN_START: __webpack_require__(345),
-    POST_RENDER: __webpack_require__(346),
-    PRE_RENDER: __webpack_require__(347),
-    ROTATE_COMPLETE: __webpack_require__(348),
-    ROTATE_START: __webpack_require__(349),
-    SHAKE_COMPLETE: __webpack_require__(350),
-    SHAKE_START: __webpack_require__(351),
-    ZOOM_COMPLETE: __webpack_require__(352),
-    ZOOM_START: __webpack_require__(353)
+    DESTROY: __webpack_require__(390),
+    FADE_IN_COMPLETE: __webpack_require__(391),
+    FADE_IN_START: __webpack_require__(392),
+    FADE_OUT_COMPLETE: __webpack_require__(393),
+    FADE_OUT_START: __webpack_require__(394),
+    FLASH_COMPLETE: __webpack_require__(395),
+    FLASH_START: __webpack_require__(396),
+    FOLLOW_UPDATE: __webpack_require__(397),
+    PAN_COMPLETE: __webpack_require__(398),
+    PAN_START: __webpack_require__(399),
+    POST_RENDER: __webpack_require__(400),
+    PRE_RENDER: __webpack_require__(401),
+    ROTATE_COMPLETE: __webpack_require__(402),
+    ROTATE_START: __webpack_require__(403),
+    SHAKE_COMPLETE: __webpack_require__(404),
+    SHAKE_START: __webpack_require__(405),
+    ZOOM_COMPLETE: __webpack_require__(406),
+    ZOOM_START: __webpack_require__(407)
 
 };
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2529,8 +3040,8 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = __webpack_require__(15);
-var Smoothing = __webpack_require__(431);
+var CONST = __webpack_require__(16);
+var Smoothing = __webpack_require__(484);
 
 // The pool into which the canvas elements are placed.
 var pool = [];
@@ -2781,7 +3292,7 @@ module.exports = CanvasPool();
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2790,8 +3301,1054 @@ module.exports = CanvasPool();
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var MATH = __webpack_require__(159);
-var GetValue = __webpack_require__(4);
+//  Adapted from [gl-matrix](https://github.com/toji/gl-matrix) by toji
+//  and [vecmath](https://github.com/mattdesl/vecmath) by mattdesl
+
+var Class = __webpack_require__(0);
+
+/**
+ * @classdesc
+ * A representation of a vector in 3D space.
+ *
+ * A three-component vector.
+ *
+ * @class Vector3
+ * @memberof Phaser.Math
+ * @constructor
+ * @since 3.0.0
+ *
+ * @param {number} [x] - The x component.
+ * @param {number} [y] - The y component.
+ * @param {number} [z] - The z component.
+ */
+var Vector3 = new Class({
+
+    initialize:
+
+    function Vector3 (x, y, z)
+    {
+        /**
+         * The x component of this Vector.
+         *
+         * @name Phaser.Math.Vector3#x
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.x = 0;
+
+        /**
+         * The y component of this Vector.
+         *
+         * @name Phaser.Math.Vector3#y
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.y = 0;
+
+        /**
+         * The z component of this Vector.
+         *
+         * @name Phaser.Math.Vector3#z
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.z = 0;
+
+        if (typeof x === 'object')
+        {
+            this.x = x.x || 0;
+            this.y = x.y || 0;
+            this.z = x.z || 0;
+        }
+        else
+        {
+            this.x = x || 0;
+            this.y = y || 0;
+            this.z = z || 0;
+        }
+    },
+
+    /**
+     * Set this Vector to point up.
+     *
+     * Sets the y component of the vector to 1, and the others to 0.
+     *
+     * @method Phaser.Math.Vector3#up
+     * @since 3.0.0
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    up: function ()
+    {
+        this.x = 0;
+        this.y = 1;
+        this.z = 0;
+
+        return this;
+    },
+
+    /**
+     * Sets the components of this Vector to be the `Math.min` result from the given vector.
+     *
+     * @method Phaser.Math.Vector3#min
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Vector3} v - The Vector3 to check the minimum values against.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    min: function (v)
+    {
+        this.x = Math.min(this.x, v.x);
+        this.y = Math.min(this.y, v.y);
+        this.z = Math.min(this.z, v.z);
+
+        return this;
+    },
+
+    /**
+     * Sets the components of this Vector to be the `Math.max` result from the given vector.
+     *
+     * @method Phaser.Math.Vector3#max
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Vector3} v - The Vector3 to check the maximum values against.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    max: function (v)
+    {
+        this.x = Math.max(this.x, v.x);
+        this.y = Math.max(this.y, v.y);
+        this.z = Math.max(this.z, v.z);
+
+        return this;
+    },
+
+    /**
+     * Make a clone of this Vector3.
+     *
+     * @method Phaser.Math.Vector3#clone
+     * @since 3.0.0
+     *
+     * @return {Phaser.Math.Vector3} A new Vector3 object containing this Vectors values.
+     */
+    clone: function ()
+    {
+        return new Vector3(this.x, this.y, this.z);
+    },
+
+    /**
+     * Adds the two given Vector3s and sets the results into this Vector3.
+     *
+     * @method Phaser.Math.Vector3#addVectors
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Vector3} a - The first Vector to add.
+     * @param {Phaser.Math.Vector3} b - The second Vector to add.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    addVectors: function (a, b)
+    {
+        this.x = a.x + b.x;
+        this.y = a.y + b.y;
+        this.z = a.z + b.z;
+
+        return this;
+    },
+
+    /**
+     * Calculate the cross (vector) product of two given Vectors.
+     *
+     * @method Phaser.Math.Vector3#crossVectors
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Vector3} a - The first Vector to multiply.
+     * @param {Phaser.Math.Vector3} b - The second Vector to multiply.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    crossVectors: function (a, b)
+    {
+        var ax = a.x;
+        var ay = a.y;
+        var az = a.z;
+        var bx = b.x;
+        var by = b.y;
+        var bz = b.z;
+
+        this.x = ay * bz - az * by;
+        this.y = az * bx - ax * bz;
+        this.z = ax * by - ay * bx;
+
+        return this;
+    },
+
+    /**
+     * Check whether this Vector is equal to a given Vector.
+     *
+     * Performs a strict equality check against each Vector's components.
+     *
+     * @method Phaser.Math.Vector3#equals
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Vector3} v - The Vector3 to compare against.
+     *
+     * @return {boolean} True if the two vectors strictly match, otherwise false.
+     */
+    equals: function (v)
+    {
+        return ((this.x === v.x) && (this.y === v.y) && (this.z === v.z));
+    },
+
+    /**
+     * Copy the components of a given Vector into this Vector.
+     *
+     * @method Phaser.Math.Vector3#copy
+     * @since 3.0.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} src - The Vector to copy the components from.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    copy: function (src)
+    {
+        this.x = src.x;
+        this.y = src.y;
+        this.z = src.z || 0;
+
+        return this;
+    },
+
+    /**
+     * Set the `x`, `y`, and `z` components of this Vector to the given `x`, `y`, and `z` values.
+     *
+     * @method Phaser.Math.Vector3#set
+     * @since 3.0.0
+     *
+     * @param {(number|object)} x - The x value to set for this Vector, or an object containing x, y and z components.
+     * @param {number} [y] - The y value to set for this Vector.
+     * @param {number} [z] - The z value to set for this Vector.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    set: function (x, y, z)
+    {
+        if (typeof x === 'object')
+        {
+            this.x = x.x || 0;
+            this.y = x.y || 0;
+            this.z = x.z || 0;
+        }
+        else
+        {
+            this.x = x || 0;
+            this.y = y || 0;
+            this.z = z || 0;
+        }
+
+        return this;
+    },
+
+    /**
+     * Sets the components of this Vector3 from the position of the given Matrix4.
+     *
+     * @method Phaser.Math.Vector3#setFromMatrixPosition
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix4} mat4 - The Matrix4 to get the position from.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    setFromMatrixPosition: function (m)
+    {
+        return this.fromArray(m.val, 12);
+    },
+
+    /**
+     * Sets the components of this Vector3 from the Matrix4 column specified.
+     *
+     * @method Phaser.Math.Vector3#setFromMatrixColumn
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix4} mat4 - The Matrix4 to get the column from.
+     * @param {number} index - The column index.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    setFromMatrixColumn: function (mat4, index)
+    {
+        return this.fromArray(mat4.val, index * 4);
+    },
+
+    /**
+     * Sets the components of this Vector3 from the given array, based on the offset.
+     *
+     * Vector3.x = array[offset]
+     * Vector3.y = array[offset + 1]
+     * Vector3.z = array[offset + 2]
+     *
+     * @method Phaser.Math.Vector3#fromArray
+     * @since 3.50.0
+     *
+     * @param {number[]} array - The array of values to get this Vector from.
+     * @param {number} [offset=0] - The offset index into the array.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    fromArray: function (array, offset)
+    {
+        if (offset === undefined) { offset = 0; }
+
+        this.x = array[offset];
+        this.y = array[offset + 1];
+        this.z = array[offset + 2];
+
+        return this;
+    },
+
+    /**
+     * Add a given Vector to this Vector. Addition is component-wise.
+     *
+     * @method Phaser.Math.Vector3#add
+     * @since 3.0.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to add to this Vector.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    add: function (v)
+    {
+        this.x += v.x;
+        this.y += v.y;
+        this.z += v.z || 0;
+
+        return this;
+    },
+
+    /**
+     * Add the given value to each component of this Vector.
+     *
+     * @method Phaser.Math.Vector3#addScalar
+     * @since 3.50.0
+     *
+     * @param {number} s - The amount to add to this Vector.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    addScalar: function (s)
+    {
+        this.x += s;
+        this.y += s;
+        this.z += s;
+
+        return this;
+    },
+
+    /**
+     * Add and scale a given Vector to this Vector. Addition is component-wise.
+     *
+     * @method Phaser.Math.Vector3#addScale
+     * @since 3.50.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to add to this Vector.
+     * @param {number} scale - The amount to scale `v` by.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    addScale: function (v, scale)
+    {
+        this.x += v.x * scale;
+        this.y += v.y * scale;
+        this.z += v.z * scale || 0;
+
+        return this;
+    },
+
+    /**
+     * Subtract the given Vector from this Vector. Subtraction is component-wise.
+     *
+     * @method Phaser.Math.Vector3#subtract
+     * @since 3.0.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to subtract from this Vector.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    subtract: function (v)
+    {
+        this.x -= v.x;
+        this.y -= v.y;
+        this.z -= v.z || 0;
+
+        return this;
+    },
+
+    /**
+     * Perform a component-wise multiplication between this Vector and the given Vector.
+     *
+     * Multiplies this Vector by the given Vector.
+     *
+     * @method Phaser.Math.Vector3#multiply
+     * @since 3.0.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to multiply this Vector by.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    multiply: function (v)
+    {
+        this.x *= v.x;
+        this.y *= v.y;
+        this.z *= v.z || 1;
+
+        return this;
+    },
+
+    /**
+     * Scale this Vector by the given value.
+     *
+     * @method Phaser.Math.Vector3#scale
+     * @since 3.0.0
+     *
+     * @param {number} scale - The value to scale this Vector by.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    scale: function (scale)
+    {
+        if (isFinite(scale))
+        {
+            this.x *= scale;
+            this.y *= scale;
+            this.z *= scale;
+        }
+        else
+        {
+            this.x = 0;
+            this.y = 0;
+            this.z = 0;
+        }
+
+        return this;
+    },
+
+    /**
+     * Perform a component-wise division between this Vector and the given Vector.
+     *
+     * Divides this Vector by the given Vector.
+     *
+     * @method Phaser.Math.Vector3#divide
+     * @since 3.0.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to divide this Vector by.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    divide: function (v)
+    {
+        this.x /= v.x;
+        this.y /= v.y;
+        this.z /= v.z || 1;
+
+        return this;
+    },
+
+    /**
+     * Negate the `x`, `y` and `z` components of this Vector.
+     *
+     * @method Phaser.Math.Vector3#negate
+     * @since 3.0.0
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    negate: function ()
+    {
+        this.x = -this.x;
+        this.y = -this.y;
+        this.z = -this.z;
+
+        return this;
+    },
+
+    /**
+     * Calculate the distance between this Vector and the given Vector.
+     *
+     * @method Phaser.Math.Vector3#distance
+     * @since 3.0.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to calculate the distance to.
+     *
+     * @return {number} The distance from this Vector to the given Vector.
+     */
+    distance: function (v)
+    {
+        var dx = v.x - this.x;
+        var dy = v.y - this.y;
+        var dz = v.z - this.z || 0;
+
+        return Math.sqrt(dx * dx + dy * dy + dz * dz);
+    },
+
+    /**
+     * Calculate the distance between this Vector and the given Vector, squared.
+     *
+     * @method Phaser.Math.Vector3#distanceSq
+     * @since 3.0.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to calculate the distance to.
+     *
+     * @return {number} The distance from this Vector to the given Vector, squared.
+     */
+    distanceSq: function (v)
+    {
+        var dx = v.x - this.x;
+        var dy = v.y - this.y;
+        var dz = v.z - this.z || 0;
+
+        return dx * dx + dy * dy + dz * dz;
+    },
+
+    /**
+     * Calculate the length (or magnitude) of this Vector.
+     *
+     * @method Phaser.Math.Vector3#length
+     * @since 3.0.0
+     *
+     * @return {number} The length of this Vector.
+     */
+    length: function ()
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+
+        return Math.sqrt(x * x + y * y + z * z);
+    },
+
+    /**
+     * Calculate the length of this Vector squared.
+     *
+     * @method Phaser.Math.Vector3#lengthSq
+     * @since 3.0.0
+     *
+     * @return {number} The length of this Vector, squared.
+     */
+    lengthSq: function ()
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+
+        return x * x + y * y + z * z;
+    },
+
+    /**
+     * Normalize this Vector.
+     *
+     * Makes the vector a unit length vector (magnitude of 1) in the same direction.
+     *
+     * @method Phaser.Math.Vector3#normalize
+     * @since 3.0.0
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    normalize: function ()
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+        var len = x * x + y * y + z * z;
+
+        if (len > 0)
+        {
+            len = 1 / Math.sqrt(len);
+
+            this.x = x * len;
+            this.y = y * len;
+            this.z = z * len;
+        }
+
+        return this;
+    },
+
+    /**
+     * Calculate the dot product of this Vector and the given Vector.
+     *
+     * @method Phaser.Math.Vector3#dot
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Vector3} v - The Vector3 to dot product with this Vector3.
+     *
+     * @return {number} The dot product of this Vector and `v`.
+     */
+    dot: function (v)
+    {
+        return this.x * v.x + this.y * v.y + this.z * v.z;
+    },
+
+    /**
+     * Calculate the cross (vector) product of this Vector (which will be modified) and the given Vector.
+     *
+     * @method Phaser.Math.Vector3#cross
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Vector3} v - The Vector to cross product with.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    cross: function (v)
+    {
+        var ax = this.x;
+        var ay = this.y;
+        var az = this.z;
+        var bx = v.x;
+        var by = v.y;
+        var bz = v.z;
+
+        this.x = ay * bz - az * by;
+        this.y = az * bx - ax * bz;
+        this.z = ax * by - ay * bx;
+
+        return this;
+    },
+
+    /**
+     * Linearly interpolate between this Vector and the given Vector.
+     *
+     * Interpolates this Vector towards the given Vector.
+     *
+     * @method Phaser.Math.Vector3#lerp
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Vector3} v - The Vector3 to interpolate towards.
+     * @param {number} [t=0] - The interpolation percentage, between 0 and 1.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    lerp: function (v, t)
+    {
+        if (t === undefined) { t = 0; }
+
+        var ax = this.x;
+        var ay = this.y;
+        var az = this.z;
+
+        this.x = ax + t * (v.x - ax);
+        this.y = ay + t * (v.y - ay);
+        this.z = az + t * (v.z - az);
+
+        return this;
+    },
+
+    /**
+     * Takes a Matrix3 and applies it to this Vector3.
+     *
+     * @method Phaser.Math.Vector3#applyMatrix3
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix3} mat3 - The Matrix3 to apply to this Vector3.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    applyMatrix3: function (mat3)
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+        var m = mat3.val;
+
+        this.x = m[0] * x + m[3] * y + m[6] * z;
+        this.y = m[1] * x + m[4] * y + m[7] * z;
+        this.z = m[2] * x + m[5] * y + m[8] * z;
+
+        return this;
+    },
+
+    /**
+     * Takes a Matrix4 and applies it to this Vector3.
+     *
+     * @method Phaser.Math.Vector3#applyMatrix4
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix4} mat4 - The Matrix4 to apply to this Vector3.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    applyMatrix4: function (mat4)
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+        var m = mat4.val;
+
+        var w = 1 / (m[3] * x + m[7] * y + m[11] * z + m[15]);
+
+        this.x = (m[0] * x + m[4] * y + m[8] * z + m[12]) * w;
+        this.y = (m[1] * x + m[5] * y + m[9] * z + m[13]) * w;
+        this.z = (m[2] * x + m[6] * y + m[10] * z + m[14]) * w;
+
+        return this;
+    },
+
+    /**
+     * Transform this Vector with the given Matrix.
+     *
+     * @method Phaser.Math.Vector3#transformMat3
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Matrix3} mat - The Matrix3 to transform this Vector3 with.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    transformMat3: function (mat)
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+        var m = mat.val;
+
+        this.x = x * m[0] + y * m[3] + z * m[6];
+        this.y = x * m[1] + y * m[4] + z * m[7];
+        this.z = x * m[2] + y * m[5] + z * m[8];
+
+        return this;
+    },
+
+    /**
+     * Transform this Vector with the given Matrix4.
+     *
+     * @method Phaser.Math.Vector3#transformMat4
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Matrix4} mat - The Matrix4 to transform this Vector3 with.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    transformMat4: function (mat)
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+        var m = mat.val;
+
+        this.x = m[0] * x + m[4] * y + m[8] * z + m[12];
+        this.y = m[1] * x + m[5] * y + m[9] * z + m[13];
+        this.z = m[2] * x + m[6] * y + m[10] * z + m[14];
+
+        return this;
+    },
+
+    /**
+     * Transforms the coordinates of this Vector3 with the given Matrix4.
+     *
+     * @method Phaser.Math.Vector3#transformCoordinates
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Matrix4} mat - The Matrix4 to transform this Vector3 with.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    transformCoordinates: function (mat)
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+        var m = mat.val;
+
+        var tx = (x * m[0]) + (y * m[4]) + (z * m[8]) + m[12];
+        var ty = (x * m[1]) + (y * m[5]) + (z * m[9]) + m[13];
+        var tz = (x * m[2]) + (y * m[6]) + (z * m[10]) + m[14];
+        var tw = (x * m[3]) + (y * m[7]) + (z * m[11]) + m[15];
+
+        this.x = tx / tw;
+        this.y = ty / tw;
+        this.z = tz / tw;
+
+        return this;
+    },
+
+    /**
+     * Transform this Vector with the given Quaternion.
+     *
+     * @method Phaser.Math.Vector3#transformQuat
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Quaternion} q - The Quaternion to transform this Vector with.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    transformQuat: function (q)
+    {
+        // benchmarks: http://jsperf.com/quaternion-transform-vec3-implementations
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+        var qx = q.x;
+        var qy = q.y;
+        var qz = q.z;
+        var qw = q.w;
+
+        // calculate quat * vec
+        var ix = qw * x + qy * z - qz * y;
+        var iy = qw * y + qz * x - qx * z;
+        var iz = qw * z + qx * y - qy * x;
+        var iw = -qx * x - qy * y - qz * z;
+
+        // calculate result * inverse quat
+        this.x = ix * qw + iw * -qx + iy * -qz - iz * -qy;
+        this.y = iy * qw + iw * -qy + iz * -qx - ix * -qz;
+        this.z = iz * qw + iw * -qz + ix * -qy - iy * -qx;
+
+        return this;
+    },
+
+    /**
+     * Multiplies this Vector3 by the specified matrix, applying a W divide. This is useful for projection,
+     * e.g. unprojecting a 2D point into 3D space.
+     *
+     * @method Phaser.Math.Vector3#project
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Matrix4} mat - The Matrix4 to multiply this Vector3 with.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    project: function (mat)
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+        var m = mat.val;
+
+        var a00 = m[0];
+        var a01 = m[1];
+        var a02 = m[2];
+        var a03 = m[3];
+        var a10 = m[4];
+        var a11 = m[5];
+        var a12 = m[6];
+        var a13 = m[7];
+        var a20 = m[8];
+        var a21 = m[9];
+        var a22 = m[10];
+        var a23 = m[11];
+        var a30 = m[12];
+        var a31 = m[13];
+        var a32 = m[14];
+        var a33 = m[15];
+
+        var lw = 1 / (x * a03 + y * a13 + z * a23 + a33);
+
+        this.x = (x * a00 + y * a10 + z * a20 + a30) * lw;
+        this.y = (x * a01 + y * a11 + z * a21 + a31) * lw;
+        this.z = (x * a02 + y * a12 + z * a22 + a32) * lw;
+
+        return this;
+    },
+
+    /**
+     * Multiplies this Vector3 by the given view and projection matrices.
+     *
+     * @method Phaser.Math.Vector3#projectViewMatrix
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix4} viewMatrix - A View Matrix.
+     * @param {Phaser.Math.Matrix4} projectionMatrix - A Projection Matrix.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    projectViewMatrix: function (viewMatrix, projectionMatrix)
+    {
+        return this.applyMatrix4(viewMatrix).applyMatrix4(projectionMatrix);
+    },
+
+    /**
+     * Multiplies this Vector3 by the given inversed projection matrix and world matrix.
+     *
+     * @method Phaser.Math.Vector3#unprojectViewMatrix
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix4} projectionMatrix - An inversed Projection Matrix.
+     * @param {Phaser.Math.Matrix4} worldMatrix - A World View Matrix.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    unprojectViewMatrix: function (projectionMatrix, worldMatrix)
+    {
+        return this.applyMatrix4(projectionMatrix).applyMatrix4(worldMatrix);
+    },
+
+    /**
+     * Unproject this point from 2D space to 3D space.
+     * The point should have its x and y properties set to
+     * 2D screen space, and the z either at 0 (near plane)
+     * or 1 (far plane). The provided matrix is assumed to already
+     * be combined, i.e. projection * view * model.
+     *
+     * After this operation, this vector's (x, y, z) components will
+     * represent the unprojected 3D coordinate.
+     *
+     * @method Phaser.Math.Vector3#unproject
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Vector4} viewport - Screen x, y, width and height in pixels.
+     * @param {Phaser.Math.Matrix4} invProjectionView - Combined projection and view matrix.
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    unproject: function (viewport, invProjectionView)
+    {
+        var viewX = viewport.x;
+        var viewY = viewport.y;
+        var viewWidth = viewport.z;
+        var viewHeight = viewport.w;
+
+        var x = this.x - viewX;
+        var y = (viewHeight - this.y - 1) - viewY;
+        var z = this.z;
+
+        this.x = (2 * x) / viewWidth - 1;
+        this.y = (2 * y) / viewHeight - 1;
+        this.z = 2 * z - 1;
+
+        return this.project(invProjectionView);
+    },
+
+    /**
+     * Make this Vector the zero vector (0, 0, 0).
+     *
+     * @method Phaser.Math.Vector3#reset
+     * @since 3.0.0
+     *
+     * @return {Phaser.Math.Vector3} This Vector3.
+     */
+    reset: function ()
+    {
+        this.x = 0;
+        this.y = 0;
+        this.z = 0;
+
+        return this;
+    }
+
+});
+
+/**
+ * A static zero Vector3 for use by reference.
+ *
+ * This constant is meant for comparison operations and should not be modified directly.
+ *
+ * @constant
+ * @name Phaser.Math.Vector3.ZERO
+ * @type {Phaser.Math.Vector3}
+ * @since 3.16.0
+ */
+Vector3.ZERO = new Vector3();
+
+/**
+ * A static right Vector3 for use by reference.
+ *
+ * This constant is meant for comparison operations and should not be modified directly.
+ *
+ * @constant
+ * @name Phaser.Math.Vector3.RIGHT
+ * @type {Phaser.Math.Vector3}
+ * @since 3.16.0
+ */
+Vector3.RIGHT = new Vector3(1, 0, 0);
+
+/**
+ * A static left Vector3 for use by reference.
+ *
+ * This constant is meant for comparison operations and should not be modified directly.
+ *
+ * @constant
+ * @name Phaser.Math.Vector3.LEFT
+ * @type {Phaser.Math.Vector3}
+ * @since 3.16.0
+ */
+Vector3.LEFT = new Vector3(-1, 0, 0);
+
+/**
+ * A static up Vector3 for use by reference.
+ *
+ * This constant is meant for comparison operations and should not be modified directly.
+ *
+ * @constant
+ * @name Phaser.Math.Vector3.UP
+ * @type {Phaser.Math.Vector3}
+ * @since 3.16.0
+ */
+Vector3.UP = new Vector3(0, -1, 0);
+
+/**
+ * A static down Vector3 for use by reference.
+ *
+ * This constant is meant for comparison operations and should not be modified directly.
+ *
+ * @constant
+ * @name Phaser.Math.Vector3.DOWN
+ * @type {Phaser.Math.Vector3}
+ * @since 3.16.0
+ */
+Vector3.DOWN = new Vector3(0, 1, 0);
+
+/**
+ * A static forward Vector3 for use by reference.
+ *
+ * This constant is meant for comparison operations and should not be modified directly.
+ *
+ * @constant
+ * @name Phaser.Math.Vector3.FORWARD
+ * @type {Phaser.Math.Vector3}
+ * @since 3.16.0
+ */
+Vector3.FORWARD = new Vector3(0, 0, 1);
+
+/**
+ * A static back Vector3 for use by reference.
+ *
+ * This constant is meant for comparison operations and should not be modified directly.
+ *
+ * @constant
+ * @name Phaser.Math.Vector3.BACK
+ * @type {Phaser.Math.Vector3}
+ * @since 3.16.0
+ */
+Vector3.BACK = new Vector3(0, 0, -1);
+
+/**
+ * A static one Vector3 for use by reference.
+ *
+ * This constant is meant for comparison operations and should not be modified directly.
+ *
+ * @constant
+ * @name Phaser.Math.Vector3.ONE
+ * @type {Phaser.Math.Vector3}
+ * @since 3.16.0
+ */
+Vector3.ONE = new Vector3(1, 1, 1);
+
+module.exports = Vector3;
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var MATH = __webpack_require__(189);
+var GetValue = __webpack_require__(5);
 
 /**
  * Retrieves a value from an object. Allows for more advanced selection options, including:
@@ -2868,7 +4425,87 @@ module.exports = GetAdvancedValue;
 
 
 /***/ }),
-/* 19 */
+/* 21 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var GEOM_CONST = {
+
+    /**
+     * A Circle Geometry object type.
+     * 
+     * @name Phaser.Geom.CIRCLE
+     * @type {number}
+     * @since 3.19.0
+     */
+    CIRCLE: 0,
+
+    /**
+     * An Ellipse Geometry object type.
+     * 
+     * @name Phaser.Geom.ELLIPSE
+     * @type {number}
+     * @since 3.19.0
+     */
+    ELLIPSE: 1,
+
+    /**
+     * A Line Geometry object type.
+     * 
+     * @name Phaser.Geom.LINE
+     * @type {number}
+     * @since 3.19.0
+     */
+    LINE: 2,
+
+    /**
+     * A Point Geometry object type.
+     * 
+     * @name Phaser.Geom.POINT
+     * @type {number}
+     * @since 3.19.0
+     */
+    POINT: 3,
+
+    /**
+     * A Polygon Geometry object type.
+     * 
+     * @name Phaser.Geom.POLYGON
+     * @type {number}
+     * @since 3.19.0
+     */
+    POLYGON: 4,
+
+    /**
+     * A Rectangle Geometry object type.
+     * 
+     * @name Phaser.Geom.RECTANGLE
+     * @type {number}
+     * @since 3.19.0
+     */
+    RECTANGLE: 5,
+
+    /**
+     * A Triangle Geometry object type.
+     * 
+     * @name Phaser.Geom.TRIANGLE
+     * @type {number}
+     * @since 3.19.0
+     */
+    TRIANGLE: 6
+
+};
+
+module.exports = GEOM_CONST;
+
+
+/***/ }),
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2878,7 +4515,7 @@ module.exports = GetAdvancedValue;
  */
 
 var Class = __webpack_require__(0);
-var MATH_CONST = __webpack_require__(13);
+var MATH_CONST = __webpack_require__(7);
 var Vector2 = __webpack_require__(6);
 
 /**
@@ -3888,7 +5525,7 @@ module.exports = TransformMatrix;
 
 
 /***/ }),
-/* 20 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3898,15 +5535,15 @@ module.exports = TransformMatrix;
  */
 
 var Class = __webpack_require__(0);
-var DeepCopy = __webpack_require__(135);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(180);
+var DeepCopy = __webpack_require__(166);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(210);
 var GetFastValue = __webpack_require__(1);
-var Matrix4 = __webpack_require__(42);
-var RendererEvents = __webpack_require__(32);
-var RenderTarget = __webpack_require__(90);
-var Utils = __webpack_require__(34);
-var WebGLShader = __webpack_require__(181);
+var Matrix4 = __webpack_require__(34);
+var RendererEvents = __webpack_require__(39);
+var RenderTarget = __webpack_require__(108);
+var Utils = __webpack_require__(35);
+var WebGLShader = __webpack_require__(211);
 
 /**
  * @classdesc
@@ -6005,7 +7642,7 @@ module.exports = WebGLPipeline;
 
 
 /***/ }),
-/* 21 */
+/* 24 */
 /***/ (function(module, exports) {
 
 /**
@@ -6157,7 +7794,7 @@ module.exports = FILE_CONST;
 
 
 /***/ }),
-/* 22 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -6167,13 +7804,13 @@ module.exports = FILE_CONST;
  */
 
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(21);
-var Events = __webpack_require__(48);
+var CONST = __webpack_require__(24);
+var Events = __webpack_require__(58);
 var GetFastValue = __webpack_require__(1);
-var GetURL = __webpack_require__(105);
-var MergeXHRSettings = __webpack_require__(106);
-var XHRLoader = __webpack_require__(261);
-var XHRSettings = __webpack_require__(72);
+var GetURL = __webpack_require__(134);
+var MergeXHRSettings = __webpack_require__(135);
+var XHRLoader = __webpack_require__(320);
+var XHRSettings = __webpack_require__(89);
 
 /**
  * @classdesc
@@ -6707,7 +8344,7 @@ module.exports = File;
 
 
 /***/ }),
-/* 23 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -6717,10 +8354,375 @@ module.exports = File;
  */
 
 var Class = __webpack_require__(0);
-var GetColor = __webpack_require__(142);
-var GetColor32 = __webpack_require__(355);
-var HSVToRGB = __webpack_require__(356);
-var RGBToHSV = __webpack_require__(357);
+var GetPoint = __webpack_require__(157);
+var GetPoints = __webpack_require__(158);
+var GEOM_CONST = __webpack_require__(21);
+var Random = __webpack_require__(159);
+var Vector2 = __webpack_require__(6);
+
+/**
+ * @classdesc
+ * Defines a Line segment, a part of a line between two endpoints.
+ *
+ * @class Line
+ * @memberof Phaser.Geom
+ * @constructor
+ * @since 3.0.0
+ *
+ * @param {number} [x1=0] - The x coordinate of the lines starting point.
+ * @param {number} [y1=0] - The y coordinate of the lines starting point.
+ * @param {number} [x2=0] - The x coordinate of the lines ending point.
+ * @param {number} [y2=0] - The y coordinate of the lines ending point.
+ */
+var Line = new Class({
+
+    initialize:
+
+    function Line (x1, y1, x2, y2)
+    {
+        if (x1 === undefined) { x1 = 0; }
+        if (y1 === undefined) { y1 = 0; }
+        if (x2 === undefined) { x2 = 0; }
+        if (y2 === undefined) { y2 = 0; }
+
+        /**
+         * The geometry constant type of this object: `GEOM_CONST.LINE`.
+         * Used for fast type comparisons.
+         *
+         * @name Phaser.Geom.Line#type
+         * @type {number}
+         * @readonly
+         * @since 3.19.0
+         */
+        this.type = GEOM_CONST.LINE;
+
+        /**
+         * The x coordinate of the lines starting point.
+         *
+         * @name Phaser.Geom.Line#x1
+         * @type {number}
+         * @since 3.0.0
+         */
+        this.x1 = x1;
+
+        /**
+         * The y coordinate of the lines starting point.
+         *
+         * @name Phaser.Geom.Line#y1
+         * @type {number}
+         * @since 3.0.0
+         */
+        this.y1 = y1;
+
+        /**
+         * The x coordinate of the lines ending point.
+         *
+         * @name Phaser.Geom.Line#x2
+         * @type {number}
+         * @since 3.0.0
+         */
+        this.x2 = x2;
+
+        /**
+         * The y coordinate of the lines ending point.
+         *
+         * @name Phaser.Geom.Line#y2
+         * @type {number}
+         * @since 3.0.0
+         */
+        this.y2 = y2;
+    },
+
+    /**
+     * Get a point on a line that's a given percentage along its length.
+     *
+     * @method Phaser.Geom.Line#getPoint
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point} O - [output,$return]
+     *
+     * @param {number} position - A value between 0 and 1, where 0 is the start, 0.5 is the middle and 1 is the end of the line.
+     * @param {(Phaser.Geom.Point|object)} [output] - An optional point, or point-like object, to store the coordinates of the point on the line.
+     *
+     * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point on the line.
+     */
+    getPoint: function (position, output)
+    {
+        return GetPoint(this, position, output);
+    },
+
+    /**
+     * Get a number of points along a line's length.
+     *
+     * Provide a `quantity` to get an exact number of points along the line.
+     *
+     * Provide a `stepRate` to ensure a specific distance between each point on the line. Set `quantity` to `0` when
+     * providing a `stepRate`.
+     *
+     * @method Phaser.Geom.Line#getPoints
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point[]} O - [output,$return]
+     *
+     * @param {number} quantity - The number of points to place on the line. Set to `0` to use `stepRate` instead.
+     * @param {number} [stepRate] - The distance between each point on the line. When set, `quantity` is implied and should be set to `0`.
+     * @param {(array|Phaser.Geom.Point[])} [output] - An optional array of Points, or point-like objects, to store the coordinates of the points on the line.
+     *
+     * @return {(array|Phaser.Geom.Point[])} An array of Points, or point-like objects, containing the coordinates of the points on the line.
+     */
+    getPoints: function (quantity, stepRate, output)
+    {
+        return GetPoints(this, quantity, stepRate, output);
+    },
+
+    /**
+     * Get a random Point on the Line.
+     *
+     * @method Phaser.Geom.Line#getRandomPoint
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point} O - [point,$return]
+     *
+     * @param {(Phaser.Geom.Point|object)} [point] - An instance of a Point to be modified.
+     *
+     * @return {Phaser.Geom.Point} A random Point on the Line.
+     */
+    getRandomPoint: function (point)
+    {
+        return Random(this, point);
+    },
+
+    /**
+     * Set new coordinates for the line endpoints.
+     *
+     * @method Phaser.Geom.Line#setTo
+     * @since 3.0.0
+     *
+     * @param {number} [x1=0] - The x coordinate of the lines starting point.
+     * @param {number} [y1=0] - The y coordinate of the lines starting point.
+     * @param {number} [x2=0] - The x coordinate of the lines ending point.
+     * @param {number} [y2=0] - The y coordinate of the lines ending point.
+     *
+     * @return {this} This Line object.
+     */
+    setTo: function (x1, y1, x2, y2)
+    {
+        if (x1 === undefined) { x1 = 0; }
+        if (y1 === undefined) { y1 = 0; }
+        if (x2 === undefined) { x2 = 0; }
+        if (y2 === undefined) { y2 = 0; }
+
+        this.x1 = x1;
+        this.y1 = y1;
+
+        this.x2 = x2;
+        this.y2 = y2;
+
+        return this;
+    },
+
+    /**
+     * Returns a Vector2 object that corresponds to the start of this Line.
+     *
+     * @method Phaser.Geom.Line#getPointA
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Math.Vector2} O - [vec2,$return]
+     *
+     * @param {Phaser.Math.Vector2} [vec2] - A Vector2 object to set the results in. If `undefined` a new Vector2 will be created.
+     *
+     * @return {Phaser.Math.Vector2} A Vector2 object that corresponds to the start of this Line.
+     */
+    getPointA: function (vec2)
+    {
+        if (vec2 === undefined) { vec2 = new Vector2(); }
+
+        vec2.set(this.x1, this.y1);
+
+        return vec2;
+    },
+
+    /**
+     * Returns a Vector2 object that corresponds to the end of this Line.
+     *
+     * @method Phaser.Geom.Line#getPointB
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Math.Vector2} O - [vec2,$return]
+     *
+     * @param {Phaser.Math.Vector2} [vec2] - A Vector2 object to set the results in. If `undefined` a new Vector2 will be created.
+     *
+     * @return {Phaser.Math.Vector2} A Vector2 object that corresponds to the end of this Line.
+     */
+    getPointB: function (vec2)
+    {
+        if (vec2 === undefined) { vec2 = new Vector2(); }
+
+        vec2.set(this.x2, this.y2);
+
+        return vec2;
+    },
+
+    /**
+     * The left position of the Line.
+     *
+     * @name Phaser.Geom.Line#left
+     * @type {number}
+     * @since 3.0.0
+     */
+    left: {
+
+        get: function ()
+        {
+            return Math.min(this.x1, this.x2);
+        },
+
+        set: function (value)
+        {
+            if (this.x1 <= this.x2)
+            {
+                this.x1 = value;
+            }
+            else
+            {
+                this.x2 = value;
+            }
+        }
+
+    },
+
+    /**
+     * The right position of the Line.
+     *
+     * @name Phaser.Geom.Line#right
+     * @type {number}
+     * @since 3.0.0
+     */
+    right: {
+
+        get: function ()
+        {
+            return Math.max(this.x1, this.x2);
+        },
+
+        set: function (value)
+        {
+            if (this.x1 > this.x2)
+            {
+                this.x1 = value;
+            }
+            else
+            {
+                this.x2 = value;
+            }
+        }
+
+    },
+
+    /**
+     * The top position of the Line.
+     *
+     * @name Phaser.Geom.Line#top
+     * @type {number}
+     * @since 3.0.0
+     */
+    top: {
+
+        get: function ()
+        {
+            return Math.min(this.y1, this.y2);
+        },
+
+        set: function (value)
+        {
+            if (this.y1 <= this.y2)
+            {
+                this.y1 = value;
+            }
+            else
+            {
+                this.y2 = value;
+            }
+        }
+
+    },
+
+    /**
+     * The bottom position of the Line.
+     *
+     * @name Phaser.Geom.Line#bottom
+     * @type {number}
+     * @since 3.0.0
+     */
+    bottom: {
+
+        get: function ()
+        {
+            return Math.max(this.y1, this.y2);
+        },
+
+        set: function (value)
+        {
+            if (this.y1 > this.y2)
+            {
+                this.y1 = value;
+            }
+            else
+            {
+                this.y2 = value;
+            }
+        }
+
+    }
+
+});
+
+module.exports = Line;
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Calculate the length of the given line.
+ *
+ * @function Phaser.Geom.Line.Length
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The line to calculate the length of.
+ *
+ * @return {number} The length of the line.
+ */
+var Length = function (line)
+{
+    return Math.sqrt((line.x2 - line.x1) * (line.x2 - line.x1) + (line.y2 - line.y1) * (line.y2 - line.y1));
+};
+
+module.exports = Length;
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Class = __webpack_require__(0);
+var GetColor = __webpack_require__(101);
+var GetColor32 = __webpack_require__(409);
+var HSVToRGB = __webpack_require__(410);
+var RGBToHSV = __webpack_require__(411);
 
 /**
  * @namespace Phaser.Display.Color
@@ -7570,7 +9572,7 @@ module.exports = Color;
 
 
 /***/ }),
-/* 24 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -7585,58 +9587,58 @@ module.exports = Color;
 
 module.exports = {
 
-    BOOT: __webpack_require__(537),
-    DESTROY: __webpack_require__(538),
-    DRAG_END: __webpack_require__(539),
-    DRAG_ENTER: __webpack_require__(540),
-    DRAG: __webpack_require__(541),
-    DRAG_LEAVE: __webpack_require__(542),
-    DRAG_OVER: __webpack_require__(543),
-    DRAG_START: __webpack_require__(544),
-    DROP: __webpack_require__(545),
-    GAME_OUT: __webpack_require__(546),
-    GAME_OVER: __webpack_require__(547),
-    GAMEOBJECT_DOWN: __webpack_require__(548),
-    GAMEOBJECT_DRAG_END: __webpack_require__(549),
-    GAMEOBJECT_DRAG_ENTER: __webpack_require__(550),
-    GAMEOBJECT_DRAG: __webpack_require__(551),
-    GAMEOBJECT_DRAG_LEAVE: __webpack_require__(552),
-    GAMEOBJECT_DRAG_OVER: __webpack_require__(553),
-    GAMEOBJECT_DRAG_START: __webpack_require__(554),
-    GAMEOBJECT_DROP: __webpack_require__(555),
-    GAMEOBJECT_MOVE: __webpack_require__(556),
-    GAMEOBJECT_OUT: __webpack_require__(557),
-    GAMEOBJECT_OVER: __webpack_require__(558),
-    GAMEOBJECT_POINTER_DOWN: __webpack_require__(559),
-    GAMEOBJECT_POINTER_MOVE: __webpack_require__(560),
-    GAMEOBJECT_POINTER_OUT: __webpack_require__(561),
-    GAMEOBJECT_POINTER_OVER: __webpack_require__(562),
-    GAMEOBJECT_POINTER_UP: __webpack_require__(563),
-    GAMEOBJECT_POINTER_WHEEL: __webpack_require__(564),
-    GAMEOBJECT_UP: __webpack_require__(565),
-    GAMEOBJECT_WHEEL: __webpack_require__(566),
-    MANAGER_BOOT: __webpack_require__(567),
-    MANAGER_PROCESS: __webpack_require__(568),
-    MANAGER_UPDATE: __webpack_require__(569),
-    POINTER_DOWN: __webpack_require__(570),
-    POINTER_DOWN_OUTSIDE: __webpack_require__(571),
-    POINTER_MOVE: __webpack_require__(572),
-    POINTER_OUT: __webpack_require__(573),
-    POINTER_OVER: __webpack_require__(574),
-    POINTER_UP: __webpack_require__(575),
-    POINTER_UP_OUTSIDE: __webpack_require__(576),
-    POINTER_WHEEL: __webpack_require__(577),
-    POINTERLOCK_CHANGE: __webpack_require__(578),
-    PRE_UPDATE: __webpack_require__(579),
-    SHUTDOWN: __webpack_require__(580),
-    START: __webpack_require__(581),
-    UPDATE: __webpack_require__(582)
+    BOOT: __webpack_require__(587),
+    DESTROY: __webpack_require__(588),
+    DRAG_END: __webpack_require__(589),
+    DRAG_ENTER: __webpack_require__(590),
+    DRAG: __webpack_require__(591),
+    DRAG_LEAVE: __webpack_require__(592),
+    DRAG_OVER: __webpack_require__(593),
+    DRAG_START: __webpack_require__(594),
+    DROP: __webpack_require__(595),
+    GAME_OUT: __webpack_require__(596),
+    GAME_OVER: __webpack_require__(597),
+    GAMEOBJECT_DOWN: __webpack_require__(598),
+    GAMEOBJECT_DRAG_END: __webpack_require__(599),
+    GAMEOBJECT_DRAG_ENTER: __webpack_require__(600),
+    GAMEOBJECT_DRAG: __webpack_require__(601),
+    GAMEOBJECT_DRAG_LEAVE: __webpack_require__(602),
+    GAMEOBJECT_DRAG_OVER: __webpack_require__(603),
+    GAMEOBJECT_DRAG_START: __webpack_require__(604),
+    GAMEOBJECT_DROP: __webpack_require__(605),
+    GAMEOBJECT_MOVE: __webpack_require__(606),
+    GAMEOBJECT_OUT: __webpack_require__(607),
+    GAMEOBJECT_OVER: __webpack_require__(608),
+    GAMEOBJECT_POINTER_DOWN: __webpack_require__(609),
+    GAMEOBJECT_POINTER_MOVE: __webpack_require__(610),
+    GAMEOBJECT_POINTER_OUT: __webpack_require__(611),
+    GAMEOBJECT_POINTER_OVER: __webpack_require__(612),
+    GAMEOBJECT_POINTER_UP: __webpack_require__(613),
+    GAMEOBJECT_POINTER_WHEEL: __webpack_require__(614),
+    GAMEOBJECT_UP: __webpack_require__(615),
+    GAMEOBJECT_WHEEL: __webpack_require__(616),
+    MANAGER_BOOT: __webpack_require__(617),
+    MANAGER_PROCESS: __webpack_require__(618),
+    MANAGER_UPDATE: __webpack_require__(619),
+    POINTER_DOWN: __webpack_require__(620),
+    POINTER_DOWN_OUTSIDE: __webpack_require__(621),
+    POINTER_MOVE: __webpack_require__(622),
+    POINTER_OUT: __webpack_require__(623),
+    POINTER_OVER: __webpack_require__(624),
+    POINTER_UP: __webpack_require__(625),
+    POINTER_UP_OUTSIDE: __webpack_require__(626),
+    POINTER_WHEEL: __webpack_require__(627),
+    POINTERLOCK_CHANGE: __webpack_require__(628),
+    PRE_UPDATE: __webpack_require__(629),
+    SHUTDOWN: __webpack_require__(630),
+    START: __webpack_require__(631),
+    UPDATE: __webpack_require__(632)
 
 };
 
 
 /***/ }),
-/* 25 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -7646,8 +9648,8 @@ module.exports = {
  */
 
 var Class = __webpack_require__(0);
-var PluginCache = __webpack_require__(9);
-var SceneEvents = __webpack_require__(8);
+var PluginCache = __webpack_require__(12);
+var SceneEvents = __webpack_require__(11);
 
 /**
  * @classdesc
@@ -7816,7 +9818,7 @@ module.exports = GameObjectCreator;
 
 
 /***/ }),
-/* 26 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -7826,8 +9828,8 @@ module.exports = GameObjectCreator;
  */
 
 var Class = __webpack_require__(0);
-var PluginCache = __webpack_require__(9);
-var SceneEvents = __webpack_require__(8);
+var PluginCache = __webpack_require__(12);
+var SceneEvents = __webpack_require__(11);
 
 /**
  * @classdesc
@@ -8049,7 +10051,7 @@ module.exports = GameObjectFactory;
 
 
 /***/ }),
-/* 27 */
+/* 32 */
 /***/ (function(module, exports) {
 
 /**
@@ -8388,7 +10390,7 @@ module.exports = {
 
 
 /***/ }),
-/* 28 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -8403,545 +10405,33 @@ module.exports = {
 
 module.exports = {
 
-    Alpha: __webpack_require__(316),
-    AlphaSingle: __webpack_require__(124),
-    BlendMode: __webpack_require__(125),
-    ComputedSize: __webpack_require__(317),
-    Crop: __webpack_require__(318),
-    Depth: __webpack_require__(126),
-    Flip: __webpack_require__(319),
-    GetBounds: __webpack_require__(320),
-    Mask: __webpack_require__(131),
-    Origin: __webpack_require__(330),
-    PathFollower: __webpack_require__(331),
-    Pipeline: __webpack_require__(134),
-    ScrollFactor: __webpack_require__(136),
-    Size: __webpack_require__(332),
-    Texture: __webpack_require__(333),
-    TextureCrop: __webpack_require__(334),
-    Tint: __webpack_require__(335),
-    ToJSON: __webpack_require__(83),
-    Transform: __webpack_require__(137),
-    TransformMatrix: __webpack_require__(19),
-    Visible: __webpack_require__(140)
+    Alpha: __webpack_require__(375),
+    AlphaSingle: __webpack_require__(153),
+    BlendMode: __webpack_require__(154),
+    ComputedSize: __webpack_require__(376),
+    Crop: __webpack_require__(377),
+    Depth: __webpack_require__(155),
+    Flip: __webpack_require__(378),
+    GetBounds: __webpack_require__(379),
+    Mask: __webpack_require__(162),
+    Origin: __webpack_require__(384),
+    PathFollower: __webpack_require__(385),
+    Pipeline: __webpack_require__(165),
+    ScrollFactor: __webpack_require__(167),
+    Size: __webpack_require__(386),
+    Texture: __webpack_require__(387),
+    TextureCrop: __webpack_require__(388),
+    Tint: __webpack_require__(389),
+    ToJSON: __webpack_require__(99),
+    Transform: __webpack_require__(168),
+    TransformMatrix: __webpack_require__(22),
+    Visible: __webpack_require__(171)
 
 };
-
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var GEOM_CONST = {
-
-    /**
-     * A Circle Geometry object type.
-     * 
-     * @name Phaser.Geom.CIRCLE
-     * @type {number}
-     * @since 3.19.0
-     */
-    CIRCLE: 0,
-
-    /**
-     * An Ellipse Geometry object type.
-     * 
-     * @name Phaser.Geom.ELLIPSE
-     * @type {number}
-     * @since 3.19.0
-     */
-    ELLIPSE: 1,
-
-    /**
-     * A Line Geometry object type.
-     * 
-     * @name Phaser.Geom.LINE
-     * @type {number}
-     * @since 3.19.0
-     */
-    LINE: 2,
-
-    /**
-     * A Point Geometry object type.
-     * 
-     * @name Phaser.Geom.POINT
-     * @type {number}
-     * @since 3.19.0
-     */
-    POINT: 3,
-
-    /**
-     * A Polygon Geometry object type.
-     * 
-     * @name Phaser.Geom.POLYGON
-     * @type {number}
-     * @since 3.19.0
-     */
-    POLYGON: 4,
-
-    /**
-     * A Rectangle Geometry object type.
-     * 
-     * @name Phaser.Geom.RECTANGLE
-     * @type {number}
-     * @since 3.19.0
-     */
-    RECTANGLE: 5,
-
-    /**
-     * A Triangle Geometry object type.
-     * 
-     * @name Phaser.Geom.TRIANGLE
-     * @type {number}
-     * @since 3.19.0
-     */
-    TRIANGLE: 6
-
-};
-
-module.exports = GEOM_CONST;
-
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * @namespace Phaser.Sound.Events
- */
-
-module.exports = {
-
-    COMPLETE: __webpack_require__(605),
-    DECODED: __webpack_require__(606),
-    DECODED_ALL: __webpack_require__(607),
-    DESTROY: __webpack_require__(608),
-    DETUNE: __webpack_require__(609),
-    GLOBAL_DETUNE: __webpack_require__(610),
-    GLOBAL_MUTE: __webpack_require__(611),
-    GLOBAL_RATE: __webpack_require__(612),
-    GLOBAL_VOLUME: __webpack_require__(613),
-    LOOP: __webpack_require__(614),
-    LOOPED: __webpack_require__(615),
-    MUTE: __webpack_require__(616),
-    PAN: __webpack_require__(617),
-    PAUSE_ALL: __webpack_require__(618),
-    PAUSE: __webpack_require__(619),
-    PLAY: __webpack_require__(620),
-    RATE: __webpack_require__(621),
-    RESUME_ALL: __webpack_require__(622),
-    RESUME: __webpack_require__(623),
-    SEEK: __webpack_require__(624),
-    STOP_ALL: __webpack_require__(625),
-    STOP: __webpack_require__(626),
-    UNLOCKED: __webpack_require__(627),
-    VOLUME: __webpack_require__(628)
-
-};
-
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * Tests if the start and end indexes are a safe range for the given array.
- * 
- * @function Phaser.Utils.Array.SafeRange
- * @since 3.4.0
- *
- * @param {array} array - The array to check.
- * @param {number} startIndex - The start index.
- * @param {number} endIndex - The end index.
- * @param {boolean} [throwError=true] - Throw an error if the range is out of bounds.
- *
- * @return {boolean} True if the range is safe, otherwise false.
- */
-var SafeRange = function (array, startIndex, endIndex, throwError)
-{
-    var len = array.length;
-
-    if (startIndex < 0 ||
-        startIndex > len ||
-        startIndex >= endIndex ||
-        endIndex > len ||
-        startIndex + endIndex > len)
-    {
-        if (throwError)
-        {
-            throw new Error('Range Error: Values outside acceptable range');
-        }
-
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-};
-
-module.exports = SafeRange;
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * @namespace Phaser.Renderer.Events
- */
-
-module.exports = {
-
-    POST_RENDER: __webpack_require__(326),
-    PRE_RENDER: __webpack_require__(327),
-    RENDER: __webpack_require__(328),
-    RESIZE: __webpack_require__(329)
-
-};
-
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var SpliceOne = __webpack_require__(39);
-
-/**
- * Removes the given item, or array of items, from the array.
- *
- * The array is modified in-place.
- *
- * You can optionally specify a callback to be invoked for each item successfully removed from the array.
- *
- * @function Phaser.Utils.Array.Remove
- * @since 3.4.0
- *
- * @param {array} array - The array to be modified.
- * @param {*|Array.<*>} item - The item, or array of items, to be removed from the array.
- * @param {function} [callback] - A callback to be invoked for each item successfully removed from the array.
- * @param {object} [context] - The context in which the callback is invoked.
- *
- * @return {*|Array.<*>} The item, or array of items, that were successfully removed from the array.
- */
-var Remove = function (array, item, callback, context)
-{
-    if (context === undefined) { context = array; }
-
-    var index;
-
-    //  Fast path to avoid array mutation and iteration
-    if (!Array.isArray(item))
-    {
-        index = array.indexOf(item);
-
-        if (index !== -1)
-        {
-            SpliceOne(array, index);
-
-            if (callback)
-            {
-                callback.call(context, item);
-            }
-
-            return item;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    //  If we got this far, we have an array of items to remove
-
-    var itemLength = item.length - 1;
-    var removed = [];
-
-    while (itemLength >= 0)
-    {
-        var entry = item[itemLength];
-
-        index = array.indexOf(entry);
-
-        if (index !== -1)
-        {
-            SpliceOne(array, index);
-
-            removed.push(entry);
-
-            if (callback)
-            {
-                callback.call(context, entry);
-            }
-        }
-
-        itemLength--;
-    }
-
-    return removed;
-};
-
-module.exports = Remove;
 
 
 /***/ }),
 /* 34 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @author       Felipe Alfonso <@bitnenfer>
- * @author       Matthew Groves <@doormat>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * Generate shader source to test maximum ifs.
- *
- * @private
- * @ignore
- * @param {number} maxIfs - The number of if statements to generate
- */
-function GenerateSrc (maxIfs)
-{
-    var src = '';
-
-    for (var i = 0; i < maxIfs; ++i)
-    {
-        if (i > 0)
-        {
-            src += '\nelse ';
-        }
-
-        if (i < maxIfs - 1)
-        {
-            src += 'if(test == ' + i + '.0){}';
-        }
-    }
-
-    return src;
-}
-
-/**
- * @namespace Phaser.Renderer.WebGL.Utils
- * @since 3.0.0
- */
-module.exports = {
-
-    /**
-     * Packs four floats on a range from 0.0 to 1.0 into a single Uint32
-     *
-     * @function Phaser.Renderer.WebGL.Utils.getTintFromFloats
-     * @since 3.0.0
-     *
-     * @param {number} r - Red component in a range from 0.0 to 1.0
-     * @param {number} g - Green component in a range from 0.0 to 1.0
-     * @param {number} b - Blue component in a range from 0.0 to 1.0
-     * @param {number} a - Alpha component in a range from 0.0 to 1.0
-     *
-     * @return {number} The packed RGBA values as a Uint32.
-     */
-    getTintFromFloats: function (r, g, b, a)
-    {
-        var ur = ((r * 255) | 0) & 0xff;
-        var ug = ((g * 255) | 0) & 0xff;
-        var ub = ((b * 255) | 0) & 0xff;
-        var ua = ((a * 255) | 0) & 0xff;
-
-        return ((ua << 24) | (ur << 16) | (ug << 8) | ub) >>> 0;
-    },
-
-    /**
-     * Packs a Uint24, representing RGB components, with a Float32, representing
-     * the alpha component, with a range between 0.0 and 1.0 and return a Uint32
-     *
-     * @function Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha
-     * @since 3.0.0
-     *
-     * @param {number} rgb - Uint24 representing RGB components
-     * @param {number} a - Float32 representing Alpha component
-     *
-     * @return {number} Packed RGBA as Uint32
-     */
-    getTintAppendFloatAlpha: function (rgb, a)
-    {
-        var ua = ((a * 255) | 0) & 0xff;
-
-        return ((ua << 24) | rgb) >>> 0;
-    },
-
-    /**
-     * Packs a Uint24, representing RGB components, with a Float32, representing
-     * the alpha component, with a range between 0.0 and 1.0 and return a
-     * swizzled Uint32
-     *
-     * @function Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlphaAndSwap
-     * @since 3.0.0
-     *
-     * @param {number} rgb - Uint24 representing RGB components
-     * @param {number} a - Float32 representing Alpha component
-     *
-     * @return {number} Packed RGBA as Uint32
-     */
-    getTintAppendFloatAlphaAndSwap: function (rgb, a)
-    {
-        var ur = ((rgb >> 16) | 0) & 0xff;
-        var ug = ((rgb >> 8) | 0) & 0xff;
-        var ub = (rgb | 0) & 0xff;
-        var ua = ((a * 255) | 0) & 0xff;
-
-        return ((ua << 24) | (ub << 16) | (ug << 8) | ur) >>> 0;
-    },
-
-    /**
-     * Unpacks a Uint24 RGB into an array of floats of ranges of 0.0 and 1.0
-     *
-     * @function Phaser.Renderer.WebGL.Utils.getFloatsFromUintRGB
-     * @since 3.0.0
-     *
-     * @param {number} rgb - RGB packed as a Uint24
-     *
-     * @return {array} Array of floats representing each component as a float
-     */
-    getFloatsFromUintRGB: function (rgb)
-    {
-        var ur = ((rgb >> 16) | 0) & 0xff;
-        var ug = ((rgb >> 8) | 0) & 0xff;
-        var ub = (rgb | 0) & 0xff;
-
-        return [ ur / 255, ug / 255, ub / 255 ];
-    },
-
-    /**
-     * Check to see how many texture units the GPU supports, based on the given config value.
-     * Then tests this against the maximum number of iterations GLSL can support.
-     *
-     * @function Phaser.Renderer.WebGL.Utils.checkShaderMax
-     * @since 3.50.0
-     *
-     * @param {WebGLRenderingContext} gl - The WebGLContext used to create the shaders.
-     * @param {number} maxTextures - The Game Config maxTextures value.
-     *
-     * @return {number} The number of texture units that is supported by this browser and GPU.
-     */
-    checkShaderMax: function (gl, maxTextures)
-    {
-        if (!maxTextures || maxTextures === -1)
-        {
-            maxTextures = gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS);
-        }
-
-        var shader = gl.createShader(gl.FRAGMENT_SHADER);
-
-        var fragTemplate = [
-            'precision mediump float;',
-            'void main(void){',
-            'float test = 0.1;',
-            '%forloop%',
-            'gl_FragColor = vec4(0.0);',
-            '}'
-        ].join('\n');
-
-        // eslint-disable-next-line no-constant-condition
-        while (true)
-        {
-            var fragmentSrc = fragTemplate.replace(/%forloop%/gi, GenerateSrc(maxTextures));
-
-            gl.shaderSource(shader, fragmentSrc);
-            gl.compileShader(shader);
-
-            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS))
-            {
-                maxTextures = (maxTextures / 2) | 0;
-            }
-            else
-            {
-                // valid!
-                break;
-            }
-        }
-
-        return maxTextures;
-    },
-
-    /**
-     * Checks the given Fragment Shader Source for `%count%` and `%forloop%` declarations and
-     * replaces those with GLSL code for setting `texture = texture2D(uMainSampler[i], outTexCoord)`.
-     *
-     * @function Phaser.Renderer.WebGL.Utils.parseFragmentShaderMaxTextures
-     * @since 3.50.0
-     *
-     * @param {string} fragmentShaderSource - The Fragment Shader source code to operate on.
-     * @param {number} maxTextures - The number of maxTextures value.
-     *
-     * @return {string} The modified Fragment Shader source.
-     */
-    parseFragmentShaderMaxTextures: function (fragmentShaderSource, maxTextures)
-    {
-        if (!fragmentShaderSource)
-        {
-            return '';
-        }
-
-        var src = '';
-
-        for (var i = 0; i < maxTextures; i++)
-        {
-            if (i > 0)
-            {
-                src += '\n\telse ';
-            }
-
-            if (i < maxTextures - 1)
-            {
-                src += 'if (outTexId < ' + i + '.5)';
-            }
-
-            src += '\n\t{';
-            src += '\n\t\ttexture = texture2D(uMainSampler[' + i + '], outTexCoord);';
-            src += '\n\t}';
-        }
-
-        fragmentShaderSource = fragmentShaderSource.replace(/%count%/gi, maxTextures.toString());
-
-        return fragmentShaderSource.replace(/%forloop%/gi, src);
-    }
-};
-
-
-/***/ }),
-/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -8951,1363 +10441,7 @@ module.exports = {
  */
 
 var Class = __webpack_require__(0);
-
-/**
- * @callback EachMapCallback<E>
- *
- * @param {string} key - The key of the Map entry.
- * @param {E} entry - The value of the Map entry.
- *
- * @return {?boolean} The callback result.
- */
-
-/**
- * @classdesc
- * The keys of a Map can be arbitrary values.
- *
- * ```javascript
- * var map = new Map([
- *    [ 1, 'one' ],
- *    [ 2, 'two' ],
- *    [ 3, 'three' ]
- * ]);
- * ```
- *
- * @class Map
- * @memberof Phaser.Structs
- * @constructor
- * @since 3.0.0
- *
- * @generic K
- * @generic V
- * @genericUse {V[]} - [elements]
- *
- * @param {Array.<*>} elements - An optional array of key-value pairs to populate this Map with.
- */
-var Map = new Class({
-
-    initialize:
-
-    function Map (elements)
-    {
-        /**
-         * The entries in this Map.
-         *
-         * @genericUse {Object.<string, V>} - [$type]
-         *
-         * @name Phaser.Structs.Map#entries
-         * @type {Object.<string, *>}
-         * @default {}
-         * @since 3.0.0
-         */
-        this.entries = {};
-
-        /**
-         * The number of key / value pairs in this Map.
-         *
-         * @name Phaser.Structs.Map#size
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.size = 0;
-
-        if (Array.isArray(elements))
-        {
-            for (var i = 0; i < elements.length; i++)
-            {
-                this.set(elements[i][0], elements[i][1]);
-            }
-        }
-    },
-
-    /**
-     * Adds an element with a specified `key` and `value` to this Map.
-     * If the `key` already exists, the value will be replaced.
-     *
-     * @method Phaser.Structs.Map#set
-     * @since 3.0.0
-     *
-     * @genericUse {K} - [key]
-     * @genericUse {V} - [value]
-     * @genericUse {Phaser.Structs.Map.<K, V>} - [$return]
-     *
-     * @param {string} key - The key of the element to be added to this Map.
-     * @param {*} value - The value of the element to be added to this Map.
-     *
-     * @return {Phaser.Structs.Map} This Map object.
-     */
-    set: function (key, value)
-    {
-        if (!this.has(key))
-        {
-            this.size++;
-        }
-
-        this.entries[key] = value;
-
-        return this;
-    },
-
-    /**
-     * Returns the value associated to the `key`, or `undefined` if there is none.
-     *
-     * @method Phaser.Structs.Map#get
-     * @since 3.0.0
-     *
-     * @genericUse {K} - [key]
-     * @genericUse {V} - [$return]
-     *
-     * @param {string} key - The key of the element to return from the `Map` object.
-     *
-     * @return {*} The element associated with the specified key or `undefined` if the key can't be found in this Map object.
-     */
-    get: function (key)
-    {
-        if (this.has(key))
-        {
-            return this.entries[key];
-        }
-    },
-
-    /**
-     * Returns an `Array` of all the values stored in this Map.
-     *
-     * @method Phaser.Structs.Map#getArray
-     * @since 3.0.0
-     *
-     * @genericUse {V[]} - [$return]
-     *
-     * @return {Array.<*>} An array of the values stored in this Map.
-     */
-    getArray: function ()
-    {
-        var output = [];
-        var entries = this.entries;
-
-        for (var key in entries)
-        {
-            output.push(entries[key]);
-        }
-
-        return output;
-    },
-
-    /**
-     * Returns a boolean indicating whether an element with the specified key exists or not.
-     *
-     * @method Phaser.Structs.Map#has
-     * @since 3.0.0
-     *
-     * @genericUse {K} - [key]
-     *
-     * @param {string} key - The key of the element to test for presence of in this Map.
-     *
-     * @return {boolean} Returns `true` if an element with the specified key exists in this Map, otherwise `false`.
-     */
-    has: function (key)
-    {
-        return (this.entries.hasOwnProperty(key));
-    },
-
-    /**
-     * Delete the specified element from this Map.
-     *
-     * @method Phaser.Structs.Map#delete
-     * @since 3.0.0
-     *
-     * @genericUse {K} - [key]
-     * @genericUse {Phaser.Structs.Map.<K, V>} - [$return]
-     *
-     * @param {string} key - The key of the element to delete from this Map.
-     *
-     * @return {Phaser.Structs.Map} This Map object.
-     */
-    delete: function (key)
-    {
-        if (this.has(key))
-        {
-            delete this.entries[key];
-            this.size--;
-        }
-
-        return this;
-    },
-
-    /**
-     * Delete all entries from this Map.
-     *
-     * @method Phaser.Structs.Map#clear
-     * @since 3.0.0
-     *
-     * @genericUse {Phaser.Structs.Map.<K, V>} - [$return]
-     *
-     * @return {Phaser.Structs.Map} This Map object.
-     */
-    clear: function ()
-    {
-        Object.keys(this.entries).forEach(function (prop)
-        {
-            delete this.entries[prop];
-
-        }, this);
-
-        this.size = 0;
-
-        return this;
-    },
-
-    /**
-     * Returns all entries keys in this Map.
-     *
-     * @method Phaser.Structs.Map#keys
-     * @since 3.0.0
-     *
-     * @genericUse {K[]} - [$return]
-     *
-     * @return {string[]} Array containing entries' keys.
-     */
-    keys: function ()
-    {
-        return Object.keys(this.entries);
-    },
-
-    /**
-     * Returns an `Array` of all entries.
-     *
-     * @method Phaser.Structs.Map#values
-     * @since 3.0.0
-     *
-     * @genericUse {V[]} - [$return]
-     *
-     * @return {Array.<*>} An `Array` of entries.
-     */
-    values: function ()
-    {
-        var output = [];
-        var entries = this.entries;
-
-        for (var key in entries)
-        {
-            output.push(entries[key]);
-        }
-
-        return output;
-    },
-
-    /**
-     * Dumps the contents of this Map to the console via `console.group`.
-     *
-     * @method Phaser.Structs.Map#dump
-     * @since 3.0.0
-     */
-    dump: function ()
-    {
-        var entries = this.entries;
-
-        // eslint-disable-next-line no-console
-        console.group('Map');
-
-        for (var key in entries)
-        {
-            console.log(key, entries[key]);
-        }
-
-        // eslint-disable-next-line no-console
-        console.groupEnd();
-    },
-
-    /**
-     * Iterates through all entries in this Map, passing each one to the given callback.
-     *
-     * If the callback returns `false`, the iteration will break.
-     *
-     * @method Phaser.Structs.Map#each
-     * @since 3.0.0
-     *
-     * @genericUse {EachMapCallback.<V>} - [callback]
-     * @genericUse {Phaser.Structs.Map.<K, V>} - [$return]
-     *
-     * @param {EachMapCallback} callback - The callback which will receive the keys and entries held in this Map.
-     *
-     * @return {Phaser.Structs.Map} This Map object.
-     */
-    each: function (callback)
-    {
-        var entries = this.entries;
-
-        for (var key in entries)
-        {
-            if (callback(key, entries[key]) === false)
-            {
-                break;
-            }
-        }
-
-        return this;
-    },
-
-    /**
-     * Returns `true` if the value exists within this Map. Otherwise, returns `false`.
-     *
-     * @method Phaser.Structs.Map#contains
-     * @since 3.0.0
-     *
-     * @genericUse {V} - [value]
-     *
-     * @param {*} value - The value to search for.
-     *
-     * @return {boolean} `true` if the value is found, otherwise `false`.
-     */
-    contains: function (value)
-    {
-        var entries = this.entries;
-
-        for (var key in entries)
-        {
-            if (entries[key] === value)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    },
-
-    /**
-     * Merges all new keys from the given Map into this one.
-     * If it encounters a key that already exists it will be skipped unless override is set to `true`.
-     *
-     * @method Phaser.Structs.Map#merge
-     * @since 3.0.0
-     *
-     * @genericUse {Phaser.Structs.Map.<K, V>} - [map,$return]
-     *
-     * @param {Phaser.Structs.Map} map - The Map to merge in to this Map.
-     * @param {boolean} [override=false] - Set to `true` to replace values in this Map with those from the source map, or `false` to skip them.
-     *
-     * @return {Phaser.Structs.Map} This Map object.
-     */
-    merge: function (map, override)
-    {
-        if (override === undefined) { override = false; }
-
-        var local = this.entries;
-        var source = map.entries;
-
-        for (var key in source)
-        {
-            if (local.hasOwnProperty(key) && override)
-            {
-                local[key] = source[key];
-            }
-            else
-            {
-                this.set(key, source[key]);
-            }
-        }
-
-        return this;
-    }
-
-});
-
-module.exports = Map;
-
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Class = __webpack_require__(0);
-var Contains = __webpack_require__(80);
-var GetPoint = __webpack_require__(127);
-var GetPoints = __webpack_require__(321);
-var GEOM_CONST = __webpack_require__(29);
-var Line = __webpack_require__(129);
-var Random = __webpack_require__(325);
-
-/**
- * @classdesc
- * Encapsulates a 2D rectangle defined by its corner point in the top-left and its extends in x (width) and y (height)
- *
- * @class Rectangle
- * @memberof Phaser.Geom
- * @constructor
- * @since 3.0.0
- *
- * @param {number} [x=0] - The X coordinate of the top left corner of the Rectangle.
- * @param {number} [y=0] - The Y coordinate of the top left corner of the Rectangle.
- * @param {number} [width=0] - The width of the Rectangle.
- * @param {number} [height=0] - The height of the Rectangle.
- */
-var Rectangle = new Class({
-
-    initialize:
-
-    function Rectangle (x, y, width, height)
-    {
-        if (x === undefined) { x = 0; }
-        if (y === undefined) { y = 0; }
-        if (width === undefined) { width = 0; }
-        if (height === undefined) { height = 0; }
-
-        /**
-         * The geometry constant type of this object: `GEOM_CONST.RECTANGLE`.
-         * Used for fast type comparisons.
-         *
-         * @name Phaser.Geom.Rectangle#type
-         * @type {number}
-         * @readonly
-         * @since 3.19.0
-         */
-        this.type = GEOM_CONST.RECTANGLE;
-
-        /**
-         * The X coordinate of the top left corner of the Rectangle.
-         *
-         * @name Phaser.Geom.Rectangle#x
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x = x;
-
-        /**
-         * The Y coordinate of the top left corner of the Rectangle.
-         *
-         * @name Phaser.Geom.Rectangle#y
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y = y;
-
-        /**
-         * The width of the Rectangle, i.e. the distance between its left side (defined by `x`) and its right side.
-         *
-         * @name Phaser.Geom.Rectangle#width
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.width = width;
-
-        /**
-         * The height of the Rectangle, i.e. the distance between its top side (defined by `y`) and its bottom side.
-         *
-         * @name Phaser.Geom.Rectangle#height
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.height = height;
-    },
-
-    /**
-     * Checks if the given point is inside the Rectangle's bounds.
-     *
-     * @method Phaser.Geom.Rectangle#contains
-     * @since 3.0.0
-     *
-     * @param {number} x - The X coordinate of the point to check.
-     * @param {number} y - The Y coordinate of the point to check.
-     *
-     * @return {boolean} `true` if the point is within the Rectangle's bounds, otherwise `false`.
-     */
-    contains: function (x, y)
-    {
-        return Contains(this, x, y);
-    },
-
-    /**
-     * Calculates the coordinates of a point at a certain `position` on the Rectangle's perimeter.
-     * 
-     * The `position` is a fraction between 0 and 1 which defines how far into the perimeter the point is.
-     * 
-     * A value of 0 or 1 returns the point at the top left corner of the rectangle, while a value of 0.5 returns the point at the bottom right corner of the rectangle. Values between 0 and 0.5 are on the top or the right side and values between 0.5 and 1 are on the bottom or the left side.
-     *
-     * @method Phaser.Geom.Rectangle#getPoint
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point} O - [output,$return]
-     *
-     * @param {number} position - The normalized distance into the Rectangle's perimeter to return.
-     * @param {(Phaser.Geom.Point|object)} [output] - An object to update with the `x` and `y` coordinates of the point.
-     *
-     * @return {(Phaser.Geom.Point|object)} The updated `output` object, or a new Point if no `output` object was given.
-     */
-    getPoint: function (position, output)
-    {
-        return GetPoint(this, position, output);
-    },
-
-    /**
-     * Returns an array of points from the perimeter of the Rectangle, each spaced out based on the quantity or step required.
-     *
-     * @method Phaser.Geom.Rectangle#getPoints
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point[]} O - [output,$return]
-     *
-     * @param {number} quantity - The number of points to return. Set to `false` or 0 to return an arbitrary number of points (`perimeter / stepRate`) evenly spaced around the Rectangle based on the `stepRate`.
-     * @param {number} [stepRate] - If `quantity` is 0, determines the normalized distance between each returned point.
-     * @param {(array|Phaser.Geom.Point[])} [output] - An array to which to append the points.
-     *
-     * @return {(array|Phaser.Geom.Point[])} The modified `output` array, or a new array if none was provided.
-     */
-    getPoints: function (quantity, stepRate, output)
-    {
-        return GetPoints(this, quantity, stepRate, output);
-    },
-
-    /**
-     * Returns a random point within the Rectangle's bounds.
-     *
-     * @method Phaser.Geom.Rectangle#getRandomPoint
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point} O - [point,$return]
-     *
-     * @param {Phaser.Geom.Point} [point] - The object in which to store the `x` and `y` coordinates of the point.
-     *
-     * @return {Phaser.Geom.Point} The updated `point`, or a new Point if none was provided.
-     */
-    getRandomPoint: function (point)
-    {
-        return Random(this, point);
-    },
-
-    /**
-     * Sets the position, width, and height of the Rectangle.
-     *
-     * @method Phaser.Geom.Rectangle#setTo
-     * @since 3.0.0
-     *
-     * @param {number} x - The X coordinate of the top left corner of the Rectangle.
-     * @param {number} y - The Y coordinate of the top left corner of the Rectangle.
-     * @param {number} width - The width of the Rectangle.
-     * @param {number} height - The height of the Rectangle.
-     *
-     * @return {this} This Rectangle object.
-     */
-    setTo: function (x, y, width, height)
-    {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-
-        return this;
-    },
-
-    /**
-     * Resets the position, width, and height of the Rectangle to 0.
-     *
-     * @method Phaser.Geom.Rectangle#setEmpty
-     * @since 3.0.0
-     *
-     * @return {this} This Rectangle object.
-     */
-    setEmpty: function ()
-    {
-        return this.setTo(0, 0, 0, 0);
-    },
-
-    /**
-     * Sets the position of the Rectangle.
-     *
-     * @method Phaser.Geom.Rectangle#setPosition
-     * @since 3.0.0
-     *
-     * @param {number} x - The X coordinate of the top left corner of the Rectangle.
-     * @param {number} [y=x] - The Y coordinate of the top left corner of the Rectangle.
-     *
-     * @return {this} This Rectangle object.
-     */
-    setPosition: function (x, y)
-    {
-        if (y === undefined) { y = x; }
-
-        this.x = x;
-        this.y = y;
-
-        return this;
-    },
-
-    /**
-     * Sets the width and height of the Rectangle.
-     *
-     * @method Phaser.Geom.Rectangle#setSize
-     * @since 3.0.0
-     *
-     * @param {number} width - The width to set the Rectangle to.
-     * @param {number} [height=width] - The height to set the Rectangle to.
-     *
-     * @return {this} This Rectangle object.
-     */
-    setSize: function (width, height)
-    {
-        if (height === undefined) { height = width; }
-
-        this.width = width;
-        this.height = height;
-
-        return this;
-    },
-
-    /**
-     * Determines if the Rectangle is empty. A Rectangle is empty if its width or height is less than or equal to 0.
-     *
-     * @method Phaser.Geom.Rectangle#isEmpty
-     * @since 3.0.0
-     *
-     * @return {boolean} `true` if the Rectangle is empty. A Rectangle object is empty if its width or height is less than or equal to 0.
-     */
-    isEmpty: function ()
-    {
-        return (this.width <= 0 || this.height <= 0);
-    },
-
-    /**
-     * Returns a Line object that corresponds to the top of this Rectangle.
-     *
-     * @method Phaser.Geom.Rectangle#getLineA
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Line} O - [line,$return]
-     *
-     * @param {Phaser.Geom.Line} [line] - A Line object to set the results in. If `undefined` a new Line will be created.
-     *
-     * @return {Phaser.Geom.Line} A Line object that corresponds to the top of this Rectangle.
-     */
-    getLineA: function (line)
-    {
-        if (line === undefined) { line = new Line(); }
-
-        line.setTo(this.x, this.y, this.right, this.y);
-
-        return line;
-    },
-
-    /**
-     * Returns a Line object that corresponds to the right of this Rectangle.
-     *
-     * @method Phaser.Geom.Rectangle#getLineB
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Line} O - [line,$return]
-     *
-     * @param {Phaser.Geom.Line} [line] - A Line object to set the results in. If `undefined` a new Line will be created.
-     *
-     * @return {Phaser.Geom.Line} A Line object that corresponds to the right of this Rectangle.
-     */
-    getLineB: function (line)
-    {
-        if (line === undefined) { line = new Line(); }
-
-        line.setTo(this.right, this.y, this.right, this.bottom);
-
-        return line;
-    },
-
-    /**
-     * Returns a Line object that corresponds to the bottom of this Rectangle.
-     *
-     * @method Phaser.Geom.Rectangle#getLineC
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Line} O - [line,$return]
-     *
-     * @param {Phaser.Geom.Line} [line] - A Line object to set the results in. If `undefined` a new Line will be created.
-     *
-     * @return {Phaser.Geom.Line} A Line object that corresponds to the bottom of this Rectangle.
-     */
-    getLineC: function (line)
-    {
-        if (line === undefined) { line = new Line(); }
-
-        line.setTo(this.right, this.bottom, this.x, this.bottom);
-
-        return line;
-    },
-
-    /**
-     * Returns a Line object that corresponds to the left of this Rectangle.
-     *
-     * @method Phaser.Geom.Rectangle#getLineD
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Line} O - [line,$return]
-     *
-     * @param {Phaser.Geom.Line} [line] - A Line object to set the results in. If `undefined` a new Line will be created.
-     *
-     * @return {Phaser.Geom.Line} A Line object that corresponds to the left of this Rectangle.
-     */
-    getLineD: function (line)
-    {
-        if (line === undefined) { line = new Line(); }
-
-        line.setTo(this.x, this.bottom, this.x, this.y);
-
-        return line;
-    },
-
-    /**
-     * The x coordinate of the left of the Rectangle.
-     * Changing the left property of a Rectangle object has no effect on the y and height properties. However it does affect the width property, whereas changing the x value does not affect the width property.
-     *
-     * @name Phaser.Geom.Rectangle#left
-     * @type {number}
-     * @since 3.0.0
-     */
-    left: {
-
-        get: function ()
-        {
-            return this.x;
-        },
-
-        set: function (value)
-        {
-            if (value >= this.right)
-            {
-                this.width = 0;
-            }
-            else
-            {
-                this.width = this.right - value;
-            }
-
-            this.x = value;
-        }
-
-    },
-
-    /**
-     * The sum of the x and width properties.
-     * Changing the right property of a Rectangle object has no effect on the x, y and height properties, however it does affect the width property.
-     *
-     * @name Phaser.Geom.Rectangle#right
-     * @type {number}
-     * @since 3.0.0
-     */
-    right: {
-
-        get: function ()
-        {
-            return this.x + this.width;
-        },
-
-        set: function (value)
-        {
-            if (value <= this.x)
-            {
-                this.width = 0;
-            }
-            else
-            {
-                this.width = value - this.x;
-            }
-        }
-
-    },
-
-    /**
-     * The y coordinate of the top of the Rectangle. Changing the top property of a Rectangle object has no effect on the x and width properties.
-     * However it does affect the height property, whereas changing the y value does not affect the height property.
-     *
-     * @name Phaser.Geom.Rectangle#top
-     * @type {number}
-     * @since 3.0.0
-     */
-    top: {
-
-        get: function ()
-        {
-            return this.y;
-        },
-
-        set: function (value)
-        {
-            if (value >= this.bottom)
-            {
-                this.height = 0;
-            }
-            else
-            {
-                this.height = (this.bottom - value);
-            }
-
-            this.y = value;
-        }
-
-    },
-
-    /**
-     * The sum of the y and height properties.
-     * Changing the bottom property of a Rectangle object has no effect on the x, y and width properties, but does change the height property.
-     *
-     * @name Phaser.Geom.Rectangle#bottom
-     * @type {number}
-     * @since 3.0.0
-     */
-    bottom: {
-
-        get: function ()
-        {
-            return this.y + this.height;
-        },
-
-        set: function (value)
-        {
-            if (value <= this.y)
-            {
-                this.height = 0;
-            }
-            else
-            {
-                this.height = value - this.y;
-            }
-        }
-
-    },
-
-    /**
-     * The x coordinate of the center of the Rectangle.
-     *
-     * @name Phaser.Geom.Rectangle#centerX
-     * @type {number}
-     * @since 3.0.0
-     */
-    centerX: {
-
-        get: function ()
-        {
-            return this.x + (this.width / 2);
-        },
-
-        set: function (value)
-        {
-            this.x = value - (this.width / 2);
-        }
-
-    },
-
-    /**
-     * The y coordinate of the center of the Rectangle.
-     *
-     * @name Phaser.Geom.Rectangle#centerY
-     * @type {number}
-     * @since 3.0.0
-     */
-    centerY: {
-
-        get: function ()
-        {
-            return this.y + (this.height / 2);
-        },
-
-        set: function (value)
-        {
-            this.y = value - (this.height / 2);
-        }
-
-    }
-
-});
-
-module.exports = Rectangle;
-
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * Retrieves the value of the given key from an object.
- *
- * @function Phaser.Tweens.Builders.GetBoolean
- * @since 3.0.0
- *
- * @param {object} source - The object to retrieve the value from.
- * @param {string} key - The key to look for in the `source` object.
- * @param {*} defaultValue - The default value to return if the `key` doesn't exist or if no `source` object is provided.
- *
- * @return {*} The retrieved value.
- */
-var GetBoolean = function (source, key, defaultValue)
-{
-    if (!source)
-    {
-        return defaultValue;
-    }
-    else if (source.hasOwnProperty(key))
-    {
-        return source[key];
-    }
-    else
-    {
-        return defaultValue;
-    }
-};
-
-module.exports = GetBoolean;
-
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var TWEEN_CONST = {
-
-    /**
-     * TweenData state.
-     * 
-     * @name Phaser.Tweens.CREATED
-     * @type {number}
-     * @since 3.0.0
-     */
-    CREATED: 0,
-
-    /**
-     * TweenData state.
-     * 
-     * @name Phaser.Tweens.INIT
-     * @type {number}
-     * @since 3.0.0
-     */
-    INIT: 1,
-
-    /**
-     * TweenData state.
-     * 
-     * @name Phaser.Tweens.DELAY
-     * @type {number}
-     * @since 3.0.0
-     */
-    DELAY: 2,
-
-    /**
-     * TweenData state.
-     * 
-     * @name Phaser.Tweens.OFFSET_DELAY
-     * @type {number}
-     * @since 3.0.0
-     */
-    OFFSET_DELAY: 3,
-
-    /**
-     * TweenData state.
-     * 
-     * @name Phaser.Tweens.PENDING_RENDER
-     * @type {number}
-     * @since 3.0.0
-     */
-    PENDING_RENDER: 4,
-
-    /**
-     * TweenData state.
-     * 
-     * @name Phaser.Tweens.PLAYING_FORWARD
-     * @type {number}
-     * @since 3.0.0
-     */
-    PLAYING_FORWARD: 5,
-
-    /**
-     * TweenData state.
-     * 
-     * @name Phaser.Tweens.PLAYING_BACKWARD
-     * @type {number}
-     * @since 3.0.0
-     */
-    PLAYING_BACKWARD: 6,
-
-    /**
-     * TweenData state.
-     * 
-     * @name Phaser.Tweens.HOLD_DELAY
-     * @type {number}
-     * @since 3.0.0
-     */
-    HOLD_DELAY: 7,
-
-    /**
-     * TweenData state.
-     * 
-     * @name Phaser.Tweens.REPEAT_DELAY
-     * @type {number}
-     * @since 3.0.0
-     */
-    REPEAT_DELAY: 8,
-
-    /**
-     * TweenData state.
-     * 
-     * @name Phaser.Tweens.COMPLETE
-     * @type {number}
-     * @since 3.0.0
-     */
-    COMPLETE: 9,
-
-    //  Tween specific (starts from 20 to cleanly allow extra TweenData consts in the future)
-
-    /**
-     * Tween state.
-     * 
-     * @name Phaser.Tweens.PENDING_ADD
-     * @type {number}
-     * @since 3.0.0
-     */
-    PENDING_ADD: 20,
-
-    /**
-     * Tween state.
-     * 
-     * @name Phaser.Tweens.PAUSED
-     * @type {number}
-     * @since 3.0.0
-     */
-    PAUSED: 21,
-
-    /**
-     * Tween state.
-     * 
-     * @name Phaser.Tweens.LOOP_DELAY
-     * @type {number}
-     * @since 3.0.0
-     */
-    LOOP_DELAY: 22,
-
-    /**
-     * Tween state.
-     * 
-     * @name Phaser.Tweens.ACTIVE
-     * @type {number}
-     * @since 3.0.0
-     */
-    ACTIVE: 23,
-
-    /**
-     * Tween state.
-     * 
-     * @name Phaser.Tweens.COMPLETE_DELAY
-     * @type {number}
-     * @since 3.0.0
-     */
-    COMPLETE_DELAY: 24,
-
-    /**
-     * Tween state.
-     * 
-     * @name Phaser.Tweens.PENDING_REMOVE
-     * @type {number}
-     * @since 3.0.0
-     */
-    PENDING_REMOVE: 25,
-
-    /**
-     * Tween state.
-     * 
-     * @name Phaser.Tweens.REMOVED
-     * @type {number}
-     * @since 3.0.0
-     */
-    REMOVED: 26
-
-};
-
-module.exports = TWEEN_CONST;
-
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * Removes a single item from an array and returns it without creating gc, like the native splice does.
- * Based on code by Mike Reinstein.
- *
- * @function Phaser.Utils.Array.SpliceOne
- * @since 3.0.0
- *
- * @param {array} array - The array to splice from.
- * @param {number} index - The index of the item which should be spliced.
- *
- * @return {*} The item which was spliced (removed).
- */
-var SpliceOne = function (array, index)
-{
-    if (index >= array.length)
-    {
-        return;
-    }
-
-    var len = array.length - 1;
-
-    var item = array[index];
-
-    for (var i = index; i < len; i++)
-    {
-        array[i] = array[i + 1];
-    }
-
-    array.length = len;
-
-    return item;
-};
-
-module.exports = SpliceOne;
-
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * @namespace Phaser.Scale.Events
- */
-
-module.exports = {
-
-    ENTER_FULLSCREEN: __webpack_require__(402),
-    FULLSCREEN_FAILED: __webpack_require__(403),
-    FULLSCREEN_UNSUPPORTED: __webpack_require__(404),
-    LEAVE_FULLSCREEN: __webpack_require__(405),
-    ORIENTATION_CHANGE: __webpack_require__(406),
-    RESIZE: __webpack_require__(407)
-
-};
-
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * Determines the operating system of the device running this Phaser Game instance.
- * These values are read-only and populated during the boot sequence of the game.
- * They are then referenced by internal game systems and are available for you to access
- * via `this.sys.game.device.os` from within any Scene.
- *
- * @typedef {object} Phaser.Device.OS
- * @since 3.0.0
- *
- * @property {boolean} android - Is running on android?
- * @property {boolean} chromeOS - Is running on chromeOS?
- * @property {boolean} cordova - Is the game running under Apache Cordova?
- * @property {boolean} crosswalk - Is the game running under the Intel Crosswalk XDK?
- * @property {boolean} desktop - Is running on a desktop?
- * @property {boolean} ejecta - Is the game running under Ejecta?
- * @property {boolean} electron - Is the game running under GitHub Electron?
- * @property {boolean} iOS - Is running on iOS?
- * @property {boolean} iPad - Is running on iPad?
- * @property {boolean} iPhone - Is running on iPhone?
- * @property {boolean} kindle - Is running on an Amazon Kindle?
- * @property {boolean} linux - Is running on linux?
- * @property {boolean} macOS - Is running on macOS?
- * @property {boolean} node - Is the game running under Node.js?
- * @property {boolean} nodeWebkit - Is the game running under Node-Webkit?
- * @property {boolean} webApp - Set to true if running as a WebApp, i.e. within a WebView
- * @property {boolean} windows - Is running on windows?
- * @property {boolean} windowsPhone - Is running on a Windows Phone?
- * @property {number} iOSVersion - If running in iOS this will contain the major version number.
- * @property {number} pixelRatio - PixelRatio of the host device?
- */
-var OS = {
-
-    android: false,
-    chromeOS: false,
-    cordova: false,
-    crosswalk: false,
-    desktop: false,
-    ejecta: false,
-    electron: false,
-    iOS: false,
-    iOSVersion: 0,
-    iPad: false,
-    iPhone: false,
-    kindle: false,
-    linux: false,
-    macOS: false,
-    node: false,
-    nodeWebkit: false,
-    pixelRatio: 1,
-    webApp: false,
-    windows: false,
-    windowsPhone: false
-
-};
-
-function init ()
-{
-    var ua = navigator.userAgent;
-
-    if ((/Windows/).test(ua))
-    {
-        OS.windows = true;
-    }
-    else if ((/Mac OS/).test(ua) && !((/like Mac OS/).test(ua)))
-    {
-        //  Because iOS 13 identifies as Mac OS:
-        if (navigator.maxTouchPoints && navigator.maxTouchPoints > 2)
-        {
-            OS.iOS = true;
-            OS.iPad = true;
-
-            (navigator.appVersion).match(/Version\/(\d+)/);
-
-            OS.iOSVersion = parseInt(RegExp.$1, 10);
-        }
-        else
-        {
-            OS.macOS = true;
-        }
-    }
-    else if ((/Android/).test(ua))
-    {
-        OS.android = true;
-    }
-    else if ((/Linux/).test(ua))
-    {
-        OS.linux = true;
-    }
-    else if ((/iP[ao]d|iPhone/i).test(ua))
-    {
-        OS.iOS = true;
-
-        (navigator.appVersion).match(/OS (\d+)/);
-
-        OS.iOSVersion = parseInt(RegExp.$1, 10);
-
-        OS.iPhone = ua.toLowerCase().indexOf('iphone') !== -1;
-        OS.iPad = ua.toLowerCase().indexOf('ipad') !== -1;
-    }
-    else if ((/Kindle/).test(ua) || (/\bKF[A-Z][A-Z]+/).test(ua) || (/Silk.*Mobile Safari/).test(ua))
-    {
-        OS.kindle = true;
-
-        // This will NOT detect early generations of Kindle Fire, I think there is no reliable way...
-        // E.g. "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-80) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true"
-    }
-    else if ((/CrOS/).test(ua))
-    {
-        OS.chromeOS = true;
-    }
-
-    if ((/Windows Phone/i).test(ua) || (/IEMobile/i).test(ua))
-    {
-        OS.android = false;
-        OS.iOS = false;
-        OS.macOS = false;
-        OS.windows = true;
-        OS.windowsPhone = true;
-    }
-
-    var silk = (/Silk/).test(ua);
-
-    if (OS.windows || OS.macOS || (OS.linux && !silk) || OS.chromeOS)
-    {
-        OS.desktop = true;
-    }
-
-    //  Windows Phone / Table reset
-    if (OS.windowsPhone || (((/Windows NT/i).test(ua)) && ((/Touch/i).test(ua))))
-    {
-        OS.desktop = false;
-    }
-
-    //  WebApp mode in iOS
-    if (navigator.standalone)
-    {
-        OS.webApp = true;
-    }
-
-    if (window.cordova !== undefined)
-    {
-        OS.cordova = true;
-    }
-
-    if (typeof process !== 'undefined' && process.versions && process.versions.node)
-    {
-        OS.node = true;
-    }
-
-    if (OS.node && typeof process.versions === 'object')
-    {
-        OS.nodeWebkit = !!process.versions['node-webkit'];
-
-        OS.electron = !!process.versions.electron;
-    }
-
-    if (window.ejecta !== undefined)
-    {
-        OS.ejecta = true;
-    }
-
-    if ((/Crosswalk/).test(ua))
-    {
-        OS.crosswalk = true;
-    }
-
-    OS.pixelRatio = window['devicePixelRatio'] || 1;
-
-    return OS;
-}
-
-module.exports = init();
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(430)))
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Class = __webpack_require__(0);
-var Vector3 = __webpack_require__(62);
+var Vector3 = __webpack_require__(19);
 
 /**
  * @ignore
@@ -12090,7 +12224,233 @@ module.exports = Matrix4;
 
 
 /***/ }),
-/* 43 */
+/* 35 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @author       Felipe Alfonso <@bitnenfer>
+ * @author       Matthew Groves <@doormat>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Generate shader source to test maximum ifs.
+ *
+ * @private
+ * @ignore
+ * @param {number} maxIfs - The number of if statements to generate
+ */
+function GenerateSrc (maxIfs)
+{
+    var src = '';
+
+    for (var i = 0; i < maxIfs; ++i)
+    {
+        if (i > 0)
+        {
+            src += '\nelse ';
+        }
+
+        if (i < maxIfs - 1)
+        {
+            src += 'if(test == ' + i + '.0){}';
+        }
+    }
+
+    return src;
+}
+
+/**
+ * @namespace Phaser.Renderer.WebGL.Utils
+ * @since 3.0.0
+ */
+module.exports = {
+
+    /**
+     * Packs four floats on a range from 0.0 to 1.0 into a single Uint32
+     *
+     * @function Phaser.Renderer.WebGL.Utils.getTintFromFloats
+     * @since 3.0.0
+     *
+     * @param {number} r - Red component in a range from 0.0 to 1.0
+     * @param {number} g - Green component in a range from 0.0 to 1.0
+     * @param {number} b - Blue component in a range from 0.0 to 1.0
+     * @param {number} a - Alpha component in a range from 0.0 to 1.0
+     *
+     * @return {number} The packed RGBA values as a Uint32.
+     */
+    getTintFromFloats: function (r, g, b, a)
+    {
+        var ur = ((r * 255) | 0) & 0xff;
+        var ug = ((g * 255) | 0) & 0xff;
+        var ub = ((b * 255) | 0) & 0xff;
+        var ua = ((a * 255) | 0) & 0xff;
+
+        return ((ua << 24) | (ur << 16) | (ug << 8) | ub) >>> 0;
+    },
+
+    /**
+     * Packs a Uint24, representing RGB components, with a Float32, representing
+     * the alpha component, with a range between 0.0 and 1.0 and return a Uint32
+     *
+     * @function Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha
+     * @since 3.0.0
+     *
+     * @param {number} rgb - Uint24 representing RGB components
+     * @param {number} a - Float32 representing Alpha component
+     *
+     * @return {number} Packed RGBA as Uint32
+     */
+    getTintAppendFloatAlpha: function (rgb, a)
+    {
+        var ua = ((a * 255) | 0) & 0xff;
+
+        return ((ua << 24) | rgb) >>> 0;
+    },
+
+    /**
+     * Packs a Uint24, representing RGB components, with a Float32, representing
+     * the alpha component, with a range between 0.0 and 1.0 and return a
+     * swizzled Uint32
+     *
+     * @function Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlphaAndSwap
+     * @since 3.0.0
+     *
+     * @param {number} rgb - Uint24 representing RGB components
+     * @param {number} a - Float32 representing Alpha component
+     *
+     * @return {number} Packed RGBA as Uint32
+     */
+    getTintAppendFloatAlphaAndSwap: function (rgb, a)
+    {
+        var ur = ((rgb >> 16) | 0) & 0xff;
+        var ug = ((rgb >> 8) | 0) & 0xff;
+        var ub = (rgb | 0) & 0xff;
+        var ua = ((a * 255) | 0) & 0xff;
+
+        return ((ua << 24) | (ub << 16) | (ug << 8) | ur) >>> 0;
+    },
+
+    /**
+     * Unpacks a Uint24 RGB into an array of floats of ranges of 0.0 and 1.0
+     *
+     * @function Phaser.Renderer.WebGL.Utils.getFloatsFromUintRGB
+     * @since 3.0.0
+     *
+     * @param {number} rgb - RGB packed as a Uint24
+     *
+     * @return {array} Array of floats representing each component as a float
+     */
+    getFloatsFromUintRGB: function (rgb)
+    {
+        var ur = ((rgb >> 16) | 0) & 0xff;
+        var ug = ((rgb >> 8) | 0) & 0xff;
+        var ub = (rgb | 0) & 0xff;
+
+        return [ ur / 255, ug / 255, ub / 255 ];
+    },
+
+    /**
+     * Check to see how many texture units the GPU supports, based on the given config value.
+     * Then tests this against the maximum number of iterations GLSL can support.
+     *
+     * @function Phaser.Renderer.WebGL.Utils.checkShaderMax
+     * @since 3.50.0
+     *
+     * @param {WebGLRenderingContext} gl - The WebGLContext used to create the shaders.
+     * @param {number} maxTextures - The Game Config maxTextures value.
+     *
+     * @return {number} The number of texture units that is supported by this browser and GPU.
+     */
+    checkShaderMax: function (gl, maxTextures)
+    {
+        if (!maxTextures || maxTextures === -1)
+        {
+            maxTextures = gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS);
+        }
+
+        var shader = gl.createShader(gl.FRAGMENT_SHADER);
+
+        var fragTemplate = [
+            'precision mediump float;',
+            'void main(void){',
+            'float test = 0.1;',
+            '%forloop%',
+            'gl_FragColor = vec4(0.0);',
+            '}'
+        ].join('\n');
+
+        // eslint-disable-next-line no-constant-condition
+        while (true)
+        {
+            var fragmentSrc = fragTemplate.replace(/%forloop%/gi, GenerateSrc(maxTextures));
+
+            gl.shaderSource(shader, fragmentSrc);
+            gl.compileShader(shader);
+
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS))
+            {
+                maxTextures = (maxTextures / 2) | 0;
+            }
+            else
+            {
+                // valid!
+                break;
+            }
+        }
+
+        return maxTextures;
+    },
+
+    /**
+     * Checks the given Fragment Shader Source for `%count%` and `%forloop%` declarations and
+     * replaces those with GLSL code for setting `texture = texture2D(uMainSampler[i], outTexCoord)`.
+     *
+     * @function Phaser.Renderer.WebGL.Utils.parseFragmentShaderMaxTextures
+     * @since 3.50.0
+     *
+     * @param {string} fragmentShaderSource - The Fragment Shader source code to operate on.
+     * @param {number} maxTextures - The number of maxTextures value.
+     *
+     * @return {string} The modified Fragment Shader source.
+     */
+    parseFragmentShaderMaxTextures: function (fragmentShaderSource, maxTextures)
+    {
+        if (!fragmentShaderSource)
+        {
+            return '';
+        }
+
+        var src = '';
+
+        for (var i = 0; i < maxTextures; i++)
+        {
+            if (i > 0)
+            {
+                src += '\n\telse ';
+            }
+
+            if (i < maxTextures - 1)
+            {
+                src += 'if (outTexId < ' + i + '.5)';
+            }
+
+            src += '\n\t{';
+            src += '\n\t\ttexture = texture2D(uMainSampler[' + i + '], outTexCoord);';
+            src += '\n\t}';
+        }
+
+        fragmentShaderSource = fragmentShaderSource.replace(/%count%/gi, maxTextures.toString());
+
+        return fragmentShaderSource.replace(/%forloop%/gi, src);
+    }
+};
+
+
+/***/ }),
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -12099,7 +12459,1824 @@ module.exports = Matrix4;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = __webpack_require__(5);
+/**
+ * @namespace Phaser.Sound.Events
+ */
+
+module.exports = {
+
+    COMPLETE: __webpack_require__(655),
+    DECODED: __webpack_require__(656),
+    DECODED_ALL: __webpack_require__(657),
+    DESTROY: __webpack_require__(658),
+    DETUNE: __webpack_require__(659),
+    GLOBAL_DETUNE: __webpack_require__(660),
+    GLOBAL_MUTE: __webpack_require__(661),
+    GLOBAL_RATE: __webpack_require__(662),
+    GLOBAL_VOLUME: __webpack_require__(663),
+    LOOP: __webpack_require__(664),
+    LOOPED: __webpack_require__(665),
+    MUTE: __webpack_require__(666),
+    PAN: __webpack_require__(667),
+    PAUSE_ALL: __webpack_require__(668),
+    PAUSE: __webpack_require__(669),
+    PLAY: __webpack_require__(670),
+    RATE: __webpack_require__(671),
+    RESUME_ALL: __webpack_require__(672),
+    RESUME: __webpack_require__(673),
+    SEEK: __webpack_require__(674),
+    STOP_ALL: __webpack_require__(675),
+    STOP: __webpack_require__(676),
+    UNLOCKED: __webpack_require__(677),
+    VOLUME: __webpack_require__(678)
+
+};
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Tests if the start and end indexes are a safe range for the given array.
+ * 
+ * @function Phaser.Utils.Array.SafeRange
+ * @since 3.4.0
+ *
+ * @param {array} array - The array to check.
+ * @param {number} startIndex - The start index.
+ * @param {number} endIndex - The end index.
+ * @param {boolean} [throwError=true] - Throw an error if the range is out of bounds.
+ *
+ * @return {boolean} True if the range is safe, otherwise false.
+ */
+var SafeRange = function (array, startIndex, endIndex, throwError)
+{
+    var len = array.length;
+
+    if (startIndex < 0 ||
+        startIndex > len ||
+        startIndex >= endIndex ||
+        endIndex > len ||
+        startIndex + endIndex > len)
+    {
+        if (throwError)
+        {
+            throw new Error('Range Error: Values outside acceptable range');
+        }
+
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+};
+
+module.exports = SafeRange;
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Checks if a given point is inside a Rectangle's bounds.
+ *
+ * @function Phaser.Geom.Rectangle.Contains
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle to check.
+ * @param {number} x - The X coordinate of the point to check.
+ * @param {number} y - The Y coordinate of the point to check.
+ *
+ * @return {boolean} `true` if the point is within the Rectangle's bounds, otherwise `false`.
+ */
+var Contains = function (rect, x, y)
+{
+    if (rect.width <= 0 || rect.height <= 0)
+    {
+        return false;
+    }
+
+    return (rect.x <= x && rect.x + rect.width >= x && rect.y <= y && rect.y + rect.height >= y);
+};
+
+module.exports = Contains;
+
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * @namespace Phaser.Renderer.Events
+ */
+
+module.exports = {
+
+    POST_RENDER: __webpack_require__(380),
+    PRE_RENDER: __webpack_require__(381),
+    RENDER: __webpack_require__(382),
+    RESIZE: __webpack_require__(383)
+
+};
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var SpliceOne = __webpack_require__(50);
+
+/**
+ * Removes the given item, or array of items, from the array.
+ *
+ * The array is modified in-place.
+ *
+ * You can optionally specify a callback to be invoked for each item successfully removed from the array.
+ *
+ * @function Phaser.Utils.Array.Remove
+ * @since 3.4.0
+ *
+ * @param {array} array - The array to be modified.
+ * @param {*|Array.<*>} item - The item, or array of items, to be removed from the array.
+ * @param {function} [callback] - A callback to be invoked for each item successfully removed from the array.
+ * @param {object} [context] - The context in which the callback is invoked.
+ *
+ * @return {*|Array.<*>} The item, or array of items, that were successfully removed from the array.
+ */
+var Remove = function (array, item, callback, context)
+{
+    if (context === undefined) { context = array; }
+
+    var index;
+
+    //  Fast path to avoid array mutation and iteration
+    if (!Array.isArray(item))
+    {
+        index = array.indexOf(item);
+
+        if (index !== -1)
+        {
+            SpliceOne(array, index);
+
+            if (callback)
+            {
+                callback.call(context, item);
+            }
+
+            return item;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    //  If we got this far, we have an array of items to remove
+
+    var itemLength = item.length - 1;
+    var removed = [];
+
+    while (itemLength >= 0)
+    {
+        var entry = item[itemLength];
+
+        index = array.indexOf(entry);
+
+        if (index !== -1)
+        {
+            SpliceOne(array, index);
+
+            removed.push(entry);
+
+            if (callback)
+            {
+                callback.call(context, entry);
+            }
+        }
+
+        itemLength--;
+    }
+
+    return removed;
+};
+
+module.exports = Remove;
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Check to see if the Circle contains the given x / y coordinates.
+ *
+ * @function Phaser.Geom.Circle.Contains
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Circle} circle - The Circle to check.
+ * @param {number} x - The x coordinate to check within the circle.
+ * @param {number} y - The y coordinate to check within the circle.
+ *
+ * @return {boolean} True if the coordinates are within the circle, otherwise false.
+ */
+var Contains = function (circle, x, y)
+{
+    //  Check if x/y are within the bounds first
+    if (circle.radius > 0 && x >= circle.left && x <= circle.right && y >= circle.top && y <= circle.bottom)
+    {
+        var dx = (circle.x - x) * (circle.x - x);
+        var dy = (circle.y - y) * (circle.y - y);
+
+        return (dx + dy) <= (circle.radius * circle.radius);
+    }
+    else
+    {
+        return false;
+    }
+};
+
+module.exports = Contains;
+
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+//  This is based off an explanation and expanded math presented by Paul Bourke:
+//  See http:'local.wasp.uwa.edu.au/~pbourke/geometry/lineline2d/
+
+/**
+ * Checks if two Lines intersect. If the Lines are identical, they will be treated as parallel and thus non-intersecting.
+ *
+ * @function Phaser.Geom.Intersects.LineToLine
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line1 - The first Line to check.
+ * @param {Phaser.Geom.Line} line2 - The second Line to check.
+ * @param {Phaser.Geom.Point} [out] - A Point in which to optionally store the point of intersection.
+ *
+ * @return {boolean} `true` if the two Lines intersect, and the `out` object will be populated, if given. Otherwise, `false`.
+ */
+var LineToLine = function (line1, line2, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    var x1 = line1.x1;
+    var y1 = line1.y1;
+    var x2 = line1.x2;
+    var y2 = line1.y2;
+
+    var x3 = line2.x1;
+    var y3 = line2.y1;
+    var x4 = line2.x2;
+    var y4 = line2.y2;
+
+    var numA = (x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3);
+    var numB = (x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3);
+    var deNom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
+
+    //  Make sure there is not a division by zero - this also indicates that the lines are parallel.
+    //  If numA and numB were both equal to zero the lines would be on top of each other (coincidental).
+    //  This check is not done because it is not necessary for this implementation (the parallel check accounts for this).
+
+    if (deNom === 0)
+    {
+        return false;
+    }
+
+    //  Calculate the intermediate fractional point that the lines potentially intersect.
+
+    var uA = numA / deNom;
+    var uB = numB / deNom;
+
+    //  The fractional point will be between 0 and 1 inclusive if the lines intersect.
+    //  If the fractional calculation is larger than 1 or smaller than 0 the lines would need to be longer to intersect.
+
+    if (uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1)
+    {
+        out.x = x1 + (uA * (x2 - x1));
+        out.y = y1 + (uA * (y2 - y1));
+
+        return true;
+    }
+
+    return false;
+};
+
+module.exports = LineToLine;
+
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Calculate the angle of the line in radians.
+ *
+ * @function Phaser.Geom.Line.Angle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The line to calculate the angle of.
+ *
+ * @return {number} The angle of the line, in radians.
+ */
+var Angle = function (line)
+{
+    return Math.atan2(line.y2 - line.y1, line.x2 - line.x1);
+};
+
+module.exports = Angle;
+
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var EaseMap = __webpack_require__(70);
+var UppercaseFirst = __webpack_require__(247);
+
+/**
+ * This internal function is used to return the correct ease function for a Tween.
+ * 
+ * It can take a variety of input, including an EaseMap based string, or a custom function.
+ *
+ * @function Phaser.Tweens.Builders.GetEaseFunction
+ * @since 3.0.0
+ *
+ * @param {(string|function)} ease - The ease to find. This can be either a string from the EaseMap, or a custom function.
+ * @param {number[]} [easeParams] - An optional array of ease parameters to go with the ease.
+ *
+ * @return {function} The ease function.
+ */
+var GetEaseFunction = function (ease, easeParams)
+{
+    //  Default ease function
+    var easeFunction = EaseMap.Power0;
+
+    //  Prepare ease function
+    if (typeof ease === 'string')
+    {
+        //  String based look-up
+
+        //  1) They specified it correctly
+        if (EaseMap.hasOwnProperty(ease))
+        {
+            easeFunction = EaseMap[ease];
+        }
+        else
+        {
+            //  Do some string manipulation to try and find it
+            var direction = '';
+
+            if (ease.indexOf('.'))
+            {
+                //  quad.in = Quad.easeIn
+                //  quad.out = Quad.easeOut
+                //  quad.inout = Quad.easeInOut
+
+                direction = ease.substr(ease.indexOf('.') + 1);
+
+                if (direction.toLowerCase() === 'in')
+                {
+                    direction = 'easeIn';
+                }
+                else if (direction.toLowerCase() === 'out')
+                {
+                    direction = 'easeOut';
+                }
+                else if (direction.toLowerCase() === 'inout')
+                {
+                    direction = 'easeInOut';
+                }
+            }
+
+            ease = UppercaseFirst(ease.substr(0, ease.indexOf('.') + 1) + direction);
+
+            if (EaseMap.hasOwnProperty(ease))
+            {
+                easeFunction = EaseMap[ease];
+            }
+        }
+    }
+    else if (typeof ease === 'function')
+    {
+        //  Custom function
+        easeFunction = ease;
+    }
+    else if (Array.isArray(ease) && ease.length === 4)
+    {
+        //  Bezier function (TODO)
+    }
+
+    //  No custom ease parameters?
+    if (!easeParams)
+    {
+        //  Return ease function
+        return easeFunction;
+    }
+
+    var cloneParams = easeParams.slice(0);
+
+    cloneParams.unshift(0);
+
+    //  Return ease function with custom ease parameters
+    return function (v)
+    {
+        cloneParams[0] = v;
+
+        return easeFunction.apply(this, cloneParams);
+    };
+};
+
+module.exports = GetEaseFunction;
+
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Class = __webpack_require__(0);
+var Contains = __webpack_require__(64);
+var GetPoint = __webpack_require__(304);
+var GetPoints = __webpack_require__(305);
+var GEOM_CONST = __webpack_require__(21);
+var Line = __webpack_require__(26);
+var Random = __webpack_require__(306);
+
+/**
+ * @classdesc
+ * A triangle is a plane created by connecting three points.
+ * The first two arguments specify the first point, the middle two arguments
+ * specify the second point, and the last two arguments specify the third point.
+ *
+ * @class Triangle
+ * @memberof Phaser.Geom
+ * @constructor
+ * @since 3.0.0
+ *
+ * @param {number} [x1=0] - `x` coordinate of the first point.
+ * @param {number} [y1=0] - `y` coordinate of the first point.
+ * @param {number} [x2=0] - `x` coordinate of the second point.
+ * @param {number} [y2=0] - `y` coordinate of the second point.
+ * @param {number} [x3=0] - `x` coordinate of the third point.
+ * @param {number} [y3=0] - `y` coordinate of the third point.
+ */
+var Triangle = new Class({
+
+    initialize:
+
+    function Triangle (x1, y1, x2, y2, x3, y3)
+    {
+        if (x1 === undefined) { x1 = 0; }
+        if (y1 === undefined) { y1 = 0; }
+        if (x2 === undefined) { x2 = 0; }
+        if (y2 === undefined) { y2 = 0; }
+        if (x3 === undefined) { x3 = 0; }
+        if (y3 === undefined) { y3 = 0; }
+
+        /**
+         * The geometry constant type of this object: `GEOM_CONST.TRIANGLE`.
+         * Used for fast type comparisons.
+         *
+         * @name Phaser.Geom.Triangle#type
+         * @type {number}
+         * @readonly
+         * @since 3.19.0
+         */
+        this.type = GEOM_CONST.TRIANGLE;
+
+        /**
+         * `x` coordinate of the first point.
+         *
+         * @name Phaser.Geom.Triangle#x1
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.x1 = x1;
+
+        /**
+         * `y` coordinate of the first point.
+         *
+         * @name Phaser.Geom.Triangle#y1
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.y1 = y1;
+
+        /**
+         * `x` coordinate of the second point.
+         *
+         * @name Phaser.Geom.Triangle#x2
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.x2 = x2;
+
+        /**
+         * `y` coordinate of the second point.
+         *
+         * @name Phaser.Geom.Triangle#y2
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.y2 = y2;
+
+        /**
+         * `x` coordinate of the third point.
+         *
+         * @name Phaser.Geom.Triangle#x3
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.x3 = x3;
+
+        /**
+         * `y` coordinate of the third point.
+         *
+         * @name Phaser.Geom.Triangle#y3
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.y3 = y3;
+    },
+
+    /**
+     * Checks whether a given points lies within the triangle.
+     *
+     * @method Phaser.Geom.Triangle#contains
+     * @since 3.0.0
+     *
+     * @param {number} x - The x coordinate of the point to check.
+     * @param {number} y - The y coordinate of the point to check.
+     *
+     * @return {boolean} `true` if the coordinate pair is within the triangle, otherwise `false`.
+     */
+    contains: function (x, y)
+    {
+        return Contains(this, x, y);
+    },
+
+    /**
+     * Returns a specific point  on the triangle.
+     *
+     * @method Phaser.Geom.Triangle#getPoint
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point} O - [output,$return]
+     *
+     * @param {number} position - Position as float within `0` and `1`. `0` equals the first point.
+     * @param {(Phaser.Geom.Point|object)} [output] - Optional Point, or point-like object, that the calculated point will be written to.
+     *
+     * @return {(Phaser.Geom.Point|object)} Calculated `Point` that represents the requested position. It is the same as `output` when this parameter has been given.
+     */
+    getPoint: function (position, output)
+    {
+        return GetPoint(this, position, output);
+    },
+
+    /**
+     * Calculates a list of evenly distributed points on the triangle. It is either possible to pass an amount of points to be generated (`quantity`) or the distance between two points (`stepRate`).
+     *
+     * @method Phaser.Geom.Triangle#getPoints
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point[]} O - [output,$return]
+     *
+     * @param {number} quantity - Number of points to be generated. Can be falsey when `stepRate` should be used. All points have the same distance along the triangle.
+     * @param {number} [stepRate] - Distance between two points. Will only be used when `quantity` is falsey.
+     * @param {(array|Phaser.Geom.Point[])} [output] - Optional Array for writing the calculated points into. Otherwise a new array will be created.
+     *
+     * @return {(array|Phaser.Geom.Point[])} Returns a list of calculated `Point` instances or the filled array passed as parameter `output`.
+     */
+    getPoints: function (quantity, stepRate, output)
+    {
+        return GetPoints(this, quantity, stepRate, output);
+    },
+
+    /**
+     * Returns a random point along the triangle.
+     *
+     * @method Phaser.Geom.Triangle#getRandomPoint
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point} O - [point,$return]
+     *
+     * @param {Phaser.Geom.Point} [point] - Optional `Point` that should be modified. Otherwise a new one will be created.
+     *
+     * @return {Phaser.Geom.Point} Random `Point`. When parameter `point` has been provided it will be returned.
+     */
+    getRandomPoint: function (point)
+    {
+        return Random(this, point);
+    },
+
+    /**
+     * Sets all three points of the triangle. Leaving out any coordinate sets it to be `0`.
+     *
+     * @method Phaser.Geom.Triangle#setTo
+     * @since 3.0.0
+     *
+     * @param {number} [x1=0] - `x` coordinate of the first point.
+     * @param {number} [y1=0] - `y` coordinate of the first point.
+     * @param {number} [x2=0] - `x` coordinate of the second point.
+     * @param {number} [y2=0] - `y` coordinate of the second point.
+     * @param {number} [x3=0] - `x` coordinate of the third point.
+     * @param {number} [y3=0] - `y` coordinate of the third point.
+     *
+     * @return {this} This Triangle object.
+     */
+    setTo: function (x1, y1, x2, y2, x3, y3)
+    {
+        if (x1 === undefined) { x1 = 0; }
+        if (y1 === undefined) { y1 = 0; }
+        if (x2 === undefined) { x2 = 0; }
+        if (y2 === undefined) { y2 = 0; }
+        if (x3 === undefined) { x3 = 0; }
+        if (y3 === undefined) { y3 = 0; }
+
+        this.x1 = x1;
+        this.y1 = y1;
+
+        this.x2 = x2;
+        this.y2 = y2;
+
+        this.x3 = x3;
+        this.y3 = y3;
+
+        return this;
+    },
+
+    /**
+     * Returns a Line object that corresponds to Line A of this Triangle.
+     *
+     * @method Phaser.Geom.Triangle#getLineA
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Line} O - [line,$return]
+     *
+     * @param {Phaser.Geom.Line} [line] - A Line object to set the results in. If `undefined` a new Line will be created.
+     *
+     * @return {Phaser.Geom.Line} A Line object that corresponds to line A of this Triangle.
+     */
+    getLineA: function (line)
+    {
+        if (line === undefined) { line = new Line(); }
+
+        line.setTo(this.x1, this.y1, this.x2, this.y2);
+
+        return line;
+    },
+
+    /**
+     * Returns a Line object that corresponds to Line B of this Triangle.
+     *
+     * @method Phaser.Geom.Triangle#getLineB
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Line} O - [line,$return]
+     *
+     * @param {Phaser.Geom.Line} [line] - A Line object to set the results in. If `undefined` a new Line will be created.
+     *
+     * @return {Phaser.Geom.Line} A Line object that corresponds to line B of this Triangle.
+     */
+    getLineB: function (line)
+    {
+        if (line === undefined) { line = new Line(); }
+
+        line.setTo(this.x2, this.y2, this.x3, this.y3);
+
+        return line;
+    },
+
+    /**
+     * Returns a Line object that corresponds to Line C of this Triangle.
+     *
+     * @method Phaser.Geom.Triangle#getLineC
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Line} O - [line,$return]
+     *
+     * @param {Phaser.Geom.Line} [line] - A Line object to set the results in. If `undefined` a new Line will be created.
+     *
+     * @return {Phaser.Geom.Line} A Line object that corresponds to line C of this Triangle.
+     */
+    getLineC: function (line)
+    {
+        if (line === undefined) { line = new Line(); }
+
+        line.setTo(this.x3, this.y3, this.x1, this.y1);
+
+        return line;
+    },
+
+    /**
+     * Left most X coordinate of the triangle. Setting it moves the triangle on the X axis accordingly.
+     *
+     * @name Phaser.Geom.Triangle#left
+     * @type {number}
+     * @since 3.0.0
+     */
+    left: {
+
+        get: function ()
+        {
+            return Math.min(this.x1, this.x2, this.x3);
+        },
+
+        set: function (value)
+        {
+            var diff = 0;
+
+            if (this.x1 <= this.x2 && this.x1 <= this.x3)
+            {
+                diff = this.x1 - value;
+            }
+            else if (this.x2 <= this.x1 && this.x2 <= this.x3)
+            {
+                diff = this.x2 - value;
+            }
+            else
+            {
+                diff = this.x3 - value;
+            }
+
+            this.x1 -= diff;
+            this.x2 -= diff;
+            this.x3 -= diff;
+        }
+
+    },
+
+    /**
+     * Right most X coordinate of the triangle. Setting it moves the triangle on the X axis accordingly.
+     *
+     * @name Phaser.Geom.Triangle#right
+     * @type {number}
+     * @since 3.0.0
+     */
+    right: {
+
+        get: function ()
+        {
+            return Math.max(this.x1, this.x2, this.x3);
+        },
+
+        set: function (value)
+        {
+            var diff = 0;
+
+            if (this.x1 >= this.x2 && this.x1 >= this.x3)
+            {
+                diff = this.x1 - value;
+            }
+            else if (this.x2 >= this.x1 && this.x2 >= this.x3)
+            {
+                diff = this.x2 - value;
+            }
+            else
+            {
+                diff = this.x3 - value;
+            }
+
+            this.x1 -= diff;
+            this.x2 -= diff;
+            this.x3 -= diff;
+        }
+
+    },
+
+    /**
+     * Top most Y coordinate of the triangle. Setting it moves the triangle on the Y axis accordingly.
+     *
+     * @name Phaser.Geom.Triangle#top
+     * @type {number}
+     * @since 3.0.0
+     */
+    top: {
+
+        get: function ()
+        {
+            return Math.min(this.y1, this.y2, this.y3);
+        },
+
+        set: function (value)
+        {
+            var diff = 0;
+
+            if (this.y1 <= this.y2 && this.y1 <= this.y3)
+            {
+                diff = this.y1 - value;
+            }
+            else if (this.y2 <= this.y1 && this.y2 <= this.y3)
+            {
+                diff = this.y2 - value;
+            }
+            else
+            {
+                diff = this.y3 - value;
+            }
+
+            this.y1 -= diff;
+            this.y2 -= diff;
+            this.y3 -= diff;
+        }
+
+    },
+
+    /**
+     * Bottom most Y coordinate of the triangle. Setting it moves the triangle on the Y axis accordingly.
+     *
+     * @name Phaser.Geom.Triangle#bottom
+     * @type {number}
+     * @since 3.0.0
+     */
+    bottom: {
+
+        get: function ()
+        {
+            return Math.max(this.y1, this.y2, this.y3);
+        },
+
+        set: function (value)
+        {
+            var diff = 0;
+
+            if (this.y1 >= this.y2 && this.y1 >= this.y3)
+            {
+                diff = this.y1 - value;
+            }
+            else if (this.y2 >= this.y1 && this.y2 >= this.y3)
+            {
+                diff = this.y2 - value;
+            }
+            else
+            {
+                diff = this.y3 - value;
+            }
+
+            this.y1 -= diff;
+            this.y2 -= diff;
+            this.y3 -= diff;
+        }
+
+    }
+
+});
+
+module.exports = Triangle;
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Class = __webpack_require__(0);
+
+/**
+ * @callback EachMapCallback<E>
+ *
+ * @param {string} key - The key of the Map entry.
+ * @param {E} entry - The value of the Map entry.
+ *
+ * @return {?boolean} The callback result.
+ */
+
+/**
+ * @classdesc
+ * The keys of a Map can be arbitrary values.
+ *
+ * ```javascript
+ * var map = new Map([
+ *    [ 1, 'one' ],
+ *    [ 2, 'two' ],
+ *    [ 3, 'three' ]
+ * ]);
+ * ```
+ *
+ * @class Map
+ * @memberof Phaser.Structs
+ * @constructor
+ * @since 3.0.0
+ *
+ * @generic K
+ * @generic V
+ * @genericUse {V[]} - [elements]
+ *
+ * @param {Array.<*>} elements - An optional array of key-value pairs to populate this Map with.
+ */
+var Map = new Class({
+
+    initialize:
+
+    function Map (elements)
+    {
+        /**
+         * The entries in this Map.
+         *
+         * @genericUse {Object.<string, V>} - [$type]
+         *
+         * @name Phaser.Structs.Map#entries
+         * @type {Object.<string, *>}
+         * @default {}
+         * @since 3.0.0
+         */
+        this.entries = {};
+
+        /**
+         * The number of key / value pairs in this Map.
+         *
+         * @name Phaser.Structs.Map#size
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.size = 0;
+
+        if (Array.isArray(elements))
+        {
+            for (var i = 0; i < elements.length; i++)
+            {
+                this.set(elements[i][0], elements[i][1]);
+            }
+        }
+    },
+
+    /**
+     * Adds an element with a specified `key` and `value` to this Map.
+     * If the `key` already exists, the value will be replaced.
+     *
+     * @method Phaser.Structs.Map#set
+     * @since 3.0.0
+     *
+     * @genericUse {K} - [key]
+     * @genericUse {V} - [value]
+     * @genericUse {Phaser.Structs.Map.<K, V>} - [$return]
+     *
+     * @param {string} key - The key of the element to be added to this Map.
+     * @param {*} value - The value of the element to be added to this Map.
+     *
+     * @return {Phaser.Structs.Map} This Map object.
+     */
+    set: function (key, value)
+    {
+        if (!this.has(key))
+        {
+            this.size++;
+        }
+
+        this.entries[key] = value;
+
+        return this;
+    },
+
+    /**
+     * Returns the value associated to the `key`, or `undefined` if there is none.
+     *
+     * @method Phaser.Structs.Map#get
+     * @since 3.0.0
+     *
+     * @genericUse {K} - [key]
+     * @genericUse {V} - [$return]
+     *
+     * @param {string} key - The key of the element to return from the `Map` object.
+     *
+     * @return {*} The element associated with the specified key or `undefined` if the key can't be found in this Map object.
+     */
+    get: function (key)
+    {
+        if (this.has(key))
+        {
+            return this.entries[key];
+        }
+    },
+
+    /**
+     * Returns an `Array` of all the values stored in this Map.
+     *
+     * @method Phaser.Structs.Map#getArray
+     * @since 3.0.0
+     *
+     * @genericUse {V[]} - [$return]
+     *
+     * @return {Array.<*>} An array of the values stored in this Map.
+     */
+    getArray: function ()
+    {
+        var output = [];
+        var entries = this.entries;
+
+        for (var key in entries)
+        {
+            output.push(entries[key]);
+        }
+
+        return output;
+    },
+
+    /**
+     * Returns a boolean indicating whether an element with the specified key exists or not.
+     *
+     * @method Phaser.Structs.Map#has
+     * @since 3.0.0
+     *
+     * @genericUse {K} - [key]
+     *
+     * @param {string} key - The key of the element to test for presence of in this Map.
+     *
+     * @return {boolean} Returns `true` if an element with the specified key exists in this Map, otherwise `false`.
+     */
+    has: function (key)
+    {
+        return (this.entries.hasOwnProperty(key));
+    },
+
+    /**
+     * Delete the specified element from this Map.
+     *
+     * @method Phaser.Structs.Map#delete
+     * @since 3.0.0
+     *
+     * @genericUse {K} - [key]
+     * @genericUse {Phaser.Structs.Map.<K, V>} - [$return]
+     *
+     * @param {string} key - The key of the element to delete from this Map.
+     *
+     * @return {Phaser.Structs.Map} This Map object.
+     */
+    delete: function (key)
+    {
+        if (this.has(key))
+        {
+            delete this.entries[key];
+            this.size--;
+        }
+
+        return this;
+    },
+
+    /**
+     * Delete all entries from this Map.
+     *
+     * @method Phaser.Structs.Map#clear
+     * @since 3.0.0
+     *
+     * @genericUse {Phaser.Structs.Map.<K, V>} - [$return]
+     *
+     * @return {Phaser.Structs.Map} This Map object.
+     */
+    clear: function ()
+    {
+        Object.keys(this.entries).forEach(function (prop)
+        {
+            delete this.entries[prop];
+
+        }, this);
+
+        this.size = 0;
+
+        return this;
+    },
+
+    /**
+     * Returns all entries keys in this Map.
+     *
+     * @method Phaser.Structs.Map#keys
+     * @since 3.0.0
+     *
+     * @genericUse {K[]} - [$return]
+     *
+     * @return {string[]} Array containing entries' keys.
+     */
+    keys: function ()
+    {
+        return Object.keys(this.entries);
+    },
+
+    /**
+     * Returns an `Array` of all entries.
+     *
+     * @method Phaser.Structs.Map#values
+     * @since 3.0.0
+     *
+     * @genericUse {V[]} - [$return]
+     *
+     * @return {Array.<*>} An `Array` of entries.
+     */
+    values: function ()
+    {
+        var output = [];
+        var entries = this.entries;
+
+        for (var key in entries)
+        {
+            output.push(entries[key]);
+        }
+
+        return output;
+    },
+
+    /**
+     * Dumps the contents of this Map to the console via `console.group`.
+     *
+     * @method Phaser.Structs.Map#dump
+     * @since 3.0.0
+     */
+    dump: function ()
+    {
+        var entries = this.entries;
+
+        // eslint-disable-next-line no-console
+        console.group('Map');
+
+        for (var key in entries)
+        {
+            console.log(key, entries[key]);
+        }
+
+        // eslint-disable-next-line no-console
+        console.groupEnd();
+    },
+
+    /**
+     * Iterates through all entries in this Map, passing each one to the given callback.
+     *
+     * If the callback returns `false`, the iteration will break.
+     *
+     * @method Phaser.Structs.Map#each
+     * @since 3.0.0
+     *
+     * @genericUse {EachMapCallback.<V>} - [callback]
+     * @genericUse {Phaser.Structs.Map.<K, V>} - [$return]
+     *
+     * @param {EachMapCallback} callback - The callback which will receive the keys and entries held in this Map.
+     *
+     * @return {Phaser.Structs.Map} This Map object.
+     */
+    each: function (callback)
+    {
+        var entries = this.entries;
+
+        for (var key in entries)
+        {
+            if (callback(key, entries[key]) === false)
+            {
+                break;
+            }
+        }
+
+        return this;
+    },
+
+    /**
+     * Returns `true` if the value exists within this Map. Otherwise, returns `false`.
+     *
+     * @method Phaser.Structs.Map#contains
+     * @since 3.0.0
+     *
+     * @genericUse {V} - [value]
+     *
+     * @param {*} value - The value to search for.
+     *
+     * @return {boolean} `true` if the value is found, otherwise `false`.
+     */
+    contains: function (value)
+    {
+        var entries = this.entries;
+
+        for (var key in entries)
+        {
+            if (entries[key] === value)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    },
+
+    /**
+     * Merges all new keys from the given Map into this one.
+     * If it encounters a key that already exists it will be skipped unless override is set to `true`.
+     *
+     * @method Phaser.Structs.Map#merge
+     * @since 3.0.0
+     *
+     * @genericUse {Phaser.Structs.Map.<K, V>} - [map,$return]
+     *
+     * @param {Phaser.Structs.Map} map - The Map to merge in to this Map.
+     * @param {boolean} [override=false] - Set to `true` to replace values in this Map with those from the source map, or `false` to skip them.
+     *
+     * @return {Phaser.Structs.Map} This Map object.
+     */
+    merge: function (map, override)
+    {
+        if (override === undefined) { override = false; }
+
+        var local = this.entries;
+        var source = map.entries;
+
+        for (var key in source)
+        {
+            if (local.hasOwnProperty(key) && override)
+            {
+                local[key] = source[key];
+            }
+            else
+            {
+                this.set(key, source[key]);
+            }
+        }
+
+        return this;
+    }
+
+});
+
+module.exports = Map;
+
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var CONST = __webpack_require__(7);
+
+/**
+ * Convert the given angle from degrees, to the equivalent angle in radians.
+ *
+ * @function Phaser.Math.DegToRad
+ * @since 3.0.0
+ *
+ * @param {number} degrees - The angle (in degrees) to convert to radians.
+ *
+ * @return {number} The given angle converted to radians.
+ */
+var DegToRad = function (degrees)
+{
+    return degrees * CONST.DEG_TO_RAD;
+};
+
+module.exports = DegToRad;
+
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Retrieves the value of the given key from an object.
+ *
+ * @function Phaser.Tweens.Builders.GetBoolean
+ * @since 3.0.0
+ *
+ * @param {object} source - The object to retrieve the value from.
+ * @param {string} key - The key to look for in the `source` object.
+ * @param {*} defaultValue - The default value to return if the `key` doesn't exist or if no `source` object is provided.
+ *
+ * @return {*} The retrieved value.
+ */
+var GetBoolean = function (source, key, defaultValue)
+{
+    if (!source)
+    {
+        return defaultValue;
+    }
+    else if (source.hasOwnProperty(key))
+    {
+        return source[key];
+    }
+    else
+    {
+        return defaultValue;
+    }
+};
+
+module.exports = GetBoolean;
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var TWEEN_CONST = {
+
+    /**
+     * TweenData state.
+     * 
+     * @name Phaser.Tweens.CREATED
+     * @type {number}
+     * @since 3.0.0
+     */
+    CREATED: 0,
+
+    /**
+     * TweenData state.
+     * 
+     * @name Phaser.Tweens.INIT
+     * @type {number}
+     * @since 3.0.0
+     */
+    INIT: 1,
+
+    /**
+     * TweenData state.
+     * 
+     * @name Phaser.Tweens.DELAY
+     * @type {number}
+     * @since 3.0.0
+     */
+    DELAY: 2,
+
+    /**
+     * TweenData state.
+     * 
+     * @name Phaser.Tweens.OFFSET_DELAY
+     * @type {number}
+     * @since 3.0.0
+     */
+    OFFSET_DELAY: 3,
+
+    /**
+     * TweenData state.
+     * 
+     * @name Phaser.Tweens.PENDING_RENDER
+     * @type {number}
+     * @since 3.0.0
+     */
+    PENDING_RENDER: 4,
+
+    /**
+     * TweenData state.
+     * 
+     * @name Phaser.Tweens.PLAYING_FORWARD
+     * @type {number}
+     * @since 3.0.0
+     */
+    PLAYING_FORWARD: 5,
+
+    /**
+     * TweenData state.
+     * 
+     * @name Phaser.Tweens.PLAYING_BACKWARD
+     * @type {number}
+     * @since 3.0.0
+     */
+    PLAYING_BACKWARD: 6,
+
+    /**
+     * TweenData state.
+     * 
+     * @name Phaser.Tweens.HOLD_DELAY
+     * @type {number}
+     * @since 3.0.0
+     */
+    HOLD_DELAY: 7,
+
+    /**
+     * TweenData state.
+     * 
+     * @name Phaser.Tweens.REPEAT_DELAY
+     * @type {number}
+     * @since 3.0.0
+     */
+    REPEAT_DELAY: 8,
+
+    /**
+     * TweenData state.
+     * 
+     * @name Phaser.Tweens.COMPLETE
+     * @type {number}
+     * @since 3.0.0
+     */
+    COMPLETE: 9,
+
+    //  Tween specific (starts from 20 to cleanly allow extra TweenData consts in the future)
+
+    /**
+     * Tween state.
+     * 
+     * @name Phaser.Tweens.PENDING_ADD
+     * @type {number}
+     * @since 3.0.0
+     */
+    PENDING_ADD: 20,
+
+    /**
+     * Tween state.
+     * 
+     * @name Phaser.Tweens.PAUSED
+     * @type {number}
+     * @since 3.0.0
+     */
+    PAUSED: 21,
+
+    /**
+     * Tween state.
+     * 
+     * @name Phaser.Tweens.LOOP_DELAY
+     * @type {number}
+     * @since 3.0.0
+     */
+    LOOP_DELAY: 22,
+
+    /**
+     * Tween state.
+     * 
+     * @name Phaser.Tweens.ACTIVE
+     * @type {number}
+     * @since 3.0.0
+     */
+    ACTIVE: 23,
+
+    /**
+     * Tween state.
+     * 
+     * @name Phaser.Tweens.COMPLETE_DELAY
+     * @type {number}
+     * @since 3.0.0
+     */
+    COMPLETE_DELAY: 24,
+
+    /**
+     * Tween state.
+     * 
+     * @name Phaser.Tweens.PENDING_REMOVE
+     * @type {number}
+     * @since 3.0.0
+     */
+    PENDING_REMOVE: 25,
+
+    /**
+     * Tween state.
+     * 
+     * @name Phaser.Tweens.REMOVED
+     * @type {number}
+     * @since 3.0.0
+     */
+    REMOVED: 26
+
+};
+
+module.exports = TWEEN_CONST;
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Removes a single item from an array and returns it without creating gc, like the native splice does.
+ * Based on code by Mike Reinstein.
+ *
+ * @function Phaser.Utils.Array.SpliceOne
+ * @since 3.0.0
+ *
+ * @param {array} array - The array to splice from.
+ * @param {number} index - The index of the item which should be spliced.
+ *
+ * @return {*} The item which was spliced (removed).
+ */
+var SpliceOne = function (array, index)
+{
+    if (index >= array.length)
+    {
+        return;
+    }
+
+    var len = array.length - 1;
+
+    var item = array[index];
+
+    for (var i = index; i < len; i++)
+    {
+        array[i] = array[i + 1];
+    }
+
+    array.length = len;
+
+    return item;
+};
+
+module.exports = SpliceOne;
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * @namespace Phaser.Scale.Events
+ */
+
+module.exports = {
+
+    ENTER_FULLSCREEN: __webpack_require__(455),
+    FULLSCREEN_FAILED: __webpack_require__(456),
+    FULLSCREEN_UNSUPPORTED: __webpack_require__(457),
+    LEAVE_FULLSCREEN: __webpack_require__(458),
+    ORIENTATION_CHANGE: __webpack_require__(459),
+    RESIZE: __webpack_require__(460)
+
+};
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Determines the operating system of the device running this Phaser Game instance.
+ * These values are read-only and populated during the boot sequence of the game.
+ * They are then referenced by internal game systems and are available for you to access
+ * via `this.sys.game.device.os` from within any Scene.
+ *
+ * @typedef {object} Phaser.Device.OS
+ * @since 3.0.0
+ *
+ * @property {boolean} android - Is running on android?
+ * @property {boolean} chromeOS - Is running on chromeOS?
+ * @property {boolean} cordova - Is the game running under Apache Cordova?
+ * @property {boolean} crosswalk - Is the game running under the Intel Crosswalk XDK?
+ * @property {boolean} desktop - Is running on a desktop?
+ * @property {boolean} ejecta - Is the game running under Ejecta?
+ * @property {boolean} electron - Is the game running under GitHub Electron?
+ * @property {boolean} iOS - Is running on iOS?
+ * @property {boolean} iPad - Is running on iPad?
+ * @property {boolean} iPhone - Is running on iPhone?
+ * @property {boolean} kindle - Is running on an Amazon Kindle?
+ * @property {boolean} linux - Is running on linux?
+ * @property {boolean} macOS - Is running on macOS?
+ * @property {boolean} node - Is the game running under Node.js?
+ * @property {boolean} nodeWebkit - Is the game running under Node-Webkit?
+ * @property {boolean} webApp - Set to true if running as a WebApp, i.e. within a WebView
+ * @property {boolean} windows - Is running on windows?
+ * @property {boolean} windowsPhone - Is running on a Windows Phone?
+ * @property {number} iOSVersion - If running in iOS this will contain the major version number.
+ * @property {number} pixelRatio - PixelRatio of the host device?
+ */
+var OS = {
+
+    android: false,
+    chromeOS: false,
+    cordova: false,
+    crosswalk: false,
+    desktop: false,
+    ejecta: false,
+    electron: false,
+    iOS: false,
+    iOSVersion: 0,
+    iPad: false,
+    iPhone: false,
+    kindle: false,
+    linux: false,
+    macOS: false,
+    node: false,
+    nodeWebkit: false,
+    pixelRatio: 1,
+    webApp: false,
+    windows: false,
+    windowsPhone: false
+
+};
+
+function init ()
+{
+    var ua = navigator.userAgent;
+
+    if ((/Windows/).test(ua))
+    {
+        OS.windows = true;
+    }
+    else if ((/Mac OS/).test(ua) && !((/like Mac OS/).test(ua)))
+    {
+        //  Because iOS 13 identifies as Mac OS:
+        if (navigator.maxTouchPoints && navigator.maxTouchPoints > 2)
+        {
+            OS.iOS = true;
+            OS.iPad = true;
+
+            (navigator.appVersion).match(/Version\/(\d+)/);
+
+            OS.iOSVersion = parseInt(RegExp.$1, 10);
+        }
+        else
+        {
+            OS.macOS = true;
+        }
+    }
+    else if ((/Android/).test(ua))
+    {
+        OS.android = true;
+    }
+    else if ((/Linux/).test(ua))
+    {
+        OS.linux = true;
+    }
+    else if ((/iP[ao]d|iPhone/i).test(ua))
+    {
+        OS.iOS = true;
+
+        (navigator.appVersion).match(/OS (\d+)/);
+
+        OS.iOSVersion = parseInt(RegExp.$1, 10);
+
+        OS.iPhone = ua.toLowerCase().indexOf('iphone') !== -1;
+        OS.iPad = ua.toLowerCase().indexOf('ipad') !== -1;
+    }
+    else if ((/Kindle/).test(ua) || (/\bKF[A-Z][A-Z]+/).test(ua) || (/Silk.*Mobile Safari/).test(ua))
+    {
+        OS.kindle = true;
+
+        // This will NOT detect early generations of Kindle Fire, I think there is no reliable way...
+        // E.g. "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-80) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true"
+    }
+    else if ((/CrOS/).test(ua))
+    {
+        OS.chromeOS = true;
+    }
+
+    if ((/Windows Phone/i).test(ua) || (/IEMobile/i).test(ua))
+    {
+        OS.android = false;
+        OS.iOS = false;
+        OS.macOS = false;
+        OS.windows = true;
+        OS.windowsPhone = true;
+    }
+
+    var silk = (/Silk/).test(ua);
+
+    if (OS.windows || OS.macOS || (OS.linux && !silk) || OS.chromeOS)
+    {
+        OS.desktop = true;
+    }
+
+    //  Windows Phone / Table reset
+    if (OS.windowsPhone || (((/Windows NT/i).test(ua)) && ((/Touch/i).test(ua))))
+    {
+        OS.desktop = false;
+    }
+
+    //  WebApp mode in iOS
+    if (navigator.standalone)
+    {
+        OS.webApp = true;
+    }
+
+    if (window.cordova !== undefined)
+    {
+        OS.cordova = true;
+    }
+
+    if (typeof process !== 'undefined' && process.versions && process.versions.node)
+    {
+        OS.node = true;
+    }
+
+    if (OS.node && typeof process.versions === 'object')
+    {
+        OS.nodeWebkit = !!process.versions['node-webkit'];
+
+        OS.electron = !!process.versions.electron;
+    }
+
+    if (window.ejecta !== undefined)
+    {
+        OS.ejecta = true;
+    }
+
+    if ((/Crosswalk/).test(ua))
+    {
+        OS.crosswalk = true;
+    }
+
+    OS.pixelRatio = window['devicePixelRatio'] || 1;
+
+    return OS;
+}
+
+module.exports = init();
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(483)))
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Clamp = __webpack_require__(8);
 
 /**
  * Return a value based on the range between `min` and `max` and the percentage given.
@@ -12124,7 +14301,7 @@ module.exports = FromPercent;
 
 
 /***/ }),
-/* 44 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -12139,17 +14316,17 @@ module.exports = FromPercent;
 
 module.exports = {
 
-    ADD: __webpack_require__(497),
-    ERROR: __webpack_require__(498),
-    LOAD: __webpack_require__(499),
-    READY: __webpack_require__(500),
-    REMOVE: __webpack_require__(501)
+    ADD: __webpack_require__(548),
+    ERROR: __webpack_require__(549),
+    LOAD: __webpack_require__(550),
+    READY: __webpack_require__(551),
+    REMOVE: __webpack_require__(552)
 
 };
 
 
 /***/ }),
-/* 45 */
+/* 55 */
 /***/ (function(module, exports) {
 
 /**
@@ -12229,7 +14406,7 @@ module.exports = WEBGL_CONST;
 
 
 /***/ }),
-/* 46 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -12241,12 +14418,12 @@ module.exports = WEBGL_CONST;
 
 var Class = __webpack_require__(0);
 var GetFastValue = __webpack_require__(1);
-var ShaderSourceFS = __webpack_require__(515);
-var ShaderSourceVS = __webpack_require__(516);
-var TransformMatrix = __webpack_require__(19);
-var Utils = __webpack_require__(34);
-var WEBGL_CONST = __webpack_require__(45);
-var WebGLPipeline = __webpack_require__(20);
+var ShaderSourceFS = __webpack_require__(565);
+var ShaderSourceVS = __webpack_require__(566);
+var TransformMatrix = __webpack_require__(22);
+var Utils = __webpack_require__(35);
+var WEBGL_CONST = __webpack_require__(55);
+var WebGLPipeline = __webpack_require__(23);
 
 /**
  * @classdesc
@@ -12781,7 +14958,7 @@ module.exports = MultiPipeline;
 
 
 /***/ }),
-/* 47 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -12791,7 +14968,7 @@ module.exports = MultiPipeline;
  */
 
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(195);
+var Events = __webpack_require__(225);
 
 /**
  * @callback DataEachCallback
@@ -13488,7 +15665,7 @@ module.exports = DataManager;
 
 
 /***/ }),
-/* 48 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -13503,22 +15680,22 @@ module.exports = DataManager;
 
 module.exports = {
 
-    ADD: __webpack_require__(583),
-    COMPLETE: __webpack_require__(584),
-    FILE_COMPLETE: __webpack_require__(585),
-    FILE_KEY_COMPLETE: __webpack_require__(586),
-    FILE_LOAD_ERROR: __webpack_require__(587),
-    FILE_LOAD: __webpack_require__(588),
-    FILE_PROGRESS: __webpack_require__(589),
-    POST_PROCESS: __webpack_require__(590),
-    PROGRESS: __webpack_require__(591),
-    START: __webpack_require__(592)
+    ADD: __webpack_require__(633),
+    COMPLETE: __webpack_require__(634),
+    FILE_COMPLETE: __webpack_require__(635),
+    FILE_KEY_COMPLETE: __webpack_require__(636),
+    FILE_LOAD_ERROR: __webpack_require__(637),
+    FILE_LOAD: __webpack_require__(638),
+    FILE_PROGRESS: __webpack_require__(639),
+    POST_PROCESS: __webpack_require__(640),
+    PROGRESS: __webpack_require__(641),
+    START: __webpack_require__(642)
 
 };
 
 
 /***/ }),
-/* 49 */
+/* 59 */
 /***/ (function(module, exports) {
 
 /**
@@ -13560,7 +15737,7 @@ module.exports = Clone;
 
 
 /***/ }),
-/* 50 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -13569,8 +15746,8 @@ module.exports = Clone;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BlendModes = __webpack_require__(27);
-var GetAdvancedValue = __webpack_require__(18);
+var BlendModes = __webpack_require__(32);
+var GetAdvancedValue = __webpack_require__(20);
 
 /**
  * Builds a Game Object using the provided configuration object.
@@ -13688,7 +15865,7 @@ module.exports = BuildGameObject;
 
 
 /***/ }),
-/* 51 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -13698,10 +15875,10 @@ module.exports = BuildGameObject;
  */
 
 var Class = __webpack_require__(0);
-var ComponentsToJSON = __webpack_require__(83);
-var DataManager = __webpack_require__(47);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(97);
+var ComponentsToJSON = __webpack_require__(99);
+var DataManager = __webpack_require__(57);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(116);
 
 /**
  * @classdesc
@@ -14447,7 +16624,140 @@ module.exports = GameObject;
 
 
 /***/ }),
-/* 52 */
+/* 62 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Check to see if the Ellipse contains the given x / y coordinates.
+ *
+ * @function Phaser.Geom.Ellipse.Contains
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to check.
+ * @param {number} x - The x coordinate to check within the ellipse.
+ * @param {number} y - The y coordinate to check within the ellipse.
+ *
+ * @return {boolean} True if the coordinates are within the ellipse, otherwise false.
+ */
+var Contains = function (ellipse, x, y)
+{
+    if (ellipse.width <= 0 || ellipse.height <= 0)
+    {
+        return false;
+    }
+
+    //  Normalize the coords to an ellipse with center 0,0 and a radius of 0.5
+    var normx = ((x - ellipse.x) / ellipse.width);
+    var normy = ((y - ellipse.y) / ellipse.height);
+
+    normx *= normx;
+    normy *= normy;
+
+    return (normx + normy < 0.25);
+};
+
+module.exports = Contains;
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Checks if two Rectangles intersect.
+ *
+ * A Rectangle intersects another Rectangle if any part of its bounds is within the other Rectangle's bounds.
+ * As such, the two Rectangles are considered "solid".
+ * A Rectangle with no width or no height will never intersect another Rectangle.
+ *
+ * @function Phaser.Geom.Intersects.RectangleToRectangle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Rectangle} rectA - The first Rectangle to check for intersection.
+ * @param {Phaser.Geom.Rectangle} rectB - The second Rectangle to check for intersection.
+ *
+ * @return {boolean} `true` if the two Rectangles intersect, otherwise `false`.
+ */
+var RectangleToRectangle = function (rectA, rectB)
+{
+    if (rectA.width <= 0 || rectA.height <= 0 || rectB.width <= 0 || rectB.height <= 0)
+    {
+        return false;
+    }
+
+    return !(rectA.right < rectB.x || rectA.bottom < rectB.y || rectA.x > rectB.right || rectA.y > rectB.bottom);
+};
+
+module.exports = RectangleToRectangle;
+
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+//  http://www.blackpawn.com/texts/pointinpoly/
+
+/**
+ * Checks if a point (as a pair of coordinates) is inside a Triangle's bounds.
+ *
+ * @function Phaser.Geom.Triangle.Contains
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to check.
+ * @param {number} x - The X coordinate of the point to check.
+ * @param {number} y - The Y coordinate of the point to check.
+ *
+ * @return {boolean} `true` if the point is inside the Triangle, otherwise `false`.
+ */
+var Contains = function (triangle, x, y)
+{
+    var v0x = triangle.x3 - triangle.x1;
+    var v0y = triangle.y3 - triangle.y1;
+
+    var v1x = triangle.x2 - triangle.x1;
+    var v1y = triangle.y2 - triangle.y1;
+
+    var v2x = x - triangle.x1;
+    var v2y = y - triangle.y1;
+
+    var dot00 = (v0x * v0x) + (v0y * v0y);
+    var dot01 = (v0x * v1x) + (v0y * v1y);
+    var dot02 = (v0x * v2x) + (v0y * v2y);
+    var dot11 = (v1x * v1x) + (v1y * v1y);
+    var dot12 = (v1x * v2x) + (v1y * v2y);
+
+    // Compute barycentric coordinates
+    var b = ((dot00 * dot11) - (dot01 * dot01));
+    var inv = (b === 0) ? 0 : (1 / b);
+    var u = ((dot11 * dot02) - (dot01 * dot12)) * inv;
+    var v = ((dot00 * dot12) - (dot01 * dot02)) * inv;
+
+    return (u >= 0 && v >= 0 && (u + v < 1));
+};
+
+module.exports = Contains;
+
+
+/***/ }),
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -14457,12 +16767,12 @@ module.exports = GameObject;
  */
 
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(21);
-var File = __webpack_require__(22);
-var FileTypesManager = __webpack_require__(10);
+var CONST = __webpack_require__(24);
+var File = __webpack_require__(25);
+var FileTypesManager = __webpack_require__(13);
 var GetFastValue = __webpack_require__(1);
-var GetValue = __webpack_require__(4);
-var IsPlainObject = __webpack_require__(11);
+var GetValue = __webpack_require__(5);
+var IsPlainObject = __webpack_require__(15);
 
 /**
  * @classdesc
@@ -14677,116 +16987,7 @@ module.exports = JSONFile;
 
 
 /***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var EaseMap = __webpack_require__(57);
-var UppercaseFirst = __webpack_require__(217);
-
-/**
- * This internal function is used to return the correct ease function for a Tween.
- * 
- * It can take a variety of input, including an EaseMap based string, or a custom function.
- *
- * @function Phaser.Tweens.Builders.GetEaseFunction
- * @since 3.0.0
- *
- * @param {(string|function)} ease - The ease to find. This can be either a string from the EaseMap, or a custom function.
- * @param {number[]} [easeParams] - An optional array of ease parameters to go with the ease.
- *
- * @return {function} The ease function.
- */
-var GetEaseFunction = function (ease, easeParams)
-{
-    //  Default ease function
-    var easeFunction = EaseMap.Power0;
-
-    //  Prepare ease function
-    if (typeof ease === 'string')
-    {
-        //  String based look-up
-
-        //  1) They specified it correctly
-        if (EaseMap.hasOwnProperty(ease))
-        {
-            easeFunction = EaseMap[ease];
-        }
-        else
-        {
-            //  Do some string manipulation to try and find it
-            var direction = '';
-
-            if (ease.indexOf('.'))
-            {
-                //  quad.in = Quad.easeIn
-                //  quad.out = Quad.easeOut
-                //  quad.inout = Quad.easeInOut
-
-                direction = ease.substr(ease.indexOf('.') + 1);
-
-                if (direction.toLowerCase() === 'in')
-                {
-                    direction = 'easeIn';
-                }
-                else if (direction.toLowerCase() === 'out')
-                {
-                    direction = 'easeOut';
-                }
-                else if (direction.toLowerCase() === 'inout')
-                {
-                    direction = 'easeInOut';
-                }
-            }
-
-            ease = UppercaseFirst(ease.substr(0, ease.indexOf('.') + 1) + direction);
-
-            if (EaseMap.hasOwnProperty(ease))
-            {
-                easeFunction = EaseMap[ease];
-            }
-        }
-    }
-    else if (typeof ease === 'function')
-    {
-        //  Custom function
-        easeFunction = ease;
-    }
-    else if (Array.isArray(ease) && ease.length === 4)
-    {
-        //  Bezier function (TODO)
-    }
-
-    //  No custom ease parameters?
-    if (!easeParams)
-    {
-        //  Return ease function
-        return easeFunction;
-    }
-
-    var cloneParams = easeParams.slice(0);
-
-    cloneParams.unshift(0);
-
-    //  Return ease function with custom ease parameters
-    return function (v)
-    {
-        cloneParams[0] = v;
-
-        return easeFunction.apply(this, cloneParams);
-    };
-};
-
-module.exports = GetEaseFunction;
-
-
-/***/ }),
-/* 54 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -14801,24 +17002,24 @@ module.exports = GetEaseFunction;
 
 module.exports = {
 
-    ADD_ANIMATION: __webpack_require__(285),
-    ANIMATION_COMPLETE: __webpack_require__(286),
-    ANIMATION_COMPLETE_KEY: __webpack_require__(287),
-    ANIMATION_REPEAT: __webpack_require__(288),
-    ANIMATION_RESTART: __webpack_require__(289),
-    ANIMATION_START: __webpack_require__(290),
-    ANIMATION_STOP: __webpack_require__(291),
-    ANIMATION_UPDATE: __webpack_require__(292),
-    PAUSE_ALL: __webpack_require__(293),
-    REMOVE_ANIMATION: __webpack_require__(294),
-    RESUME_ALL: __webpack_require__(295)
+    ADD_ANIMATION: __webpack_require__(344),
+    ANIMATION_COMPLETE: __webpack_require__(345),
+    ANIMATION_COMPLETE_KEY: __webpack_require__(346),
+    ANIMATION_REPEAT: __webpack_require__(347),
+    ANIMATION_RESTART: __webpack_require__(348),
+    ANIMATION_START: __webpack_require__(349),
+    ANIMATION_STOP: __webpack_require__(350),
+    ANIMATION_UPDATE: __webpack_require__(351),
+    PAUSE_ALL: __webpack_require__(352),
+    REMOVE_ANIMATION: __webpack_require__(353),
+    RESUME_ALL: __webpack_require__(354)
 
 };
 
 
 /***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 67 */
+/***/ (function(module, exports) {
 
 /**
  * @author       Richard Davey <rich@photonstorm.com>
@@ -14826,28 +17027,26 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = __webpack_require__(13);
-
 /**
- * Convert the given angle from degrees, to the equivalent angle in radians.
+ * Calculates the perimeter of a Rectangle.
  *
- * @function Phaser.Math.DegToRad
+ * @function Phaser.Geom.Rectangle.Perimeter
  * @since 3.0.0
  *
- * @param {number} degrees - The angle (in degrees) to convert to radians.
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle to use.
  *
- * @return {number} The given angle converted to radians.
+ * @return {number} The perimeter of the Rectangle, equal to `(width * 2) + (height * 2)`.
  */
-var DegToRad = function (degrees)
+var Perimeter = function (rect)
 {
-    return degrees * CONST.DEG_TO_RAD;
+    return 2 * (rect.width + rect.height);
 };
 
-module.exports = DegToRad;
+module.exports = Perimeter;
 
 
 /***/ }),
-/* 56 */
+/* 68 */
 /***/ (function(module, exports) {
 
 /**
@@ -14953,7 +17152,39 @@ module.exports = PIPELINE_CONST;
 
 
 /***/ }),
-/* 57 */
+/* 69 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Wrap the given `value` between `min` and `max.
+ *
+ * @function Phaser.Math.Wrap
+ * @since 3.0.0
+ *
+ * @param {number} value - The value to wrap.
+ * @param {number} min - The minimum value.
+ * @param {number} max - The maximum value.
+ *
+ * @return {number} The wrapped value.
+ */
+var Wrap = function (value, min, max)
+{
+    var range = max - min;
+
+    return (min + ((((value - min) % range) + range) % range));
+};
+
+module.exports = Wrap;
+
+
+/***/ }),
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -14962,18 +17193,18 @@ module.exports = PIPELINE_CONST;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Back = __webpack_require__(144);
-var Bounce = __webpack_require__(145);
-var Circular = __webpack_require__(146);
-var Cubic = __webpack_require__(147);
-var Elastic = __webpack_require__(148);
-var Expo = __webpack_require__(149);
-var Linear = __webpack_require__(150);
-var Quadratic = __webpack_require__(151);
-var Quartic = __webpack_require__(152);
-var Quintic = __webpack_require__(153);
-var Sine = __webpack_require__(154);
-var Stepped = __webpack_require__(155);
+var Back = __webpack_require__(174);
+var Bounce = __webpack_require__(175);
+var Circular = __webpack_require__(176);
+var Cubic = __webpack_require__(177);
+var Elastic = __webpack_require__(178);
+var Expo = __webpack_require__(179);
+var Linear = __webpack_require__(180);
+var Quadratic = __webpack_require__(181);
+var Quartic = __webpack_require__(182);
+var Quintic = __webpack_require__(183);
+var Sine = __webpack_require__(184);
+var Stepped = __webpack_require__(185);
 
 //  EaseMap
 module.exports = {
@@ -15034,7 +17265,7 @@ module.exports = {
 
 
 /***/ }),
-/* 58 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -15043,7 +17274,7 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var OS = __webpack_require__(41);
+var OS = __webpack_require__(52);
 
 /**
  * Determines the browser type and version running this Phaser Game instance.
@@ -15144,7 +17375,7 @@ module.exports = init();
 
 
 /***/ }),
-/* 59 */
+/* 72 */
 /***/ (function(module, exports) {
 
 /**
@@ -15173,7 +17404,41 @@ module.exports = FloatBetween;
 
 
 /***/ }),
-/* 60 */
+/* 73 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Calculate the distance between two sets of coordinates (points).
+ *
+ * @function Phaser.Math.Distance.Between
+ * @since 3.0.0
+ *
+ * @param {number} x1 - The x coordinate of the first point.
+ * @param {number} y1 - The y coordinate of the first point.
+ * @param {number} x2 - The x coordinate of the second point.
+ * @param {number} y2 - The y coordinate of the second point.
+ *
+ * @return {number} The distance between each point.
+ */
+var DistanceBetween = function (x1, y1, x2, y2)
+{
+    var dx = x1 - x2;
+    var dy = y1 - y2;
+
+    return Math.sqrt(dx * dx + dy * dy);
+};
+
+module.exports = DistanceBetween;
+
+
+/***/ }),
+/* 74 */
 /***/ (function(module, exports) {
 
 /**
@@ -15203,7 +17468,7 @@ module.exports = IsSizePowerOfTwo;
 
 
 /***/ }),
-/* 61 */
+/* 75 */
 /***/ (function(module, exports) {
 
 /**
@@ -15247,1053 +17512,7 @@ module.exports = SnapFloor;
 
 
 /***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-//  Adapted from [gl-matrix](https://github.com/toji/gl-matrix) by toji
-//  and [vecmath](https://github.com/mattdesl/vecmath) by mattdesl
-
-var Class = __webpack_require__(0);
-
-/**
- * @classdesc
- * A representation of a vector in 3D space.
- *
- * A three-component vector.
- *
- * @class Vector3
- * @memberof Phaser.Math
- * @constructor
- * @since 3.0.0
- *
- * @param {number} [x] - The x component.
- * @param {number} [y] - The y component.
- * @param {number} [z] - The z component.
- */
-var Vector3 = new Class({
-
-    initialize:
-
-    function Vector3 (x, y, z)
-    {
-        /**
-         * The x component of this Vector.
-         *
-         * @name Phaser.Math.Vector3#x
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x = 0;
-
-        /**
-         * The y component of this Vector.
-         *
-         * @name Phaser.Math.Vector3#y
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y = 0;
-
-        /**
-         * The z component of this Vector.
-         *
-         * @name Phaser.Math.Vector3#z
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.z = 0;
-
-        if (typeof x === 'object')
-        {
-            this.x = x.x || 0;
-            this.y = x.y || 0;
-            this.z = x.z || 0;
-        }
-        else
-        {
-            this.x = x || 0;
-            this.y = y || 0;
-            this.z = z || 0;
-        }
-    },
-
-    /**
-     * Set this Vector to point up.
-     *
-     * Sets the y component of the vector to 1, and the others to 0.
-     *
-     * @method Phaser.Math.Vector3#up
-     * @since 3.0.0
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    up: function ()
-    {
-        this.x = 0;
-        this.y = 1;
-        this.z = 0;
-
-        return this;
-    },
-
-    /**
-     * Sets the components of this Vector to be the `Math.min` result from the given vector.
-     *
-     * @method Phaser.Math.Vector3#min
-     * @since 3.50.0
-     *
-     * @param {Phaser.Math.Vector3} v - The Vector3 to check the minimum values against.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    min: function (v)
-    {
-        this.x = Math.min(this.x, v.x);
-        this.y = Math.min(this.y, v.y);
-        this.z = Math.min(this.z, v.z);
-
-        return this;
-    },
-
-    /**
-     * Sets the components of this Vector to be the `Math.max` result from the given vector.
-     *
-     * @method Phaser.Math.Vector3#max
-     * @since 3.50.0
-     *
-     * @param {Phaser.Math.Vector3} v - The Vector3 to check the maximum values against.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    max: function (v)
-    {
-        this.x = Math.max(this.x, v.x);
-        this.y = Math.max(this.y, v.y);
-        this.z = Math.max(this.z, v.z);
-
-        return this;
-    },
-
-    /**
-     * Make a clone of this Vector3.
-     *
-     * @method Phaser.Math.Vector3#clone
-     * @since 3.0.0
-     *
-     * @return {Phaser.Math.Vector3} A new Vector3 object containing this Vectors values.
-     */
-    clone: function ()
-    {
-        return new Vector3(this.x, this.y, this.z);
-    },
-
-    /**
-     * Adds the two given Vector3s and sets the results into this Vector3.
-     *
-     * @method Phaser.Math.Vector3#addVectors
-     * @since 3.50.0
-     *
-     * @param {Phaser.Math.Vector3} a - The first Vector to add.
-     * @param {Phaser.Math.Vector3} b - The second Vector to add.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    addVectors: function (a, b)
-    {
-        this.x = a.x + b.x;
-        this.y = a.y + b.y;
-        this.z = a.z + b.z;
-
-        return this;
-    },
-
-    /**
-     * Calculate the cross (vector) product of two given Vectors.
-     *
-     * @method Phaser.Math.Vector3#crossVectors
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Vector3} a - The first Vector to multiply.
-     * @param {Phaser.Math.Vector3} b - The second Vector to multiply.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    crossVectors: function (a, b)
-    {
-        var ax = a.x;
-        var ay = a.y;
-        var az = a.z;
-        var bx = b.x;
-        var by = b.y;
-        var bz = b.z;
-
-        this.x = ay * bz - az * by;
-        this.y = az * bx - ax * bz;
-        this.z = ax * by - ay * bx;
-
-        return this;
-    },
-
-    /**
-     * Check whether this Vector is equal to a given Vector.
-     *
-     * Performs a strict equality check against each Vector's components.
-     *
-     * @method Phaser.Math.Vector3#equals
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Vector3} v - The Vector3 to compare against.
-     *
-     * @return {boolean} True if the two vectors strictly match, otherwise false.
-     */
-    equals: function (v)
-    {
-        return ((this.x === v.x) && (this.y === v.y) && (this.z === v.z));
-    },
-
-    /**
-     * Copy the components of a given Vector into this Vector.
-     *
-     * @method Phaser.Math.Vector3#copy
-     * @since 3.0.0
-     *
-     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} src - The Vector to copy the components from.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    copy: function (src)
-    {
-        this.x = src.x;
-        this.y = src.y;
-        this.z = src.z || 0;
-
-        return this;
-    },
-
-    /**
-     * Set the `x`, `y`, and `z` components of this Vector to the given `x`, `y`, and `z` values.
-     *
-     * @method Phaser.Math.Vector3#set
-     * @since 3.0.0
-     *
-     * @param {(number|object)} x - The x value to set for this Vector, or an object containing x, y and z components.
-     * @param {number} [y] - The y value to set for this Vector.
-     * @param {number} [z] - The z value to set for this Vector.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    set: function (x, y, z)
-    {
-        if (typeof x === 'object')
-        {
-            this.x = x.x || 0;
-            this.y = x.y || 0;
-            this.z = x.z || 0;
-        }
-        else
-        {
-            this.x = x || 0;
-            this.y = y || 0;
-            this.z = z || 0;
-        }
-
-        return this;
-    },
-
-    /**
-     * Sets the components of this Vector3 from the position of the given Matrix4.
-     *
-     * @method Phaser.Math.Vector3#setFromMatrixPosition
-     * @since 3.50.0
-     *
-     * @param {Phaser.Math.Matrix4} mat4 - The Matrix4 to get the position from.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    setFromMatrixPosition: function (m)
-    {
-        return this.fromArray(m.val, 12);
-    },
-
-    /**
-     * Sets the components of this Vector3 from the Matrix4 column specified.
-     *
-     * @method Phaser.Math.Vector3#setFromMatrixColumn
-     * @since 3.50.0
-     *
-     * @param {Phaser.Math.Matrix4} mat4 - The Matrix4 to get the column from.
-     * @param {number} index - The column index.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    setFromMatrixColumn: function (mat4, index)
-    {
-        return this.fromArray(mat4.val, index * 4);
-    },
-
-    /**
-     * Sets the components of this Vector3 from the given array, based on the offset.
-     *
-     * Vector3.x = array[offset]
-     * Vector3.y = array[offset + 1]
-     * Vector3.z = array[offset + 2]
-     *
-     * @method Phaser.Math.Vector3#fromArray
-     * @since 3.50.0
-     *
-     * @param {number[]} array - The array of values to get this Vector from.
-     * @param {number} [offset=0] - The offset index into the array.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    fromArray: function (array, offset)
-    {
-        if (offset === undefined) { offset = 0; }
-
-        this.x = array[offset];
-        this.y = array[offset + 1];
-        this.z = array[offset + 2];
-
-        return this;
-    },
-
-    /**
-     * Add a given Vector to this Vector. Addition is component-wise.
-     *
-     * @method Phaser.Math.Vector3#add
-     * @since 3.0.0
-     *
-     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to add to this Vector.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    add: function (v)
-    {
-        this.x += v.x;
-        this.y += v.y;
-        this.z += v.z || 0;
-
-        return this;
-    },
-
-    /**
-     * Add the given value to each component of this Vector.
-     *
-     * @method Phaser.Math.Vector3#addScalar
-     * @since 3.50.0
-     *
-     * @param {number} s - The amount to add to this Vector.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    addScalar: function (s)
-    {
-        this.x += s;
-        this.y += s;
-        this.z += s;
-
-        return this;
-    },
-
-    /**
-     * Add and scale a given Vector to this Vector. Addition is component-wise.
-     *
-     * @method Phaser.Math.Vector3#addScale
-     * @since 3.50.0
-     *
-     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to add to this Vector.
-     * @param {number} scale - The amount to scale `v` by.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    addScale: function (v, scale)
-    {
-        this.x += v.x * scale;
-        this.y += v.y * scale;
-        this.z += v.z * scale || 0;
-
-        return this;
-    },
-
-    /**
-     * Subtract the given Vector from this Vector. Subtraction is component-wise.
-     *
-     * @method Phaser.Math.Vector3#subtract
-     * @since 3.0.0
-     *
-     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to subtract from this Vector.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    subtract: function (v)
-    {
-        this.x -= v.x;
-        this.y -= v.y;
-        this.z -= v.z || 0;
-
-        return this;
-    },
-
-    /**
-     * Perform a component-wise multiplication between this Vector and the given Vector.
-     *
-     * Multiplies this Vector by the given Vector.
-     *
-     * @method Phaser.Math.Vector3#multiply
-     * @since 3.0.0
-     *
-     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to multiply this Vector by.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    multiply: function (v)
-    {
-        this.x *= v.x;
-        this.y *= v.y;
-        this.z *= v.z || 1;
-
-        return this;
-    },
-
-    /**
-     * Scale this Vector by the given value.
-     *
-     * @method Phaser.Math.Vector3#scale
-     * @since 3.0.0
-     *
-     * @param {number} scale - The value to scale this Vector by.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    scale: function (scale)
-    {
-        if (isFinite(scale))
-        {
-            this.x *= scale;
-            this.y *= scale;
-            this.z *= scale;
-        }
-        else
-        {
-            this.x = 0;
-            this.y = 0;
-            this.z = 0;
-        }
-
-        return this;
-    },
-
-    /**
-     * Perform a component-wise division between this Vector and the given Vector.
-     *
-     * Divides this Vector by the given Vector.
-     *
-     * @method Phaser.Math.Vector3#divide
-     * @since 3.0.0
-     *
-     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to divide this Vector by.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    divide: function (v)
-    {
-        this.x /= v.x;
-        this.y /= v.y;
-        this.z /= v.z || 1;
-
-        return this;
-    },
-
-    /**
-     * Negate the `x`, `y` and `z` components of this Vector.
-     *
-     * @method Phaser.Math.Vector3#negate
-     * @since 3.0.0
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    negate: function ()
-    {
-        this.x = -this.x;
-        this.y = -this.y;
-        this.z = -this.z;
-
-        return this;
-    },
-
-    /**
-     * Calculate the distance between this Vector and the given Vector.
-     *
-     * @method Phaser.Math.Vector3#distance
-     * @since 3.0.0
-     *
-     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to calculate the distance to.
-     *
-     * @return {number} The distance from this Vector to the given Vector.
-     */
-    distance: function (v)
-    {
-        var dx = v.x - this.x;
-        var dy = v.y - this.y;
-        var dz = v.z - this.z || 0;
-
-        return Math.sqrt(dx * dx + dy * dy + dz * dz);
-    },
-
-    /**
-     * Calculate the distance between this Vector and the given Vector, squared.
-     *
-     * @method Phaser.Math.Vector3#distanceSq
-     * @since 3.0.0
-     *
-     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3)} v - The Vector to calculate the distance to.
-     *
-     * @return {number} The distance from this Vector to the given Vector, squared.
-     */
-    distanceSq: function (v)
-    {
-        var dx = v.x - this.x;
-        var dy = v.y - this.y;
-        var dz = v.z - this.z || 0;
-
-        return dx * dx + dy * dy + dz * dz;
-    },
-
-    /**
-     * Calculate the length (or magnitude) of this Vector.
-     *
-     * @method Phaser.Math.Vector3#length
-     * @since 3.0.0
-     *
-     * @return {number} The length of this Vector.
-     */
-    length: function ()
-    {
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-
-        return Math.sqrt(x * x + y * y + z * z);
-    },
-
-    /**
-     * Calculate the length of this Vector squared.
-     *
-     * @method Phaser.Math.Vector3#lengthSq
-     * @since 3.0.0
-     *
-     * @return {number} The length of this Vector, squared.
-     */
-    lengthSq: function ()
-    {
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-
-        return x * x + y * y + z * z;
-    },
-
-    /**
-     * Normalize this Vector.
-     *
-     * Makes the vector a unit length vector (magnitude of 1) in the same direction.
-     *
-     * @method Phaser.Math.Vector3#normalize
-     * @since 3.0.0
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    normalize: function ()
-    {
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-        var len = x * x + y * y + z * z;
-
-        if (len > 0)
-        {
-            len = 1 / Math.sqrt(len);
-
-            this.x = x * len;
-            this.y = y * len;
-            this.z = z * len;
-        }
-
-        return this;
-    },
-
-    /**
-     * Calculate the dot product of this Vector and the given Vector.
-     *
-     * @method Phaser.Math.Vector3#dot
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Vector3} v - The Vector3 to dot product with this Vector3.
-     *
-     * @return {number} The dot product of this Vector and `v`.
-     */
-    dot: function (v)
-    {
-        return this.x * v.x + this.y * v.y + this.z * v.z;
-    },
-
-    /**
-     * Calculate the cross (vector) product of this Vector (which will be modified) and the given Vector.
-     *
-     * @method Phaser.Math.Vector3#cross
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Vector3} v - The Vector to cross product with.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    cross: function (v)
-    {
-        var ax = this.x;
-        var ay = this.y;
-        var az = this.z;
-        var bx = v.x;
-        var by = v.y;
-        var bz = v.z;
-
-        this.x = ay * bz - az * by;
-        this.y = az * bx - ax * bz;
-        this.z = ax * by - ay * bx;
-
-        return this;
-    },
-
-    /**
-     * Linearly interpolate between this Vector and the given Vector.
-     *
-     * Interpolates this Vector towards the given Vector.
-     *
-     * @method Phaser.Math.Vector3#lerp
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Vector3} v - The Vector3 to interpolate towards.
-     * @param {number} [t=0] - The interpolation percentage, between 0 and 1.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    lerp: function (v, t)
-    {
-        if (t === undefined) { t = 0; }
-
-        var ax = this.x;
-        var ay = this.y;
-        var az = this.z;
-
-        this.x = ax + t * (v.x - ax);
-        this.y = ay + t * (v.y - ay);
-        this.z = az + t * (v.z - az);
-
-        return this;
-    },
-
-    /**
-     * Takes a Matrix3 and applies it to this Vector3.
-     *
-     * @method Phaser.Math.Vector3#applyMatrix3
-     * @since 3.50.0
-     *
-     * @param {Phaser.Math.Matrix3} mat3 - The Matrix3 to apply to this Vector3.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    applyMatrix3: function (mat3)
-    {
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-        var m = mat3.val;
-
-        this.x = m[0] * x + m[3] * y + m[6] * z;
-        this.y = m[1] * x + m[4] * y + m[7] * z;
-        this.z = m[2] * x + m[5] * y + m[8] * z;
-
-        return this;
-    },
-
-    /**
-     * Takes a Matrix4 and applies it to this Vector3.
-     *
-     * @method Phaser.Math.Vector3#applyMatrix4
-     * @since 3.50.0
-     *
-     * @param {Phaser.Math.Matrix4} mat4 - The Matrix4 to apply to this Vector3.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    applyMatrix4: function (mat4)
-    {
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-        var m = mat4.val;
-
-        var w = 1 / (m[3] * x + m[7] * y + m[11] * z + m[15]);
-
-        this.x = (m[0] * x + m[4] * y + m[8] * z + m[12]) * w;
-        this.y = (m[1] * x + m[5] * y + m[9] * z + m[13]) * w;
-        this.z = (m[2] * x + m[6] * y + m[10] * z + m[14]) * w;
-
-        return this;
-    },
-
-    /**
-     * Transform this Vector with the given Matrix.
-     *
-     * @method Phaser.Math.Vector3#transformMat3
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Matrix3} mat - The Matrix3 to transform this Vector3 with.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    transformMat3: function (mat)
-    {
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-        var m = mat.val;
-
-        this.x = x * m[0] + y * m[3] + z * m[6];
-        this.y = x * m[1] + y * m[4] + z * m[7];
-        this.z = x * m[2] + y * m[5] + z * m[8];
-
-        return this;
-    },
-
-    /**
-     * Transform this Vector with the given Matrix4.
-     *
-     * @method Phaser.Math.Vector3#transformMat4
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Matrix4} mat - The Matrix4 to transform this Vector3 with.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    transformMat4: function (mat)
-    {
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-        var m = mat.val;
-
-        this.x = m[0] * x + m[4] * y + m[8] * z + m[12];
-        this.y = m[1] * x + m[5] * y + m[9] * z + m[13];
-        this.z = m[2] * x + m[6] * y + m[10] * z + m[14];
-
-        return this;
-    },
-
-    /**
-     * Transforms the coordinates of this Vector3 with the given Matrix4.
-     *
-     * @method Phaser.Math.Vector3#transformCoordinates
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Matrix4} mat - The Matrix4 to transform this Vector3 with.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    transformCoordinates: function (mat)
-    {
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-        var m = mat.val;
-
-        var tx = (x * m[0]) + (y * m[4]) + (z * m[8]) + m[12];
-        var ty = (x * m[1]) + (y * m[5]) + (z * m[9]) + m[13];
-        var tz = (x * m[2]) + (y * m[6]) + (z * m[10]) + m[14];
-        var tw = (x * m[3]) + (y * m[7]) + (z * m[11]) + m[15];
-
-        this.x = tx / tw;
-        this.y = ty / tw;
-        this.z = tz / tw;
-
-        return this;
-    },
-
-    /**
-     * Transform this Vector with the given Quaternion.
-     *
-     * @method Phaser.Math.Vector3#transformQuat
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Quaternion} q - The Quaternion to transform this Vector with.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    transformQuat: function (q)
-    {
-        // benchmarks: http://jsperf.com/quaternion-transform-vec3-implementations
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-        var qx = q.x;
-        var qy = q.y;
-        var qz = q.z;
-        var qw = q.w;
-
-        // calculate quat * vec
-        var ix = qw * x + qy * z - qz * y;
-        var iy = qw * y + qz * x - qx * z;
-        var iz = qw * z + qx * y - qy * x;
-        var iw = -qx * x - qy * y - qz * z;
-
-        // calculate result * inverse quat
-        this.x = ix * qw + iw * -qx + iy * -qz - iz * -qy;
-        this.y = iy * qw + iw * -qy + iz * -qx - ix * -qz;
-        this.z = iz * qw + iw * -qz + ix * -qy - iy * -qx;
-
-        return this;
-    },
-
-    /**
-     * Multiplies this Vector3 by the specified matrix, applying a W divide. This is useful for projection,
-     * e.g. unprojecting a 2D point into 3D space.
-     *
-     * @method Phaser.Math.Vector3#project
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Matrix4} mat - The Matrix4 to multiply this Vector3 with.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    project: function (mat)
-    {
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-        var m = mat.val;
-
-        var a00 = m[0];
-        var a01 = m[1];
-        var a02 = m[2];
-        var a03 = m[3];
-        var a10 = m[4];
-        var a11 = m[5];
-        var a12 = m[6];
-        var a13 = m[7];
-        var a20 = m[8];
-        var a21 = m[9];
-        var a22 = m[10];
-        var a23 = m[11];
-        var a30 = m[12];
-        var a31 = m[13];
-        var a32 = m[14];
-        var a33 = m[15];
-
-        var lw = 1 / (x * a03 + y * a13 + z * a23 + a33);
-
-        this.x = (x * a00 + y * a10 + z * a20 + a30) * lw;
-        this.y = (x * a01 + y * a11 + z * a21 + a31) * lw;
-        this.z = (x * a02 + y * a12 + z * a22 + a32) * lw;
-
-        return this;
-    },
-
-    /**
-     * Multiplies this Vector3 by the given view and projection matrices.
-     *
-     * @method Phaser.Math.Vector3#projectViewMatrix
-     * @since 3.50.0
-     *
-     * @param {Phaser.Math.Matrix4} viewMatrix - A View Matrix.
-     * @param {Phaser.Math.Matrix4} projectionMatrix - A Projection Matrix.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    projectViewMatrix: function (viewMatrix, projectionMatrix)
-    {
-        return this.applyMatrix4(viewMatrix).applyMatrix4(projectionMatrix);
-    },
-
-    /**
-     * Multiplies this Vector3 by the given inversed projection matrix and world matrix.
-     *
-     * @method Phaser.Math.Vector3#unprojectViewMatrix
-     * @since 3.50.0
-     *
-     * @param {Phaser.Math.Matrix4} projectionMatrix - An inversed Projection Matrix.
-     * @param {Phaser.Math.Matrix4} worldMatrix - A World View Matrix.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    unprojectViewMatrix: function (projectionMatrix, worldMatrix)
-    {
-        return this.applyMatrix4(projectionMatrix).applyMatrix4(worldMatrix);
-    },
-
-    /**
-     * Unproject this point from 2D space to 3D space.
-     * The point should have its x and y properties set to
-     * 2D screen space, and the z either at 0 (near plane)
-     * or 1 (far plane). The provided matrix is assumed to already
-     * be combined, i.e. projection * view * model.
-     *
-     * After this operation, this vector's (x, y, z) components will
-     * represent the unprojected 3D coordinate.
-     *
-     * @method Phaser.Math.Vector3#unproject
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Vector4} viewport - Screen x, y, width and height in pixels.
-     * @param {Phaser.Math.Matrix4} invProjectionView - Combined projection and view matrix.
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    unproject: function (viewport, invProjectionView)
-    {
-        var viewX = viewport.x;
-        var viewY = viewport.y;
-        var viewWidth = viewport.z;
-        var viewHeight = viewport.w;
-
-        var x = this.x - viewX;
-        var y = (viewHeight - this.y - 1) - viewY;
-        var z = this.z;
-
-        this.x = (2 * x) / viewWidth - 1;
-        this.y = (2 * y) / viewHeight - 1;
-        this.z = 2 * z - 1;
-
-        return this.project(invProjectionView);
-    },
-
-    /**
-     * Make this Vector the zero vector (0, 0, 0).
-     *
-     * @method Phaser.Math.Vector3#reset
-     * @since 3.0.0
-     *
-     * @return {Phaser.Math.Vector3} This Vector3.
-     */
-    reset: function ()
-    {
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
-
-        return this;
-    }
-
-});
-
-/**
- * A static zero Vector3 for use by reference.
- *
- * This constant is meant for comparison operations and should not be modified directly.
- *
- * @constant
- * @name Phaser.Math.Vector3.ZERO
- * @type {Phaser.Math.Vector3}
- * @since 3.16.0
- */
-Vector3.ZERO = new Vector3();
-
-/**
- * A static right Vector3 for use by reference.
- *
- * This constant is meant for comparison operations and should not be modified directly.
- *
- * @constant
- * @name Phaser.Math.Vector3.RIGHT
- * @type {Phaser.Math.Vector3}
- * @since 3.16.0
- */
-Vector3.RIGHT = new Vector3(1, 0, 0);
-
-/**
- * A static left Vector3 for use by reference.
- *
- * This constant is meant for comparison operations and should not be modified directly.
- *
- * @constant
- * @name Phaser.Math.Vector3.LEFT
- * @type {Phaser.Math.Vector3}
- * @since 3.16.0
- */
-Vector3.LEFT = new Vector3(-1, 0, 0);
-
-/**
- * A static up Vector3 for use by reference.
- *
- * This constant is meant for comparison operations and should not be modified directly.
- *
- * @constant
- * @name Phaser.Math.Vector3.UP
- * @type {Phaser.Math.Vector3}
- * @since 3.16.0
- */
-Vector3.UP = new Vector3(0, -1, 0);
-
-/**
- * A static down Vector3 for use by reference.
- *
- * This constant is meant for comparison operations and should not be modified directly.
- *
- * @constant
- * @name Phaser.Math.Vector3.DOWN
- * @type {Phaser.Math.Vector3}
- * @since 3.16.0
- */
-Vector3.DOWN = new Vector3(0, 1, 0);
-
-/**
- * A static forward Vector3 for use by reference.
- *
- * This constant is meant for comparison operations and should not be modified directly.
- *
- * @constant
- * @name Phaser.Math.Vector3.FORWARD
- * @type {Phaser.Math.Vector3}
- * @since 3.16.0
- */
-Vector3.FORWARD = new Vector3(0, 0, 1);
-
-/**
- * A static back Vector3 for use by reference.
- *
- * This constant is meant for comparison operations and should not be modified directly.
- *
- * @constant
- * @name Phaser.Math.Vector3.BACK
- * @type {Phaser.Math.Vector3}
- * @since 3.16.0
- */
-Vector3.BACK = new Vector3(0, 0, -1);
-
-/**
- * A static one Vector3 for use by reference.
- *
- * This constant is meant for comparison operations and should not be modified directly.
- *
- * @constant
- * @name Phaser.Math.Vector3.ONE
- * @type {Phaser.Math.Vector3}
- * @since 3.16.0
- */
-Vector3.ONE = new Vector3(1, 1, 1);
-
-module.exports = Vector3;
-
-
-/***/ }),
-/* 63 */
+/* 76 */
 /***/ (function(module, exports) {
 
 /**
@@ -16351,7 +17570,7 @@ module.exports = AddToDOM;
 
 
 /***/ }),
-/* 64 */
+/* 77 */
 /***/ (function(module, exports) {
 
 /**
@@ -17257,7 +18476,7 @@ module.exports = KeyCodes;
 
 
 /***/ }),
-/* 65 */
+/* 78 */
 /***/ (function(module, exports) {
 
 /**
@@ -17380,7 +18599,7 @@ module.exports = CONST;
 
 
 /***/ }),
-/* 66 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -17391,13 +18610,13 @@ module.exports = CONST;
  */
 
 var Class = __webpack_require__(0);
-var Clone = __webpack_require__(49);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(30);
-var GameEvents = __webpack_require__(7);
-var NOOP = __webpack_require__(3);
-var GetAll = __webpack_require__(227);
-var GetFirst = __webpack_require__(228);
+var Clone = __webpack_require__(59);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(36);
+var GameEvents = __webpack_require__(9);
+var NOOP = __webpack_require__(4);
+var GetAll = __webpack_require__(257);
+var GetFirst = __webpack_require__(258);
 
 /**
  * @classdesc
@@ -18094,7 +19313,7 @@ module.exports = BaseSoundManager;
 
 
 /***/ }),
-/* 67 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -18105,10 +19324,10 @@ module.exports = BaseSoundManager;
  */
 
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(30);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(36);
 var Extend = __webpack_require__(14);
-var NOOP = __webpack_require__(3);
+var NOOP = __webpack_require__(4);
 
 /**
  * @classdesc
@@ -18597,7 +19816,7 @@ module.exports = BaseSound;
 
 
 /***/ }),
-/* 68 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -18606,8 +19825,8 @@ module.exports = BaseSound;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CheckMatrix = __webpack_require__(96);
-var TransposeMatrix = __webpack_require__(234);
+var CheckMatrix = __webpack_require__(115);
+var TransposeMatrix = __webpack_require__(264);
 
 /**
  * Rotates the array matrix based on the given rotation value.
@@ -18683,7 +19902,7 @@ module.exports = RotateMatrix;
 
 
 /***/ }),
-/* 69 */
+/* 82 */
 /***/ (function(module, exports) {
 
 /**
@@ -18859,7 +20078,7 @@ module.exports = StableSort;
 
 
 /***/ }),
-/* 70 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -18868,7 +20087,1623 @@ module.exports = StableSort;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetValue = __webpack_require__(4);
+var Class = __webpack_require__(0);
+var Contains = __webpack_require__(62);
+var GetPoint = __webpack_require__(272);
+var GetPoints = __webpack_require__(273);
+var GEOM_CONST = __webpack_require__(21);
+var Random = __webpack_require__(275);
+
+/**
+ * @classdesc
+ * An Ellipse object.
+ *
+ * This is a geometry object, containing numerical values and related methods to inspect and modify them.
+ * It is not a Game Object, in that you cannot add it to the display list, and it has no texture.
+ * To render an Ellipse you should look at the capabilities of the Graphics class.
+ *
+ * @class Ellipse
+ * @memberof Phaser.Geom
+ * @constructor
+ * @since 3.0.0
+ *
+ * @param {number} [x=0] - The x position of the center of the ellipse.
+ * @param {number} [y=0] - The y position of the center of the ellipse.
+ * @param {number} [width=0] - The width of the ellipse.
+ * @param {number} [height=0] - The height of the ellipse.
+ */
+var Ellipse = new Class({
+
+    initialize:
+
+    function Ellipse (x, y, width, height)
+    {
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = 0; }
+        if (width === undefined) { width = 0; }
+        if (height === undefined) { height = 0; }
+
+        /**
+         * The geometry constant type of this object: `GEOM_CONST.ELLIPSE`.
+         * Used for fast type comparisons.
+         *
+         * @name Phaser.Geom.Ellipse#type
+         * @type {number}
+         * @readonly
+         * @since 3.19.0
+         */
+        this.type = GEOM_CONST.ELLIPSE;
+
+        /**
+         * The x position of the center of the ellipse.
+         *
+         * @name Phaser.Geom.Ellipse#x
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.x = x;
+
+        /**
+         * The y position of the center of the ellipse.
+         *
+         * @name Phaser.Geom.Ellipse#y
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.y = y;
+
+        /**
+         * The width of the ellipse.
+         *
+         * @name Phaser.Geom.Ellipse#width
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.width = width;
+
+        /**
+         * The height of the ellipse.
+         *
+         * @name Phaser.Geom.Ellipse#height
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.height = height;
+    },
+
+    /**
+     * Check to see if the Ellipse contains the given x / y coordinates.
+     *
+     * @method Phaser.Geom.Ellipse#contains
+     * @since 3.0.0
+     *
+     * @param {number} x - The x coordinate to check within the ellipse.
+     * @param {number} y - The y coordinate to check within the ellipse.
+     *
+     * @return {boolean} True if the coordinates are within the ellipse, otherwise false.
+     */
+    contains: function (x, y)
+    {
+        return Contains(this, x, y);
+    },
+
+    /**
+     * Returns a Point object containing the coordinates of a point on the circumference of the Ellipse
+     * based on the given angle normalized to the range 0 to 1. I.e. a value of 0.5 will give the point
+     * at 180 degrees around the circle.
+     *
+     * @method Phaser.Geom.Ellipse#getPoint
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point} O - [out,$return]
+     *
+     * @param {number} position - A value between 0 and 1, where 0 equals 0 degrees, 0.5 equals 180 degrees and 1 equals 360 around the ellipse.
+     * @param {(Phaser.Geom.Point|object)} [out] - An object to store the return values in. If not given a Point object will be created.
+     *
+     * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point around the ellipse.
+     */
+    getPoint: function (position, point)
+    {
+        return GetPoint(this, position, point);
+    },
+
+    /**
+     * Returns an array of Point objects containing the coordinates of the points around the circumference of the Ellipse,
+     * based on the given quantity or stepRate values.
+     *
+     * @method Phaser.Geom.Ellipse#getPoints
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point[]} O - [output,$return]
+     *
+     * @param {number} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
+     * @param {number} [stepRate] - Sets the quantity by getting the circumference of the ellipse and dividing it by the stepRate.
+     * @param {(array|Phaser.Geom.Point[])} [output] - An array to insert the points in to. If not provided a new array will be created.
+     *
+     * @return {(array|Phaser.Geom.Point[])} An array of Point objects pertaining to the points around the circumference of the ellipse.
+     */
+    getPoints: function (quantity, stepRate, output)
+    {
+        return GetPoints(this, quantity, stepRate, output);
+    },
+
+    /**
+     * Returns a uniformly distributed random point from anywhere within the given Ellipse.
+     *
+     * @method Phaser.Geom.Ellipse#getRandomPoint
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point} O - [point,$return]
+     *
+     * @param {(Phaser.Geom.Point|object)} [point] - A Point or point-like object to set the random `x` and `y` values in.
+     *
+     * @return {(Phaser.Geom.Point|object)} A Point object with the random values set in the `x` and `y` properties.
+     */
+    getRandomPoint: function (point)
+    {
+        return Random(this, point);
+    },
+
+    /**
+     * Sets the x, y, width and height of this ellipse.
+     *
+     * @method Phaser.Geom.Ellipse#setTo
+     * @since 3.0.0
+     *
+     * @param {number} x - The x position of the center of the ellipse.
+     * @param {number} y - The y position of the center of the ellipse.
+     * @param {number} width - The width of the ellipse.
+     * @param {number} height - The height of the ellipse.
+     *
+     * @return {this} This Ellipse object.
+     */
+    setTo: function (x, y, width, height)
+    {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+
+        return this;
+    },
+
+    /**
+     * Sets this Ellipse to be empty with a width and height of zero.
+     * Does not change its position.
+     *
+     * @method Phaser.Geom.Ellipse#setEmpty
+     * @since 3.0.0
+     *
+     * @return {this} This Ellipse object.
+     */
+    setEmpty: function ()
+    {
+        this.width = 0;
+        this.height = 0;
+
+        return this;
+    },
+
+    /**
+     * Sets the position of this Ellipse.
+     *
+     * @method Phaser.Geom.Ellipse#setPosition
+     * @since 3.0.0
+     *
+     * @param {number} x - The x position of the center of the ellipse.
+     * @param {number} y - The y position of the center of the ellipse.
+     *
+     * @return {this} This Ellipse object.
+     */
+    setPosition: function (x, y)
+    {
+        if (y === undefined) { y = x; }
+
+        this.x = x;
+        this.y = y;
+
+        return this;
+    },
+
+    /**
+     * Sets the size of this Ellipse.
+     * Does not change its position.
+     *
+     * @method Phaser.Geom.Ellipse#setSize
+     * @since 3.0.0
+     *
+     * @param {number} width - The width of the ellipse.
+     * @param {number} [height=width] - The height of the ellipse.
+     *
+     * @return {this} This Ellipse object.
+     */
+    setSize: function (width, height)
+    {
+        if (height === undefined) { height = width; }
+
+        this.width = width;
+        this.height = height;
+
+        return this;
+    },
+
+    /**
+     * Checks to see if the Ellipse is empty: has a width or height equal to zero.
+     *
+     * @method Phaser.Geom.Ellipse#isEmpty
+     * @since 3.0.0
+     *
+     * @return {boolean} True if the Ellipse is empty, otherwise false.
+     */
+    isEmpty: function ()
+    {
+        return (this.width <= 0 || this.height <= 0);
+    },
+
+    /**
+     * Returns the minor radius of the ellipse. Also known as the Semi Minor Axis.
+     *
+     * @method Phaser.Geom.Ellipse#getMinorRadius
+     * @since 3.0.0
+     *
+     * @return {number} The minor radius.
+     */
+    getMinorRadius: function ()
+    {
+        return Math.min(this.width, this.height) / 2;
+    },
+
+    /**
+     * Returns the major radius of the ellipse. Also known as the Semi Major Axis.
+     *
+     * @method Phaser.Geom.Ellipse#getMajorRadius
+     * @since 3.0.0
+     *
+     * @return {number} The major radius.
+     */
+    getMajorRadius: function ()
+    {
+        return Math.max(this.width, this.height) / 2;
+    },
+
+    /**
+     * The left position of the Ellipse.
+     *
+     * @name Phaser.Geom.Ellipse#left
+     * @type {number}
+     * @since 3.0.0
+     */
+    left: {
+
+        get: function ()
+        {
+            return this.x - (this.width / 2);
+        },
+
+        set: function (value)
+        {
+            this.x = value + (this.width / 2);
+        }
+
+    },
+
+    /**
+     * The right position of the Ellipse.
+     *
+     * @name Phaser.Geom.Ellipse#right
+     * @type {number}
+     * @since 3.0.0
+     */
+    right: {
+
+        get: function ()
+        {
+            return this.x + (this.width / 2);
+        },
+
+        set: function (value)
+        {
+            this.x = value - (this.width / 2);
+        }
+
+    },
+
+    /**
+     * The top position of the Ellipse.
+     *
+     * @name Phaser.Geom.Ellipse#top
+     * @type {number}
+     * @since 3.0.0
+     */
+    top: {
+
+        get: function ()
+        {
+            return this.y - (this.height / 2);
+        },
+
+        set: function (value)
+        {
+            this.y = value + (this.height / 2);
+        }
+
+    },
+
+    /**
+     * The bottom position of the Ellipse.
+     *
+     * @name Phaser.Geom.Ellipse#bottom
+     * @type {number}
+     * @since 3.0.0
+     */
+    bottom: {
+
+        get: function ()
+        {
+            return this.y + (this.height / 2);
+        },
+
+        set: function (value)
+        {
+            this.y = value - (this.height / 2);
+        }
+
+    }
+
+});
+
+module.exports = Ellipse;
+
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Class = __webpack_require__(0);
+var Contains = __webpack_require__(41);
+var GetPoint = __webpack_require__(279);
+var GetPoints = __webpack_require__(280);
+var GEOM_CONST = __webpack_require__(21);
+var Random = __webpack_require__(282);
+
+/**
+ * @classdesc
+ * A Circle object.
+ *
+ * This is a geometry object, containing numerical values and related methods to inspect and modify them.
+ * It is not a Game Object, in that you cannot add it to the display list, and it has no texture.
+ * To render a Circle you should look at the capabilities of the Graphics class.
+ *
+ * @class Circle
+ * @memberof Phaser.Geom
+ * @constructor
+ * @since 3.0.0
+ *
+ * @param {number} [x=0] - The x position of the center of the circle.
+ * @param {number} [y=0] - The y position of the center of the circle.
+ * @param {number} [radius=0] - The radius of the circle.
+ */
+var Circle = new Class({
+
+    initialize:
+
+    function Circle (x, y, radius)
+    {
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = 0; }
+        if (radius === undefined) { radius = 0; }
+
+        /**
+         * The geometry constant type of this object: `GEOM_CONST.CIRCLE`.
+         * Used for fast type comparisons.
+         *
+         * @name Phaser.Geom.Circle#type
+         * @type {number}
+         * @readonly
+         * @since 3.19.0
+         */
+        this.type = GEOM_CONST.CIRCLE;
+
+        /**
+         * The x position of the center of the circle.
+         *
+         * @name Phaser.Geom.Circle#x
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.x = x;
+
+        /**
+         * The y position of the center of the circle.
+         *
+         * @name Phaser.Geom.Circle#y
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.y = y;
+
+        /**
+         * The internal radius of the circle.
+         *
+         * @name Phaser.Geom.Circle#_radius
+         * @type {number}
+         * @private
+         * @since 3.0.0
+         */
+        this._radius = radius;
+
+        /**
+         * The internal diameter of the circle.
+         *
+         * @name Phaser.Geom.Circle#_diameter
+         * @type {number}
+         * @private
+         * @since 3.0.0
+         */
+        this._diameter = radius * 2;
+    },
+
+    /**
+     * Check to see if the Circle contains the given x / y coordinates.
+     *
+     * @method Phaser.Geom.Circle#contains
+     * @since 3.0.0
+     *
+     * @param {number} x - The x coordinate to check within the circle.
+     * @param {number} y - The y coordinate to check within the circle.
+     *
+     * @return {boolean} True if the coordinates are within the circle, otherwise false.
+     */
+    contains: function (x, y)
+    {
+        return Contains(this, x, y);
+    },
+
+    /**
+     * Returns a Point object containing the coordinates of a point on the circumference of the Circle
+     * based on the given angle normalized to the range 0 to 1. I.e. a value of 0.5 will give the point
+     * at 180 degrees around the circle.
+     *
+     * @method Phaser.Geom.Circle#getPoint
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point} O - [out,$return]
+     *
+     * @param {number} position - A value between 0 and 1, where 0 equals 0 degrees, 0.5 equals 180 degrees and 1 equals 360 around the circle.
+     * @param {(Phaser.Geom.Point|object)} [out] - An object to store the return values in. If not given a Point object will be created.
+     *
+     * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point around the circle.
+     */
+    getPoint: function (position, point)
+    {
+        return GetPoint(this, position, point);
+    },
+
+    /**
+     * Returns an array of Point objects containing the coordinates of the points around the circumference of the Circle,
+     * based on the given quantity or stepRate values.
+     *
+     * @method Phaser.Geom.Circle#getPoints
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point[]} O - [output,$return]
+     *
+     * @param {number} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
+     * @param {number} [stepRate] - Sets the quantity by getting the circumference of the circle and dividing it by the stepRate.
+     * @param {(array|Phaser.Geom.Point[])} [output] - An array to insert the points in to. If not provided a new array will be created.
+     *
+     * @return {(array|Phaser.Geom.Point[])} An array of Point objects pertaining to the points around the circumference of the circle.
+     */
+    getPoints: function (quantity, stepRate, output)
+    {
+        return GetPoints(this, quantity, stepRate, output);
+    },
+
+    /**
+     * Returns a uniformly distributed random point from anywhere within the Circle.
+     *
+     * @method Phaser.Geom.Circle#getRandomPoint
+     * @since 3.0.0
+     *
+     * @generic {Phaser.Geom.Point} O - [point,$return]
+     *
+     * @param {(Phaser.Geom.Point|object)} [point] - A Point or point-like object to set the random `x` and `y` values in.
+     *
+     * @return {(Phaser.Geom.Point|object)} A Point object with the random values set in the `x` and `y` properties.
+     */
+    getRandomPoint: function (point)
+    {
+        return Random(this, point);
+    },
+
+    /**
+     * Sets the x, y and radius of this circle.
+     *
+     * @method Phaser.Geom.Circle#setTo
+     * @since 3.0.0
+     *
+     * @param {number} [x=0] - The x position of the center of the circle.
+     * @param {number} [y=0] - The y position of the center of the circle.
+     * @param {number} [radius=0] - The radius of the circle.
+     *
+     * @return {this} This Circle object.
+     */
+    setTo: function (x, y, radius)
+    {
+        this.x = x;
+        this.y = y;
+        this._radius = radius;
+        this._diameter = radius * 2;
+
+        return this;
+    },
+
+    /**
+     * Sets this Circle to be empty with a radius of zero.
+     * Does not change its position.
+     *
+     * @method Phaser.Geom.Circle#setEmpty
+     * @since 3.0.0
+     *
+     * @return {this} This Circle object.
+     */
+    setEmpty: function ()
+    {
+        this._radius = 0;
+        this._diameter = 0;
+
+        return this;
+    },
+
+    /**
+     * Sets the position of this Circle.
+     *
+     * @method Phaser.Geom.Circle#setPosition
+     * @since 3.0.0
+     *
+     * @param {number} [x=0] - The x position of the center of the circle.
+     * @param {number} [y=0] - The y position of the center of the circle.
+     *
+     * @return {this} This Circle object.
+     */
+    setPosition: function (x, y)
+    {
+        if (y === undefined) { y = x; }
+
+        this.x = x;
+        this.y = y;
+
+        return this;
+    },
+
+    /**
+     * Checks to see if the Circle is empty: has a radius of zero.
+     *
+     * @method Phaser.Geom.Circle#isEmpty
+     * @since 3.0.0
+     *
+     * @return {boolean} True if the Circle is empty, otherwise false.
+     */
+    isEmpty: function ()
+    {
+        return (this._radius <= 0);
+    },
+
+    /**
+     * The radius of the Circle.
+     *
+     * @name Phaser.Geom.Circle#radius
+     * @type {number}
+     * @since 3.0.0
+     */
+    radius: {
+
+        get: function ()
+        {
+            return this._radius;
+        },
+
+        set: function (value)
+        {
+            this._radius = value;
+            this._diameter = value * 2;
+        }
+
+    },
+
+    /**
+     * The diameter of the Circle.
+     *
+     * @name Phaser.Geom.Circle#diameter
+     * @type {number}
+     * @since 3.0.0
+     */
+    diameter: {
+
+        get: function ()
+        {
+            return this._diameter;
+        },
+
+        set: function (value)
+        {
+            this._diameter = value;
+            this._radius = value * 0.5;
+        }
+
+    },
+
+    /**
+     * The left position of the Circle.
+     *
+     * @name Phaser.Geom.Circle#left
+     * @type {number}
+     * @since 3.0.0
+     */
+    left: {
+
+        get: function ()
+        {
+            return this.x - this._radius;
+        },
+
+        set: function (value)
+        {
+            this.x = value + this._radius;
+        }
+
+    },
+
+    /**
+     * The right position of the Circle.
+     *
+     * @name Phaser.Geom.Circle#right
+     * @type {number}
+     * @since 3.0.0
+     */
+    right: {
+
+        get: function ()
+        {
+            return this.x + this._radius;
+        },
+
+        set: function (value)
+        {
+            this.x = value - this._radius;
+        }
+
+    },
+
+    /**
+     * The top position of the Circle.
+     *
+     * @name Phaser.Geom.Circle#top
+     * @type {number}
+     * @since 3.0.0
+     */
+    top: {
+
+        get: function ()
+        {
+            return this.y - this._radius;
+        },
+
+        set: function (value)
+        {
+            this.y = value + this._radius;
+        }
+
+    },
+
+    /**
+     * The bottom position of the Circle.
+     *
+     * @name Phaser.Geom.Circle#bottom
+     * @type {number}
+     * @since 3.0.0
+     */
+    bottom: {
+
+        get: function ()
+        {
+            return this.y + this._radius;
+        },
+
+        set: function (value)
+        {
+            this.y = value - this._radius;
+        }
+
+    }
+
+});
+
+module.exports = Circle;
+
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Class = __webpack_require__(0);
+var Rectangle = __webpack_require__(10);
+var RectangleToRectangle = __webpack_require__(63);
+var Vector2 = __webpack_require__(6);
+
+/**
+ * Returns the length of the line.
+ *
+ * @ignore
+ * @private
+ *
+ * @param {number} x1 - The x1 coordinate.
+ * @param {number} y1 - The y1 coordinate.
+ * @param {number} x2 - The x2 coordinate.
+ * @param {number} y2 - The y2 coordinate.
+ *
+ * @return {number} The length of the line.
+ */
+function GetLength (x1, y1, x2, y2)
+{
+    var x = x1 - x2;
+    var y = y1 - y2;
+    var magnitude = (x * x) + (y * y);
+
+    return Math.sqrt(magnitude);
+}
+
+/**
+ * @classdesc
+ * A Face Geometry Object.
+ *
+ * A Face is used by the Mesh Game Object. A Mesh consists of one, or more, faces that are
+ * used to render the Mesh Game Objects in WebGL.
+ *
+ * A Face consists of 3 Vertex instances, for the 3 corners of the face and methods to help
+ * you modify and test them.
+ *
+ * @class Face
+ * @memberof Phaser.Geom.Mesh
+ * @constructor
+ * @since 3.50.0
+ *
+ * @param {Phaser.Geom.Mesh.Vertex} vertex1 - The first vertex of the Face.
+ * @param {Phaser.Geom.Mesh.Vertex} vertex2 - The second vertex of the Face.
+ * @param {Phaser.Geom.Mesh.Vertex} vertex3 - The third vertex of the Face.
+ */
+var Face = new Class({
+
+    initialize:
+
+    function Face (vertex1, vertex2, vertex3)
+    {
+        /**
+         * The first vertex in this Face.
+         *
+         * @name Phaser.Geom.Mesh.Face#vertex1
+         * @type {Phaser.Geom.Mesh.Vertex}
+         * @since 3.50.0
+         */
+        this.vertex1 = vertex1;
+
+        /**
+         * The second vertex in this Face.
+         *
+         * @name Phaser.Geom.Mesh.Face#vertex2
+         * @type {Phaser.Geom.Mesh.Vertex}
+         * @since 3.50.0
+         */
+        this.vertex2 = vertex2;
+
+        /**
+         * The third vertex in this Face.
+         *
+         * @name Phaser.Geom.Mesh.Face#vertex3
+         * @type {Phaser.Geom.Mesh.Vertex}
+         * @since 3.50.0
+         */
+        this.vertex3 = vertex3;
+
+        /**
+         * The bounds of this Face.
+         *
+         * Be sure to call the `Face.updateBounds` method _before_ using this property.
+         *
+         * @name Phaser.Geom.Mesh.Face#bounds
+         * @type {Phaser.Geom.Rectangle}
+         * @since 3.50.0
+         */
+        this.bounds = new Rectangle();
+
+        /**
+         * The face inCenter. Do not access directly, instead use the `getInCenter` method.
+         *
+         * @name Phaser.Geom.Mesh.Face#_inCenter
+         * @type {Phaser.Math.Vector2}
+         * @private
+         * @since 3.50.0
+         */
+        this._inCenter = new Vector2();
+    },
+
+    /**
+     * Calculates and returns the in-center position of this Face.
+     *
+     * @method Phaser.Geom.Mesh.Face#getInCenter
+     * @since 3.50.0
+     *
+     * @param {boolean} [local=true] Return the in center from the un-transformed vertex positions (`true`), or transformed? (`false`)
+     *
+     * @return {Phaser.Math.Vector2} A Vector2 containing the in center position of this Face.
+     */
+    getInCenter: function (local)
+    {
+        if (local === undefined) { local = true; }
+
+        var v1 = this.vertex1;
+        var v2 = this.vertex2;
+        var v3 = this.vertex3;
+
+        var v1x;
+        var v1y;
+
+        var v2x;
+        var v2y;
+
+        var v3x;
+        var v3y;
+
+        if (local)
+        {
+            v1x = v1.x;
+            v1y = v1.y;
+
+            v2x = v2.x;
+            v2y = v2.y;
+
+            v3x = v3.x;
+            v3y = v3.y;
+        }
+        else
+        {
+            v1x = v1.vx;
+            v1y = v1.vy;
+
+            v2x = v2.vx;
+            v2y = v2.vy;
+
+            v3x = v3.vx;
+            v3y = v3.vy;
+        }
+
+        var d1 = GetLength(v3x, v3y, v2x, v2y);
+        var d2 = GetLength(v1x, v1y, v3x, v3y);
+        var d3 = GetLength(v2x, v2y, v1x, v1y);
+
+        var p = d1 + d2 + d3;
+
+        return this._inCenter.set(
+            (v1x * d1 + v2x * d2 + v3x * d3) / p,
+            (v1y * d1 + v2y * d2 + v3y * d3) / p
+        );
+    },
+
+    /**
+     * Checks if the given coordinates are within this Face.
+     *
+     * You can optionally provide a transform matrix. If given, the Face vertices
+     * will be transformed first, before being checked against the coordinates.
+     *
+     * @method Phaser.Geom.Mesh.Face#contains
+     * @since 3.50.0
+     *
+     * @param {number} x - The horizontal position to check.
+     * @param {number} y - The vertical position to check.
+     * @param {Phaser.GameObjects.Components.TransformMatrix} [calcMatrix] - Optional transform matrix to apply to the vertices before comparison.
+     *
+     * @return {boolean} `true` if the coordinates lay within this Face, otherwise `false`.
+     */
+    contains: function (x, y, calcMatrix)
+    {
+        var vertex1 = this.vertex1;
+        var vertex2 = this.vertex2;
+        var vertex3 = this.vertex3;
+
+        var v1x = vertex1.vx;
+        var v1y = vertex1.vy;
+
+        var v2x = vertex2.vx;
+        var v2y = vertex2.vy;
+
+        var v3x = vertex3.vx;
+        var v3y = vertex3.vy;
+
+        if (calcMatrix)
+        {
+            var a = calcMatrix.a;
+            var b = calcMatrix.b;
+            var c = calcMatrix.c;
+            var d = calcMatrix.d;
+            var e = calcMatrix.e;
+            var f = calcMatrix.f;
+
+            v1x = vertex1.vx * a + vertex1.vy * c + e;
+            v1y = vertex1.vx * b + vertex1.vy * d + f;
+
+            v2x = vertex2.vx * a + vertex2.vy * c + e;
+            v2y = vertex2.vx * b + vertex2.vy * d + f;
+
+            v3x = vertex3.vx * a + vertex3.vy * c + e;
+            v3y = vertex3.vx * b + vertex3.vy * d + f;
+        }
+
+        var t0x = v3x - v1x;
+        var t0y = v3y - v1y;
+
+        var t1x = v2x - v1x;
+        var t1y = v2y - v1y;
+
+        var t2x = x - v1x;
+        var t2y = y - v1y;
+
+        var dot00 = (t0x * t0x) + (t0y * t0y);
+        var dot01 = (t0x * t1x) + (t0y * t1y);
+        var dot02 = (t0x * t2x) + (t0y * t2y);
+        var dot11 = (t1x * t1x) + (t1y * t1y);
+        var dot12 = (t1x * t2x) + (t1y * t2y);
+
+        //  Compute barycentric coordinates
+        var bc = ((dot00 * dot11) - (dot01 * dot01));
+        var inv = (bc === 0) ? 0 : (1 / bc);
+        var u = ((dot11 * dot02) - (dot01 * dot12)) * inv;
+        var v = ((dot00 * dot12) - (dot01 * dot02)) * inv;
+
+        return (u >= 0 && v >= 0 && (u + v < 1));
+    },
+
+    /**
+     * Checks if the vertices in this Face are orientated counter-clockwise, or not.
+     *
+     * It checks the transformed position of the vertices, not the local one.
+     *
+     * @method Phaser.Geom.Mesh.Face#isCounterClockwise
+     * @since 3.50.0
+     *
+     * @param {number} z - The z-axis value to test against. Typically the `Mesh.modelPosition.z`.
+     *
+     * @return {boolean} `true` if the vertices in this Face run counter-clockwise, otherwise `false`.
+     */
+    isCounterClockwise: function (z)
+    {
+        var v1 = this.vertex1;
+        var v2 = this.vertex2;
+        var v3 = this.vertex3;
+
+        var d = (v2.vx - v1.vx) * (v3.vy - v1.vy) - (v2.vy - v1.vy) * (v3.vx - v1.vx);
+
+        return (z <= 0) ? d >= 0 : d < 0;
+    },
+
+    /**
+     * Loads the data from this Vertex into the given Typed Arrays.
+     *
+     * @method Phaser.Geom.Mesh.Face#load
+     * @since 3.50.0
+     *
+     * @param {Float32Array} F32 - A Float32 Array to insert the position, UV and unit data in to.
+     * @param {Uint32Array} U32 - A Uint32 Array to insert the color and alpha data in to.
+     * @param {number} offset - The index of the array to insert this Vertex to.
+     * @param {number} textureUnit - The texture unit currently in use.
+     * @param {number} alpha - The alpha of the parent object.
+     * @param {number} a - The parent transform matrix data a component.
+     * @param {number} b - The parent transform matrix data b component.
+     * @param {number} c - The parent transform matrix data c component.
+     * @param {number} d - The parent transform matrix data d component.
+     * @param {number} e - The parent transform matrix data e component.
+     * @param {number} f - The parent transform matrix data f component.
+     * @param {boolean} roundPixels - Round the vertex position or not?
+     *
+     * @return {number} The new vertex index array offset.
+     */
+    load: function (F32, U32, offset, textureUnit, tintEffect)
+    {
+        offset = this.vertex1.load(F32, U32, offset, textureUnit, tintEffect);
+        offset = this.vertex2.load(F32, U32, offset, textureUnit, tintEffect);
+        offset = this.vertex3.load(F32, U32, offset, textureUnit, tintEffect);
+
+        return offset;
+    },
+
+    /**
+     * Transforms all Face vertices by the given matrix, storing the results in their `vx`, `vy` and `vz` properties.
+     *
+     * @method Phaser.Geom.Mesh.Face#transformCoordinatesLocal
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix4} transformMatrix - The transform matrix to apply to this vertex.
+     * @param {number} width - The width of the parent Mesh.
+     * @param {number} height - The height of the parent Mesh.
+     * @param {number} cameraZ - The z position of the MeshCamera.
+     *
+     * @return {this} This Face instance.
+     */
+    transformCoordinatesLocal: function (transformMatrix, width, height, cameraZ)
+    {
+        this.vertex1.transformCoordinatesLocal(transformMatrix, width, height, cameraZ);
+        this.vertex2.transformCoordinatesLocal(transformMatrix, width, height, cameraZ);
+        this.vertex3.transformCoordinatesLocal(transformMatrix, width, height, cameraZ);
+
+        return this;
+    },
+
+    /**
+     * Updates the bounds of this Face, based on the translated values of the vertices.
+     *
+     * Call this method prior to accessing the `Face.bounds` property.
+     *
+     * @method Phaser.Geom.Mesh.Face#updateBounds
+     * @since 3.50.0
+     *
+     * @return {this} This Face instance.
+     */
+    updateBounds: function ()
+    {
+        var v1 = this.vertex1;
+        var v2 = this.vertex2;
+        var v3 = this.vertex3;
+
+        var bounds = this.bounds;
+
+        bounds.x = Math.min(v1.vx, v2.vx, v3.vx);
+        bounds.y = Math.min(v1.vy, v2.vy, v3.vy);
+        bounds.width = Math.max(v1.vx, v2.vx, v3.vx) - bounds.x;
+        bounds.height = Math.max(v1.vy, v2.vy, v3.vy) - bounds.y;
+
+        return this;
+    },
+
+    /**
+     * Checks if this Face is within the view of the given Camera.
+     *
+     * This method is called in the `MeshWebGLRenderer` function. It performs the following tasks:
+     *
+     * First, the `Vertex.update` method is called on each of the vertices. This populates them
+     * with the new translated values, updating their `tx`, `ty` and `ta` properties.
+     *
+     * Then it tests to see if this face is visible due to the alpha values, if not, it returns.
+     *
+     * After this, if `hideCCW` is set, it calls `isCounterClockwise` and returns if not.
+     *
+     * Finally, it will update the `Face.bounds` based on the newly translated vertex values
+     * and return the results of an intersection test between the bounds and the camera world view
+     * rectangle.
+     *
+     * @method Phaser.Geom.Mesh.Face#isInView
+     * @since 3.50.0
+     *
+     * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera to check against.
+     * @param {boolean} hideCCW - Test the counter-clockwise orientation of the verts?
+     * @param {number} z - The Cameras z position, used in the CCW test.
+     * @param {number} alpha - The alpha of the parent object.
+     * @param {number} a - The parent transform matrix data a component.
+     * @param {number} b - The parent transform matrix data b component.
+     * @param {number} c - The parent transform matrix data c component.
+     * @param {number} d - The parent transform matrix data d component.
+     * @param {number} e - The parent transform matrix data e component.
+     * @param {number} f - The parent transform matrix data f component.
+     * @param {boolean} roundPixels - Round the vertex position or not?
+     *
+     * @return {boolean} `true` if this Face can be seen by the Camera.
+     */
+    isInView: function (camera, hideCCW, z, alpha, a, b, c, d, e, f, roundPixels)
+    {
+        var v1 = this.vertex1.update(a, b, c, d, e, f, roundPixels, alpha);
+        var v2 = this.vertex2.update(a, b, c, d, e, f, roundPixels, alpha);
+        var v3 = this.vertex3.update(a, b, c, d, e, f, roundPixels, alpha);
+
+        //  Alpha check first
+        if (v1.ta <= 0 && v2.ta <= 0 && v3.ta <= 0)
+        {
+            return false;
+        }
+
+        //  CCW check
+        if (hideCCW && !this.isCounterClockwise(z))
+        {
+            return false;
+        }
+
+        //  Bounds check
+        var bounds = this.bounds;
+
+        bounds.x = Math.min(v1.tx, v2.tx, v3.tx);
+        bounds.y = Math.min(v1.ty, v2.ty, v3.ty);
+        bounds.width = Math.max(v1.tx, v2.tx, v3.tx) - bounds.x;
+        bounds.height = Math.max(v1.ty, v2.ty, v3.ty) - bounds.y;
+
+        return RectangleToRectangle(bounds, camera.worldView);
+    },
+
+    /**
+     * Translates the vertices of this Face by the given amounts.
+     *
+     * The actual vertex positions are adjusted, not their transformed position.
+     *
+     * Therefore, this updates the vertex data directly.
+     *
+     * @method Phaser.Geom.Mesh.Face#translate
+     * @since 3.50.0
+     *
+     * @param {number} x - The amount to horizontally translate by.
+     * @param {number} [y=0] - The amount to vertically translate by.
+     *
+     * @return {this} This Face instance.
+     */
+    translate: function (x, y)
+    {
+        if (y === undefined) { y = 0; }
+
+        var v1 = this.vertex1;
+        var v2 = this.vertex2;
+        var v3 = this.vertex3;
+
+        v1.x += x;
+        v1.y += y;
+
+        v2.x += x;
+        v2.y += y;
+
+        v3.x += x;
+        v3.y += y;
+
+        return this;
+    },
+
+    /**
+     * The x coordinate of this Face, based on the in center position of the Face.
+     *
+     * @name Phaser.Geom.Mesh.Face#x
+     * @type {number}
+     * @since 3.50.0
+     */
+    x: {
+
+        get: function ()
+        {
+            return this.getInCenter().x;
+        },
+
+        set: function (value)
+        {
+            var current = this.getInCenter();
+
+            this.translate(value - current.x, 0);
+        }
+
+    },
+
+    /**
+     * The y coordinate of this Face, based on the in center position of the Face.
+     *
+     * @name Phaser.Geom.Mesh.Face#y
+     * @type {number}
+     * @since 3.50.0
+     */
+    y: {
+
+        get: function ()
+        {
+            return this.getInCenter().y;
+        },
+
+        set: function (value)
+        {
+            var current = this.getInCenter();
+
+            this.translate(0, value - current.y);
+        }
+
+    },
+
+    /**
+     * Set the alpha value of this Face.
+     *
+     * Each vertex is given the same value. If you need to adjust the alpha on a per-vertex basis
+     * then use the `Vertex.alpha` property instead.
+     *
+     * When getting the alpha of this Face, it will return an average of the alpha
+     * component of all three vertices.
+     *
+     * @name Phaser.Geom.Mesh.Face#alpha
+     * @type {number}
+     * @since 3.50.0
+     */
+    alpha: {
+
+        get: function ()
+        {
+            var v1 = this.vertex1;
+            var v2 = this.vertex2;
+            var v3 = this.vertex3;
+
+            return (v1.alpha + v2.alpha + v3.alpha) / 3;
+        },
+
+        set: function (value)
+        {
+            this.vertex1.alpha = value;
+            this.vertex2.alpha = value;
+            this.vertex3.alpha = value;
+        }
+
+    },
+
+    /**
+     * The depth of this Face, which is an average of the z component of all three vertices.
+     *
+     * The depth is calculated based on the transformed z value, not the local one.
+     *
+     * @name Phaser.Geom.Mesh.Face#depth
+     * @type {number}
+     * @readonly
+     * @since 3.50.0
+     */
+    depth: {
+
+        get: function ()
+        {
+            var v1 = this.vertex1;
+            var v2 = this.vertex2;
+            var v3 = this.vertex3;
+
+            return (v1.vz + v2.vz + v3.vz) / 3;
+        }
+
+    },
+
+    /**
+     * Destroys this Face and nulls the references to the vertices.
+     *
+     * @method Phaser.Geom.Mesh.Face#destroy
+     * @since 3.50.0
+     */
+    destroy: function ()
+    {
+        this.vertex1 = null;
+        this.vertex2 = null;
+        this.vertex3 = null;
+    }
+
+});
+
+module.exports = Face;
+
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Class = __webpack_require__(0);
+var Utils = __webpack_require__(35);
+var Vector3 = __webpack_require__(19);
+
+/**
+ * @classdesc
+ * A Vertex Geometry Object.
+ *
+ * This class consists of all the information required for a single vertex within a Face Geometry Object.
+ *
+ * Faces, and thus Vertex objects, are used by the Mesh Game Object in order to render objects in WebGL.
+ *
+ * @class Vertex
+ * @memberof Phaser.Geom.Mesh
+ * @constructor
+ * @extends Phaser.Math.Vector3
+ * @since 3.50.0
+ *
+ * @param {number} x - The x position of the vertex.
+ * @param {number} y - The y position of the vertex.
+ * @param {number} z - The z position of the vertex.
+ * @param {number} u - The UV u coordinate of the vertex.
+ * @param {number} v - The UV v coordinate of the vertex.
+ * @param {number} [color=0xffffff] - The color value of the vertex.
+ * @param {number} [alpha=1] - The alpha value of the vertex.
+ * @param {number} [nx=0] - The x normal value of the vertex.
+ * @param {number} [ny=0] - The y normal value of the vertex.
+ * @param {number} [nz=0] - The z normal value of the vertex.
+ */
+var Vertex = new Class({
+
+    Extends: Vector3,
+
+    initialize:
+
+    function Vertex (x, y, z, u, v, color, alpha, nx, ny, nz)
+    {
+        if (color === undefined) { color = 0xffffff; }
+        if (alpha === undefined) { alpha = 1; }
+        if (nx === undefined) { nx = 0; }
+        if (ny === undefined) { ny = 0; }
+        if (nz === undefined) { nz = 0; }
+
+        Vector3.call(this, x, y, z);
+
+        /**
+         * The projected x coordinate of this vertex.
+         *
+         * @name Phaser.Geom.Mesh.Vertex#vx
+         * @type {number}
+         * @since 3.50.0
+         */
+        this.vx = 0;
+
+        /**
+         * The projected y coordinate of this vertex.
+         *
+         * @name Phaser.Geom.Mesh.Vertex#vy
+         * @type {number}
+         * @since 3.50.0
+         */
+        this.vy = 0;
+
+        /**
+         * The projected z coordinate of this vertex.
+         *
+         * @name Phaser.Geom.Mesh.Vertex#vz
+         * @type {number}
+         * @since 3.50.0
+         */
+        this.vz = 0;
+
+        /**
+         * The projected x coordinate of this vertex.
+         *
+         * @name Phaser.Geom.Mesh.Vertex#nx
+         * @type {number}
+         * @since 3.50.0
+         */
+        this.nx = nx;
+
+        /**
+         * The projected y coordinate of this vertex.
+         *
+         * @name Phaser.Geom.Mesh.Vertex#ny
+         * @type {number}
+         * @since 3.50.0
+         */
+        this.ny = ny;
+
+        /**
+         * The projected z coordinate of this vertex.
+         *
+         * @name Phaser.Geom.Mesh.Vertex#nz
+         * @type {number}
+         * @since 3.50.0
+         */
+        this.nz = nz;
+
+        /**
+         * UV u coordinate of this vertex.
+         *
+         * @name Phaser.Geom.Mesh.Vertex#u
+         * @type {number}
+         * @since 3.50.0
+         */
+        this.u = u;
+
+        /**
+         * UV v coordinate of this vertex.
+         *
+         * @name Phaser.Geom.Mesh.Vertex#v
+         * @type {number}
+         * @since 3.50.0
+         */
+        this.v = v;
+
+        /**
+         * The color value of this vertex.
+         *
+         * @name Phaser.Geom.Mesh.Vertex#color
+         * @type {number}
+         * @since 3.50.0
+         */
+        this.color = color;
+
+        /**
+         * The alpha value of this vertex.
+         *
+         * @name Phaser.Geom.Mesh.Vertex#alpha
+         * @type {number}
+         * @since 3.50.0
+         */
+        this.alpha = alpha;
+
+        /**
+         * The translated x coordinate of this vertex.
+         *
+         * @name Phaser.Geom.Mesh.Vertex#tx
+         * @type {number}
+         * @since 3.50.0
+         */
+        this.tx = 0;
+
+        /**
+         * The translated y coordinate of this vertex.
+         *
+         * @name Phaser.Geom.Mesh.Vertex#ty
+         * @type {number}
+         * @since 3.50.0
+         */
+        this.ty = 0;
+
+        /**
+         * The translated alpha value of this vertex.
+         *
+         * @name Phaser.Geom.Mesh.Vertex#ta
+         * @type {number}
+         * @since 3.50.0
+         */
+        this.ta = 0;
+    },
+
+    /**
+     * Sets the U and V properties.
+     *
+     * @method Phaser.Geom.Mesh.Vertex#setUVs
+     * @since 3.50.0
+     *
+     * @param {number} u - The UV u coordinate of the vertex.
+     * @param {number} v - The UV v coordinate of the vertex.
+     *
+     * @return {this} This Vertex.
+     */
+    setUVs: function (u, v)
+    {
+        this.u = u;
+        this.v = v;
+
+        return this;
+    },
+
+    /**
+     * Transforms this vertex by the given matrix, storing the results in `vx`, `vy` and `vz`.
+     *
+     * @method Phaser.Geom.Mesh.Vertex#transformCoordinatesLocal
+     * @since 3.50.0
+     *
+     * @param {Phaser.Math.Matrix4} transformMatrix - The transform matrix to apply to this vertex.
+     * @param {number} width - The width of the parent Mesh.
+     * @param {number} height - The height of the parent Mesh.
+     * @param {number} cameraZ - The z position of the MeshCamera.
+     */
+    transformCoordinatesLocal: function (transformMatrix, width, height, cameraZ)
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+
+        var m = transformMatrix.val;
+
+        var tx = (x * m[0]) + (y * m[4]) + (z * m[8]) + m[12];
+        var ty = (x * m[1]) + (y * m[5]) + (z * m[9]) + m[13];
+        var tz = (x * m[2]) + (y * m[6]) + (z * m[10]) + m[14];
+        var tw = (x * m[3]) + (y * m[7]) + (z * m[11]) + m[15];
+
+        this.vx = (tx / tw) * width;
+        this.vy = -(ty / tw) * height;
+
+        if (cameraZ <= 0)
+        {
+            this.vz = (tz / tw);
+        }
+        else
+        {
+            this.vz = -(tz / tw);
+        }
+    },
+
+    /**
+     * Updates this Vertex based on the given transform.
+     *
+     * @method Phaser.Geom.Mesh.Vertex#update
+     * @since 3.50.0
+     *
+     * @param {number} a - The parent transform matrix data a component.
+     * @param {number} b - The parent transform matrix data b component.
+     * @param {number} c - The parent transform matrix data c component.
+     * @param {number} d - The parent transform matrix data d component.
+     * @param {number} e - The parent transform matrix data e component.
+     * @param {number} f - The parent transform matrix data f component.
+     * @param {boolean} roundPixels - Round the vertex position or not?
+     * @param {number} alpha - The alpha of the parent object.
+     *
+     * @return {this} This Vertex.
+     */
+    update: function (a, b, c, d, e, f, roundPixels, alpha)
+    {
+        var tx = this.vx * a + this.vy * c + e;
+        var ty = this.vx * b + this.vy * d + f;
+
+        if (roundPixels)
+        {
+            tx = Math.round(tx);
+            ty = Math.round(ty);
+        }
+
+        this.tx = tx;
+        this.ty = ty;
+        this.ta = this.alpha * alpha;
+
+        return this;
+    },
+
+    /**
+     * Loads the data from this Vertex into the given Typed Arrays.
+     *
+     * @method Phaser.Geom.Mesh.Vertex#load
+     * @since 3.50.0
+     *
+     * @param {Float32Array} F32 - A Float32 Array to insert the position, UV and unit data in to.
+     * @param {Uint32Array} U32 - A Uint32 Array to insert the color and alpha data in to.
+     * @param {number} offset - The index of the array to insert this Vertex to.
+     * @param {number} textureUnit - The texture unit currently in use.
+     *
+     * @return {number} The new array offset.
+     */
+    load: function (F32, U32, offset, textureUnit, tintEffect)
+    {
+        F32[++offset] = this.tx;
+        F32[++offset] = this.ty;
+        F32[++offset] = this.u;
+        F32[++offset] = this.v;
+        F32[++offset] = textureUnit;
+        F32[++offset] = tintEffect;
+        U32[++offset] = Utils.getTintAppendFloatAlpha(this.color, this.ta);
+
+        return offset;
+    }
+
+});
+
+module.exports = Vertex;
+
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var GetValue = __webpack_require__(5);
 
 //  Contains the plugins that Phaser uses globally and locally.
 //  These are the source objects, not instantiated.
@@ -18967,7 +21802,7 @@ module.exports = InputPluginCache;
 
 
 /***/ }),
-/* 71 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -18982,19 +21817,19 @@ module.exports = InputPluginCache;
 
 module.exports = {
 
-    ANY_KEY_DOWN: __webpack_require__(730),
-    ANY_KEY_UP: __webpack_require__(731),
-    COMBO_MATCH: __webpack_require__(732),
-    DOWN: __webpack_require__(733),
-    KEY_DOWN: __webpack_require__(734),
-    KEY_UP: __webpack_require__(735),
-    UP: __webpack_require__(736)
+    ANY_KEY_DOWN: __webpack_require__(897),
+    ANY_KEY_UP: __webpack_require__(898),
+    COMBO_MATCH: __webpack_require__(899),
+    DOWN: __webpack_require__(900),
+    KEY_DOWN: __webpack_require__(901),
+    KEY_UP: __webpack_require__(902),
+    UP: __webpack_require__(903)
 
 };
 
 
 /***/ }),
-/* 72 */
+/* 89 */
 /***/ (function(module, exports) {
 
 /**
@@ -19064,7 +21899,7 @@ module.exports = XHRSettings;
 
 
 /***/ }),
-/* 73 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -19074,11 +21909,11 @@ module.exports = XHRSettings;
  */
 
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(21);
-var File = __webpack_require__(22);
-var FileTypesManager = __webpack_require__(10);
+var CONST = __webpack_require__(24);
+var File = __webpack_require__(25);
+var FileTypesManager = __webpack_require__(13);
 var GetFastValue = __webpack_require__(1);
-var IsPlainObject = __webpack_require__(11);
+var IsPlainObject = __webpack_require__(15);
 
 /**
  * @classdesc
@@ -19338,7 +22173,7 @@ module.exports = ImageFile;
 
 
 /***/ }),
-/* 74 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -19583,7 +22418,7 @@ module.exports = MultiFile;
 
 
 /***/ }),
-/* 75 */
+/* 92 */
 /***/ (function(module, exports) {
 
 /**
@@ -19647,7 +22482,7 @@ module.exports = GetNewValue;
 
 
 /***/ }),
-/* 76 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -19656,17 +22491,17 @@ module.exports = GetNewValue;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Defaults = __webpack_require__(109);
-var GetAdvancedValue = __webpack_require__(18);
-var GetBoolean = __webpack_require__(37);
-var GetEaseFunction = __webpack_require__(53);
-var GetNewValue = __webpack_require__(75);
-var GetProps = __webpack_require__(267);
-var GetTargets = __webpack_require__(107);
-var GetValue = __webpack_require__(4);
-var GetValueOp = __webpack_require__(108);
-var Tween = __webpack_require__(110);
-var TweenData = __webpack_require__(112);
+var Defaults = __webpack_require__(138);
+var GetAdvancedValue = __webpack_require__(20);
+var GetBoolean = __webpack_require__(48);
+var GetEaseFunction = __webpack_require__(44);
+var GetNewValue = __webpack_require__(92);
+var GetProps = __webpack_require__(326);
+var GetTargets = __webpack_require__(136);
+var GetValue = __webpack_require__(5);
+var GetValueOp = __webpack_require__(137);
+var Tween = __webpack_require__(139);
+var TweenData = __webpack_require__(141);
 
 /**
  * Creates a new Tween.
@@ -19780,7 +22615,7 @@ module.exports = TweenBuilder;
 
 
 /***/ }),
-/* 77 */
+/* 94 */
 /***/ (function(module, exports) {
 
 /**
@@ -19834,7 +22669,7 @@ module.exports = ScaleModes;
 
 
 /***/ }),
-/* 78 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -19843,13 +22678,13 @@ module.exports = ScaleModes;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = __webpack_require__(5);
+var Clamp = __webpack_require__(8);
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(54);
-var FindClosestInSorted = __webpack_require__(113);
-var Frame = __webpack_require__(114);
-var GetValue = __webpack_require__(4);
-var SortByDigits = __webpack_require__(115);
+var Events = __webpack_require__(66);
+var FindClosestInSorted = __webpack_require__(142);
+var Frame = __webpack_require__(143);
+var GetValue = __webpack_require__(5);
+var SortByDigits = __webpack_require__(144);
 
 /**
  * @classdesc
@@ -20749,7 +23584,7 @@ module.exports = Animation;
 
 
 /***/ }),
-/* 79 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -20759,13 +23594,13 @@ module.exports = Animation;
  */
 
 var Class = __webpack_require__(0);
-var Components = __webpack_require__(28);
-var DegToRad = __webpack_require__(55);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(16);
-var Rectangle = __webpack_require__(36);
-var TransformMatrix = __webpack_require__(19);
-var ValueToColor = __webpack_require__(141);
+var Components = __webpack_require__(33);
+var DegToRad = __webpack_require__(47);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(17);
+var Rectangle = __webpack_require__(10);
+var TransformMatrix = __webpack_require__(22);
+var ValueToColor = __webpack_require__(172);
 var Vector2 = __webpack_require__(6);
 
 /**
@@ -22727,8 +25562,8 @@ module.exports = BaseCamera;
 
 
 /***/ }),
-/* 80 */
-/***/ (function(module, exports) {
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
 
 /**
  * @author       Richard Davey <rich@photonstorm.com>
@@ -22736,61 +25571,79 @@ module.exports = BaseCamera;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
+var Perimeter = __webpack_require__(67);
+var Point = __webpack_require__(2);
+
 /**
- * Checks if a given point is inside a Rectangle's bounds.
+ * Calculates the coordinates of a point at a certain `position` on the Rectangle's perimeter.
+ * 
+ * The `position` is a fraction between 0 and 1 which defines how far into the perimeter the point is.
+ * 
+ * A value of 0 or 1 returns the point at the top left corner of the rectangle, while a value of 0.5 returns the point at the bottom right corner of the rectangle. Values between 0 and 0.5 are on the top or the right side and values between 0.5 and 1 are on the bottom or the left side.
  *
- * @function Phaser.Geom.Rectangle.Contains
+ * @function Phaser.Geom.Rectangle.GetPoint
  * @since 3.0.0
  *
- * @param {Phaser.Geom.Rectangle} rect - The Rectangle to check.
- * @param {number} x - The X coordinate of the point to check.
- * @param {number} y - The Y coordinate of the point to check.
+ * @generic {Phaser.Geom.Point} O - [out,$return]
  *
- * @return {boolean} `true` if the point is within the Rectangle's bounds, otherwise `false`.
+ * @param {Phaser.Geom.Rectangle} rectangle - The Rectangle to get the perimeter point from.
+ * @param {number} position - The normalized distance into the Rectangle's perimeter to return.
+ * @param {(Phaser.Geom.Point|object)} [out] - An object to update with the `x` and `y` coordinates of the point.
+ *
+ * @return {Phaser.Geom.Point} The updated `output` object, or a new Point if no `output` object was given.
  */
-var Contains = function (rect, x, y)
+var GetPoint = function (rectangle, position, out)
 {
-    if (rect.width <= 0 || rect.height <= 0)
+    if (out === undefined) { out = new Point(); }
+
+    if (position <= 0 || position >= 1)
     {
-        return false;
+        out.x = rectangle.x;
+        out.y = rectangle.y;
+
+        return out;
     }
 
-    return (rect.x <= x && rect.x + rect.width >= x && rect.y <= y && rect.y + rect.height >= y);
+    var p = Perimeter(rectangle) * position;
+
+    if (position > 0.5)
+    {
+        p -= (rectangle.width + rectangle.height);
+
+        if (p <= rectangle.width)
+        {
+            //  Face 3
+            out.x = rectangle.right - p;
+            out.y = rectangle.bottom;
+        }
+        else
+        {
+            //  Face 4
+            out.x = rectangle.x;
+            out.y = rectangle.bottom - (p - rectangle.width);
+        }
+    }
+    else if (p <= rectangle.width)
+    {
+        //  Face 1
+        out.x = rectangle.x + p;
+        out.y = rectangle.y;
+    }
+    else
+    {
+        //  Face 2
+        out.x = rectangle.right;
+        out.y = rectangle.y + (p - rectangle.width);
+    }
+
+    return out;
 };
 
-module.exports = Contains;
+module.exports = GetPoint;
 
 
 /***/ }),
-/* 81 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * Calculate the length of the given line.
- *
- * @function Phaser.Geom.Line.Length
- * @since 3.0.0
- *
- * @param {Phaser.Geom.Line} line - The line to calculate the length of.
- *
- * @return {number} The length of the line.
- */
-var Length = function (line)
-{
-    return Math.sqrt((line.x2 - line.x1) * (line.x2 - line.x1) + (line.y2 - line.y1) * (line.y2 - line.y1));
-};
-
-module.exports = Length;
-
-
-/***/ }),
-/* 82 */
+/* 98 */
 /***/ (function(module, exports) {
 
 /**
@@ -22824,7 +25677,7 @@ module.exports = Equal;
 
 
 /***/ }),
-/* 83 */
+/* 99 */
 /***/ (function(module, exports) {
 
 /**
@@ -22885,7 +25738,7 @@ module.exports = ToJSON;
 
 
 /***/ }),
-/* 84 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -22940,7 +25793,7 @@ module.exports = TransformXY;
 
 
 /***/ }),
-/* 85 */
+/* 101 */
 /***/ (function(module, exports) {
 
 /**
@@ -22950,29 +25803,64 @@ module.exports = TransformXY;
  */
 
 /**
- * Wrap the given `value` between `min` and `max.
+ * Given 3 separate color values this will return an integer representation of it.
  *
- * @function Phaser.Math.Wrap
+ * @function Phaser.Display.Color.GetColor
  * @since 3.0.0
  *
- * @param {number} value - The value to wrap.
- * @param {number} min - The minimum value.
- * @param {number} max - The maximum value.
+ * @param {number} red - The red color value. A number between 0 and 255.
+ * @param {number} green - The green color value. A number between 0 and 255.
+ * @param {number} blue - The blue color value. A number between 0 and 255.
  *
- * @return {number} The wrapped value.
+ * @return {number} The combined color value.
  */
-var Wrap = function (value, min, max)
+var GetColor = function (red, green, blue)
 {
-    var range = max - min;
-
-    return (min + ((((value - min) % range) + range) % range));
+    return red << 16 | green << 8 | blue;
 };
 
-module.exports = Wrap;
+module.exports = GetColor;
 
 
 /***/ }),
-/* 86 */
+/* 102 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+// Centers this Rectangle so that the center coordinates match the given x and y values.
+
+/**
+ * Moves the top-left corner of a Rectangle so that its center is at the given coordinates.
+ *
+ * @function Phaser.Geom.Rectangle.CenterOn
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [rect,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle to be centered.
+ * @param {number} x - The X coordinate of the Rectangle's center.
+ * @param {number} y - The Y coordinate of the Rectangle's center.
+ *
+ * @return {Phaser.Geom.Rectangle} The centered rectangle.
+ */
+var CenterOn = function (rect, x, y)
+{
+    rect.x = x - (rect.width / 2);
+    rect.y = y - (rect.height / 2);
+
+    return rect;
+};
+
+module.exports = CenterOn;
+
+
+/***/ }),
+/* 103 */
 /***/ (function(module, exports) {
 
 /**
@@ -23002,7 +25890,7 @@ module.exports = Linear;
 
 
 /***/ }),
-/* 87 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -23011,9 +25899,9 @@ module.exports = Linear;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var OS = __webpack_require__(41);
-var Browser = __webpack_require__(58);
-var CanvasPool = __webpack_require__(17);
+var OS = __webpack_require__(52);
+var Browser = __webpack_require__(71);
+var CanvasPool = __webpack_require__(18);
 
 /**
  * Determines the features of the browser running this Phaser Game instance.
@@ -23194,7 +26082,7 @@ module.exports = init();
 
 
 /***/ }),
-/* 88 */
+/* 105 */
 /***/ (function(module, exports) {
 
 /**
@@ -23204,31 +26092,567 @@ module.exports = init();
  */
 
 /**
- * Calculate the distance between two sets of coordinates (points).
+ * Compute a random integer between the `min` and `max` values, inclusive.
  *
- * @function Phaser.Math.Distance.Between
+ * @function Phaser.Math.Between
  * @since 3.0.0
  *
- * @param {number} x1 - The x coordinate of the first point.
- * @param {number} y1 - The y coordinate of the first point.
- * @param {number} x2 - The x coordinate of the second point.
- * @param {number} y2 - The y coordinate of the second point.
+ * @param {number} min - The minimum value.
+ * @param {number} max - The maximum value.
  *
- * @return {number} The distance between each point.
+ * @return {number} The random integer.
  */
-var DistanceBetween = function (x1, y1, x2, y2)
+var Between = function (min, max)
 {
-    var dx = x1 - x2;
-    var dy = y1 - y2;
-
-    return Math.sqrt(dx * dx + dy * dy);
+    return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-module.exports = DistanceBetween;
+module.exports = Between;
 
 
 /***/ }),
-/* 89 */
+/* 106 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+//  Adapted from [gl-matrix](https://github.com/toji/gl-matrix) by toji
+//  and [vecmath](https://github.com/mattdesl/vecmath) by mattdesl
+
+var Class = __webpack_require__(0);
+
+/**
+ * @classdesc
+ * A representation of a vector in 4D space.
+ *
+ * A four-component vector.
+ *
+ * @class Vector4
+ * @memberof Phaser.Math
+ * @constructor
+ * @since 3.0.0
+ *
+ * @param {number} [x] - The x component.
+ * @param {number} [y] - The y component.
+ * @param {number} [z] - The z component.
+ * @param {number} [w] - The w component.
+ */
+var Vector4 = new Class({
+
+    initialize:
+
+    function Vector4 (x, y, z, w)
+    {
+        /**
+         * The x component of this Vector.
+         *
+         * @name Phaser.Math.Vector4#x
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.x = 0;
+
+        /**
+         * The y component of this Vector.
+         *
+         * @name Phaser.Math.Vector4#y
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.y = 0;
+
+        /**
+         * The z component of this Vector.
+         *
+         * @name Phaser.Math.Vector4#z
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.z = 0;
+
+        /**
+         * The w component of this Vector.
+         *
+         * @name Phaser.Math.Vector4#w
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.w = 0;
+
+        if (typeof x === 'object')
+        {
+            this.x = x.x || 0;
+            this.y = x.y || 0;
+            this.z = x.z || 0;
+            this.w = x.w || 0;
+        }
+        else
+        {
+            this.x = x || 0;
+            this.y = y || 0;
+            this.z = z || 0;
+            this.w = w || 0;
+        }
+    },
+
+    /**
+     * Make a clone of this Vector4.
+     *
+     * @method Phaser.Math.Vector4#clone
+     * @since 3.0.0
+     *
+     * @return {Phaser.Math.Vector4} A clone of this Vector4.
+     */
+    clone: function ()
+    {
+        return new Vector4(this.x, this.y, this.z, this.w);
+    },
+
+    /**
+     * Copy the components of a given Vector into this Vector.
+     *
+     * @method Phaser.Math.Vector4#copy
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Vector4} src - The Vector to copy the components from.
+     *
+     * @return {Phaser.Math.Vector4} This Vector4.
+     */
+    copy: function (src)
+    {
+        this.x = src.x;
+        this.y = src.y;
+        this.z = src.z || 0;
+        this.w = src.w || 0;
+
+        return this;
+    },
+
+    /**
+     * Check whether this Vector is equal to a given Vector.
+     *
+     * Performs a strict quality check against each Vector's components.
+     *
+     * @method Phaser.Math.Vector4#equals
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Vector4} v - The vector to check equality with.
+     *
+     * @return {boolean} A boolean indicating whether the two Vectors are equal or not.
+     */
+    equals: function (v)
+    {
+        return ((this.x === v.x) && (this.y === v.y) && (this.z === v.z) && (this.w === v.w));
+    },
+
+    /**
+     * Set the `x`, `y`, `z` and `w` components of the this Vector to the given `x`, `y`, `z` and `w` values.
+     *
+     * @method Phaser.Math.Vector4#set
+     * @since 3.0.0
+     *
+     * @param {(number|object)} x - The x value to set for this Vector, or an object containing x, y, z and w components.
+     * @param {number} y - The y value to set for this Vector.
+     * @param {number} z - The z value to set for this Vector.
+     * @param {number} w - The z value to set for this Vector.
+     *
+     * @return {Phaser.Math.Vector4} This Vector4.
+     */
+    set: function (x, y, z, w)
+    {
+        if (typeof x === 'object')
+        {
+            this.x = x.x || 0;
+            this.y = x.y || 0;
+            this.z = x.z || 0;
+            this.w = x.w || 0;
+        }
+        else
+        {
+            this.x = x || 0;
+            this.y = y || 0;
+            this.z = z || 0;
+            this.w = w || 0;
+        }
+
+        return this;
+    },
+
+    /**
+     * Add a given Vector to this Vector. Addition is component-wise.
+     *
+     * @method Phaser.Math.Vector4#add
+     * @since 3.0.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3|Phaser.Math.Vector4)} v - The Vector to add to this Vector.
+     *
+     * @return {Phaser.Math.Vector4} This Vector4.
+     */
+    add: function (v)
+    {
+        this.x += v.x;
+        this.y += v.y;
+        this.z += v.z || 0;
+        this.w += v.w || 0;
+
+        return this;
+    },
+
+    /**
+     * Subtract the given Vector from this Vector. Subtraction is component-wise.
+     *
+     * @method Phaser.Math.Vector4#subtract
+     * @since 3.0.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3|Phaser.Math.Vector4)} v - The Vector to subtract from this Vector.
+     *
+     * @return {Phaser.Math.Vector4} This Vector4.
+     */
+    subtract: function (v)
+    {
+        this.x -= v.x;
+        this.y -= v.y;
+        this.z -= v.z || 0;
+        this.w -= v.w || 0;
+
+        return this;
+    },
+
+    /**
+     * Scale this Vector by the given value.
+     *
+     * @method Phaser.Math.Vector4#scale
+     * @since 3.0.0
+     *
+     * @param {number} scale - The value to scale this Vector by.
+     *
+     * @return {Phaser.Math.Vector4} This Vector4.
+     */
+    scale: function (scale)
+    {
+        this.x *= scale;
+        this.y *= scale;
+        this.z *= scale;
+        this.w *= scale;
+
+        return this;
+    },
+
+    /**
+     * Calculate the length (or magnitude) of this Vector.
+     *
+     * @method Phaser.Math.Vector4#length
+     * @since 3.0.0
+     *
+     * @return {number} The length of this Vector.
+     */
+    length: function ()
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+        var w = this.w;
+
+        return Math.sqrt(x * x + y * y + z * z + w * w);
+    },
+
+    /**
+     * Calculate the length of this Vector squared.
+     *
+     * @method Phaser.Math.Vector4#lengthSq
+     * @since 3.0.0
+     *
+     * @return {number} The length of this Vector, squared.
+     */
+    lengthSq: function ()
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+        var w = this.w;
+
+        return x * x + y * y + z * z + w * w;
+    },
+
+    /**
+     * Normalize this Vector.
+     *
+     * Makes the vector a unit length vector (magnitude of 1) in the same direction.
+     *
+     * @method Phaser.Math.Vector4#normalize
+     * @since 3.0.0
+     *
+     * @return {Phaser.Math.Vector4} This Vector4.
+     */
+    normalize: function ()
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+        var w = this.w;
+        var len = x * x + y * y + z * z + w * w;
+
+        if (len > 0)
+        {
+            len = 1 / Math.sqrt(len);
+
+            this.x = x * len;
+            this.y = y * len;
+            this.z = z * len;
+            this.w = w * len;
+        }
+
+        return this;
+    },
+
+    /**
+     * Calculate the dot product of this Vector and the given Vector.
+     *
+     * @method Phaser.Math.Vector4#dot
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Vector4} v - The Vector4 to dot product with this Vector4.
+     *
+     * @return {number} The dot product of this Vector and the given Vector.
+     */
+    dot: function (v)
+    {
+        return this.x * v.x + this.y * v.y + this.z * v.z + this.w * v.w;
+    },
+
+    /**
+     * Linearly interpolate between this Vector and the given Vector.
+     *
+     * Interpolates this Vector towards the given Vector.
+     *
+     * @method Phaser.Math.Vector4#lerp
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Vector4} v - The Vector4 to interpolate towards.
+     * @param {number} [t=0] - The interpolation percentage, between 0 and 1.
+     *
+     * @return {Phaser.Math.Vector4} This Vector4.
+     */
+    lerp: function (v, t)
+    {
+        if (t === undefined) { t = 0; }
+
+        var ax = this.x;
+        var ay = this.y;
+        var az = this.z;
+        var aw = this.w;
+
+        this.x = ax + t * (v.x - ax);
+        this.y = ay + t * (v.y - ay);
+        this.z = az + t * (v.z - az);
+        this.w = aw + t * (v.w - aw);
+
+        return this;
+    },
+
+    /**
+     * Perform a component-wise multiplication between this Vector and the given Vector.
+     *
+     * Multiplies this Vector by the given Vector.
+     *
+     * @method Phaser.Math.Vector4#multiply
+     * @since 3.0.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3|Phaser.Math.Vector4)} v - The Vector to multiply this Vector by.
+     *
+     * @return {Phaser.Math.Vector4} This Vector4.
+     */
+    multiply: function (v)
+    {
+        this.x *= v.x;
+        this.y *= v.y;
+        this.z *= v.z || 1;
+        this.w *= v.w || 1;
+
+        return this;
+    },
+
+    /**
+     * Perform a component-wise division between this Vector and the given Vector.
+     *
+     * Divides this Vector by the given Vector.
+     *
+     * @method Phaser.Math.Vector4#divide
+     * @since 3.0.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3|Phaser.Math.Vector4)} v - The Vector to divide this Vector by.
+     *
+     * @return {Phaser.Math.Vector4} This Vector4.
+     */
+    divide: function (v)
+    {
+        this.x /= v.x;
+        this.y /= v.y;
+        this.z /= v.z || 1;
+        this.w /= v.w || 1;
+
+        return this;
+    },
+
+    /**
+     * Calculate the distance between this Vector and the given Vector.
+     *
+     * @method Phaser.Math.Vector4#distance
+     * @since 3.0.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3|Phaser.Math.Vector4)} v - The Vector to calculate the distance to.
+     *
+     * @return {number} The distance from this Vector to the given Vector.
+     */
+    distance: function (v)
+    {
+        var dx = v.x - this.x;
+        var dy = v.y - this.y;
+        var dz = v.z - this.z || 0;
+        var dw = v.w - this.w || 0;
+
+        return Math.sqrt(dx * dx + dy * dy + dz * dz + dw * dw);
+    },
+
+    /**
+     * Calculate the distance between this Vector and the given Vector, squared.
+     *
+     * @method Phaser.Math.Vector4#distanceSq
+     * @since 3.0.0
+     *
+     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3|Phaser.Math.Vector4)} v - The Vector to calculate the distance to.
+     *
+     * @return {number} The distance from this Vector to the given Vector, squared.
+     */
+    distanceSq: function (v)
+    {
+        var dx = v.x - this.x;
+        var dy = v.y - this.y;
+        var dz = v.z - this.z || 0;
+        var dw = v.w - this.w || 0;
+
+        return dx * dx + dy * dy + dz * dz + dw * dw;
+    },
+
+    /**
+     * Negate the `x`, `y`, `z` and `w` components of this Vector.
+     *
+     * @method Phaser.Math.Vector4#negate
+     * @since 3.0.0
+     *
+     * @return {Phaser.Math.Vector4} This Vector4.
+     */
+    negate: function ()
+    {
+        this.x = -this.x;
+        this.y = -this.y;
+        this.z = -this.z;
+        this.w = -this.w;
+
+        return this;
+    },
+
+    /**
+     * Transform this Vector with the given Matrix.
+     *
+     * @method Phaser.Math.Vector4#transformMat4
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Matrix4} mat - The Matrix4 to transform this Vector4 with.
+     *
+     * @return {Phaser.Math.Vector4} This Vector4.
+     */
+    transformMat4: function (mat)
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+        var w = this.w;
+        var m = mat.val;
+
+        this.x = m[0] * x + m[4] * y + m[8] * z + m[12] * w;
+        this.y = m[1] * x + m[5] * y + m[9] * z + m[13] * w;
+        this.z = m[2] * x + m[6] * y + m[10] * z + m[14] * w;
+        this.w = m[3] * x + m[7] * y + m[11] * z + m[15] * w;
+
+        return this;
+    },
+
+    /**
+     * Transform this Vector with the given Quaternion.
+     *
+     * @method Phaser.Math.Vector4#transformQuat
+     * @since 3.0.0
+     *
+     * @param {Phaser.Math.Quaternion} q - The Quaternion to transform this Vector with.
+     *
+     * @return {Phaser.Math.Vector4} This Vector4.
+     */
+    transformQuat: function (q)
+    {
+        var x = this.x;
+        var y = this.y;
+        var z = this.z;
+        var qx = q.x;
+        var qy = q.y;
+        var qz = q.z;
+        var qw = q.w;
+
+        // calculate quat * vec
+        var ix = qw * x + qy * z - qz * y;
+        var iy = qw * y + qz * x - qx * z;
+        var iz = qw * z + qx * y - qy * x;
+        var iw = -qx * x - qy * y - qz * z;
+
+        // calculate result * inverse quat
+        this.x = ix * qw + iw * -qx + iy * -qz - iz * -qy;
+        this.y = iy * qw + iw * -qy + iz * -qx - ix * -qz;
+        this.z = iz * qw + iw * -qz + ix * -qy - iy * -qx;
+
+        return this;
+    },
+
+    /**
+     * Make this Vector the zero vector (0, 0, 0, 0).
+     *
+     * @method Phaser.Math.Vector4#reset
+     * @since 3.0.0
+     *
+     * @return {Phaser.Math.Vector4} This Vector4.
+     */
+    reset: function ()
+    {
+        this.x = 0;
+        this.y = 0;
+        this.z = 0;
+        this.w = 0;
+
+        return this;
+    }
+
+});
+
+Vector4.prototype.sub = Vector4.prototype.subtract;
+Vector4.prototype.mul = Vector4.prototype.multiply;
+Vector4.prototype.div = Vector4.prototype.divide;
+Vector4.prototype.dist = Vector4.prototype.distance;
+Vector4.prototype.distSq = Vector4.prototype.distanceSq;
+Vector4.prototype.len = Vector4.prototype.length;
+Vector4.prototype.lenSq = Vector4.prototype.lengthSq;
+
+module.exports = Vector4;
+
+
+/***/ }),
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -23330,7 +26754,7 @@ module.exports = DefaultPlugins;
 
 
 /***/ }),
-/* 90 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -23340,7 +26764,7 @@ module.exports = DefaultPlugins;
  */
 
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(32);
+var Events = __webpack_require__(39);
 
 /**
  * @classdesc
@@ -23687,7 +27111,771 @@ module.exports = RenderTarget;
 
 
 /***/ }),
-/* 91 */
+/* 109 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * This module implements a modified ear slicing algorithm, optimized by z-order curve hashing and extended to
+ * handle holes, twisted polygons, degeneracies and self-intersections in a way that doesn't guarantee correctness
+ * of triangulation, but attempts to always produce acceptable results for practical data.
+ *
+ * Example:
+ *
+ * ```javascript
+ * const triangles = Phaser.Geom.Polygon.Earcut([10,0, 0,50, 60,60, 70,10]); // returns [1,0,3, 3,2,1]
+ * ```
+ *
+ * Each group of three vertex indices in the resulting array forms a triangle.
+ *
+ * ```javascript
+ * // triangulating a polygon with a hole
+ * earcut([0,0, 100,0, 100,100, 0,100,  20,20, 80,20, 80,80, 20,80], [4]);
+ * // [3,0,4, 5,4,0, 3,4,7, 5,0,1, 2,3,7, 6,5,1, 2,7,6, 6,1,2]
+ *
+ * // triangulating a polygon with 3d coords
+ * earcut([10,0,1, 0,50,2, 60,60,3, 70,10,4], null, 3);
+ * // [1,0,3, 3,2,1]
+ * ```
+ *
+ * If you pass a single vertex as a hole, Earcut treats it as a Steiner point.
+ *
+ * If your input is a multi-dimensional array (e.g. GeoJSON Polygon), you can convert it to the format
+ * expected by Earcut with `Phaser.Geom.Polygon.Earcut.flatten`:
+ *
+ * ```javascript
+ * var data = earcut.flatten(geojson.geometry.coordinates);
+ * var triangles = earcut(data.vertices, data.holes, data.dimensions);
+ * ```
+ *
+ * After getting a triangulation, you can verify its correctness with `Phaser.Geom.Polygon.Earcut.deviation`:
+ *
+ * ```javascript
+ * var deviation = earcut.deviation(vertices, holes, dimensions, triangles);
+ * ```
+ * Returns the relative difference between the total area of triangles and the area of the input polygon.
+ * 0 means the triangulation is fully correct.
+ *
+ * For more information see https://github.com/mapbox/earcut
+ *
+ * @function Phaser.Geom.Polygon.Earcut
+ * @since 3.50.0
+ *
+ * @param {number[]} data - A flat array of vertex coordinate, like [x0,y0, x1,y1, x2,y2, ...]
+ * @param {number[]} [holeIndices] - An array of hole indices if any (e.g. [5, 8] for a 12-vertex input would mean one hole with vertices 5–7 and another with 8–11).
+ * @param {number} [dimensions=2] - The number of coordinates per vertex in the input array (2 by default).
+ *
+ * @return {number[]} An array of triangulated data.
+ */
+
+ //  Earcut 2.2.2 (January 21st 2020)
+
+/*
+ * ISC License
+ *
+ * Copyright (c) 2016, Mapbox
+ *
+ * Permission to use, copy, modify, and/or distribute this software for any purpose
+ * with or without fee is hereby granted, provided that the above copyright notice
+ * and this permission notice appear in all copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+ * REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+ * INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+ * OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
+ * THIS SOFTWARE.
+ */
+
+
+
+function earcut(data, holeIndices, dim) {
+
+    dim = dim || 2;
+
+    var hasHoles = holeIndices && holeIndices.length,
+        outerLen = hasHoles ? holeIndices[0] * dim : data.length,
+        outerNode = linkedList(data, 0, outerLen, dim, true),
+        triangles = [];
+
+    if (!outerNode || outerNode.next === outerNode.prev) return triangles;
+
+    var minX, minY, maxX, maxY, x, y, invSize;
+
+    if (hasHoles) outerNode = eliminateHoles(data, holeIndices, outerNode, dim);
+
+    // if the shape is not too simple, we'll use z-order curve hash later; calculate polygon bbox
+    if (data.length > 80 * dim) {
+        minX = maxX = data[0];
+        minY = maxY = data[1];
+
+        for (var i = dim; i < outerLen; i += dim) {
+            x = data[i];
+            y = data[i + 1];
+            if (x < minX) minX = x;
+            if (y < minY) minY = y;
+            if (x > maxX) maxX = x;
+            if (y > maxY) maxY = y;
+        }
+
+        // minX, minY and invSize are later used to transform coords into integers for z-order calculation
+        invSize = Math.max(maxX - minX, maxY - minY);
+        invSize = invSize !== 0 ? 1 / invSize : 0;
+    }
+
+    earcutLinked(outerNode, triangles, dim, minX, minY, invSize);
+
+    return triangles;
+}
+
+// create a circular doubly linked list from polygon points in the specified winding order
+function linkedList(data, start, end, dim, clockwise) {
+    var i, last;
+
+    if (clockwise === (signedArea(data, start, end, dim) > 0)) {
+        for (i = start; i < end; i += dim) last = insertNode(i, data[i], data[i + 1], last);
+    } else {
+        for (i = end - dim; i >= start; i -= dim) last = insertNode(i, data[i], data[i + 1], last);
+    }
+
+    if (last && equals(last, last.next)) {
+        removeNode(last);
+        last = last.next;
+    }
+
+    return last;
+}
+
+// eliminate colinear or duplicate points
+function filterPoints(start, end) {
+    if (!start) return start;
+    if (!end) end = start;
+
+    var p = start,
+        again;
+    do {
+        again = false;
+
+        if (!p.steiner && (equals(p, p.next) || area(p.prev, p, p.next) === 0)) {
+            removeNode(p);
+            p = end = p.prev;
+            if (p === p.next) break;
+            again = true;
+
+        } else {
+            p = p.next;
+        }
+    } while (again || p !== end);
+
+    return end;
+}
+
+// main ear slicing loop which triangulates a polygon (given as a linked list)
+function earcutLinked(ear, triangles, dim, minX, minY, invSize, pass) {
+    if (!ear) return;
+
+    // interlink polygon nodes in z-order
+    if (!pass && invSize) indexCurve(ear, minX, minY, invSize);
+
+    var stop = ear,
+        prev, next;
+
+    // iterate through ears, slicing them one by one
+    while (ear.prev !== ear.next) {
+        prev = ear.prev;
+        next = ear.next;
+
+        if (invSize ? isEarHashed(ear, minX, minY, invSize) : isEar(ear)) {
+            // cut off the triangle
+            triangles.push(prev.i / dim);
+            triangles.push(ear.i / dim);
+            triangles.push(next.i / dim);
+
+            removeNode(ear);
+
+            // skipping the next vertex leads to less sliver triangles
+            ear = next.next;
+            stop = next.next;
+
+            continue;
+        }
+
+        ear = next;
+
+        // if we looped through the whole remaining polygon and can't find any more ears
+        if (ear === stop) {
+            // try filtering points and slicing again
+            if (!pass) {
+                earcutLinked(filterPoints(ear), triangles, dim, minX, minY, invSize, 1);
+
+            // if this didn't work, try curing all small self-intersections locally
+            } else if (pass === 1) {
+                ear = cureLocalIntersections(filterPoints(ear), triangles, dim);
+                earcutLinked(ear, triangles, dim, minX, minY, invSize, 2);
+
+            // as a last resort, try splitting the remaining polygon into two
+            } else if (pass === 2) {
+                splitEarcut(ear, triangles, dim, minX, minY, invSize);
+            }
+
+            break;
+        }
+    }
+}
+
+// check whether a polygon node forms a valid ear with adjacent nodes
+function isEar(ear) {
+    var a = ear.prev,
+        b = ear,
+        c = ear.next;
+
+    if (area(a, b, c) >= 0) return false; // reflex, can't be an ear
+
+    // now make sure we don't have other points inside the potential ear
+    var p = ear.next.next;
+
+    while (p !== ear.prev) {
+        if (pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, p.x, p.y) &&
+            area(p.prev, p, p.next) >= 0) return false;
+        p = p.next;
+    }
+
+    return true;
+}
+
+function isEarHashed(ear, minX, minY, invSize) {
+    var a = ear.prev,
+        b = ear,
+        c = ear.next;
+
+    if (area(a, b, c) >= 0) return false; // reflex, can't be an ear
+
+    // triangle bbox; min & max are calculated like this for speed
+    var minTX = a.x < b.x ? (a.x < c.x ? a.x : c.x) : (b.x < c.x ? b.x : c.x),
+        minTY = a.y < b.y ? (a.y < c.y ? a.y : c.y) : (b.y < c.y ? b.y : c.y),
+        maxTX = a.x > b.x ? (a.x > c.x ? a.x : c.x) : (b.x > c.x ? b.x : c.x),
+        maxTY = a.y > b.y ? (a.y > c.y ? a.y : c.y) : (b.y > c.y ? b.y : c.y);
+
+    // z-order range for the current triangle bbox;
+    var minZ = zOrder(minTX, minTY, minX, minY, invSize),
+        maxZ = zOrder(maxTX, maxTY, minX, minY, invSize);
+
+    var p = ear.prevZ,
+        n = ear.nextZ;
+
+    // look for points inside the triangle in both directions
+    while (p && p.z >= minZ && n && n.z <= maxZ) {
+        if (p !== ear.prev && p !== ear.next &&
+            pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, p.x, p.y) &&
+            area(p.prev, p, p.next) >= 0) return false;
+        p = p.prevZ;
+
+        if (n !== ear.prev && n !== ear.next &&
+            pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, n.x, n.y) &&
+            area(n.prev, n, n.next) >= 0) return false;
+        n = n.nextZ;
+    }
+
+    // look for remaining points in decreasing z-order
+    while (p && p.z >= minZ) {
+        if (p !== ear.prev && p !== ear.next &&
+            pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, p.x, p.y) &&
+            area(p.prev, p, p.next) >= 0) return false;
+        p = p.prevZ;
+    }
+
+    // look for remaining points in increasing z-order
+    while (n && n.z <= maxZ) {
+        if (n !== ear.prev && n !== ear.next &&
+            pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, n.x, n.y) &&
+            area(n.prev, n, n.next) >= 0) return false;
+        n = n.nextZ;
+    }
+
+    return true;
+}
+
+// go through all polygon nodes and cure small local self-intersections
+function cureLocalIntersections(start, triangles, dim) {
+    var p = start;
+    do {
+        var a = p.prev,
+            b = p.next.next;
+
+        if (!equals(a, b) && intersects(a, p, p.next, b) && locallyInside(a, b) && locallyInside(b, a)) {
+
+            triangles.push(a.i / dim);
+            triangles.push(p.i / dim);
+            triangles.push(b.i / dim);
+
+            // remove two nodes involved
+            removeNode(p);
+            removeNode(p.next);
+
+            p = start = b;
+        }
+        p = p.next;
+    } while (p !== start);
+
+    return filterPoints(p);
+}
+
+// try splitting polygon into two and triangulate them independently
+function splitEarcut(start, triangles, dim, minX, minY, invSize) {
+    // look for a valid diagonal that divides the polygon into two
+    var a = start;
+    do {
+        var b = a.next.next;
+        while (b !== a.prev) {
+            if (a.i !== b.i && isValidDiagonal(a, b)) {
+                // split the polygon in two by the diagonal
+                var c = splitPolygon(a, b);
+
+                // filter colinear points around the cuts
+                a = filterPoints(a, a.next);
+                c = filterPoints(c, c.next);
+
+                // run earcut on each half
+                earcutLinked(a, triangles, dim, minX, minY, invSize);
+                earcutLinked(c, triangles, dim, minX, minY, invSize);
+                return;
+            }
+            b = b.next;
+        }
+        a = a.next;
+    } while (a !== start);
+}
+
+// link every hole into the outer loop, producing a single-ring polygon without holes
+function eliminateHoles(data, holeIndices, outerNode, dim) {
+    var queue = [],
+        i, len, start, end, list;
+
+    for (i = 0, len = holeIndices.length; i < len; i++) {
+        start = holeIndices[i] * dim;
+        end = i < len - 1 ? holeIndices[i + 1] * dim : data.length;
+        list = linkedList(data, start, end, dim, false);
+        if (list === list.next) list.steiner = true;
+        queue.push(getLeftmost(list));
+    }
+
+    queue.sort(compareX);
+
+    // process holes from left to right
+    for (i = 0; i < queue.length; i++) {
+        eliminateHole(queue[i], outerNode);
+        outerNode = filterPoints(outerNode, outerNode.next);
+    }
+
+    return outerNode;
+}
+
+function compareX(a, b) {
+    return a.x - b.x;
+}
+
+// find a bridge between vertices that connects hole with an outer ring and and link it
+function eliminateHole(hole, outerNode) {
+    outerNode = findHoleBridge(hole, outerNode);
+    if (outerNode) {
+        var b = splitPolygon(outerNode, hole);
+
+        // filter collinear points around the cuts
+        filterPoints(outerNode, outerNode.next);
+        filterPoints(b, b.next);
+    }
+}
+
+// David Eberly's algorithm for finding a bridge between hole and outer polygon
+function findHoleBridge(hole, outerNode) {
+    var p = outerNode,
+        hx = hole.x,
+        hy = hole.y,
+        qx = -Infinity,
+        m;
+
+    // find a segment intersected by a ray from the hole's leftmost point to the left;
+    // segment's endpoint with lesser x will be potential connection point
+    do {
+        if (hy <= p.y && hy >= p.next.y && p.next.y !== p.y) {
+            var x = p.x + (hy - p.y) * (p.next.x - p.x) / (p.next.y - p.y);
+            if (x <= hx && x > qx) {
+                qx = x;
+                if (x === hx) {
+                    if (hy === p.y) return p;
+                    if (hy === p.next.y) return p.next;
+                }
+                m = p.x < p.next.x ? p : p.next;
+            }
+        }
+        p = p.next;
+    } while (p !== outerNode);
+
+    if (!m) return null;
+
+    if (hx === qx) return m; // hole touches outer segment; pick leftmost endpoint
+
+    // look for points inside the triangle of hole point, segment intersection and endpoint;
+    // if there are no points found, we have a valid connection;
+    // otherwise choose the point of the minimum angle with the ray as connection point
+
+    var stop = m,
+        mx = m.x,
+        my = m.y,
+        tanMin = Infinity,
+        tan;
+
+    p = m;
+
+    do {
+        if (hx >= p.x && p.x >= mx && hx !== p.x &&
+                pointInTriangle(hy < my ? hx : qx, hy, mx, my, hy < my ? qx : hx, hy, p.x, p.y)) {
+
+            tan = Math.abs(hy - p.y) / (hx - p.x); // tangential
+
+            if (locallyInside(p, hole) &&
+                (tan < tanMin || (tan === tanMin && (p.x > m.x || (p.x === m.x && sectorContainsSector(m, p)))))) {
+                m = p;
+                tanMin = tan;
+            }
+        }
+
+        p = p.next;
+    } while (p !== stop);
+
+    return m;
+}
+
+// whether sector in vertex m contains sector in vertex p in the same coordinates
+function sectorContainsSector(m, p) {
+    return area(m.prev, m, p.prev) < 0 && area(p.next, m, m.next) < 0;
+}
+
+// interlink polygon nodes in z-order
+function indexCurve(start, minX, minY, invSize) {
+    var p = start;
+    do {
+        if (p.z === null) p.z = zOrder(p.x, p.y, minX, minY, invSize);
+        p.prevZ = p.prev;
+        p.nextZ = p.next;
+        p = p.next;
+    } while (p !== start);
+
+    p.prevZ.nextZ = null;
+    p.prevZ = null;
+
+    sortLinked(p);
+}
+
+// Simon Tatham's linked list merge sort algorithm
+// http://www.chiark.greenend.org.uk/~sgtatham/algorithms/listsort.html
+function sortLinked(list) {
+    var i, p, q, e, tail, numMerges, pSize, qSize,
+        inSize = 1;
+
+    do {
+        p = list;
+        list = null;
+        tail = null;
+        numMerges = 0;
+
+        while (p) {
+            numMerges++;
+            q = p;
+            pSize = 0;
+            for (i = 0; i < inSize; i++) {
+                pSize++;
+                q = q.nextZ;
+                if (!q) break;
+            }
+            qSize = inSize;
+
+            while (pSize > 0 || (qSize > 0 && q)) {
+
+                if (pSize !== 0 && (qSize === 0 || !q || p.z <= q.z)) {
+                    e = p;
+                    p = p.nextZ;
+                    pSize--;
+                } else {
+                    e = q;
+                    q = q.nextZ;
+                    qSize--;
+                }
+
+                if (tail) tail.nextZ = e;
+                else list = e;
+
+                e.prevZ = tail;
+                tail = e;
+            }
+
+            p = q;
+        }
+
+        tail.nextZ = null;
+        inSize *= 2;
+
+    } while (numMerges > 1);
+
+    return list;
+}
+
+// z-order of a point given coords and inverse of the longer side of data bbox
+function zOrder(x, y, minX, minY, invSize) {
+    // coords are transformed into non-negative 15-bit integer range
+    x = 32767 * (x - minX) * invSize;
+    y = 32767 * (y - minY) * invSize;
+
+    x = (x | (x << 8)) & 0x00FF00FF;
+    x = (x | (x << 4)) & 0x0F0F0F0F;
+    x = (x | (x << 2)) & 0x33333333;
+    x = (x | (x << 1)) & 0x55555555;
+
+    y = (y | (y << 8)) & 0x00FF00FF;
+    y = (y | (y << 4)) & 0x0F0F0F0F;
+    y = (y | (y << 2)) & 0x33333333;
+    y = (y | (y << 1)) & 0x55555555;
+
+    return x | (y << 1);
+}
+
+// find the leftmost node of a polygon ring
+function getLeftmost(start) {
+    var p = start,
+        leftmost = start;
+    do {
+        if (p.x < leftmost.x || (p.x === leftmost.x && p.y < leftmost.y)) leftmost = p;
+        p = p.next;
+    } while (p !== start);
+
+    return leftmost;
+}
+
+// check if a point lies within a convex triangle
+function pointInTriangle(ax, ay, bx, by, cx, cy, px, py) {
+    return (cx - px) * (ay - py) - (ax - px) * (cy - py) >= 0 &&
+           (ax - px) * (by - py) - (bx - px) * (ay - py) >= 0 &&
+           (bx - px) * (cy - py) - (cx - px) * (by - py) >= 0;
+}
+
+// check if a diagonal between two polygon nodes is valid (lies in polygon interior)
+function isValidDiagonal(a, b) {
+    return a.next.i !== b.i && a.prev.i !== b.i && !intersectsPolygon(a, b) && // dones't intersect other edges
+           (locallyInside(a, b) && locallyInside(b, a) && middleInside(a, b) && // locally visible
+            (area(a.prev, a, b.prev) || area(a, b.prev, b)) || // does not create opposite-facing sectors
+            equals(a, b) && area(a.prev, a, a.next) > 0 && area(b.prev, b, b.next) > 0); // special zero-length case
+}
+
+// signed area of a triangle
+function area(p, q, r) {
+    return (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+}
+
+// check if two points are equal
+function equals(p1, p2) {
+    return p1.x === p2.x && p1.y === p2.y;
+}
+
+// check if two segments intersect
+function intersects(p1, q1, p2, q2) {
+    var o1 = sign(area(p1, q1, p2));
+    var o2 = sign(area(p1, q1, q2));
+    var o3 = sign(area(p2, q2, p1));
+    var o4 = sign(area(p2, q2, q1));
+
+    if (o1 !== o2 && o3 !== o4) return true; // general case
+
+    if (o1 === 0 && onSegment(p1, p2, q1)) return true; // p1, q1 and p2 are collinear and p2 lies on p1q1
+    if (o2 === 0 && onSegment(p1, q2, q1)) return true; // p1, q1 and q2 are collinear and q2 lies on p1q1
+    if (o3 === 0 && onSegment(p2, p1, q2)) return true; // p2, q2 and p1 are collinear and p1 lies on p2q2
+    if (o4 === 0 && onSegment(p2, q1, q2)) return true; // p2, q2 and q1 are collinear and q1 lies on p2q2
+
+    return false;
+}
+
+// for collinear points p, q, r, check if point q lies on segment pr
+function onSegment(p, q, r) {
+    return q.x <= Math.max(p.x, r.x) && q.x >= Math.min(p.x, r.x) && q.y <= Math.max(p.y, r.y) && q.y >= Math.min(p.y, r.y);
+}
+
+function sign(num) {
+    return num > 0 ? 1 : num < 0 ? -1 : 0;
+}
+
+// check if a polygon diagonal intersects any polygon segments
+function intersectsPolygon(a, b) {
+    var p = a;
+    do {
+        if (p.i !== a.i && p.next.i !== a.i && p.i !== b.i && p.next.i !== b.i &&
+                intersects(p, p.next, a, b)) return true;
+        p = p.next;
+    } while (p !== a);
+
+    return false;
+}
+
+// check if a polygon diagonal is locally inside the polygon
+function locallyInside(a, b) {
+    return area(a.prev, a, a.next) < 0 ?
+        area(a, b, a.next) >= 0 && area(a, a.prev, b) >= 0 :
+        area(a, b, a.prev) < 0 || area(a, a.next, b) < 0;
+}
+
+// check if the middle point of a polygon diagonal is inside the polygon
+function middleInside(a, b) {
+    var p = a,
+        inside = false,
+        px = (a.x + b.x) / 2,
+        py = (a.y + b.y) / 2;
+    do {
+        if (((p.y > py) !== (p.next.y > py)) && p.next.y !== p.y &&
+                (px < (p.next.x - p.x) * (py - p.y) / (p.next.y - p.y) + p.x))
+            inside = !inside;
+        p = p.next;
+    } while (p !== a);
+
+    return inside;
+}
+
+// link two polygon vertices with a bridge; if the vertices belong to the same ring, it splits polygon into two;
+// if one belongs to the outer ring and another to a hole, it merges it into a single ring
+function splitPolygon(a, b) {
+    var a2 = new Node(a.i, a.x, a.y),
+        b2 = new Node(b.i, b.x, b.y),
+        an = a.next,
+        bp = b.prev;
+
+    a.next = b;
+    b.prev = a;
+
+    a2.next = an;
+    an.prev = a2;
+
+    b2.next = a2;
+    a2.prev = b2;
+
+    bp.next = b2;
+    b2.prev = bp;
+
+    return b2;
+}
+
+// create a node and optionally link it with previous one (in a circular doubly linked list)
+function insertNode(i, x, y, last) {
+    var p = new Node(i, x, y);
+
+    if (!last) {
+        p.prev = p;
+        p.next = p;
+
+    } else {
+        p.next = last.next;
+        p.prev = last;
+        last.next.prev = p;
+        last.next = p;
+    }
+    return p;
+}
+
+function removeNode(p) {
+    p.next.prev = p.prev;
+    p.prev.next = p.next;
+
+    if (p.prevZ) p.prevZ.nextZ = p.nextZ;
+    if (p.nextZ) p.nextZ.prevZ = p.prevZ;
+}
+
+function Node(i, x, y) {
+    // vertex index in coordinates array
+    this.i = i;
+
+    // vertex coordinates
+    this.x = x;
+    this.y = y;
+
+    // previous and next vertex nodes in a polygon ring
+    this.prev = null;
+    this.next = null;
+
+    // z-order curve value
+    this.z = null;
+
+    // previous and next nodes in z-order
+    this.prevZ = null;
+    this.nextZ = null;
+
+    // indicates whether this is a steiner point
+    this.steiner = false;
+}
+
+// return a percentage difference between the polygon area and its triangulation area;
+// used to verify correctness of triangulation
+earcut.deviation = function (data, holeIndices, dim, triangles) {
+    var hasHoles = holeIndices && holeIndices.length;
+    var outerLen = hasHoles ? holeIndices[0] * dim : data.length;
+
+    var polygonArea = Math.abs(signedArea(data, 0, outerLen, dim));
+    if (hasHoles) {
+        for (var i = 0, len = holeIndices.length; i < len; i++) {
+            var start = holeIndices[i] * dim;
+            var end = i < len - 1 ? holeIndices[i + 1] * dim : data.length;
+            polygonArea -= Math.abs(signedArea(data, start, end, dim));
+        }
+    }
+
+    var trianglesArea = 0;
+    for (i = 0; i < triangles.length; i += 3) {
+        var a = triangles[i] * dim;
+        var b = triangles[i + 1] * dim;
+        var c = triangles[i + 2] * dim;
+        trianglesArea += Math.abs(
+            (data[a] - data[c]) * (data[b + 1] - data[a + 1]) -
+            (data[a] - data[b]) * (data[c + 1] - data[a + 1]));
+    }
+
+    return polygonArea === 0 && trianglesArea === 0 ? 0 :
+        Math.abs((trianglesArea - polygonArea) / polygonArea);
+};
+
+function signedArea(data, start, end, dim) {
+    var sum = 0;
+    for (var i = start, j = end - dim; i < end; i += dim) {
+        sum += (data[j] - data[i]) * (data[i + 1] + data[j + 1]);
+        j = i;
+    }
+    return sum;
+}
+
+// turn a polygon in a multi-dimensional array form (e.g. as in GeoJSON) into a form Earcut accepts
+earcut.flatten = function (data) {
+    var dim = data[0][0].length,
+        result = {vertices: [], holes: [], dimensions: dim},
+        holeIndex = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        for (var j = 0; j < data[i].length; j++) {
+            for (var d = 0; d < dim; d++) result.vertices.push(data[i][j][d]);
+        }
+        if (i > 0) {
+            holeIndex += data[i - 1].length;
+            result.holes.push(holeIndex);
+        }
+    }
+    return result;
+};
+
+module.exports = earcut;
+
+
+/***/ }),
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -23698,10 +27886,10 @@ module.exports = RenderTarget;
 
 var CONST = {
 
-    CENTER: __webpack_require__(199),
-    ORIENTATION: __webpack_require__(200),
-    SCALE_MODE: __webpack_require__(201),
-    ZOOM: __webpack_require__(202)
+    CENTER: __webpack_require__(229),
+    ORIENTATION: __webpack_require__(230),
+    SCALE_MODE: __webpack_require__(231),
+    ZOOM: __webpack_require__(232)
 
 };
 
@@ -23709,7 +27897,7 @@ module.exports = CONST;
 
 
 /***/ }),
-/* 92 */
+/* 111 */
 /***/ (function(module, exports) {
 
 /**
@@ -23807,7 +27995,7 @@ module.exports = INPUT_CONST;
 
 
 /***/ }),
-/* 93 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -23817,14 +28005,14 @@ module.exports = INPUT_CONST;
  */
 
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(65);
-var DefaultPlugins = __webpack_require__(89);
-var Events = __webpack_require__(8);
-var GetPhysicsPlugins = __webpack_require__(216);
-var GetScenePlugins = __webpack_require__(218);
-var GLOBAL_CONST = __webpack_require__(15);
-var NOOP = __webpack_require__(3);
-var Settings = __webpack_require__(219);
+var CONST = __webpack_require__(78);
+var DefaultPlugins = __webpack_require__(107);
+var Events = __webpack_require__(11);
+var GetPhysicsPlugins = __webpack_require__(246);
+var GetScenePlugins = __webpack_require__(248);
+var GLOBAL_CONST = __webpack_require__(16);
+var NOOP = __webpack_require__(4);
+var Settings = __webpack_require__(249);
 
 /**
  * @classdesc
@@ -24608,7 +28796,7 @@ module.exports = Systems;
 
 
 /***/ }),
-/* 94 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -24617,10 +28805,10 @@ module.exports = Systems;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = __webpack_require__(15);
+var CONST = __webpack_require__(16);
 var Class = __webpack_require__(0);
-var Frame = __webpack_require__(222);
-var TextureSource = __webpack_require__(223);
+var Frame = __webpack_require__(252);
+var TextureSource = __webpack_require__(253);
 
 var TEXTURE_MISSING_ERROR = 'Texture.frame missing: ';
 
@@ -25136,7 +29324,7 @@ module.exports = Texture;
 
 
 /***/ }),
-/* 95 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -25145,10 +29333,10 @@ module.exports = Texture;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var ArrayUtils = __webpack_require__(631);
+var ArrayUtils = __webpack_require__(681);
 var Class = __webpack_require__(0);
-var NOOP = __webpack_require__(3);
-var StableSort = __webpack_require__(69);
+var NOOP = __webpack_require__(4);
+var StableSort = __webpack_require__(82);
 
 /**
  * @callback EachListCallback<I>
@@ -25952,7 +30140,7 @@ module.exports = List;
 
 
 /***/ }),
-/* 96 */
+/* 115 */
 /***/ (function(module, exports) {
 
 /**
@@ -26014,7 +30202,7 @@ module.exports = CheckMatrix;
 
 
 /***/ }),
-/* 97 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -26029,25 +30217,25 @@ module.exports = CheckMatrix;
 
 module.exports = {
 
-    ADDED_TO_SCENE: __webpack_require__(659),
-    DESTROY: __webpack_require__(660),
-    REMOVED_FROM_SCENE: __webpack_require__(661),
-    VIDEO_COMPLETE: __webpack_require__(662),
-    VIDEO_CREATED: __webpack_require__(663),
-    VIDEO_ERROR: __webpack_require__(664),
-    VIDEO_LOOP: __webpack_require__(665),
-    VIDEO_PLAY: __webpack_require__(666),
-    VIDEO_SEEKED: __webpack_require__(667),
-    VIDEO_SEEKING: __webpack_require__(668),
-    VIDEO_STOP: __webpack_require__(669),
-    VIDEO_TIMEOUT: __webpack_require__(670),
-    VIDEO_UNLOCKED: __webpack_require__(671)
+    ADDED_TO_SCENE: __webpack_require__(709),
+    DESTROY: __webpack_require__(710),
+    REMOVED_FROM_SCENE: __webpack_require__(711),
+    VIDEO_COMPLETE: __webpack_require__(712),
+    VIDEO_CREATED: __webpack_require__(713),
+    VIDEO_ERROR: __webpack_require__(714),
+    VIDEO_LOOP: __webpack_require__(715),
+    VIDEO_PLAY: __webpack_require__(716),
+    VIDEO_SEEKED: __webpack_require__(717),
+    VIDEO_SEEKING: __webpack_require__(718),
+    VIDEO_STOP: __webpack_require__(719),
+    VIDEO_TIMEOUT: __webpack_require__(720),
+    VIDEO_UNLOCKED: __webpack_require__(721)
 
 };
 
 
 /***/ }),
-/* 98 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -26056,24 +30244,24 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BaseCamera = __webpack_require__(79);
+var BaseCamera = __webpack_require__(96);
 var Class = __webpack_require__(0);
-var Commands = __webpack_require__(99);
-var ComponentsAlpha = __webpack_require__(124);
-var ComponentsBlendMode = __webpack_require__(125);
-var ComponentsDepth = __webpack_require__(126);
-var ComponentsMask = __webpack_require__(131);
-var ComponentsPipeline = __webpack_require__(134);
-var ComponentsScrollFactor = __webpack_require__(136);
-var ComponentsTransform = __webpack_require__(137);
-var ComponentsVisible = __webpack_require__(140);
-var Ellipse = __webpack_require__(242);
-var GameObject = __webpack_require__(51);
+var Commands = __webpack_require__(118);
+var ComponentsAlpha = __webpack_require__(153);
+var ComponentsBlendMode = __webpack_require__(154);
+var ComponentsDepth = __webpack_require__(155);
+var ComponentsMask = __webpack_require__(162);
+var ComponentsPipeline = __webpack_require__(165);
+var ComponentsScrollFactor = __webpack_require__(167);
+var ComponentsTransform = __webpack_require__(168);
+var ComponentsVisible = __webpack_require__(171);
+var Ellipse = __webpack_require__(83);
+var GameObject = __webpack_require__(61);
 var GetFastValue = __webpack_require__(1);
-var GetValue = __webpack_require__(4);
-var MATH_CONST = __webpack_require__(13);
-var PIPELINES_CONST = __webpack_require__(56);
-var Render = __webpack_require__(679);
+var GetValue = __webpack_require__(5);
+var MATH_CONST = __webpack_require__(7);
+var PIPELINES_CONST = __webpack_require__(68);
+var Render = __webpack_require__(725);
 
 /**
  * @classdesc
@@ -27524,7 +31712,7 @@ module.exports = Graphics;
 
 
 /***/ }),
-/* 99 */
+/* 118 */
 /***/ (function(module, exports) {
 
 /**
@@ -27559,7 +31747,49 @@ module.exports = {
 
 
 /***/ }),
-/* 100 */
+/* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Returns a Point object containing the coordinates of a point on the circumference of the Ellipse based on the given angle.
+ *
+ * @function Phaser.Geom.Ellipse.CircumferencePoint
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to get the circumference point on.
+ * @param {number} angle - The angle from the center of the Ellipse to the circumference to return the point from. Given in radians.
+ * @param {(Phaser.Geom.Point|object)} [out] - A Point, or point-like object, to store the results in. If not given a Point will be created.
+ *
+ * @return {(Phaser.Geom.Point|object)} A Point object where the `x` and `y` properties are the point on the circumference.
+ */
+var CircumferencePoint = function (ellipse, angle, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    var halfWidth = ellipse.width / 2;
+    var halfHeight = ellipse.height / 2;
+
+    out.x = ellipse.x + halfWidth * Math.cos(angle);
+    out.y = ellipse.y + halfHeight * Math.sin(angle);
+
+    return out;
+};
+
+module.exports = CircumferencePoint;
+
+
+/***/ }),
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -27569,9 +31799,9 @@ module.exports = {
  */
 
 var Class = __webpack_require__(0);
-var Components = __webpack_require__(28);
-var GameObject = __webpack_require__(51);
-var ImageRender = __webpack_require__(681);
+var Components = __webpack_require__(33);
+var GameObject = __webpack_require__(61);
+var ImageRender = __webpack_require__(727);
 
 /**
  * @classdesc
@@ -27660,7 +31890,7 @@ module.exports = Image;
 
 
 /***/ }),
-/* 101 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -27669,17 +31899,17 @@ module.exports = Image;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BlendModes = __webpack_require__(27);
+var BlendModes = __webpack_require__(32);
 var Class = __webpack_require__(0);
-var Components = __webpack_require__(28);
-var ComponentsToJSON = __webpack_require__(83);
-var DataManager = __webpack_require__(47);
-var EventEmitter = __webpack_require__(2);
-var GameObjectEvents = __webpack_require__(97);
-var List = __webpack_require__(95);
-var Render = __webpack_require__(684);
-var SceneEvents = __webpack_require__(8);
-var StableSort = __webpack_require__(69);
+var Components = __webpack_require__(33);
+var ComponentsToJSON = __webpack_require__(99);
+var DataManager = __webpack_require__(57);
+var EventEmitter = __webpack_require__(3);
+var GameObjectEvents = __webpack_require__(116);
+var List = __webpack_require__(114);
+var Render = __webpack_require__(730);
+var SceneEvents = __webpack_require__(11);
+var StableSort = __webpack_require__(82);
 
 /**
  * @classdesc
@@ -28557,7 +32787,7 @@ module.exports = Layer;
 
 
 /***/ }),
-/* 102 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -28566,11 +32796,11 @@ module.exports = Layer;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var AnimationState = __webpack_require__(119);
+var AnimationState = __webpack_require__(148);
 var Class = __webpack_require__(0);
-var Components = __webpack_require__(28);
-var GameObject = __webpack_require__(51);
-var SpriteRender = __webpack_require__(687);
+var Components = __webpack_require__(33);
+var GameObject = __webpack_require__(61);
+var SpriteRender = __webpack_require__(733);
 
 /**
  * @classdesc
@@ -29036,7 +33266,7 @@ module.exports = Sprite;
 
 
 /***/ }),
-/* 103 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -29045,17 +33275,17 @@ module.exports = Sprite;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var AddToDOM = __webpack_require__(63);
-var CanvasPool = __webpack_require__(17);
+var AddToDOM = __webpack_require__(76);
+var CanvasPool = __webpack_require__(18);
 var Class = __webpack_require__(0);
-var Components = __webpack_require__(28);
-var GameEvents = __webpack_require__(7);
-var GameObject = __webpack_require__(51);
-var GetTextSize = __webpack_require__(690);
-var GetValue = __webpack_require__(4);
-var RemoveFromDOM = __webpack_require__(205);
-var TextRender = __webpack_require__(691);
-var TextStyle = __webpack_require__(694);
+var Components = __webpack_require__(33);
+var GameEvents = __webpack_require__(9);
+var GameObject = __webpack_require__(61);
+var GetTextSize = __webpack_require__(736);
+var GetValue = __webpack_require__(5);
+var RemoveFromDOM = __webpack_require__(235);
+var TextRender = __webpack_require__(737);
+var TextStyle = __webpack_require__(740);
 
 /**
  * @classdesc
@@ -30453,7 +34683,548 @@ module.exports = Text;
 
 
 /***/ }),
-/* 104 */
+/* 124 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Returns a Point object containing the coordinates of a point on the circumference of the Circle based on the given angle.
+ *
+ * @function Phaser.Geom.Circle.CircumferencePoint
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Circle} circle - The Circle to get the circumference point on.
+ * @param {number} angle - The angle from the center of the Circle to the circumference to return the point from. Given in radians.
+ * @param {(Phaser.Geom.Point|object)} [out] - A Point, or point-like object, to store the results in. If not given a Point will be created.
+ *
+ * @return {(Phaser.Geom.Point|object)} A Point object where the `x` and `y` properties are the point on the circumference.
+ */
+var CircumferencePoint = function (circle, angle, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    out.x = circle.x + (circle.radius * Math.cos(angle));
+    out.y = circle.y + (circle.radius * Math.sin(angle));
+
+    return out;
+};
+
+module.exports = CircumferencePoint;
+
+
+/***/ }),
+/* 125 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Florian Vazelle
+ * @author       Geoffrey Glaive
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+var LineToCircle = __webpack_require__(126);
+
+/**
+ * Checks for intersection between the line segment and circle,
+ * and returns the intersection points as a Point object array.
+ *
+ * @function Phaser.Geom.Intersects.GetLineToCircle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The line segment to check.
+ * @param {Phaser.Geom.Circle} circle - The circle to check against the line.
+ * @param {array} [out] - An optional array in which to store the points of intersection.
+ *
+ * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
+ */
+var GetLineToCircle = function (line, circle, out)
+{
+    if (out === undefined) { out = []; }
+
+    if (LineToCircle(line, circle))
+    {
+        var lx1 = line.x1;
+        var ly1 = line.y1;
+
+        var lx2 = line.x2;
+        var ly2 = line.y2;
+
+        var cx = circle.x;
+        var cy = circle.y;
+        var cr = circle.radius;
+
+        var lDirX = lx2 - lx1;
+        var lDirY = ly2 - ly1;
+        var oDirX = lx1 - cx;
+        var oDirY = ly1 - cy;
+
+        var coefficientA = lDirX * lDirX + lDirY * lDirY;
+        var coefficientB = 2 * (lDirX * oDirX + lDirY * oDirY);
+        var coefficientC = oDirX * oDirX + oDirY * oDirY - cr * cr;
+
+        var lambda = (coefficientB * coefficientB) - (4 * coefficientA * coefficientC);
+
+        var x, y;
+
+        if (lambda === 0)
+        {
+            var root = -coefficientB / (2 * coefficientA);
+            x = lx1 + root * lDirX;
+            y = ly1 + root * lDirY;
+            if (root >= 0 && root <= 1)
+            {
+                out.push(new Point(x, y));
+            }
+        }
+        else if (lambda > 0)
+        {
+            var root1 = (-coefficientB - Math.sqrt(lambda)) / (2 * coefficientA);
+            x = lx1 + root1 * lDirX;
+            y = ly1 + root1 * lDirY;
+            if (root1 >= 0 && root1 <= 1)
+            {
+                out.push(new Point(x, y));
+            }
+
+            var root2 = (-coefficientB + Math.sqrt(lambda)) / (2 * coefficientA);
+            x = lx1 + root2 * lDirX;
+            y = ly1 + root2 * lDirY;
+            if (root2 >= 0 && root2 <= 1)
+            {
+                out.push(new Point(x, y));
+            }
+        }
+    }
+
+    return out;
+};
+
+module.exports = GetLineToCircle;
+
+
+/***/ }),
+/* 126 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Contains = __webpack_require__(41);
+var Point = __webpack_require__(2);
+
+var tmp = new Point();
+
+/**
+ * Checks for intersection between the line segment and circle.
+ *
+ * Based on code by [Matt DesLauriers](https://github.com/mattdesl/line-circle-collision/blob/master/LICENSE.md).
+ *
+ * @function Phaser.Geom.Intersects.LineToCircle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The line segment to check.
+ * @param {Phaser.Geom.Circle} circle - The circle to check against the line.
+ * @param {(Phaser.Geom.Point|any)} [nearest] - An optional Point-like object. If given the closest point on the Line where the circle intersects will be stored in this object.
+ *
+ * @return {boolean} `true` if the two objects intersect, otherwise `false`.
+ */
+var LineToCircle = function (line, circle, nearest)
+{
+    if (nearest === undefined) { nearest = tmp; }
+
+    if (Contains(circle, line.x1, line.y1))
+    {
+        nearest.x = line.x1;
+        nearest.y = line.y1;
+
+        return true;
+    }
+
+    if (Contains(circle, line.x2, line.y2))
+    {
+        nearest.x = line.x2;
+        nearest.y = line.y2;
+
+        return true;
+    }
+
+    var dx = line.x2 - line.x1;
+    var dy = line.y2 - line.y1;
+
+    var lcx = circle.x - line.x1;
+    var lcy = circle.y - line.y1;
+
+    //  project lc onto d, resulting in vector p
+    var dLen2 = (dx * dx) + (dy * dy);
+    var px = dx;
+    var py = dy;
+
+    if (dLen2 > 0)
+    {
+        var dp = ((lcx * dx) + (lcy * dy)) / dLen2;
+
+        px *= dp;
+        py *= dp;
+    }
+
+    nearest.x = line.x1 + px;
+    nearest.y = line.y1 + py;
+    
+    //  len2 of p
+    var pLen2 = (px * px) + (py * py);
+    
+    return (
+        pLen2 <= dLen2 &&
+        ((px * dx) + (py * dy)) >= 0 &&
+        Contains(circle, nearest.x, nearest.y)
+    );
+};
+
+module.exports = LineToCircle;
+
+
+/***/ }),
+/* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Florian Vazelle
+ * @author       Geoffrey Glaive
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+var LineToLine = __webpack_require__(42);
+var LineToRectangle = __webpack_require__(288);
+
+/**
+ * Checks for intersection between the Line and a Rectangle shape,
+ * and returns the intersection points as a Point object array.
+ *
+ * @function Phaser.Geom.Intersects.GetLineToRectangle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The Line to check for intersection.
+ * @param {(Phaser.Geom.Rectangle|object)} rect - The Rectangle to check for intersection.
+ * @param {array} [out] - An optional array in which to store the points of intersection.
+ *
+ * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
+ */
+var GetLineToRectangle = function (line, rect, out)
+{
+    if (out === undefined) { out = []; }
+
+    if (LineToRectangle(line, rect))
+    {
+        var lineA = rect.getLineA();
+        var lineB = rect.getLineB();
+        var lineC = rect.getLineC();
+        var lineD = rect.getLineD();
+
+        var output = [ new Point(), new Point(), new Point(), new Point() ];
+
+        var result = [
+            LineToLine(lineA, line, output[0]),
+            LineToLine(lineB, line, output[1]),
+            LineToLine(lineC, line, output[2]),
+            LineToLine(lineD, line, output[3])
+        ];
+
+        for (var i = 0; i < 4; i++)
+        {
+            if (result[i]) { out.push(output[i]); }
+        }
+    }
+
+    return out;
+};
+
+module.exports = GetLineToRectangle;
+
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+//  http://www.blackpawn.com/texts/pointinpoly/
+
+//  points is an array of Point-like objects with public x/y properties
+//  returns an array containing all points that are within the triangle, or an empty array if none
+//  if 'returnFirst' is true it will return after the first point within the triangle is found
+
+/**
+ * Filters an array of point-like objects to only those contained within a triangle.
+ * If `returnFirst` is true, will return an array containing only the first point in the provided array that is within the triangle (or an empty array if there are no such points).
+ *
+ * @function Phaser.Geom.Triangle.ContainsArray
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The triangle that the points are being checked in.
+ * @param {Phaser.Geom.Point[]} points - An array of point-like objects (objects that have an `x` and `y` property)
+ * @param {boolean} [returnFirst=false] - If `true`, return an array containing only the first point found that is within the triangle.
+ * @param {array} [out] - If provided, the points that are within the triangle will be appended to this array instead of being added to a new array. If `returnFirst` is true, only the first point found within the triangle will be appended. This array will also be returned by this function.
+ *
+ * @return {Phaser.Geom.Point[]} An array containing all the points from `points` that are within the triangle, if an array was provided as `out`, points will be appended to that array and it will also be returned here.
+ */
+var ContainsArray = function (triangle, points, returnFirst, out)
+{
+    if (returnFirst === undefined) { returnFirst = false; }
+    if (out === undefined) { out = []; }
+
+    var v0x = triangle.x3 - triangle.x1;
+    var v0y = triangle.y3 - triangle.y1;
+
+    var v1x = triangle.x2 - triangle.x1;
+    var v1y = triangle.y2 - triangle.y1;
+
+    var dot00 = (v0x * v0x) + (v0y * v0y);
+    var dot01 = (v0x * v1x) + (v0y * v1y);
+    var dot11 = (v1x * v1x) + (v1y * v1y);
+
+    // Compute barycentric coordinates
+    var b = ((dot00 * dot11) - (dot01 * dot01));
+    var inv = (b === 0) ? 0 : (1 / b);
+
+    var u;
+    var v;
+    var v2x;
+    var v2y;
+    var dot02;
+    var dot12;
+
+    var x1 = triangle.x1;
+    var y1 = triangle.y1;
+
+    for (var i = 0; i < points.length; i++)
+    {
+        v2x = points[i].x - x1;
+        v2y = points[i].y - y1;
+
+        dot02 = (v0x * v2x) + (v0y * v2y);
+        dot12 = (v1x * v2x) + (v1y * v2y);
+
+        u = ((dot11 * dot02) - (dot01 * dot12)) * inv;
+        v = ((dot00 * dot12) - (dot01 * dot02)) * inv;
+    
+        if (u >= 0 && v >= 0 && (u + v < 1))
+        {
+            out.push({ x: points[i].x, y: points[i].y });
+
+            if (returnFirst)
+            {
+                break;
+            }
+        }
+    }
+
+    return out;
+};
+
+module.exports = ContainsArray;
+
+
+/***/ }),
+/* 129 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Rotate a line around the given coordinates by the given angle in radians.
+ *
+ * @function Phaser.Geom.Line.RotateAroundXY
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Line} O - [line,$return]
+ *
+ * @param {Phaser.Geom.Line} line - The line to rotate.
+ * @param {number} x - The horizontal coordinate to rotate the line around.
+ * @param {number} y - The vertical coordinate to rotate the line around.
+ * @param {number} angle - The angle of rotation in radians.
+ *
+ * @return {Phaser.Geom.Line} The rotated line.
+ */
+var RotateAroundXY = function (line, x, y, angle)
+{
+    var c = Math.cos(angle);
+    var s = Math.sin(angle);
+
+    var tx = line.x1 - x;
+    var ty = line.y1 - y;
+
+    line.x1 = tx * c - ty * s + x;
+    line.y1 = tx * s + ty * c + y;
+
+    tx = line.x2 - x;
+    ty = line.y2 - y;
+
+    line.x2 = tx * c - ty * s + x;
+    line.y2 = tx * s + ty * c + y;
+
+    return line;
+};
+
+module.exports = RotateAroundXY;
+
+
+/***/ }),
+/* 130 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+// Checks whether the x and y coordinates are contained within this polygon.
+//  Adapted from http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html by Jonas Raoni Soares Silva
+
+/**
+ * Checks if a point is within the bounds of a Polygon.
+ *
+ * @function Phaser.Geom.Polygon.Contains
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Polygon} polygon - The Polygon to check against.
+ * @param {number} x - The X coordinate of the point to check.
+ * @param {number} y - The Y coordinate of the point to check.
+ *
+ * @return {boolean} `true` if the point is within the bounds of the Polygon, otherwise `false`.
+ */
+var Contains = function (polygon, x, y)
+{
+    var inside = false;
+
+    for (var i = -1, j = polygon.points.length - 1; ++i < polygon.points.length; j = i)
+    {
+        var ix = polygon.points[i].x;
+        var iy = polygon.points[i].y;
+
+        var jx = polygon.points[j].x;
+        var jy = polygon.points[j].y;
+
+        if (((iy <= y && y < jy) || (jy <= y && y < iy)) && (x < (jx - ix) * (y - iy) / (jy - iy) + ix))
+        {
+            inside = !inside;
+        }
+    }
+
+    return inside;
+};
+
+module.exports = Contains;
+
+
+/***/ }),
+/* 131 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Calculates the width/height ratio of a rectangle.
+ *
+ * @function Phaser.Geom.Rectangle.GetAspectRatio
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The rectangle.
+ *
+ * @return {number} The width/height ratio of the rectangle.
+ */
+var GetAspectRatio = function (rect)
+{
+    return (rect.height === 0) ? NaN : rect.width / rect.height;
+};
+
+module.exports = GetAspectRatio;
+
+
+/***/ }),
+/* 132 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Rotates an entire Triangle at a given angle about a specific point.
+ *
+ * @function Phaser.Geom.Triangle.RotateAroundXY
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Triangle} O - [triangle,$return]
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to rotate.
+ * @param {number} x - The X coordinate of the point to rotate the Triangle about.
+ * @param {number} y - The Y coordinate of the point to rotate the Triangle about.
+ * @param {number} angle - The angle by which to rotate the Triangle, in radians.
+ *
+ * @return {Phaser.Geom.Triangle} The rotated Triangle.
+ */
+var RotateAroundXY = function (triangle, x, y, angle)
+{
+    var c = Math.cos(angle);
+    var s = Math.sin(angle);
+
+    var tx = triangle.x1 - x;
+    var ty = triangle.y1 - y;
+
+    triangle.x1 = tx * c - ty * s + x;
+    triangle.y1 = tx * s + ty * c + y;
+
+    tx = triangle.x2 - x;
+    ty = triangle.y2 - y;
+
+    triangle.x2 = tx * c - ty * s + x;
+    triangle.y2 = tx * s + ty * c + y;
+
+    tx = triangle.x3 - x;
+    ty = triangle.y3 - y;
+
+    triangle.x3 = tx * c - ty * s + x;
+    triangle.y3 = tx * s + ty * c + y;
+
+    return triangle;
+};
+
+module.exports = RotateAroundXY;
+
+
+/***/ }),
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -30468,18 +35239,18 @@ module.exports = Text;
 
 module.exports = {
 
-    BUTTON_DOWN: __webpack_require__(708),
-    BUTTON_UP: __webpack_require__(709),
-    CONNECTED: __webpack_require__(710),
-    DISCONNECTED: __webpack_require__(711),
-    GAMEPAD_BUTTON_DOWN: __webpack_require__(712),
-    GAMEPAD_BUTTON_UP: __webpack_require__(713)
+    BUTTON_DOWN: __webpack_require__(884),
+    BUTTON_UP: __webpack_require__(885),
+    CONNECTED: __webpack_require__(886),
+    DISCONNECTED: __webpack_require__(887),
+    GAMEPAD_BUTTON_DOWN: __webpack_require__(888),
+    GAMEPAD_BUTTON_UP: __webpack_require__(889)
 
 };
 
 
 /***/ }),
-/* 105 */
+/* 134 */
 /***/ (function(module, exports) {
 
 /**
@@ -30520,7 +35291,7 @@ module.exports = GetURL;
 
 
 /***/ }),
-/* 106 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -30530,7 +35301,7 @@ module.exports = GetURL;
  */
 
 var Extend = __webpack_require__(14);
-var XHRSettings = __webpack_require__(72);
+var XHRSettings = __webpack_require__(89);
 
 /**
  * Takes two XHRSettings Objects and creates a new XHRSettings object from them.
@@ -30568,7 +35339,7 @@ module.exports = MergeXHRSettings;
 
 
 /***/ }),
-/* 107 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -30577,7 +35348,7 @@ module.exports = MergeXHRSettings;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetValue = __webpack_require__(4);
+var GetValue = __webpack_require__(5);
 
 /**
  * Extracts an array of targets from a Tween configuration object.
@@ -30617,7 +35388,7 @@ module.exports = GetTargets;
 
 
 /***/ }),
-/* 108 */
+/* 137 */
 /***/ (function(module, exports) {
 
 /**
@@ -30885,7 +35656,7 @@ module.exports = GetValueOp;
 
 
 /***/ }),
-/* 109 */
+/* 138 */
 /***/ (function(module, exports) {
 
 /**
@@ -30929,7 +35700,7 @@ module.exports = TWEEN_DEFAULTS;
 
 
 /***/ }),
-/* 110 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -30939,12 +35710,12 @@ module.exports = TWEEN_DEFAULTS;
  */
 
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(111);
-var GameObjectCreator = __webpack_require__(25);
-var GameObjectFactory = __webpack_require__(26);
-var TWEEN_CONST = __webpack_require__(38);
-var MATH_CONST = __webpack_require__(13);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(140);
+var GameObjectCreator = __webpack_require__(30);
+var GameObjectFactory = __webpack_require__(31);
+var TWEEN_CONST = __webpack_require__(49);
+var MATH_CONST = __webpack_require__(7);
 
 /**
  * @classdesc
@@ -32572,7 +37343,7 @@ module.exports = Tween;
 
 
 /***/ }),
-/* 111 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -32587,26 +37358,26 @@ module.exports = Tween;
 
 module.exports = {
 
-    TIMELINE_COMPLETE: __webpack_require__(776),
-    TIMELINE_LOOP: __webpack_require__(777),
-    TIMELINE_PAUSE: __webpack_require__(778),
-    TIMELINE_RESUME: __webpack_require__(779),
-    TIMELINE_START: __webpack_require__(780),
-    TIMELINE_UPDATE: __webpack_require__(781),
-    TWEEN_ACTIVE: __webpack_require__(782),
-    TWEEN_COMPLETE: __webpack_require__(783),
-    TWEEN_LOOP: __webpack_require__(784),
-    TWEEN_REPEAT: __webpack_require__(785),
-    TWEEN_START: __webpack_require__(786),
-    TWEEN_STOP: __webpack_require__(787),
-    TWEEN_UPDATE: __webpack_require__(788),
-    TWEEN_YOYO: __webpack_require__(789)
+    TIMELINE_COMPLETE: __webpack_require__(943),
+    TIMELINE_LOOP: __webpack_require__(944),
+    TIMELINE_PAUSE: __webpack_require__(945),
+    TIMELINE_RESUME: __webpack_require__(946),
+    TIMELINE_START: __webpack_require__(947),
+    TIMELINE_UPDATE: __webpack_require__(948),
+    TWEEN_ACTIVE: __webpack_require__(949),
+    TWEEN_COMPLETE: __webpack_require__(950),
+    TWEEN_LOOP: __webpack_require__(951),
+    TWEEN_REPEAT: __webpack_require__(952),
+    TWEEN_START: __webpack_require__(953),
+    TWEEN_STOP: __webpack_require__(954),
+    TWEEN_UPDATE: __webpack_require__(955),
+    TWEEN_YOYO: __webpack_require__(956)
 
 };
 
 
 /***/ }),
-/* 112 */
+/* 141 */
 /***/ (function(module, exports) {
 
 /**
@@ -32733,7 +37504,7 @@ module.exports = TweenData;
 
 
 /***/ }),
-/* 113 */
+/* 142 */
 /***/ (function(module, exports) {
 
 /**
@@ -32817,7 +37588,7 @@ module.exports = FindClosestInSorted;
 
 
 /***/ }),
-/* 114 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -33004,7 +37775,7 @@ module.exports = AnimationFrame;
 
 
 /***/ }),
-/* 115 */
+/* 144 */
 /***/ (function(module, exports) {
 
 /**
@@ -33042,7 +37813,7 @@ module.exports = SortByDigits;
 
 
 /***/ }),
-/* 116 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -33051,16 +37822,16 @@ module.exports = SortByDigits;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Animation = __webpack_require__(78);
+var Animation = __webpack_require__(95);
 var Class = __webpack_require__(0);
-var CustomMap = __webpack_require__(35);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(54);
-var GameEvents = __webpack_require__(7);
+var CustomMap = __webpack_require__(46);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(66);
+var GameEvents = __webpack_require__(9);
 var GetFastValue = __webpack_require__(1);
-var GetValue = __webpack_require__(4);
-var Pad = __webpack_require__(117);
-var NumberArray = __webpack_require__(118);
+var GetValue = __webpack_require__(5);
+var Pad = __webpack_require__(146);
+var NumberArray = __webpack_require__(147);
 
 /**
  * @classdesc
@@ -34051,7 +38822,7 @@ module.exports = AnimationManager;
 
 
 /***/ }),
-/* 117 */
+/* 146 */
 /***/ (function(module, exports) {
 
 /**
@@ -34127,7 +38898,7 @@ module.exports = Pad;
 
 
 /***/ }),
-/* 118 */
+/* 147 */
 /***/ (function(module, exports) {
 
 /**
@@ -34220,7 +38991,7 @@ module.exports = NumberArray;
 
 
 /***/ }),
-/* 119 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -34230,10 +39001,10 @@ module.exports = NumberArray;
  */
 
 var Class = __webpack_require__(0);
-var CustomMap = __webpack_require__(35);
+var CustomMap = __webpack_require__(46);
 var GetFastValue = __webpack_require__(1);
-var Events = __webpack_require__(54);
-var Animation = __webpack_require__(78);
+var Events = __webpack_require__(66);
+var Animation = __webpack_require__(95);
 
 /**
  * @classdesc
@@ -36097,7 +40868,7 @@ module.exports = AnimationState;
 
 
 /***/ }),
-/* 120 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -36107,9 +40878,9 @@ module.exports = AnimationState;
  */
 
 var Class = __webpack_require__(0);
-var CustomMap = __webpack_require__(35);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(121);
+var CustomMap = __webpack_require__(46);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(150);
 
 /**
  * @classdesc
@@ -36283,7 +41054,7 @@ module.exports = BaseCache;
 
 
 /***/ }),
-/* 121 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -36298,14 +41069,14 @@ module.exports = BaseCache;
 
 module.exports = {
 
-    ADD: __webpack_require__(313),
-    REMOVE: __webpack_require__(314)
+    ADD: __webpack_require__(372),
+    REMOVE: __webpack_require__(373)
 
 };
 
 
 /***/ }),
-/* 122 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -36314,9 +41085,9 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BaseCache = __webpack_require__(120);
+var BaseCache = __webpack_require__(149);
 var Class = __webpack_require__(0);
-var GameEvents = __webpack_require__(7);
+var GameEvents = __webpack_require__(9);
 
 /**
  * @classdesc
@@ -36539,7 +41310,7 @@ module.exports = CacheManager;
 
 
 /***/ }),
-/* 123 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -36548,15 +41319,15 @@ module.exports = CacheManager;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BaseCamera = __webpack_require__(79);
-var CenterOn = __webpack_require__(362);
-var Clamp = __webpack_require__(5);
+var BaseCamera = __webpack_require__(96);
+var CenterOn = __webpack_require__(102);
+var Clamp = __webpack_require__(8);
 var Class = __webpack_require__(0);
-var Components = __webpack_require__(28);
-var Effects = __webpack_require__(143);
-var Events = __webpack_require__(16);
-var Linear = __webpack_require__(86);
-var Rectangle = __webpack_require__(36);
+var Components = __webpack_require__(33);
+var Effects = __webpack_require__(173);
+var Events = __webpack_require__(17);
+var Linear = __webpack_require__(103);
+var Rectangle = __webpack_require__(10);
 var Vector2 = __webpack_require__(6);
 
 /**
@@ -37350,7 +42121,7 @@ module.exports = Camera;
 
 
 /***/ }),
-/* 124 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -37359,7 +42130,7 @@ module.exports = Camera;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = __webpack_require__(5);
+var Clamp = __webpack_require__(8);
 
 //  bitmask flag for GameObject.renderMask
 var _FLAG = 2; // 0010
@@ -37460,7 +42231,7 @@ module.exports = AlphaSingle;
 
 
 /***/ }),
-/* 125 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -37469,7 +42240,7 @@ module.exports = AlphaSingle;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BlendModes = __webpack_require__(27);
+var BlendModes = __webpack_require__(32);
 
 /**
  * Provides methods used for setting the blend mode of a Game Object.
@@ -37582,7 +42353,7 @@ module.exports = BlendMode;
 
 
 /***/ }),
-/* 126 */
+/* 155 */
 /***/ (function(module, exports) {
 
 /**
@@ -37679,7 +42450,7 @@ module.exports = Depth;
 
 
 /***/ }),
-/* 127 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -37688,70 +42459,82 @@ module.exports = Depth;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Perimeter = __webpack_require__(128);
-var Point = __webpack_require__(12);
+var GetPoint = __webpack_require__(97);
+var Perimeter = __webpack_require__(67);
+
+//  Return an array of points from the perimeter of the rectangle
+//  each spaced out based on the quantity or step required
 
 /**
- * Calculates the coordinates of a point at a certain `position` on the Rectangle's perimeter.
- * 
- * The `position` is a fraction between 0 and 1 which defines how far into the perimeter the point is.
- * 
- * A value of 0 or 1 returns the point at the top left corner of the rectangle, while a value of 0.5 returns the point at the bottom right corner of the rectangle. Values between 0 and 0.5 are on the top or the right side and values between 0.5 and 1 are on the bottom or the left side.
+ * Return an array of points from the perimeter of the rectangle, each spaced out based on the quantity or step required.
  *
- * @function Phaser.Geom.Rectangle.GetPoint
+ * @function Phaser.Geom.Rectangle.GetPoints
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point[]} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rectangle - The Rectangle object to get the points from.
+ * @param {number} step - Step between points. Used to calculate the number of points to return when quantity is falsey. Ignored if quantity is positive.
+ * @param {number} quantity - The number of evenly spaced points from the rectangles perimeter to return. If falsey, step param will be used to calculate the number of points.
+ * @param {(array|Phaser.Geom.Point[])} [out] - An optional array to store the points in.
+ *
+ * @return {(array|Phaser.Geom.Point[])} An array of Points from the perimeter of the rectangle.
+ */
+var GetPoints = function (rectangle, quantity, stepRate, out)
+{
+    if (out === undefined) { out = []; }
+
+    //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
+    if (!quantity && stepRate > 0)
+    {
+        quantity = Perimeter(rectangle) / stepRate;
+    }
+
+    for (var i = 0; i < quantity; i++)
+    {
+        var position = i / quantity;
+
+        out.push(GetPoint(rectangle, position));
+    }
+
+    return out;
+};
+
+module.exports = GetPoints;
+
+
+/***/ }),
+/* 157 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Get a point on a line that's a given percentage along its length.
+ *
+ * @function Phaser.Geom.Line.GetPoint
  * @since 3.0.0
  *
  * @generic {Phaser.Geom.Point} O - [out,$return]
  *
- * @param {Phaser.Geom.Rectangle} rectangle - The Rectangle to get the perimeter point from.
- * @param {number} position - The normalized distance into the Rectangle's perimeter to return.
- * @param {(Phaser.Geom.Point|object)} [out] - An object to update with the `x` and `y` coordinates of the point.
+ * @param {Phaser.Geom.Line} line - The line.
+ * @param {number} position - A value between 0 and 1, where 0 is the start, 0.5 is the middle and 1 is the end of the line.
+ * @param {(Phaser.Geom.Point|object)} [out] - An optional point, or point-like object, to store the coordinates of the point on the line.
  *
- * @return {Phaser.Geom.Point} The updated `output` object, or a new Point if no `output` object was given.
+ * @return {(Phaser.Geom.Point|object)} The point on the line.
  */
-var GetPoint = function (rectangle, position, out)
+var GetPoint = function (line, position, out)
 {
     if (out === undefined) { out = new Point(); }
 
-    if (position <= 0 || position >= 1)
-    {
-        out.x = rectangle.x;
-        out.y = rectangle.y;
-
-        return out;
-    }
-
-    var p = Perimeter(rectangle) * position;
-
-    if (position > 0.5)
-    {
-        p -= (rectangle.width + rectangle.height);
-
-        if (p <= rectangle.width)
-        {
-            //  Face 3
-            out.x = rectangle.right - p;
-            out.y = rectangle.bottom;
-        }
-        else
-        {
-            //  Face 4
-            out.x = rectangle.x;
-            out.y = rectangle.bottom - (p - rectangle.width);
-        }
-    }
-    else if (p <= rectangle.width)
-    {
-        //  Face 1
-        out.x = rectangle.x + p;
-        out.y = rectangle.y;
-    }
-    else
-    {
-        //  Face 2
-        out.x = rectangle.right;
-        out.y = rectangle.y + (p - rectangle.width);
-    }
+    out.x = line.x1 + (line.x2 - line.x1) * position;
+    out.y = line.y1 + (line.y2 - line.y1) * position;
 
     return out;
 };
@@ -37760,35 +42543,7 @@ module.exports = GetPoint;
 
 
 /***/ }),
-/* 128 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * Calculates the perimeter of a Rectangle.
- *
- * @function Phaser.Geom.Rectangle.Perimeter
- * @since 3.0.0
- *
- * @param {Phaser.Geom.Rectangle} rect - The Rectangle to use.
- *
- * @return {number} The perimeter of the Rectangle, equal to `(width * 2) + (height * 2)`.
- */
-var Perimeter = function (rect)
-{
-    return 2 * (rect.width + rect.height);
-};
-
-module.exports = Perimeter;
-
-
-/***/ }),
-/* 129 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -37797,335 +42552,141 @@ module.exports = Perimeter;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = __webpack_require__(0);
-var GetPoint = __webpack_require__(322);
-var GetPoints = __webpack_require__(323);
-var GEOM_CONST = __webpack_require__(29);
-var Random = __webpack_require__(324);
-var Vector2 = __webpack_require__(6);
+var Length = __webpack_require__(27);
+var Point = __webpack_require__(2);
 
 /**
- * @classdesc
- * Defines a Line segment, a part of a line between two endpoints.
+ * Get a number of points along a line's length.
  *
- * @class Line
- * @memberof Phaser.Geom
- * @constructor
+ * Provide a `quantity` to get an exact number of points along the line.
+ *
+ * Provide a `stepRate` to ensure a specific distance between each point on the line. Set `quantity` to `0` when
+ * providing a `stepRate`.
+ *
+ * @function Phaser.Geom.Line.GetPoints
  * @since 3.0.0
  *
- * @param {number} [x1=0] - The x coordinate of the lines starting point.
- * @param {number} [y1=0] - The y coordinate of the lines starting point.
- * @param {number} [x2=0] - The x coordinate of the lines ending point.
- * @param {number} [y2=0] - The y coordinate of the lines ending point.
+ * @generic {Phaser.Geom.Point[]} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Line} line - The line.
+ * @param {number} quantity - The number of points to place on the line. Set to `0` to use `stepRate` instead.
+ * @param {number} [stepRate] - The distance between each point on the line. When set, `quantity` is implied and should be set to `0`.
+ * @param {(array|Phaser.Geom.Point[])} [out] - An optional array of Points, or point-like objects, to store the coordinates of the points on the line.
+ *
+ * @return {(array|Phaser.Geom.Point[])} An array of Points, or point-like objects, containing the coordinates of the points on the line.
  */
-var Line = new Class({
+var GetPoints = function (line, quantity, stepRate, out)
+{
+    if (out === undefined) { out = []; }
 
-    initialize:
-
-    function Line (x1, y1, x2, y2)
+    //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
+    if (!quantity && stepRate > 0)
     {
-        if (x1 === undefined) { x1 = 0; }
-        if (y1 === undefined) { y1 = 0; }
-        if (x2 === undefined) { x2 = 0; }
-        if (y2 === undefined) { y2 = 0; }
-
-        /**
-         * The geometry constant type of this object: `GEOM_CONST.LINE`.
-         * Used for fast type comparisons.
-         *
-         * @name Phaser.Geom.Line#type
-         * @type {number}
-         * @readonly
-         * @since 3.19.0
-         */
-        this.type = GEOM_CONST.LINE;
-
-        /**
-         * The x coordinate of the lines starting point.
-         *
-         * @name Phaser.Geom.Line#x1
-         * @type {number}
-         * @since 3.0.0
-         */
-        this.x1 = x1;
-
-        /**
-         * The y coordinate of the lines starting point.
-         *
-         * @name Phaser.Geom.Line#y1
-         * @type {number}
-         * @since 3.0.0
-         */
-        this.y1 = y1;
-
-        /**
-         * The x coordinate of the lines ending point.
-         *
-         * @name Phaser.Geom.Line#x2
-         * @type {number}
-         * @since 3.0.0
-         */
-        this.x2 = x2;
-
-        /**
-         * The y coordinate of the lines ending point.
-         *
-         * @name Phaser.Geom.Line#y2
-         * @type {number}
-         * @since 3.0.0
-         */
-        this.y2 = y2;
-    },
-
-    /**
-     * Get a point on a line that's a given percentage along its length.
-     *
-     * @method Phaser.Geom.Line#getPoint
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point} O - [output,$return]
-     *
-     * @param {number} position - A value between 0 and 1, where 0 is the start, 0.5 is the middle and 1 is the end of the line.
-     * @param {(Phaser.Geom.Point|object)} [output] - An optional point, or point-like object, to store the coordinates of the point on the line.
-     *
-     * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point on the line.
-     */
-    getPoint: function (position, output)
-    {
-        return GetPoint(this, position, output);
-    },
-
-    /**
-     * Get a number of points along a line's length.
-     *
-     * Provide a `quantity` to get an exact number of points along the line.
-     *
-     * Provide a `stepRate` to ensure a specific distance between each point on the line. Set `quantity` to `0` when
-     * providing a `stepRate`.
-     *
-     * @method Phaser.Geom.Line#getPoints
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point[]} O - [output,$return]
-     *
-     * @param {number} quantity - The number of points to place on the line. Set to `0` to use `stepRate` instead.
-     * @param {number} [stepRate] - The distance between each point on the line. When set, `quantity` is implied and should be set to `0`.
-     * @param {(array|Phaser.Geom.Point[])} [output] - An optional array of Points, or point-like objects, to store the coordinates of the points on the line.
-     *
-     * @return {(array|Phaser.Geom.Point[])} An array of Points, or point-like objects, containing the coordinates of the points on the line.
-     */
-    getPoints: function (quantity, stepRate, output)
-    {
-        return GetPoints(this, quantity, stepRate, output);
-    },
-
-    /**
-     * Get a random Point on the Line.
-     *
-     * @method Phaser.Geom.Line#getRandomPoint
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point} O - [point,$return]
-     *
-     * @param {(Phaser.Geom.Point|object)} [point] - An instance of a Point to be modified.
-     *
-     * @return {Phaser.Geom.Point} A random Point on the Line.
-     */
-    getRandomPoint: function (point)
-    {
-        return Random(this, point);
-    },
-
-    /**
-     * Set new coordinates for the line endpoints.
-     *
-     * @method Phaser.Geom.Line#setTo
-     * @since 3.0.0
-     *
-     * @param {number} [x1=0] - The x coordinate of the lines starting point.
-     * @param {number} [y1=0] - The y coordinate of the lines starting point.
-     * @param {number} [x2=0] - The x coordinate of the lines ending point.
-     * @param {number} [y2=0] - The y coordinate of the lines ending point.
-     *
-     * @return {this} This Line object.
-     */
-    setTo: function (x1, y1, x2, y2)
-    {
-        if (x1 === undefined) { x1 = 0; }
-        if (y1 === undefined) { y1 = 0; }
-        if (x2 === undefined) { x2 = 0; }
-        if (y2 === undefined) { y2 = 0; }
-
-        this.x1 = x1;
-        this.y1 = y1;
-
-        this.x2 = x2;
-        this.y2 = y2;
-
-        return this;
-    },
-
-    /**
-     * Returns a Vector2 object that corresponds to the start of this Line.
-     *
-     * @method Phaser.Geom.Line#getPointA
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Math.Vector2} O - [vec2,$return]
-     *
-     * @param {Phaser.Math.Vector2} [vec2] - A Vector2 object to set the results in. If `undefined` a new Vector2 will be created.
-     *
-     * @return {Phaser.Math.Vector2} A Vector2 object that corresponds to the start of this Line.
-     */
-    getPointA: function (vec2)
-    {
-        if (vec2 === undefined) { vec2 = new Vector2(); }
-
-        vec2.set(this.x1, this.y1);
-
-        return vec2;
-    },
-
-    /**
-     * Returns a Vector2 object that corresponds to the end of this Line.
-     *
-     * @method Phaser.Geom.Line#getPointB
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Math.Vector2} O - [vec2,$return]
-     *
-     * @param {Phaser.Math.Vector2} [vec2] - A Vector2 object to set the results in. If `undefined` a new Vector2 will be created.
-     *
-     * @return {Phaser.Math.Vector2} A Vector2 object that corresponds to the end of this Line.
-     */
-    getPointB: function (vec2)
-    {
-        if (vec2 === undefined) { vec2 = new Vector2(); }
-
-        vec2.set(this.x2, this.y2);
-
-        return vec2;
-    },
-
-    /**
-     * The left position of the Line.
-     *
-     * @name Phaser.Geom.Line#left
-     * @type {number}
-     * @since 3.0.0
-     */
-    left: {
-
-        get: function ()
-        {
-            return Math.min(this.x1, this.x2);
-        },
-
-        set: function (value)
-        {
-            if (this.x1 <= this.x2)
-            {
-                this.x1 = value;
-            }
-            else
-            {
-                this.x2 = value;
-            }
-        }
-
-    },
-
-    /**
-     * The right position of the Line.
-     *
-     * @name Phaser.Geom.Line#right
-     * @type {number}
-     * @since 3.0.0
-     */
-    right: {
-
-        get: function ()
-        {
-            return Math.max(this.x1, this.x2);
-        },
-
-        set: function (value)
-        {
-            if (this.x1 > this.x2)
-            {
-                this.x1 = value;
-            }
-            else
-            {
-                this.x2 = value;
-            }
-        }
-
-    },
-
-    /**
-     * The top position of the Line.
-     *
-     * @name Phaser.Geom.Line#top
-     * @type {number}
-     * @since 3.0.0
-     */
-    top: {
-
-        get: function ()
-        {
-            return Math.min(this.y1, this.y2);
-        },
-
-        set: function (value)
-        {
-            if (this.y1 <= this.y2)
-            {
-                this.y1 = value;
-            }
-            else
-            {
-                this.y2 = value;
-            }
-        }
-
-    },
-
-    /**
-     * The bottom position of the Line.
-     *
-     * @name Phaser.Geom.Line#bottom
-     * @type {number}
-     * @since 3.0.0
-     */
-    bottom: {
-
-        get: function ()
-        {
-            return Math.max(this.y1, this.y2);
-        },
-
-        set: function (value)
-        {
-            if (this.y1 > this.y2)
-            {
-                this.y1 = value;
-            }
-            else
-            {
-                this.y2 = value;
-            }
-        }
-
+        quantity = Length(line) / stepRate;
     }
 
-});
+    var x1 = line.x1;
+    var y1 = line.y1;
 
-module.exports = Line;
+    var x2 = line.x2;
+    var y2 = line.y2;
+
+    for (var i = 0; i < quantity; i++)
+    {
+        var position = i / quantity;
+
+        var x = x1 + (x2 - x1) * position;
+        var y = y1 + (y2 - y1) * position;
+
+        out.push(new Point(x, y));
+    }
+
+    return out;
+};
+
+module.exports = GetPoints;
 
 
 /***/ }),
-/* 130 */
+/* 159 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Returns a random point on a given Line.
+ *
+ * @function Phaser.Geom.Line.Random
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Line} line - The Line to calculate the random Point on.
+ * @param {(Phaser.Geom.Point|object)} [out] - An instance of a Point to be modified.
+ *
+ * @return {(Phaser.Geom.Point|object)} A random Point on the Line.
+ */
+var Random = function (line, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    var t = Math.random();
+
+    out.x = line.x1 + t * (line.x2 - line.x1);
+    out.y = line.y1 + t * (line.y2 - line.y1);
+
+    return out;
+};
+
+module.exports = Random;
+
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Returns a random point within a Rectangle.
+ *
+ * @function Phaser.Geom.Rectangle.Random
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle to return a point from.
+ * @param {Phaser.Geom.Point} out - The object to update with the point's coordinates.
+ *
+ * @return {Phaser.Geom.Point} The modified `out` object, or a new Point if none was provided.
+ */
+var Random = function (rect, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    out.x = rect.x + (Math.random() * rect.width);
+    out.y = rect.y + (Math.random() * rect.height);
+
+    return out;
+};
+
+module.exports = Random;
+
+
+/***/ }),
+/* 161 */
 /***/ (function(module, exports) {
 
 /**
@@ -38169,7 +42730,7 @@ module.exports = RotateAround;
 
 
 /***/ }),
-/* 131 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -38178,8 +42739,8 @@ module.exports = RotateAround;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BitmapMask = __webpack_require__(132);
-var GeometryMask = __webpack_require__(133);
+var BitmapMask = __webpack_require__(163);
+var GeometryMask = __webpack_require__(164);
 
 /**
  * Provides methods used for getting and setting the mask of a Game Object.
@@ -38318,7 +42879,7 @@ module.exports = Mask;
 
 
 /***/ }),
-/* 132 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -38328,8 +42889,8 @@ module.exports = Mask;
  */
 
 var Class = __webpack_require__(0);
-var GameEvents = __webpack_require__(7);
-var RenderEvents = __webpack_require__(32);
+var GameEvents = __webpack_require__(9);
+var RenderEvents = __webpack_require__(39);
 
 /**
  * @classdesc
@@ -38635,7 +43196,7 @@ module.exports = BitmapMask;
 
 
 /***/ }),
-/* 133 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -38955,7 +43516,7 @@ module.exports = GeometryMask;
 
 
 /***/ }),
-/* 134 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -38964,9 +43525,9 @@ module.exports = GeometryMask;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var DeepCopy = __webpack_require__(135);
-var PIPELINE_CONST = __webpack_require__(56);
-var SpliceOne = __webpack_require__(39);
+var DeepCopy = __webpack_require__(166);
+var PIPELINE_CONST = __webpack_require__(68);
+var SpliceOne = __webpack_require__(50);
 
 /**
  * Provides methods used for setting the WebGL rendering pipeline of a Game Object.
@@ -39378,7 +43939,7 @@ module.exports = Pipeline;
 
 
 /***/ }),
-/* 135 */
+/* 166 */
 /***/ (function(module, exports) {
 
 /**
@@ -39427,7 +43988,7 @@ module.exports = DeepCopy;
 
 
 /***/ }),
-/* 136 */
+/* 167 */
 /***/ (function(module, exports) {
 
 /**
@@ -39534,7 +44095,7 @@ module.exports = ScrollFactor;
 
 
 /***/ }),
-/* 137 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -39543,11 +44104,11 @@ module.exports = ScrollFactor;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var MATH_CONST = __webpack_require__(13);
-var TransformMatrix = __webpack_require__(19);
-var TransformXY = __webpack_require__(84);
-var WrapAngle = __webpack_require__(138);
-var WrapAngleDegrees = __webpack_require__(139);
+var MATH_CONST = __webpack_require__(7);
+var TransformMatrix = __webpack_require__(22);
+var TransformXY = __webpack_require__(100);
+var WrapAngle = __webpack_require__(169);
+var WrapAngleDegrees = __webpack_require__(170);
 var Vector2 = __webpack_require__(6);
 
 //  global bitmask flag for GameObject.renderMask (used by Scale)
@@ -40145,7 +44706,7 @@ module.exports = Transform;
 
 
 /***/ }),
-/* 138 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40154,7 +44715,7 @@ module.exports = Transform;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var MathWrap = __webpack_require__(85);
+var MathWrap = __webpack_require__(69);
 
 /**
  * Wrap an angle.
@@ -40177,7 +44738,7 @@ module.exports = Wrap;
 
 
 /***/ }),
-/* 139 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40186,7 +44747,7 @@ module.exports = Wrap;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Wrap = __webpack_require__(85);
+var Wrap = __webpack_require__(69);
 
 /**
  * Wrap an angle in degrees.
@@ -40209,7 +44770,7 @@ module.exports = WrapDegrees;
 
 
 /***/ }),
-/* 140 */
+/* 171 */
 /***/ (function(module, exports) {
 
 /**
@@ -40298,7 +44859,7 @@ module.exports = Visible;
 
 
 /***/ }),
-/* 141 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40307,10 +44868,10 @@ module.exports = Visible;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var HexStringToColor = __webpack_require__(354);
-var IntegerToColor = __webpack_require__(358);
-var ObjectToColor = __webpack_require__(360);
-var RGBStringToColor = __webpack_require__(361);
+var HexStringToColor = __webpack_require__(408);
+var IntegerToColor = __webpack_require__(412);
+var ObjectToColor = __webpack_require__(414);
+var RGBStringToColor = __webpack_require__(415);
 
 /**
  * Converts the given source color value into an instance of a Color class.
@@ -40354,37 +44915,7 @@ module.exports = ValueToColor;
 
 
 /***/ }),
-/* 142 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * Given 3 separate color values this will return an integer representation of it.
- *
- * @function Phaser.Display.Color.GetColor
- * @since 3.0.0
- *
- * @param {number} red - The red color value. A number between 0 and 255.
- * @param {number} green - The green color value. A number between 0 and 255.
- * @param {number} blue - The blue color value. A number between 0 and 255.
- *
- * @return {number} The combined color value.
- */
-var GetColor = function (red, green, blue)
-{
-    return red << 16 | green << 8 | blue;
-};
-
-module.exports = GetColor;
-
-
-/***/ }),
-/* 143 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40399,18 +44930,18 @@ module.exports = GetColor;
 
 module.exports = {
 
-    Fade: __webpack_require__(363),
-    Flash: __webpack_require__(364),
-    Pan: __webpack_require__(365),
-    Shake: __webpack_require__(398),
-    RotateTo: __webpack_require__(399),
-    Zoom: __webpack_require__(400)
+    Fade: __webpack_require__(416),
+    Flash: __webpack_require__(417),
+    Pan: __webpack_require__(418),
+    Shake: __webpack_require__(451),
+    RotateTo: __webpack_require__(452),
+    Zoom: __webpack_require__(453)
 
 };
 
 
 /***/ }),
-/* 144 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40425,15 +44956,15 @@ module.exports = {
 
 module.exports = {
 
-    In: __webpack_require__(366),
-    Out: __webpack_require__(367),
-    InOut: __webpack_require__(368)
+    In: __webpack_require__(419),
+    Out: __webpack_require__(420),
+    InOut: __webpack_require__(421)
 
 };
 
 
 /***/ }),
-/* 145 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40448,15 +44979,15 @@ module.exports = {
 
 module.exports = {
 
-    In: __webpack_require__(369),
-    Out: __webpack_require__(370),
-    InOut: __webpack_require__(371)
+    In: __webpack_require__(422),
+    Out: __webpack_require__(423),
+    InOut: __webpack_require__(424)
 
 };
 
 
 /***/ }),
-/* 146 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40471,15 +45002,15 @@ module.exports = {
 
 module.exports = {
 
-    In: __webpack_require__(372),
-    Out: __webpack_require__(373),
-    InOut: __webpack_require__(374)
+    In: __webpack_require__(425),
+    Out: __webpack_require__(426),
+    InOut: __webpack_require__(427)
 
 };
 
 
 /***/ }),
-/* 147 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40494,15 +45025,15 @@ module.exports = {
 
 module.exports = {
 
-    In: __webpack_require__(375),
-    Out: __webpack_require__(376),
-    InOut: __webpack_require__(377)
+    In: __webpack_require__(428),
+    Out: __webpack_require__(429),
+    InOut: __webpack_require__(430)
 
 };
 
 
 /***/ }),
-/* 148 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40517,15 +45048,15 @@ module.exports = {
 
 module.exports = {
 
-    In: __webpack_require__(378),
-    Out: __webpack_require__(379),
-    InOut: __webpack_require__(380)
+    In: __webpack_require__(431),
+    Out: __webpack_require__(432),
+    InOut: __webpack_require__(433)
 
 };
 
 
 /***/ }),
-/* 149 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40540,15 +45071,15 @@ module.exports = {
 
 module.exports = {
 
-    In: __webpack_require__(381),
-    Out: __webpack_require__(382),
-    InOut: __webpack_require__(383)
+    In: __webpack_require__(434),
+    Out: __webpack_require__(435),
+    InOut: __webpack_require__(436)
 
 };
 
 
 /***/ }),
-/* 150 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40557,11 +45088,11 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-module.exports = __webpack_require__(384);
+module.exports = __webpack_require__(437);
 
 
 /***/ }),
-/* 151 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40576,15 +45107,15 @@ module.exports = __webpack_require__(384);
 
 module.exports = {
 
-    In: __webpack_require__(385),
-    Out: __webpack_require__(386),
-    InOut: __webpack_require__(387)
+    In: __webpack_require__(438),
+    Out: __webpack_require__(439),
+    InOut: __webpack_require__(440)
 
 };
 
 
 /***/ }),
-/* 152 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40599,15 +45130,15 @@ module.exports = {
 
 module.exports = {
 
-    In: __webpack_require__(388),
-    Out: __webpack_require__(389),
-    InOut: __webpack_require__(390)
+    In: __webpack_require__(441),
+    Out: __webpack_require__(442),
+    InOut: __webpack_require__(443)
 
 };
 
 
 /***/ }),
-/* 153 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40622,15 +45153,15 @@ module.exports = {
 
 module.exports = {
 
-    In: __webpack_require__(391),
-    Out: __webpack_require__(392),
-    InOut: __webpack_require__(393)
+    In: __webpack_require__(444),
+    Out: __webpack_require__(445),
+    InOut: __webpack_require__(446)
 
 };
 
 
 /***/ }),
-/* 154 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40645,15 +45176,15 @@ module.exports = {
 
 module.exports = {
 
-    In: __webpack_require__(394),
-    Out: __webpack_require__(395),
-    InOut: __webpack_require__(396)
+    In: __webpack_require__(447),
+    Out: __webpack_require__(448),
+    InOut: __webpack_require__(449)
 
 };
 
 
 /***/ }),
-/* 155 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40666,11 +45197,11 @@ module.exports = {
  * @namespace Phaser.Math.Easing.Stepped
  */
 
-module.exports = __webpack_require__(397);
+module.exports = __webpack_require__(450);
 
 
 /***/ }),
-/* 156 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -40680,15 +45211,15 @@ module.exports = __webpack_require__(397);
  */
 
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(15);
-var Device = __webpack_require__(157);
+var CONST = __webpack_require__(16);
+var Device = __webpack_require__(187);
 var GetFastValue = __webpack_require__(1);
-var GetValue = __webpack_require__(4);
-var IsPlainObject = __webpack_require__(11);
-var PhaserMath = __webpack_require__(159);
-var NOOP = __webpack_require__(3);
-var DefaultPlugins = __webpack_require__(89);
-var ValueToColor = __webpack_require__(141);
+var GetValue = __webpack_require__(5);
+var IsPlainObject = __webpack_require__(15);
+var PhaserMath = __webpack_require__(189);
+var NOOP = __webpack_require__(4);
+var DefaultPlugins = __webpack_require__(107);
+var ValueToColor = __webpack_require__(172);
 
 /**
  * @classdesc
@@ -41279,7 +45810,7 @@ module.exports = Config;
 
 
 /***/ }),
-/* 157 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -41313,20 +45844,20 @@ module.exports = Config;
 
 module.exports = {
 
-    os: __webpack_require__(41),
-    browser: __webpack_require__(58),
-    features: __webpack_require__(87),
-    input: __webpack_require__(432),
-    audio: __webpack_require__(433),
-    video: __webpack_require__(434),
-    fullscreen: __webpack_require__(435),
-    canvasFeatures: __webpack_require__(158)
+    os: __webpack_require__(52),
+    browser: __webpack_require__(71),
+    features: __webpack_require__(104),
+    input: __webpack_require__(485),
+    audio: __webpack_require__(486),
+    video: __webpack_require__(487),
+    fullscreen: __webpack_require__(488),
+    canvasFeatures: __webpack_require__(188)
 
 };
 
 
 /***/ }),
-/* 158 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -41335,7 +45866,7 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CanvasPool = __webpack_require__(17);
+var CanvasPool = __webpack_require__(18);
 
 /**
  * Determines the canvas features of the browser running this Phaser Game instance.
@@ -41440,7 +45971,7 @@ module.exports = init();
 
 
 /***/ }),
-/* 159 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -41449,7 +45980,7 @@ module.exports = init();
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = __webpack_require__(13);
+var CONST = __webpack_require__(7);
 var Extend = __webpack_require__(14);
 
 /**
@@ -41459,64 +45990,64 @@ var Extend = __webpack_require__(14);
 var PhaserMath = {
 
     //  Collections of functions
-    Angle: __webpack_require__(436),
-    Distance: __webpack_require__(446),
-    Easing: __webpack_require__(453),
-    Fuzzy: __webpack_require__(454),
-    Interpolation: __webpack_require__(459),
-    Pow2: __webpack_require__(466),
-    Snap: __webpack_require__(469),
+    Angle: __webpack_require__(489),
+    Distance: __webpack_require__(499),
+    Easing: __webpack_require__(505),
+    Fuzzy: __webpack_require__(506),
+    Interpolation: __webpack_require__(511),
+    Pow2: __webpack_require__(518),
+    Snap: __webpack_require__(521),
 
     //  Expose the RNG Class
-    RandomDataGenerator: __webpack_require__(472),
+    RandomDataGenerator: __webpack_require__(524),
 
     //  Single functions
-    Average: __webpack_require__(473),
-    Bernstein: __webpack_require__(162),
-    Between: __webpack_require__(168),
-    CatmullRom: __webpack_require__(164),
-    CeilTo: __webpack_require__(474),
-    Clamp: __webpack_require__(5),
-    DegToRad: __webpack_require__(55),
-    Difference: __webpack_require__(475),
-    Euler: __webpack_require__(476),
-    Factorial: __webpack_require__(163),
-    FloatBetween: __webpack_require__(59),
-    FloorTo: __webpack_require__(477),
-    FromPercent: __webpack_require__(43),
-    GetSpeed: __webpack_require__(478),
-    IsEven: __webpack_require__(479),
-    IsEvenStrict: __webpack_require__(480),
-    Linear: __webpack_require__(86),
-    MaxAdd: __webpack_require__(481),
-    MinSub: __webpack_require__(482),
-    Percent: __webpack_require__(483),
-    RadToDeg: __webpack_require__(169),
-    RandomXY: __webpack_require__(484),
-    RandomXYZ: __webpack_require__(485),
-    RandomXYZW: __webpack_require__(486),
-    Rotate: __webpack_require__(487),
-    RotateAround: __webpack_require__(130),
-    RotateAroundDistance: __webpack_require__(488),
-    RotateTo: __webpack_require__(489),
-    RoundAwayFromZero: __webpack_require__(170),
-    RoundTo: __webpack_require__(490),
-    SinCosTableGenerator: __webpack_require__(491),
-    SmootherStep: __webpack_require__(167),
-    SmoothStep: __webpack_require__(166),
-    ToXY: __webpack_require__(492),
-    TransformXY: __webpack_require__(84),
-    Within: __webpack_require__(493),
-    Wrap: __webpack_require__(85),
+    Average: __webpack_require__(525),
+    Bernstein: __webpack_require__(193),
+    Between: __webpack_require__(105),
+    CatmullRom: __webpack_require__(195),
+    CeilTo: __webpack_require__(526),
+    Clamp: __webpack_require__(8),
+    DegToRad: __webpack_require__(47),
+    Difference: __webpack_require__(527),
+    Euler: __webpack_require__(528),
+    Factorial: __webpack_require__(194),
+    FloatBetween: __webpack_require__(72),
+    FloorTo: __webpack_require__(529),
+    FromPercent: __webpack_require__(53),
+    GetSpeed: __webpack_require__(530),
+    IsEven: __webpack_require__(531),
+    IsEvenStrict: __webpack_require__(532),
+    Linear: __webpack_require__(103),
+    MaxAdd: __webpack_require__(533),
+    MinSub: __webpack_require__(534),
+    Percent: __webpack_require__(535),
+    RadToDeg: __webpack_require__(199),
+    RandomXY: __webpack_require__(536),
+    RandomXYZ: __webpack_require__(537),
+    RandomXYZW: __webpack_require__(538),
+    Rotate: __webpack_require__(539),
+    RotateAround: __webpack_require__(161),
+    RotateAroundDistance: __webpack_require__(540),
+    RotateTo: __webpack_require__(541),
+    RoundAwayFromZero: __webpack_require__(200),
+    RoundTo: __webpack_require__(542),
+    SinCosTableGenerator: __webpack_require__(543),
+    SmootherStep: __webpack_require__(198),
+    SmoothStep: __webpack_require__(197),
+    ToXY: __webpack_require__(544),
+    TransformXY: __webpack_require__(100),
+    Within: __webpack_require__(545),
+    Wrap: __webpack_require__(69),
 
     //  Vector classes
     Vector2: __webpack_require__(6),
-    Vector3: __webpack_require__(62),
-    Vector4: __webpack_require__(494),
-    Matrix3: __webpack_require__(171),
-    Matrix4: __webpack_require__(42),
-    Quaternion: __webpack_require__(172),
-    RotateVec3: __webpack_require__(495)
+    Vector3: __webpack_require__(19),
+    Vector4: __webpack_require__(106),
+    Matrix3: __webpack_require__(201),
+    Matrix4: __webpack_require__(34),
+    Quaternion: __webpack_require__(202),
+    RotateVec3: __webpack_require__(546)
 
 };
 
@@ -41530,7 +46061,7 @@ module.exports = PhaserMath;
 
 
 /***/ }),
-/* 160 */
+/* 190 */
 /***/ (function(module, exports) {
 
 /**
@@ -41561,7 +46092,7 @@ module.exports = Between;
 
 
 /***/ }),
-/* 161 */
+/* 191 */
 /***/ (function(module, exports) {
 
 /**
@@ -41598,7 +46129,39 @@ module.exports = Normalize;
 
 
 /***/ }),
-/* 162 */
+/* 192 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       samme
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Calculate the distance between two points.
+ *
+ * @function Phaser.Math.Distance.BetweenPoints
+ * @since 3.22.0
+ *
+ * @param {Phaser.Types.Math.Vector2Like} a - The first point.
+ * @param {Phaser.Types.Math.Vector2Like} b - The second point.
+ *
+ * @return {number} The distance between the points.
+ */
+var DistanceBetweenPoints = function (a, b)
+{
+    var dx = a.x - b.x;
+    var dy = a.y - b.y;
+
+    return Math.sqrt(dx * dx + dy * dy);
+};
+
+module.exports = DistanceBetweenPoints;
+
+
+/***/ }),
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -41607,7 +46170,7 @@ module.exports = Normalize;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Factorial = __webpack_require__(163);
+var Factorial = __webpack_require__(194);
 
 /**
  * Calculates the Bernstein basis from the three factorial coefficients.
@@ -41629,7 +46192,7 @@ module.exports = Bernstein;
 
 
 /***/ }),
-/* 163 */
+/* 194 */
 /***/ (function(module, exports) {
 
 /**
@@ -41669,7 +46232,7 @@ module.exports = Factorial;
 
 
 /***/ }),
-/* 164 */
+/* 195 */
 /***/ (function(module, exports) {
 
 /**
@@ -41706,7 +46269,7 @@ module.exports = CatmullRom;
 
 
 /***/ }),
-/* 165 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -41715,7 +46278,7 @@ module.exports = CatmullRom;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SmoothStep = __webpack_require__(166);
+var SmoothStep = __webpack_require__(197);
 
 /**
  * A Smooth Step interpolation method.
@@ -41739,7 +46302,7 @@ module.exports = SmoothStepInterpolation;
 
 
 /***/ }),
-/* 166 */
+/* 197 */
 /***/ (function(module, exports) {
 
 /**
@@ -41786,7 +46349,7 @@ module.exports = SmoothStep;
 
 
 /***/ }),
-/* 167 */
+/* 198 */
 /***/ (function(module, exports) {
 
 /**
@@ -41825,36 +46388,7 @@ module.exports = SmootherStep;
 
 
 /***/ }),
-/* 168 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * Compute a random integer between the `min` and `max` values, inclusive.
- *
- * @function Phaser.Math.Between
- * @since 3.0.0
- *
- * @param {number} min - The minimum value.
- * @param {number} max - The maximum value.
- *
- * @return {number} The random integer.
- */
-var Between = function (min, max)
-{
-    return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
-module.exports = Between;
-
-
-/***/ }),
-/* 169 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -41863,7 +46397,7 @@ module.exports = Between;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = __webpack_require__(13);
+var CONST = __webpack_require__(7);
 
 /**
  * Convert the given angle in radians, to the equivalent angle in degrees.
@@ -41884,7 +46418,7 @@ module.exports = RadToDeg;
 
 
 /***/ }),
-/* 170 */
+/* 200 */
 /***/ (function(module, exports) {
 
 /**
@@ -41913,7 +46447,7 @@ module.exports = RoundAwayFromZero;
 
 
 /***/ }),
-/* 171 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -42506,7 +47040,7 @@ module.exports = Matrix3;
 
 
 /***/ }),
-/* 172 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -42519,9 +47053,9 @@ module.exports = Matrix3;
 //  and [vecmath](https://github.com/mattdesl/vecmath) by mattdesl
 
 var Class = __webpack_require__(0);
-var Matrix3 = __webpack_require__(171);
-var NOOP = __webpack_require__(3);
-var Vector3 = __webpack_require__(62);
+var Matrix3 = __webpack_require__(201);
+var NOOP = __webpack_require__(4);
+var Vector3 = __webpack_require__(19);
 
 var EPSILON = 0.000001;
 
@@ -43555,7 +48089,7 @@ module.exports = Quaternion;
 
 
 /***/ }),
-/* 173 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -43564,10 +48098,10 @@ module.exports = Quaternion;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CanvasInterpolation = __webpack_require__(496);
-var CanvasPool = __webpack_require__(17);
-var CONST = __webpack_require__(15);
-var Features = __webpack_require__(87);
+var CanvasInterpolation = __webpack_require__(547);
+var CanvasPool = __webpack_require__(18);
+var CONST = __webpack_require__(16);
+var Features = __webpack_require__(104);
 
 /**
  * Called automatically by Phaser.Game and responsible for creating the renderer it will use.
@@ -43657,8 +48191,8 @@ var CreateRenderer = function (game)
 
     if (true)
     {
-        CanvasRenderer = __webpack_require__(174);
-        WebGLRenderer = __webpack_require__(177);
+        CanvasRenderer = __webpack_require__(204);
+        WebGLRenderer = __webpack_require__(207);
 
         //  Let the config pick the renderer type, as both are included
         if (config.renderType === CONST.WEBGL)
@@ -43683,7 +48217,7 @@ module.exports = CreateRenderer;
 
 
 /***/ }),
-/* 174 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -43693,16 +48227,16 @@ module.exports = CreateRenderer;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CameraEvents = __webpack_require__(16);
-var CanvasSnapshot = __webpack_require__(175);
+var CameraEvents = __webpack_require__(17);
+var CanvasSnapshot = __webpack_require__(205);
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(15);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(32);
-var GetBlendModes = __webpack_require__(176);
-var ScaleEvents = __webpack_require__(40);
-var TextureEvents = __webpack_require__(44);
-var TransformMatrix = __webpack_require__(19);
+var CONST = __webpack_require__(16);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(39);
+var GetBlendModes = __webpack_require__(206);
+var ScaleEvents = __webpack_require__(51);
+var TextureEvents = __webpack_require__(54);
+var TransformMatrix = __webpack_require__(22);
 
 /**
  * @classdesc
@@ -44527,7 +49061,7 @@ module.exports = CanvasRenderer;
 
 
 /***/ }),
-/* 175 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -44536,8 +49070,8 @@ module.exports = CanvasRenderer;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CanvasPool = __webpack_require__(17);
-var Color = __webpack_require__(23);
+var CanvasPool = __webpack_require__(18);
+var Color = __webpack_require__(28);
 var GetFastValue = __webpack_require__(1);
 
 /**
@@ -44620,7 +49154,7 @@ module.exports = CanvasSnapshot;
 
 
 /***/ }),
-/* 176 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -44629,8 +49163,8 @@ module.exports = CanvasSnapshot;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var modes = __webpack_require__(27);
-var CanvasFeatures = __webpack_require__(158);
+var modes = __webpack_require__(32);
+var CanvasFeatures = __webpack_require__(188);
 
 /**
  * Returns an array which maps the default blend modes to supported Canvas blend modes.
@@ -44684,7 +49218,7 @@ module.exports = GetBlendModes;
 
 
 /***/ }),
-/* 177 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -44694,22 +49228,22 @@ module.exports = GetBlendModes;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var ArrayRemove = __webpack_require__(33);
-var CameraEvents = __webpack_require__(16);
+var ArrayRemove = __webpack_require__(40);
+var CameraEvents = __webpack_require__(17);
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(15);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(32);
-var GameEvents = __webpack_require__(7);
-var IsSizePowerOfTwo = __webpack_require__(60);
-var Matrix4 = __webpack_require__(42);
-var NOOP = __webpack_require__(3);
-var PipelineManager = __webpack_require__(178);
-var RenderTarget = __webpack_require__(90);
-var ScaleEvents = __webpack_require__(40);
-var TextureEvents = __webpack_require__(44);
-var Utils = __webpack_require__(34);
-var WebGLSnapshot = __webpack_require__(190);
+var CONST = __webpack_require__(16);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(39);
+var GameEvents = __webpack_require__(9);
+var IsSizePowerOfTwo = __webpack_require__(74);
+var Matrix4 = __webpack_require__(34);
+var NOOP = __webpack_require__(4);
+var PipelineManager = __webpack_require__(208);
+var RenderTarget = __webpack_require__(108);
+var ScaleEvents = __webpack_require__(51);
+var TextureEvents = __webpack_require__(54);
+var Utils = __webpack_require__(35);
+var WebGLSnapshot = __webpack_require__(220);
 
 /**
  * @callback WebGLContextCallback
@@ -47680,7 +52214,7 @@ module.exports = WebGLRenderer;
 
 
 /***/ }),
-/* 178 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -47690,18 +52224,18 @@ module.exports = WebGLRenderer;
  */
 
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(56);
-var CustomMap = __webpack_require__(35);
+var CONST = __webpack_require__(68);
+var CustomMap = __webpack_require__(46);
 
 //  Default Phaser 3 Pipelines
-var BitmapMaskPipeline = __webpack_require__(179);
-var GraphicsPipeline = __webpack_require__(182);
-var LightPipeline = __webpack_require__(183);
-var MultiPipeline = __webpack_require__(46);
-var PointLightPipeline = __webpack_require__(184);
-var RopePipeline = __webpack_require__(185);
-var SinglePipeline = __webpack_require__(186);
-var UtilityPipeline = __webpack_require__(187);
+var BitmapMaskPipeline = __webpack_require__(209);
+var GraphicsPipeline = __webpack_require__(212);
+var LightPipeline = __webpack_require__(213);
+var MultiPipeline = __webpack_require__(56);
+var PointLightPipeline = __webpack_require__(214);
+var RopePipeline = __webpack_require__(215);
+var SinglePipeline = __webpack_require__(216);
+var UtilityPipeline = __webpack_require__(217);
 
 /**
  * @classdesc
@@ -48803,7 +53337,7 @@ module.exports = PipelineManager;
 
 
 /***/ }),
-/* 179 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -48815,10 +53349,10 @@ module.exports = PipelineManager;
 
 var Class = __webpack_require__(0);
 var GetFastValue = __webpack_require__(1);
-var ShaderSourceFS = __webpack_require__(502);
-var ShaderSourceVS = __webpack_require__(503);
-var WEBGL_CONST = __webpack_require__(45);
-var WebGLPipeline = __webpack_require__(20);
+var ShaderSourceFS = __webpack_require__(553);
+var ShaderSourceVS = __webpack_require__(554);
+var WEBGL_CONST = __webpack_require__(55);
+var WebGLPipeline = __webpack_require__(23);
 
 /**
  * @classdesc
@@ -49001,7 +53535,7 @@ module.exports = BitmapMaskPipeline;
 
 
 /***/ }),
-/* 180 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -49016,19 +53550,19 @@ module.exports = BitmapMaskPipeline;
 
 module.exports = {
 
-    AFTER_FLUSH: __webpack_require__(504),
-    BEFORE_FLUSH: __webpack_require__(505),
-    BIND: __webpack_require__(506),
-    BOOT: __webpack_require__(507),
-    DESTROY: __webpack_require__(508),
-    REBIND: __webpack_require__(509),
-    RESIZE: __webpack_require__(510)
+    AFTER_FLUSH: __webpack_require__(555),
+    BEFORE_FLUSH: __webpack_require__(556),
+    BIND: __webpack_require__(557),
+    BOOT: __webpack_require__(558),
+    DESTROY: __webpack_require__(559),
+    REBIND: __webpack_require__(560),
+    RESIZE: __webpack_require__(561)
 
 };
 
 
 /***/ }),
-/* 181 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -49039,7 +53573,7 @@ module.exports = {
 
 var Class = __webpack_require__(0);
 var GetFastValue = __webpack_require__(1);
-var WEBGL_CONST = __webpack_require__(45);
+var WEBGL_CONST = __webpack_require__(55);
 
 /**
  * @classdesc
@@ -50129,7 +54663,7 @@ module.exports = WebGLShader;
 
 
 /***/ }),
-/* 182 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -50140,13 +54674,13 @@ module.exports = WebGLShader;
  */
 
 var Class = __webpack_require__(0);
-var Earcut = __webpack_require__(511);
+var Earcut = __webpack_require__(109);
 var GetFastValue = __webpack_require__(1);
-var ShaderSourceFS = __webpack_require__(512);
-var ShaderSourceVS = __webpack_require__(513);
-var TransformMatrix = __webpack_require__(19);
-var WEBGL_CONST = __webpack_require__(45);
-var WebGLPipeline = __webpack_require__(20);
+var ShaderSourceFS = __webpack_require__(562);
+var ShaderSourceVS = __webpack_require__(563);
+var TransformMatrix = __webpack_require__(22);
+var WEBGL_CONST = __webpack_require__(55);
+var WebGLPipeline = __webpack_require__(23);
 
 /**
  * @classdesc
@@ -50812,7 +55346,7 @@ module.exports = GraphicsPipeline;
 
 
 /***/ }),
-/* 183 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -50824,10 +55358,10 @@ module.exports = GraphicsPipeline;
 
 var Class = __webpack_require__(0);
 var GetFastValue = __webpack_require__(1);
-var LightShaderSourceFS = __webpack_require__(514);
-var MultiPipeline = __webpack_require__(46);
+var LightShaderSourceFS = __webpack_require__(564);
+var MultiPipeline = __webpack_require__(56);
 var Vec2 = __webpack_require__(6);
-var WebGLPipeline = __webpack_require__(20);
+var WebGLPipeline = __webpack_require__(23);
 
 var LIGHT_COUNT = 10;
 var tempVec2 = new Vec2();
@@ -51187,7 +55721,7 @@ module.exports = LightPipeline;
 
 
 /***/ }),
-/* 184 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -51198,9 +55732,9 @@ module.exports = LightPipeline;
 
 var Class = __webpack_require__(0);
 var GetFastValue = __webpack_require__(1);
-var PointLightShaderSourceFS = __webpack_require__(517);
-var PointLightShaderSourceVS = __webpack_require__(518);
-var WebGLPipeline = __webpack_require__(20);
+var PointLightShaderSourceFS = __webpack_require__(567);
+var PointLightShaderSourceVS = __webpack_require__(568);
+var WebGLPipeline = __webpack_require__(23);
 
 /**
  * @classdesc
@@ -51361,7 +55895,7 @@ module.exports = PointLightPipeline;
 
 
 /***/ }),
-/* 185 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -51372,7 +55906,7 @@ module.exports = PointLightPipeline;
 
 var Class = __webpack_require__(0);
 var GetFastValue = __webpack_require__(1);
-var MultiPipeline = __webpack_require__(46);
+var MultiPipeline = __webpack_require__(56);
 
 /**
  * @classdesc
@@ -51428,7 +55962,7 @@ module.exports = RopePipeline;
 
 
 /***/ }),
-/* 186 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -51439,10 +55973,10 @@ module.exports = RopePipeline;
 
 var Class = __webpack_require__(0);
 var GetFastValue = __webpack_require__(1);
-var MultiPipeline = __webpack_require__(46);
-var ShaderSourceFS = __webpack_require__(519);
-var ShaderSourceVS = __webpack_require__(520);
-var WebGLPipeline = __webpack_require__(20);
+var MultiPipeline = __webpack_require__(56);
+var ShaderSourceFS = __webpack_require__(569);
+var ShaderSourceVS = __webpack_require__(570);
+var WebGLPipeline = __webpack_require__(23);
 
 /**
  * @classdesc
@@ -51505,7 +56039,7 @@ module.exports = SinglePipeline;
 
 
 /***/ }),
-/* 187 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -51514,16 +56048,16 @@ module.exports = SinglePipeline;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var AddBlendFS = __webpack_require__(521);
-var BlendModes = __webpack_require__(27);
+var AddBlendFS = __webpack_require__(571);
+var BlendModes = __webpack_require__(32);
 var Class = __webpack_require__(0);
-var ColorMatrix = __webpack_require__(188);
-var ColorMatrixFS = __webpack_require__(522);
-var CopyFS = __webpack_require__(523);
+var ColorMatrix = __webpack_require__(218);
+var ColorMatrixFS = __webpack_require__(572);
+var CopyFS = __webpack_require__(573);
 var GetFastValue = __webpack_require__(1);
-var LinearBlendFS = __webpack_require__(524);
-var QuadVS = __webpack_require__(189);
-var WebGLPipeline = __webpack_require__(20);
+var LinearBlendFS = __webpack_require__(574);
+var QuadVS = __webpack_require__(219);
+var WebGLPipeline = __webpack_require__(23);
 
 /**
  * @classdesc
@@ -52296,7 +56830,7 @@ module.exports = UtilityPipeline;
 
 
 /***/ }),
-/* 188 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -52946,7 +57480,7 @@ module.exports = ColorMatrix;
 
 
 /***/ }),
-/* 189 */
+/* 219 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -52972,7 +57506,7 @@ module.exports = [
 
 
 /***/ }),
-/* 190 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -52981,8 +57515,8 @@ module.exports = [
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CanvasPool = __webpack_require__(17);
-var Color = __webpack_require__(23);
+var CanvasPool = __webpack_require__(18);
+var Color = __webpack_require__(28);
 var GetFastValue = __webpack_require__(1);
 
 /**
@@ -53084,7 +57618,7 @@ module.exports = WebGLSnapshot;
 
 
 /***/ }),
-/* 191 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -53093,7 +57627,7 @@ module.exports = WebGLSnapshot;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = __webpack_require__(15);
+var CONST = __webpack_require__(16);
 
 /**
  * Called automatically by Phaser.Game and responsible for creating the console.log debug header.
@@ -53214,7 +57748,7 @@ module.exports = DebugHeader;
 
 
 /***/ }),
-/* 192 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -53224,9 +57758,9 @@ module.exports = DebugHeader;
  */
 
 var Class = __webpack_require__(0);
-var GetValue = __webpack_require__(4);
-var NOOP = __webpack_require__(3);
-var RequestAnimationFrame = __webpack_require__(193);
+var GetValue = __webpack_require__(5);
+var NOOP = __webpack_require__(4);
+var RequestAnimationFrame = __webpack_require__(223);
 
 // http://www.testufo.com/#test=animation-time-graph
 
@@ -53944,7 +58478,7 @@ module.exports = TimeStep;
 
 
 /***/ }),
-/* 193 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -53954,7 +58488,7 @@ module.exports = TimeStep;
  */
 
 var Class = __webpack_require__(0);
-var NOOP = __webpack_require__(3);
+var NOOP = __webpack_require__(4);
 
 /**
  * @classdesc
@@ -54158,7 +58692,7 @@ module.exports = RequestAnimationFrame;
 
 
 /***/ }),
-/* 194 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -54167,7 +58701,7 @@ module.exports = RequestAnimationFrame;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Events = __webpack_require__(7);
+var Events = __webpack_require__(9);
 
 /**
  * The Visibility Handler is responsible for listening out for document level visibility change events.
@@ -54249,7 +58783,7 @@ module.exports = VisibilityHandler;
 
 
 /***/ }),
-/* 195 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -54264,17 +58798,17 @@ module.exports = VisibilityHandler;
 
 module.exports = {
 
-    CHANGE_DATA: __webpack_require__(526),
-    CHANGE_DATA_KEY: __webpack_require__(527),
-    DESTROY: __webpack_require__(528),
-    REMOVE_DATA: __webpack_require__(529),
-    SET_DATA: __webpack_require__(530)
+    CHANGE_DATA: __webpack_require__(576),
+    CHANGE_DATA_KEY: __webpack_require__(577),
+    DESTROY: __webpack_require__(578),
+    REMOVE_DATA: __webpack_require__(579),
+    SET_DATA: __webpack_require__(580)
 
 };
 
 
 /***/ }),
-/* 196 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -54283,7 +58817,7 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var OS = __webpack_require__(41);
+var OS = __webpack_require__(52);
 
 /**
  * @callback ContentLoadedCallback
@@ -54337,7 +58871,7 @@ module.exports = DOMContentLoaded;
 
 
 /***/ }),
-/* 197 */
+/* 227 */
 /***/ (function(module, exports) {
 
 /**
@@ -54396,7 +58930,7 @@ module.exports = GetInnerHeight;
 
 
 /***/ }),
-/* 198 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -54405,7 +58939,7 @@ module.exports = GetInnerHeight;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = __webpack_require__(91);
+var CONST = __webpack_require__(110);
 
 /**
  * Attempts to determine the screen orientation using the Orientation API.
@@ -54461,7 +58995,7 @@ module.exports = GetScreenOrientation;
 
 
 /***/ }),
-/* 199 */
+/* 229 */
 /***/ (function(module, exports) {
 
 /**
@@ -54547,7 +59081,7 @@ module.exports = {
 
 
 /***/ }),
-/* 200 */
+/* 230 */
 /***/ (function(module, exports) {
 
 /**
@@ -54600,7 +59134,7 @@ module.exports = {
 
 
 /***/ }),
-/* 201 */
+/* 231 */
 /***/ (function(module, exports) {
 
 /**
@@ -54698,7 +59232,7 @@ module.exports = {
 
 
 /***/ }),
-/* 202 */
+/* 232 */
 /***/ (function(module, exports) {
 
 /**
@@ -54772,7 +59306,7 @@ module.exports = {
 
 
 /***/ }),
-/* 203 */
+/* 233 */
 /***/ (function(module, exports) {
 
 /**
@@ -54823,7 +59357,7 @@ module.exports = GetTarget;
 
 
 /***/ }),
-/* 204 */
+/* 234 */
 /***/ (function(module, exports) {
 
 /**
@@ -54880,7 +59414,7 @@ module.exports = ParseXML;
 
 
 /***/ }),
-/* 205 */
+/* 235 */
 /***/ (function(module, exports) {
 
 /**
@@ -54909,7 +59443,7 @@ module.exports = RemoveFromDOM;
 
 
 /***/ }),
-/* 206 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -54919,16 +59453,16 @@ module.exports = RemoveFromDOM;
  */
 
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(92);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(24);
-var GameEvents = __webpack_require__(7);
-var Keyboard = __webpack_require__(207);
-var Mouse = __webpack_require__(208);
-var Pointer = __webpack_require__(209);
-var Touch = __webpack_require__(210);
-var TransformMatrix = __webpack_require__(19);
-var TransformXY = __webpack_require__(84);
+var CONST = __webpack_require__(111);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(29);
+var GameEvents = __webpack_require__(9);
+var Keyboard = __webpack_require__(237);
+var Mouse = __webpack_require__(238);
+var Pointer = __webpack_require__(239);
+var Touch = __webpack_require__(240);
+var TransformMatrix = __webpack_require__(22);
+var TransformXY = __webpack_require__(100);
 
 /**
  * @classdesc
@@ -56001,7 +60535,7 @@ module.exports = InputManager;
 
 
 /***/ }),
-/* 207 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -56010,12 +60544,12 @@ module.exports = InputManager;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var ArrayRemove = __webpack_require__(33);
+var ArrayRemove = __webpack_require__(40);
 var Class = __webpack_require__(0);
-var GameEvents = __webpack_require__(7);
-var InputEvents = __webpack_require__(24);
-var KeyCodes = __webpack_require__(64);
-var NOOP = __webpack_require__(3);
+var GameEvents = __webpack_require__(9);
+var InputEvents = __webpack_require__(29);
+var KeyCodes = __webpack_require__(77);
+var NOOP = __webpack_require__(4);
 
 /**
  * @classdesc
@@ -56445,7 +60979,7 @@ module.exports = KeyboardManager;
 
 
 /***/ }),
-/* 208 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -56455,9 +60989,9 @@ module.exports = KeyboardManager;
  */
 
 var Class = __webpack_require__(0);
-var Features = __webpack_require__(87);
-var InputEvents = __webpack_require__(24);
-var NOOP = __webpack_require__(3);
+var Features = __webpack_require__(104);
+var InputEvents = __webpack_require__(29);
+var NOOP = __webpack_require__(4);
 
 //  https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 //  https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
@@ -57011,7 +61545,7 @@ module.exports = MouseManager;
 
 
 /***/ }),
-/* 209 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -57020,13 +61554,13 @@ module.exports = MouseManager;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Angle = __webpack_require__(160);
+var Angle = __webpack_require__(190);
 var Class = __webpack_require__(0);
-var Distance = __webpack_require__(88);
-var FuzzyEqual = __webpack_require__(82);
-var SmoothStepInterpolation = __webpack_require__(165);
+var Distance = __webpack_require__(73);
+var FuzzyEqual = __webpack_require__(98);
+var SmoothStepInterpolation = __webpack_require__(196);
 var Vector2 = __webpack_require__(6);
-var OS = __webpack_require__(41);
+var OS = __webpack_require__(52);
 
 /**
  * @classdesc
@@ -58297,7 +62831,7 @@ module.exports = Pointer;
 
 
 /***/ }),
-/* 210 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -58307,8 +62841,8 @@ module.exports = Pointer;
  */
 
 var Class = __webpack_require__(0);
-var InputEvents = __webpack_require__(24);
-var NOOP = __webpack_require__(3);
+var InputEvents = __webpack_require__(29);
+var NOOP = __webpack_require__(4);
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Touch_events
 // https://patrickhlauke.github.io/touch/tests/results/
@@ -58710,7 +63244,7 @@ module.exports = TouchManager;
 
 
 /***/ }),
-/* 211 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -58720,14 +63254,14 @@ module.exports = TouchManager;
  */
 
 var Class = __webpack_require__(0);
-var GameEvents = __webpack_require__(7);
-var EventEmitter = __webpack_require__(2);
-var FileTypesManager = __webpack_require__(10);
-var GameObjectCreator = __webpack_require__(25);
-var GameObjectFactory = __webpack_require__(26);
+var GameEvents = __webpack_require__(9);
+var EventEmitter = __webpack_require__(3);
+var FileTypesManager = __webpack_require__(13);
+var GameObjectCreator = __webpack_require__(30);
+var GameObjectFactory = __webpack_require__(31);
 var GetFastValue = __webpack_require__(1);
-var PluginCache = __webpack_require__(9);
-var Remove = __webpack_require__(33);
+var PluginCache = __webpack_require__(12);
+var Remove = __webpack_require__(40);
 
 /**
  * @classdesc
@@ -59612,7 +64146,7 @@ module.exports = PluginManager;
 
 
 /***/ }),
-/* 212 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -59621,18 +64155,18 @@ module.exports = PluginManager;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = __webpack_require__(91);
+var CONST = __webpack_require__(110);
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(40);
-var GameEvents = __webpack_require__(7);
-var GetInnerHeight = __webpack_require__(197);
-var GetTarget = __webpack_require__(203);
-var GetScreenOrientation = __webpack_require__(198);
-var NOOP = __webpack_require__(3);
-var Rectangle = __webpack_require__(36);
-var Size = __webpack_require__(213);
-var SnapFloor = __webpack_require__(61);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(51);
+var GameEvents = __webpack_require__(9);
+var GetInnerHeight = __webpack_require__(227);
+var GetTarget = __webpack_require__(233);
+var GetScreenOrientation = __webpack_require__(228);
+var NOOP = __webpack_require__(4);
+var Rectangle = __webpack_require__(10);
+var Size = __webpack_require__(243);
+var SnapFloor = __webpack_require__(75);
 var Vector2 = __webpack_require__(6);
 
 /**
@@ -61303,7 +65837,7 @@ module.exports = ScaleManager;
 
 
 /***/ }),
-/* 213 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -61312,9 +65846,9 @@ module.exports = ScaleManager;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = __webpack_require__(5);
+var Clamp = __webpack_require__(8);
 var Class = __webpack_require__(0);
-var SnapFloor = __webpack_require__(61);
+var SnapFloor = __webpack_require__(75);
 var Vector2 = __webpack_require__(6);
 
 /**
@@ -62081,7 +66615,7 @@ module.exports = Size;
 
 
 /***/ }),
-/* 214 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -62091,14 +66625,14 @@ module.exports = Size;
  */
 
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(65);
-var Events = __webpack_require__(8);
-var GameEvents = __webpack_require__(7);
-var GetValue = __webpack_require__(4);
-var LoaderEvents = __webpack_require__(48);
-var NOOP = __webpack_require__(3);
-var Scene = __webpack_require__(215);
-var Systems = __webpack_require__(93);
+var CONST = __webpack_require__(78);
+var Events = __webpack_require__(11);
+var GameEvents = __webpack_require__(9);
+var GetValue = __webpack_require__(5);
+var LoaderEvents = __webpack_require__(58);
+var NOOP = __webpack_require__(4);
+var Scene = __webpack_require__(245);
+var Systems = __webpack_require__(112);
 
 /**
  * @classdesc
@@ -63725,7 +68259,7 @@ module.exports = SceneManager;
 
 
 /***/ }),
-/* 215 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -63735,7 +68269,7 @@ module.exports = SceneManager;
  */
 
 var Class = __webpack_require__(0);
-var Systems = __webpack_require__(93);
+var Systems = __webpack_require__(112);
 
 /**
  * @classdesc
@@ -64020,7 +68554,7 @@ module.exports = Scene;
 
 
 /***/ }),
-/* 216 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -64030,7 +68564,7 @@ module.exports = Scene;
  */
 
 var GetFastValue = __webpack_require__(1);
-var UppercaseFirst = __webpack_require__(217);
+var UppercaseFirst = __webpack_require__(247);
 
 /**
  * Builds an array of which physics plugins should be activated for the given Scene.
@@ -64082,7 +68616,7 @@ module.exports = GetPhysicsPlugins;
 
 
 /***/ }),
-/* 217 */
+/* 247 */
 /***/ (function(module, exports) {
 
 /**
@@ -64119,7 +68653,7 @@ module.exports = UppercaseFirst;
 
 
 /***/ }),
-/* 218 */
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -64166,7 +68700,7 @@ module.exports = GetScenePlugins;
 
 
 /***/ }),
-/* 219 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -64175,10 +68709,10 @@ module.exports = GetScenePlugins;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = __webpack_require__(65);
-var GetValue = __webpack_require__(4);
-var Merge = __webpack_require__(593);
-var InjectionMap = __webpack_require__(594);
+var CONST = __webpack_require__(78);
+var GetValue = __webpack_require__(5);
+var Merge = __webpack_require__(643);
+var InjectionMap = __webpack_require__(644);
 
 /**
  * @namespace Phaser.Scenes.Settings
@@ -64262,7 +68796,7 @@ module.exports = Settings;
 
 
 /***/ }),
-/* 220 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -64271,18 +68805,18 @@ module.exports = Settings;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CanvasPool = __webpack_require__(17);
-var CanvasTexture = __webpack_require__(221);
+var CanvasPool = __webpack_require__(18);
+var CanvasTexture = __webpack_require__(251);
 var Class = __webpack_require__(0);
-var Color = __webpack_require__(23);
-var CONST = __webpack_require__(15);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(44);
-var GameEvents = __webpack_require__(7);
-var GenerateTexture = __webpack_require__(595);
-var GetValue = __webpack_require__(4);
-var Parser = __webpack_require__(224);
-var Texture = __webpack_require__(94);
+var Color = __webpack_require__(28);
+var CONST = __webpack_require__(16);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(54);
+var GameEvents = __webpack_require__(9);
+var GenerateTexture = __webpack_require__(645);
+var GetValue = __webpack_require__(5);
+var Parser = __webpack_require__(254);
+var Texture = __webpack_require__(113);
 
 /**
  * @callback EachTextureCallback
@@ -65477,7 +70011,7 @@ module.exports = TextureManager;
 
 
 /***/ }),
-/* 221 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -65487,11 +70021,11 @@ module.exports = TextureManager;
  */
 
 var Class = __webpack_require__(0);
-var Clamp = __webpack_require__(5);
-var Color = __webpack_require__(23);
-var CONST = __webpack_require__(15);
-var IsSizePowerOfTwo = __webpack_require__(60);
-var Texture = __webpack_require__(94);
+var Clamp = __webpack_require__(8);
+var Color = __webpack_require__(28);
+var CONST = __webpack_require__(16);
+var IsSizePowerOfTwo = __webpack_require__(74);
+var Texture = __webpack_require__(113);
 
 /**
  * @classdesc
@@ -66112,7 +70646,7 @@ module.exports = CanvasTexture;
 
 
 /***/ }),
-/* 222 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -66122,7 +70656,7 @@ module.exports = CanvasTexture;
  */
 
 var Class = __webpack_require__(0);
-var Clamp = __webpack_require__(5);
+var Clamp = __webpack_require__(8);
 var Extend = __webpack_require__(14);
 
 /**
@@ -66969,7 +71503,7 @@ module.exports = Frame;
 
 
 /***/ }),
-/* 223 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -66978,10 +71512,10 @@ module.exports = Frame;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CanvasPool = __webpack_require__(17);
+var CanvasPool = __webpack_require__(18);
 var Class = __webpack_require__(0);
-var IsSizePowerOfTwo = __webpack_require__(60);
-var ScaleModes = __webpack_require__(77);
+var IsSizePowerOfTwo = __webpack_require__(74);
+var ScaleModes = __webpack_require__(94);
 
 /**
  * @classdesc
@@ -67334,7 +71868,7 @@ module.exports = TextureSource;
 
 
 /***/ }),
-/* 224 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -67349,20 +71883,20 @@ module.exports = TextureSource;
 
 module.exports = {
 
-    AtlasXML: __webpack_require__(597),
-    Canvas: __webpack_require__(598),
-    Image: __webpack_require__(599),
-    JSONArray: __webpack_require__(600),
-    JSONHash: __webpack_require__(601),
-    SpriteSheet: __webpack_require__(602),
-    SpriteSheetFromAtlas: __webpack_require__(603),
-    UnityYAML: __webpack_require__(604)
+    AtlasXML: __webpack_require__(647),
+    Canvas: __webpack_require__(648),
+    Image: __webpack_require__(649),
+    JSONArray: __webpack_require__(650),
+    JSONHash: __webpack_require__(651),
+    SpriteSheet: __webpack_require__(652),
+    SpriteSheetFromAtlas: __webpack_require__(653),
+    UnityYAML: __webpack_require__(654)
 
 };
 
 
 /***/ }),
-/* 225 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -67372,9 +71906,9 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var HTML5AudioSoundManager = __webpack_require__(226);
-var NoAudioSoundManager = __webpack_require__(230);
-var WebAudioSoundManager = __webpack_require__(232);
+var HTML5AudioSoundManager = __webpack_require__(256);
+var NoAudioSoundManager = __webpack_require__(260);
+var WebAudioSoundManager = __webpack_require__(262);
 
 /**
  * Creates a Web Audio, HTML5 Audio or No Audio Sound Manager based on config and device settings.
@@ -67414,7 +71948,7 @@ module.exports = SoundManagerCreator;
 
 
 /***/ }),
-/* 226 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -67424,10 +71958,10 @@ module.exports = SoundManagerCreator;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BaseSoundManager = __webpack_require__(66);
+var BaseSoundManager = __webpack_require__(79);
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(30);
-var HTML5AudioSound = __webpack_require__(229);
+var Events = __webpack_require__(36);
+var HTML5AudioSound = __webpack_require__(259);
 
 /**
  * HTML5 Audio implementation of the Sound Manager.
@@ -67883,7 +72417,7 @@ module.exports = HTML5AudioSoundManager;
 
 
 /***/ }),
-/* 227 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -67892,7 +72426,7 @@ module.exports = HTML5AudioSoundManager;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SafeRange = __webpack_require__(31);
+var SafeRange = __webpack_require__(37);
 
 /**
  * Returns all elements in the array.
@@ -67945,7 +72479,7 @@ module.exports = GetAll;
 
 
 /***/ }),
-/* 228 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -67954,7 +72488,7 @@ module.exports = GetAll;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SafeRange = __webpack_require__(31);
+var SafeRange = __webpack_require__(37);
 
 /**
  * Returns the first element in the array.
@@ -68004,7 +72538,7 @@ module.exports = GetFirst;
 
 
 /***/ }),
-/* 229 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -68014,10 +72548,10 @@ module.exports = GetFirst;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BaseSound = __webpack_require__(67);
+var BaseSound = __webpack_require__(80);
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(30);
-var Clamp = __webpack_require__(5);
+var Events = __webpack_require__(36);
+var Clamp = __webpack_require__(8);
 
 /**
  * @classdesc
@@ -68978,7 +73512,7 @@ module.exports = HTML5AudioSound;
 
 
 /***/ }),
-/* 230 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -68988,11 +73522,11 @@ module.exports = HTML5AudioSound;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BaseSoundManager = __webpack_require__(66);
+var BaseSoundManager = __webpack_require__(79);
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(2);
-var NoAudioSound = __webpack_require__(231);
-var NOOP = __webpack_require__(3);
+var EventEmitter = __webpack_require__(3);
+var NoAudioSound = __webpack_require__(261);
+var NOOP = __webpack_require__(4);
 
 /**
  * @classdesc
@@ -69096,7 +73630,7 @@ module.exports = NoAudioSoundManager;
 
 
 /***/ }),
-/* 231 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -69106,9 +73640,9 @@ module.exports = NoAudioSoundManager;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BaseSound = __webpack_require__(67);
+var BaseSound = __webpack_require__(80);
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(2);
+var EventEmitter = __webpack_require__(3);
 var Extend = __webpack_require__(14);
 
 var returnFalse = function ()
@@ -69289,7 +73823,7 @@ module.exports = NoAudioSound;
 
 
 /***/ }),
-/* 232 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -69299,12 +73833,12 @@ module.exports = NoAudioSound;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Base64ToArrayBuffer = __webpack_require__(629);
-var BaseSoundManager = __webpack_require__(66);
+var Base64ToArrayBuffer = __webpack_require__(679);
+var BaseSoundManager = __webpack_require__(79);
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(30);
-var GameEvents = __webpack_require__(7);
-var WebAudioSound = __webpack_require__(233);
+var Events = __webpack_require__(36);
+var GameEvents = __webpack_require__(9);
+var WebAudioSound = __webpack_require__(263);
 
 /**
  * @classdesc
@@ -69757,7 +74291,7 @@ module.exports = WebAudioSoundManager;
 
 
 /***/ }),
-/* 233 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -69767,9 +74301,9 @@ module.exports = WebAudioSoundManager;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BaseSound = __webpack_require__(67);
+var BaseSound = __webpack_require__(80);
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(30);
+var Events = __webpack_require__(36);
 
 /**
  * @classdesc
@@ -70747,7 +75281,7 @@ module.exports = WebAudioSound;
 
 
 /***/ }),
-/* 234 */
+/* 264 */
 /***/ (function(module, exports) {
 
 /**
@@ -70809,7 +75343,7 @@ module.exports = TransposeMatrix;
 
 
 /***/ }),
-/* 235 */
+/* 265 */
 /***/ (function(module, exports) {
 
 /**
@@ -70849,7 +75383,7 @@ module.exports = RotateLeft;
 
 
 /***/ }),
-/* 236 */
+/* 266 */
 /***/ (function(module, exports) {
 
 /**
@@ -70889,7 +75423,7 @@ module.exports = RotateRight;
 
 
 /***/ }),
-/* 237 */
+/* 267 */
 /***/ (function(module, exports) {
 
 /**
@@ -71011,7 +75545,7 @@ module.exports = QuickSelect;
 
 
 /***/ }),
-/* 238 */
+/* 268 */
 /***/ (function(module, exports) {
 
 /**
@@ -71052,7 +75586,7 @@ module.exports = Shuffle;
 
 
 /***/ }),
-/* 239 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -71062,8 +75596,8 @@ module.exports = Shuffle;
  */
 
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(240);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(270);
 
 /**
  * @classdesc
@@ -71355,7 +75889,7 @@ module.exports = ProcessQueue;
 
 
 /***/ }),
-/* 240 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -71370,14 +75904,14 @@ module.exports = ProcessQueue;
 
 module.exports = {
 
-    PROCESS_QUEUE_ADD: __webpack_require__(673),
-    PROCESS_QUEUE_REMOVE: __webpack_require__(674)
+    PROCESS_QUEUE_ADD: __webpack_require__(723),
+    PROCESS_QUEUE_REMOVE: __webpack_require__(724)
 
 };
 
 
 /***/ }),
-/* 241 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -71386,7 +75920,7 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetAdvancedValue = __webpack_require__(18);
+var GetAdvancedValue = __webpack_require__(20);
 
 /**
  * Adds an Animation component to a Sprite and populates it based on the given config.
@@ -71474,7 +76008,7 @@ module.exports = BuildGameObjectAnimation;
 
 
 /***/ }),
-/* 242 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -71483,380 +76017,95 @@ module.exports = BuildGameObjectAnimation;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = __webpack_require__(0);
-var Contains = __webpack_require__(243);
-var GetPoint = __webpack_require__(675);
-var GetPoints = __webpack_require__(676);
-var GEOM_CONST = __webpack_require__(29);
-var Random = __webpack_require__(678);
+var CircumferencePoint = __webpack_require__(119);
+var FromPercent = __webpack_require__(53);
+var MATH_CONST = __webpack_require__(7);
+var Point = __webpack_require__(2);
 
 /**
- * @classdesc
- * An Ellipse object.
+ * Returns a Point object containing the coordinates of a point on the circumference of the Ellipse
+ * based on the given angle normalized to the range 0 to 1. I.e. a value of 0.5 will give the point
+ * at 180 degrees around the circle.
  *
- * This is a geometry object, containing numerical values and related methods to inspect and modify them.
- * It is not a Game Object, in that you cannot add it to the display list, and it has no texture.
- * To render an Ellipse you should look at the capabilities of the Graphics class.
- *
- * @class Ellipse
- * @memberof Phaser.Geom
- * @constructor
+ * @function Phaser.Geom.Ellipse.GetPoint
  * @since 3.0.0
  *
- * @param {number} [x=0] - The x position of the center of the ellipse.
- * @param {number} [y=0] - The y position of the center of the ellipse.
- * @param {number} [width=0] - The width of the ellipse.
- * @param {number} [height=0] - The height of the ellipse.
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to get the circumference point on.
+ * @param {number} position - A value between 0 and 1, where 0 equals 0 degrees, 0.5 equals 180 degrees and 1 equals 360 around the ellipse.
+ * @param {(Phaser.Geom.Point|object)} [out] - An object to store the return values in. If not given a Point object will be created.
+ *
+ * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point around the ellipse.
  */
-var Ellipse = new Class({
+var GetPoint = function (ellipse, position, out)
+{
+    if (out === undefined) { out = new Point(); }
 
-    initialize:
+    var angle = FromPercent(position, 0, MATH_CONST.PI2);
 
-    function Ellipse (x, y, width, height)
-    {
-        if (x === undefined) { x = 0; }
-        if (y === undefined) { y = 0; }
-        if (width === undefined) { width = 0; }
-        if (height === undefined) { height = 0; }
+    return CircumferencePoint(ellipse, angle, out);
+};
 
-        /**
-         * The geometry constant type of this object: `GEOM_CONST.ELLIPSE`.
-         * Used for fast type comparisons.
-         *
-         * @name Phaser.Geom.Ellipse#type
-         * @type {number}
-         * @readonly
-         * @since 3.19.0
-         */
-        this.type = GEOM_CONST.ELLIPSE;
-
-        /**
-         * The x position of the center of the ellipse.
-         *
-         * @name Phaser.Geom.Ellipse#x
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x = x;
-
-        /**
-         * The y position of the center of the ellipse.
-         *
-         * @name Phaser.Geom.Ellipse#y
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y = y;
-
-        /**
-         * The width of the ellipse.
-         *
-         * @name Phaser.Geom.Ellipse#width
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.width = width;
-
-        /**
-         * The height of the ellipse.
-         *
-         * @name Phaser.Geom.Ellipse#height
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.height = height;
-    },
-
-    /**
-     * Check to see if the Ellipse contains the given x / y coordinates.
-     *
-     * @method Phaser.Geom.Ellipse#contains
-     * @since 3.0.0
-     *
-     * @param {number} x - The x coordinate to check within the ellipse.
-     * @param {number} y - The y coordinate to check within the ellipse.
-     *
-     * @return {boolean} True if the coordinates are within the ellipse, otherwise false.
-     */
-    contains: function (x, y)
-    {
-        return Contains(this, x, y);
-    },
-
-    /**
-     * Returns a Point object containing the coordinates of a point on the circumference of the Ellipse
-     * based on the given angle normalized to the range 0 to 1. I.e. a value of 0.5 will give the point
-     * at 180 degrees around the circle.
-     *
-     * @method Phaser.Geom.Ellipse#getPoint
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point} O - [out,$return]
-     *
-     * @param {number} position - A value between 0 and 1, where 0 equals 0 degrees, 0.5 equals 180 degrees and 1 equals 360 around the ellipse.
-     * @param {(Phaser.Geom.Point|object)} [out] - An object to store the return values in. If not given a Point object will be created.
-     *
-     * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point around the ellipse.
-     */
-    getPoint: function (position, point)
-    {
-        return GetPoint(this, position, point);
-    },
-
-    /**
-     * Returns an array of Point objects containing the coordinates of the points around the circumference of the Ellipse,
-     * based on the given quantity or stepRate values.
-     *
-     * @method Phaser.Geom.Ellipse#getPoints
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point[]} O - [output,$return]
-     *
-     * @param {number} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
-     * @param {number} [stepRate] - Sets the quantity by getting the circumference of the ellipse and dividing it by the stepRate.
-     * @param {(array|Phaser.Geom.Point[])} [output] - An array to insert the points in to. If not provided a new array will be created.
-     *
-     * @return {(array|Phaser.Geom.Point[])} An array of Point objects pertaining to the points around the circumference of the ellipse.
-     */
-    getPoints: function (quantity, stepRate, output)
-    {
-        return GetPoints(this, quantity, stepRate, output);
-    },
-
-    /**
-     * Returns a uniformly distributed random point from anywhere within the given Ellipse.
-     *
-     * @method Phaser.Geom.Ellipse#getRandomPoint
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point} O - [point,$return]
-     *
-     * @param {(Phaser.Geom.Point|object)} [point] - A Point or point-like object to set the random `x` and `y` values in.
-     *
-     * @return {(Phaser.Geom.Point|object)} A Point object with the random values set in the `x` and `y` properties.
-     */
-    getRandomPoint: function (point)
-    {
-        return Random(this, point);
-    },
-
-    /**
-     * Sets the x, y, width and height of this ellipse.
-     *
-     * @method Phaser.Geom.Ellipse#setTo
-     * @since 3.0.0
-     *
-     * @param {number} x - The x position of the center of the ellipse.
-     * @param {number} y - The y position of the center of the ellipse.
-     * @param {number} width - The width of the ellipse.
-     * @param {number} height - The height of the ellipse.
-     *
-     * @return {this} This Ellipse object.
-     */
-    setTo: function (x, y, width, height)
-    {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-
-        return this;
-    },
-
-    /**
-     * Sets this Ellipse to be empty with a width and height of zero.
-     * Does not change its position.
-     *
-     * @method Phaser.Geom.Ellipse#setEmpty
-     * @since 3.0.0
-     *
-     * @return {this} This Ellipse object.
-     */
-    setEmpty: function ()
-    {
-        this.width = 0;
-        this.height = 0;
-
-        return this;
-    },
-
-    /**
-     * Sets the position of this Ellipse.
-     *
-     * @method Phaser.Geom.Ellipse#setPosition
-     * @since 3.0.0
-     *
-     * @param {number} x - The x position of the center of the ellipse.
-     * @param {number} y - The y position of the center of the ellipse.
-     *
-     * @return {this} This Ellipse object.
-     */
-    setPosition: function (x, y)
-    {
-        if (y === undefined) { y = x; }
-
-        this.x = x;
-        this.y = y;
-
-        return this;
-    },
-
-    /**
-     * Sets the size of this Ellipse.
-     * Does not change its position.
-     *
-     * @method Phaser.Geom.Ellipse#setSize
-     * @since 3.0.0
-     *
-     * @param {number} width - The width of the ellipse.
-     * @param {number} [height=width] - The height of the ellipse.
-     *
-     * @return {this} This Ellipse object.
-     */
-    setSize: function (width, height)
-    {
-        if (height === undefined) { height = width; }
-
-        this.width = width;
-        this.height = height;
-
-        return this;
-    },
-
-    /**
-     * Checks to see if the Ellipse is empty: has a width or height equal to zero.
-     *
-     * @method Phaser.Geom.Ellipse#isEmpty
-     * @since 3.0.0
-     *
-     * @return {boolean} True if the Ellipse is empty, otherwise false.
-     */
-    isEmpty: function ()
-    {
-        return (this.width <= 0 || this.height <= 0);
-    },
-
-    /**
-     * Returns the minor radius of the ellipse. Also known as the Semi Minor Axis.
-     *
-     * @method Phaser.Geom.Ellipse#getMinorRadius
-     * @since 3.0.0
-     *
-     * @return {number} The minor radius.
-     */
-    getMinorRadius: function ()
-    {
-        return Math.min(this.width, this.height) / 2;
-    },
-
-    /**
-     * Returns the major radius of the ellipse. Also known as the Semi Major Axis.
-     *
-     * @method Phaser.Geom.Ellipse#getMajorRadius
-     * @since 3.0.0
-     *
-     * @return {number} The major radius.
-     */
-    getMajorRadius: function ()
-    {
-        return Math.max(this.width, this.height) / 2;
-    },
-
-    /**
-     * The left position of the Ellipse.
-     *
-     * @name Phaser.Geom.Ellipse#left
-     * @type {number}
-     * @since 3.0.0
-     */
-    left: {
-
-        get: function ()
-        {
-            return this.x - (this.width / 2);
-        },
-
-        set: function (value)
-        {
-            this.x = value + (this.width / 2);
-        }
-
-    },
-
-    /**
-     * The right position of the Ellipse.
-     *
-     * @name Phaser.Geom.Ellipse#right
-     * @type {number}
-     * @since 3.0.0
-     */
-    right: {
-
-        get: function ()
-        {
-            return this.x + (this.width / 2);
-        },
-
-        set: function (value)
-        {
-            this.x = value - (this.width / 2);
-        }
-
-    },
-
-    /**
-     * The top position of the Ellipse.
-     *
-     * @name Phaser.Geom.Ellipse#top
-     * @type {number}
-     * @since 3.0.0
-     */
-    top: {
-
-        get: function ()
-        {
-            return this.y - (this.height / 2);
-        },
-
-        set: function (value)
-        {
-            this.y = value + (this.height / 2);
-        }
-
-    },
-
-    /**
-     * The bottom position of the Ellipse.
-     *
-     * @name Phaser.Geom.Ellipse#bottom
-     * @type {number}
-     * @since 3.0.0
-     */
-    bottom: {
-
-        get: function ()
-        {
-            return this.y + (this.height / 2);
-        },
-
-        set: function (value)
-        {
-            this.y = value - (this.height / 2);
-        }
-
-    }
-
-});
-
-module.exports = Ellipse;
+module.exports = GetPoint;
 
 
 /***/ }),
-/* 243 */
+/* 273 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Circumference = __webpack_require__(274);
+var CircumferencePoint = __webpack_require__(119);
+var FromPercent = __webpack_require__(53);
+var MATH_CONST = __webpack_require__(7);
+
+/**
+ * Returns an array of Point objects containing the coordinates of the points around the circumference of the Ellipse,
+ * based on the given quantity or stepRate values.
+ *
+ * @function Phaser.Geom.Ellipse.GetPoints
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point[]} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to get the points from.
+ * @param {number} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
+ * @param {number} [stepRate] - Sets the quantity by getting the circumference of the ellipse and dividing it by the stepRate.
+ * @param {(array|Phaser.Geom.Point[])} [out] - An array to insert the points in to. If not provided a new array will be created.
+ *
+ * @return {(array|Phaser.Geom.Point[])} An array of Point objects pertaining to the points around the circumference of the ellipse.
+ */
+var GetPoints = function (ellipse, quantity, stepRate, out)
+{
+    if (out === undefined) { out = []; }
+
+    //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
+    if (!quantity && stepRate > 0)
+    {
+        quantity = Circumference(ellipse) / stepRate;
+    }
+
+    for (var i = 0; i < quantity; i++)
+    {
+        var angle = FromPercent(i / quantity, 0, MATH_CONST.PI2);
+
+        out.push(CircumferencePoint(ellipse, angle));
+    }
+
+    return out;
+};
+
+module.exports = GetPoints;
+
+
+/***/ }),
+/* 274 */
 /***/ (function(module, exports) {
 
 /**
@@ -71866,39 +76115,29 @@ module.exports = Ellipse;
  */
 
 /**
- * Check to see if the Ellipse contains the given x / y coordinates.
+ * Returns the circumference of the given Ellipse.
  *
- * @function Phaser.Geom.Ellipse.Contains
+ * @function Phaser.Geom.Ellipse.Circumference
  * @since 3.0.0
  *
- * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to check.
- * @param {number} x - The x coordinate to check within the ellipse.
- * @param {number} y - The y coordinate to check within the ellipse.
+ * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to get the circumference of.
  *
- * @return {boolean} True if the coordinates are within the ellipse, otherwise false.
+ * @return {number} The circumference of th Ellipse.
  */
-var Contains = function (ellipse, x, y)
+var Circumference = function (ellipse)
 {
-    if (ellipse.width <= 0 || ellipse.height <= 0)
-    {
-        return false;
-    }
+    var rx = ellipse.width / 2;
+    var ry = ellipse.height / 2;
+    var h = Math.pow((rx - ry), 2) / Math.pow((rx + ry), 2);
 
-    //  Normalize the coords to an ellipse with center 0,0 and a radius of 0.5
-    var normx = ((x - ellipse.x) / ellipse.width);
-    var normy = ((y - ellipse.y) / ellipse.height);
-
-    normx *= normx;
-    normy *= normy;
-
-    return (normx + normy < 0.25);
+    return (Math.PI * (rx + ry)) * (1 + ((3 * h) / (10 + Math.sqrt(4 - (3 * h)))));
 };
 
-module.exports = Contains;
+module.exports = Circumference;
 
 
 /***/ }),
-/* 244 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -71907,40 +76146,39 @@ module.exports = Contains;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = __webpack_require__(12);
+var Point = __webpack_require__(2);
 
 /**
- * Returns a Point object containing the coordinates of a point on the circumference of the Ellipse based on the given angle.
+ * Returns a uniformly distributed random point from anywhere within the given Ellipse.
  *
- * @function Phaser.Geom.Ellipse.CircumferencePoint
+ * @function Phaser.Geom.Ellipse.Random
  * @since 3.0.0
  *
  * @generic {Phaser.Geom.Point} O - [out,$return]
  *
- * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to get the circumference point on.
- * @param {number} angle - The angle from the center of the Ellipse to the circumference to return the point from. Given in radians.
- * @param {(Phaser.Geom.Point|object)} [out] - A Point, or point-like object, to store the results in. If not given a Point will be created.
+ * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to get a random point from.
+ * @param {(Phaser.Geom.Point|object)} [out] - A Point or point-like object to set the random `x` and `y` values in.
  *
- * @return {(Phaser.Geom.Point|object)} A Point object where the `x` and `y` properties are the point on the circumference.
+ * @return {(Phaser.Geom.Point|object)} A Point object with the random values set in the `x` and `y` properties.
  */
-var CircumferencePoint = function (ellipse, angle, out)
+var Random = function (ellipse, out)
 {
     if (out === undefined) { out = new Point(); }
 
-    var halfWidth = ellipse.width / 2;
-    var halfHeight = ellipse.height / 2;
+    var p = Math.random() * Math.PI * 2;
+    var s = Math.sqrt(Math.random());
 
-    out.x = ellipse.x + halfWidth * Math.cos(angle);
-    out.y = ellipse.y + halfHeight * Math.sin(angle);
+    out.x = ellipse.x + ((s * Math.cos(p)) * ellipse.width / 2);
+    out.y = ellipse.y + ((s * Math.sin(p)) * ellipse.height / 2);
 
     return out;
 };
 
-module.exports = CircumferencePoint;
+module.exports = Random;
 
 
 /***/ }),
-/* 245 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -71949,7 +76187,7 @@ module.exports = CircumferencePoint;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var TransformMatrix = __webpack_require__(19);
+var TransformMatrix = __webpack_require__(22);
 
 var tempMatrix1 = new TransformMatrix();
 var tempMatrix2 = new TransformMatrix();
@@ -72011,7 +76249,7 @@ module.exports = GetCalcMatrix;
 
 
 /***/ }),
-/* 246 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -72020,8 +76258,8 @@ module.exports = GetCalcMatrix;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Commands = __webpack_require__(99);
-var SetTransform = __webpack_require__(247);
+var Commands = __webpack_require__(118);
+var SetTransform = __webpack_require__(278);
 
 /**
  * Renders this Game Object with the Canvas Renderer to the given Camera.
@@ -72258,7 +76496,7 @@ module.exports = GraphicsCanvasRenderer;
 
 
 /***/ }),
-/* 247 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -72267,7 +76505,7 @@ module.exports = GraphicsCanvasRenderer;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetCalcMatrix = __webpack_require__(245);
+var GetCalcMatrix = __webpack_require__(276);
 
 /**
  * Takes a reference to the Canvas Renderer, a Canvas Rendering Context, a Game Object, a Camera and a parent matrix
@@ -72325,7 +76563,1968 @@ module.exports = SetTransform;
 
 
 /***/ }),
-/* 248 */
+/* 279 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var CircumferencePoint = __webpack_require__(124);
+var FromPercent = __webpack_require__(53);
+var MATH_CONST = __webpack_require__(7);
+var Point = __webpack_require__(2);
+
+/**
+ * Returns a Point object containing the coordinates of a point on the circumference of the Circle
+ * based on the given angle normalized to the range 0 to 1. I.e. a value of 0.5 will give the point
+ * at 180 degrees around the circle.
+ *
+ * @function Phaser.Geom.Circle.GetPoint
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Circle} circle - The Circle to get the circumference point on.
+ * @param {number} position - A value between 0 and 1, where 0 equals 0 degrees, 0.5 equals 180 degrees and 1 equals 360 around the circle.
+ * @param {(Phaser.Geom.Point|object)} [out] - An object to store the return values in. If not given a Point object will be created.
+ *
+ * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point around the circle.
+ */
+var GetPoint = function (circle, position, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    var angle = FromPercent(position, 0, MATH_CONST.PI2);
+
+    return CircumferencePoint(circle, angle, out);
+};
+
+module.exports = GetPoint;
+
+
+/***/ }),
+/* 280 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Circumference = __webpack_require__(281);
+var CircumferencePoint = __webpack_require__(124);
+var FromPercent = __webpack_require__(53);
+var MATH_CONST = __webpack_require__(7);
+
+/**
+ * Returns an array of Point objects containing the coordinates of the points around the circumference of the Circle,
+ * based on the given quantity or stepRate values.
+ *
+ * @function Phaser.Geom.Circle.GetPoints
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Circle} circle - The Circle to get the points from.
+ * @param {number} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
+ * @param {number} [stepRate] - Sets the quantity by getting the circumference of the circle and dividing it by the stepRate.
+ * @param {array} [output] - An array to insert the points in to. If not provided a new array will be created.
+ *
+ * @return {Phaser.Geom.Point[]} An array of Point objects pertaining to the points around the circumference of the circle.
+ */
+var GetPoints = function (circle, quantity, stepRate, out)
+{
+    if (out === undefined) { out = []; }
+
+    //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
+    if (!quantity && stepRate > 0)
+    {
+        quantity = Circumference(circle) / stepRate;
+    }
+
+    for (var i = 0; i < quantity; i++)
+    {
+        var angle = FromPercent(i / quantity, 0, MATH_CONST.PI2);
+
+        out.push(CircumferencePoint(circle, angle));
+    }
+
+    return out;
+};
+
+module.exports = GetPoints;
+
+
+/***/ }),
+/* 281 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Returns the circumference of the given Circle.
+ *
+ * @function Phaser.Geom.Circle.Circumference
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Circle} circle - The Circle to get the circumference of.
+ *
+ * @return {number} The circumference of the Circle.
+ */
+var Circumference = function (circle)
+{
+    return 2 * (Math.PI * circle.radius);
+};
+
+module.exports = Circumference;
+
+
+/***/ }),
+/* 282 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Returns a uniformly distributed random point from anywhere within the given Circle.
+ *
+ * @function Phaser.Geom.Circle.Random
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Circle} circle - The Circle to get a random point from.
+ * @param {(Phaser.Geom.Point|object)} [out] - A Point or point-like object to set the random `x` and `y` values in.
+ *
+ * @return {(Phaser.Geom.Point|object)} A Point object with the random values set in the `x` and `y` properties.
+ */
+var Random = function (circle, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    var t = 2 * Math.PI * Math.random();
+    var u = Math.random() + Math.random();
+    var r = (u > 1) ? 2 - u : u;
+    var x = r * Math.cos(t);
+    var y = r * Math.sin(t);
+
+    out.x = circle.x + (x * circle.radius);
+    out.y = circle.y + (y * circle.radius);
+
+    return out;
+};
+
+module.exports = Random;
+
+
+/***/ }),
+/* 283 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var DistanceBetween = __webpack_require__(73);
+
+/**
+ * Checks if two Circles intersect.
+ *
+ * @function Phaser.Geom.Intersects.CircleToCircle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Circle} circleA - The first Circle to check for intersection.
+ * @param {Phaser.Geom.Circle} circleB - The second Circle to check for intersection.
+ *
+ * @return {boolean} `true` if the two Circles intersect, otherwise `false`.
+ */
+var CircleToCircle = function (circleA, circleB)
+{
+    return (DistanceBetween(circleA.x, circleA.y, circleB.x, circleB.y) <= (circleA.radius + circleB.radius));
+};
+
+module.exports = CircleToCircle;
+
+
+/***/ }),
+/* 284 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Checks for intersection between a circle and a rectangle.
+ *
+ * @function Phaser.Geom.Intersects.CircleToRectangle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Circle} circle - The circle to be checked.
+ * @param {Phaser.Geom.Rectangle} rect - The rectangle to be checked.
+ *
+ * @return {boolean} `true` if the two objects intersect, otherwise `false`.
+ */
+var CircleToRectangle = function (circle, rect)
+{
+    var halfWidth = rect.width / 2;
+    var halfHeight = rect.height / 2;
+
+    var cx = Math.abs(circle.x - rect.x - halfWidth);
+    var cy = Math.abs(circle.y - rect.y - halfHeight);
+    var xDist = halfWidth + circle.radius;
+    var yDist = halfHeight + circle.radius;
+
+    if (cx > xDist || cy > yDist)
+    {
+        return false;
+    }
+    else if (cx <= halfWidth || cy <= halfHeight)
+    {
+        return true;
+    }
+    else
+    {
+        var xCornerDist = cx - halfWidth;
+        var yCornerDist = cy - halfHeight;
+        var xCornerDistSq = xCornerDist * xCornerDist;
+        var yCornerDistSq = yCornerDist * yCornerDist;
+        var maxCornerDistSq = circle.radius * circle.radius;
+
+        return (xCornerDistSq + yCornerDistSq <= maxCornerDistSq);
+    }
+};
+
+module.exports = CircleToRectangle;
+
+
+/***/ }),
+/* 285 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Vector3 = __webpack_require__(19);
+
+/**
+ * Checks for intersection between the two line segments and returns the intersection point as a Vector3,
+ * or `null` if the lines are parallel, or do not intersect.
+ *
+ * The `z` property of the Vector3 contains the intersection distance, which can be used to find
+ * the closest intersecting point from a group of line segments.
+ *
+ * @function Phaser.Geom.Intersects.GetLineToLine
+ * @since 3.50.0
+ *
+ * @param {Phaser.Geom.Line} line1 - The first line segment to check.
+ * @param {Phaser.Geom.Line} line2 - The second line segment to check.
+ * @param {Phaser.Math.Vector3} [out] - A Vector3 to store the intersection results in.
+ *
+ * @return {Phaser.Math.Vector3} A Vector3 containing the intersection results, or `null`.
+ */
+var GetLineToLine = function (line1, line2, out)
+{
+    var x1 = line1.x1;
+    var y1 = line1.y1;
+    var x2 = line1.x2;
+    var y2 = line1.y2;
+
+    var x3 = line2.x1;
+    var y3 = line2.y1;
+    var x4 = line2.x2;
+    var y4 = line2.y2;
+
+    var dx1 = x2 - x1;
+    var dy1 = y2 - y1;
+
+    var dx2 = x4 - x3;
+    var dy2 = y4 - y3;
+
+    var denom = dy2 * dx1 - dx2 * dy1;
+
+    //  Make sure there is not a division by zero - this also indicates that the lines are parallel.
+    //  If numA and numB were both equal to zero the lines would be on top of each other (coincidental).
+    //  This check is not done because it is not necessary for this implementation (the parallel check accounts for this).
+
+    if (dx1 === 0 || denom === 0)
+    {
+        return false;
+    }
+
+    var T2 = (dx1 * (y3 - y1) + dy1 * (x1 - x3)) / (dx2 * dy1 - dy2 * dx1);
+    var T1 = (x3 + dx2 * T2 - x1) / dx1;
+
+    //  Intersects?
+    if (T1 < 0 || T2 < 0 || T2 > 1)
+    {
+        return null;
+    }
+
+    if (out === undefined)
+    {
+        out = new Vector3();
+    }
+
+    return out.set(
+        x1 + dx1 * T1,
+        y1 + dy1 * T1,
+        T1
+    );
+};
+
+module.exports = GetLineToLine;
+
+
+/***/ }),
+/* 286 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Vector3 = __webpack_require__(19);
+var GetLineToLine = __webpack_require__(285);
+var Line = __webpack_require__(26);
+
+//  Temp calculation segment
+var segment = new Line();
+
+//  Temp vec3
+var tempIntersect = new Vector3();
+
+/**
+ * Checks for the closest point of intersection between a line segment and an array of points, where each pair
+ * of points are converted to line segments for the intersection tests.
+ *
+ * If no intersection is found, this function returns `null`.
+ *
+ * If intersection was found, a Vector3 is returned with the following properties:
+ *
+ * The `x` and `y` components contain the point of the intersection.
+ * The `z` component contains the closest distance.
+ *
+ * @function Phaser.Geom.Intersects.GetLineToPoints
+ * @since 3.50.0
+ *
+ * @param {Phaser.Geom.Line} line - The line segment to check.
+ * @param {Phaser.Math.Vector2[] | Phaser.Geom.Point[]} points - An array of points to check.
+ * @param {Phaser.Math.Vector3} [out] - A Vector3 to store the intersection results in.
+ *
+ * @return {Phaser.Math.Vector3} A Vector3 containing the intersection results, or `null`.
+ */
+var GetLineToPoints = function (line, points, out)
+{
+    if (out === undefined) { out = new Vector3(); }
+
+    var closestIntersect = false;
+
+    //  Reset our vec3s
+    out.set();
+    tempIntersect.set();
+
+    var prev = points[0];
+
+    for (var i = 1; i < points.length; i++)
+    {
+        var current = points[i];
+
+        segment.setTo(prev.x, prev.y, current.x, current.y);
+
+        prev = current;
+
+        if (GetLineToLine(line, segment, tempIntersect))
+        {
+            if (!closestIntersect || tempIntersect.z < out.z)
+            {
+                out.copy(tempIntersect);
+
+                closestIntersect = true;
+            }
+        }
+    }
+
+    return (closestIntersect) ? out : null;
+};
+
+module.exports = GetLineToPoints;
+
+
+/***/ }),
+/* 287 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Vector3 = __webpack_require__(19);
+var Vector4 = __webpack_require__(106);
+var GetLineToPoints = __webpack_require__(286);
+
+//  Temp vec3
+var tempIntersect = new Vector3();
+
+/**
+ * Checks for the closest point of intersection between a line segment and an array of polygons.
+ *
+ * If no intersection is found, this function returns `null`.
+ *
+ * If intersection was found, a Vector4 is returned with the following properties:
+ *
+ * The `x` and `y` components contain the point of the intersection.
+ * The `z` component contains the closest distance.
+ * The `w` component contains the index of the polygon, in the given array, that triggered the intersection.
+ *
+ * @function Phaser.Geom.Intersects.GetLineToPolygon
+ * @since 3.50.0
+ *
+ * @param {Phaser.Geom.Line} line - The line segment to check.
+ * @param {Phaser.Geom.Polygon | Phaser.Geom.Polygon[]} polygons - A single polygon, or array of polygons, to check.
+ * @param {Phaser.Math.Vector4} [out] - A Vector4 to store the intersection results in.
+ *
+ * @return {Phaser.Math.Vector4} A Vector4 containing the intersection results, or `null`.
+ */
+var GetLineToPolygon = function (line, polygons, out)
+{
+    if (out === undefined) { out = new Vector4(); }
+
+    if (!Array.isArray(polygons))
+    {
+        polygons = [ polygons ];
+    }
+
+    var closestIntersect = false;
+
+    //  Reset our vec4s
+    out.set();
+    tempIntersect.set();
+
+    for (var i = 0; i < polygons.length; i++)
+    {
+        if (GetLineToPoints(line, polygons[i].points, tempIntersect))
+        {
+            if (!closestIntersect || tempIntersect.z < out.z)
+            {
+                out.set(tempIntersect.x, tempIntersect.y, tempIntersect.z, i);
+
+                closestIntersect = true;
+            }
+        }
+    }
+
+    return (closestIntersect) ? out : null;
+};
+
+module.exports = GetLineToPolygon;
+
+
+/***/ }),
+/* 288 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Checks for intersection between the Line and a Rectangle shape, or a rectangle-like
+ * object, with public `x`, `y`, `right` and `bottom` properties, such as a Sprite or Body.
+ *
+ * An intersection is considered valid if:
+ *
+ * The line starts within, or ends within, the Rectangle.
+ * The line segment intersects one of the 4 rectangle edges.
+ *
+ * The for the purposes of this function rectangles are considered 'solid'.
+ *
+ * @function Phaser.Geom.Intersects.LineToRectangle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The Line to check for intersection.
+ * @param {(Phaser.Geom.Rectangle|object)} rect - The Rectangle to check for intersection.
+ *
+ * @return {boolean} `true` if the Line and the Rectangle intersect, `false` otherwise.
+ */
+var LineToRectangle = function (line, rect)
+{
+    var x1 = line.x1;
+    var y1 = line.y1;
+
+    var x2 = line.x2;
+    var y2 = line.y2;
+
+    var bx1 = rect.x;
+    var by1 = rect.y;
+    var bx2 = rect.right;
+    var by2 = rect.bottom;
+
+    var t = 0;
+
+    //  If the start or end of the line is inside the rect then we assume
+    //  collision, as rects are solid for our use-case.
+
+    if ((x1 >= bx1 && x1 <= bx2 && y1 >= by1 && y1 <= by2) ||
+        (x2 >= bx1 && x2 <= bx2 && y2 >= by1 && y2 <= by2))
+    {
+        return true;
+    }
+
+    if (x1 < bx1 && x2 >= bx1)
+    {
+        //  Left edge
+        t = y1 + (y2 - y1) * (bx1 - x1) / (x2 - x1);
+
+        if (t > by1 && t <= by2)
+        {
+            return true;
+        }
+    }
+    else if (x1 > bx2 && x2 <= bx2)
+    {
+        //  Right edge
+        t = y1 + (y2 - y1) * (bx2 - x1) / (x2 - x1);
+
+        if (t >= by1 && t <= by2)
+        {
+            return true;
+        }
+    }
+
+    if (y1 < by1 && y2 >= by1)
+    {
+        //  Top edge
+        t = x1 + (x2 - x1) * (by1 - y1) / (y2 - y1);
+
+        if (t >= bx1 && t <= bx2)
+        {
+            return true;
+        }
+    }
+    else if (y1 > by2 && y2 <= by2)
+    {
+        //  Bottom edge
+        t = x1 + (x2 - x1) * (by2 - y1) / (y2 - y1);
+
+        if (t >= bx1 && t <= bx2)
+        {
+            return true;
+        }
+    }
+
+    return false;
+};
+
+module.exports = LineToRectangle;
+
+
+/***/ }),
+/* 289 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var LineToLine = __webpack_require__(42);
+var Contains = __webpack_require__(38);
+var ContainsArray = __webpack_require__(128);
+var Decompose = __webpack_require__(290);
+
+/**
+ * Checks for intersection between Rectangle shape and Triangle shape.
+ *
+ * @function Phaser.Geom.Intersects.RectangleToTriangle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Rectangle} rect - Rectangle object to test.
+ * @param {Phaser.Geom.Triangle} triangle - Triangle object to test.
+ *
+ * @return {boolean} A value of `true` if objects intersect; otherwise `false`.
+ */
+var RectangleToTriangle = function (rect, triangle)
+{
+    //  First the cheapest ones:
+
+    if (
+        triangle.left > rect.right ||
+        triangle.right < rect.left ||
+        triangle.top > rect.bottom ||
+        triangle.bottom < rect.top)
+    {
+        return false;
+    }
+
+    var triA = triangle.getLineA();
+    var triB = triangle.getLineB();
+    var triC = triangle.getLineC();
+
+    //  Are any of the triangle points within the rectangle?
+
+    if (Contains(rect, triA.x1, triA.y1) || Contains(rect, triA.x2, triA.y2))
+    {
+        return true;
+    }
+
+    if (Contains(rect, triB.x1, triB.y1) || Contains(rect, triB.x2, triB.y2))
+    {
+        return true;
+    }
+
+    if (Contains(rect, triC.x1, triC.y1) || Contains(rect, triC.x2, triC.y2))
+    {
+        return true;
+    }
+
+    //  Cheap tests over, now to see if any of the lines intersect ...
+
+    var rectA = rect.getLineA();
+    var rectB = rect.getLineB();
+    var rectC = rect.getLineC();
+    var rectD = rect.getLineD();
+
+    if (LineToLine(triA, rectA) || LineToLine(triA, rectB) || LineToLine(triA, rectC) || LineToLine(triA, rectD))
+    {
+        return true;
+    }
+
+    if (LineToLine(triB, rectA) || LineToLine(triB, rectB) || LineToLine(triB, rectC) || LineToLine(triB, rectD))
+    {
+        return true;
+    }
+
+    if (LineToLine(triC, rectA) || LineToLine(triC, rectB) || LineToLine(triC, rectC) || LineToLine(triC, rectD))
+    {
+        return true;
+    }
+
+    //  None of the lines intersect, so are any rectangle points within the triangle?
+
+    var points = Decompose(rect);
+    var within = ContainsArray(triangle, points, true);
+
+    return (within.length > 0);
+};
+
+module.exports = RectangleToTriangle;
+
+
+/***/ }),
+/* 290 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Create an array of points for each corner of a Rectangle
+ * If an array is specified, each point object will be added to the end of the array, otherwise a new array will be created.
+ *
+ * @function Phaser.Geom.Rectangle.Decompose
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle object to be decomposed.
+ * @param {array} [out] - If provided, each point will be added to this array.
+ *
+ * @return {array} Will return the array you specified or a new array containing the points of the Rectangle.
+ */
+var Decompose = function (rect, out)
+{
+    if (out === undefined) { out = []; }
+
+    out.push({ x: rect.x, y: rect.y });
+    out.push({ x: rect.right, y: rect.y });
+    out.push({ x: rect.right, y: rect.bottom });
+    out.push({ x: rect.x, y: rect.bottom });
+
+    return out;
+};
+
+module.exports = Decompose;
+
+
+/***/ }),
+/* 291 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var LineToCircle = __webpack_require__(126);
+var Contains = __webpack_require__(64);
+
+/**
+ * Checks if a Triangle and a Circle intersect.
+ *
+ * A Circle intersects a Triangle if its center is located within it or if any of the Triangle's sides intersect the Circle. As such, the Triangle and the Circle are considered "solid" for the intersection.
+ *
+ * @function Phaser.Geom.Intersects.TriangleToCircle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to check for intersection.
+ * @param {Phaser.Geom.Circle} circle - The Circle to check for intersection.
+ *
+ * @return {boolean} `true` if the Triangle and the `Circle` intersect, otherwise `false`.
+ */
+var TriangleToCircle = function (triangle, circle)
+{
+    //  First the cheapest ones:
+
+    if (
+        triangle.left > circle.right ||
+        triangle.right < circle.left ||
+        triangle.top > circle.bottom ||
+        triangle.bottom < circle.top)
+    {
+        return false;
+    }
+
+    if (Contains(triangle, circle.x, circle.y))
+    {
+        return true;
+    }
+
+    if (LineToCircle(triangle.getLineA(), circle))
+    {
+        return true;
+    }
+
+    if (LineToCircle(triangle.getLineB(), circle))
+    {
+        return true;
+    }
+
+    if (LineToCircle(triangle.getLineC(), circle))
+    {
+        return true;
+    }
+
+    return false;
+};
+
+module.exports = TriangleToCircle;
+
+
+/***/ }),
+/* 292 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Florian Vazelle
+ * @author       Geoffrey Glaive
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+var TriangleToLine = __webpack_require__(293);
+var LineToLine = __webpack_require__(42);
+
+/**
+ * Checks if a Triangle and a Line intersect, and returns the intersection points as a Point object array.
+ *
+ * The Line intersects the Triangle if it starts inside of it, ends inside of it, or crosses any of the Triangle's sides. Thus, the Triangle is considered "solid".
+ *
+ * @function Phaser.Geom.Intersects.GetTriangleToLine
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to check with.
+ * @param {Phaser.Geom.Line} line - The Line to check with.
+ * @param {array} [out] - An optional array in which to store the points of intersection.
+ *
+ * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
+ */
+var GetTriangleToLine = function (triangle, line, out)
+{
+    if (out === undefined) { out = []; }
+
+    if (TriangleToLine(triangle, line))
+    {
+        var lineA = triangle.getLineA();
+        var lineB = triangle.getLineB();
+        var lineC = triangle.getLineC();
+
+        var output = [ new Point(), new Point(), new Point() ];
+
+        var result = [
+            LineToLine(lineA, line, output[0]),
+            LineToLine(lineB, line, output[1]),
+            LineToLine(lineC, line, output[2])
+        ];
+
+        for (var i = 0; i < 3; i++)
+        {
+            if (result[i]) { out.push(output[i]); }
+        }
+    }
+
+    return out;
+};
+
+module.exports = GetTriangleToLine;
+
+
+/***/ }),
+/* 293 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var LineToLine = __webpack_require__(42);
+
+/**
+ * Checks if a Triangle and a Line intersect.
+ *
+ * The Line intersects the Triangle if it starts inside of it, ends inside of it, or crosses any of the Triangle's sides. Thus, the Triangle is considered "solid".
+ *
+ * @function Phaser.Geom.Intersects.TriangleToLine
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to check with.
+ * @param {Phaser.Geom.Line} line - The Line to check with.
+ *
+ * @return {boolean} `true` if the Triangle and the Line intersect, otherwise `false`.
+ */
+var TriangleToLine = function (triangle, line)
+{
+    //  If the Triangle contains either the start or end point of the line, it intersects
+    if (triangle.contains(line.x1, line.y1) || triangle.contains(line.x2, line.y2))
+    {
+        return true;
+    }
+
+    //  Now check the line against each line of the Triangle
+    if (LineToLine(triangle.getLineA(), line))
+    {
+        return true;
+    }
+
+    if (LineToLine(triangle.getLineB(), line))
+    {
+        return true;
+    }
+
+    if (LineToLine(triangle.getLineC(), line))
+    {
+        return true;
+    }
+
+    return false;
+};
+
+module.exports = TriangleToLine;
+
+
+/***/ }),
+/* 294 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var ContainsArray = __webpack_require__(128);
+var Decompose = __webpack_require__(295);
+var LineToLine = __webpack_require__(42);
+
+/**
+ * Checks if two Triangles intersect.
+ *
+ * A Triangle intersects another Triangle if any pair of their lines intersects or if any point of one Triangle is within the other Triangle. Thus, the Triangles are considered "solid".
+ *
+ * @function Phaser.Geom.Intersects.TriangleToTriangle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Triangle} triangleA - The first Triangle to check for intersection.
+ * @param {Phaser.Geom.Triangle} triangleB - The second Triangle to check for intersection.
+ *
+ * @return {boolean} `true` if the Triangles intersect, otherwise `false`.
+ */
+var TriangleToTriangle = function (triangleA, triangleB)
+{
+    //  First the cheapest ones:
+
+    if (
+        triangleA.left > triangleB.right ||
+        triangleA.right < triangleB.left ||
+        triangleA.top > triangleB.bottom ||
+        triangleA.bottom < triangleB.top)
+    {
+        return false;
+    }
+
+    var lineAA = triangleA.getLineA();
+    var lineAB = triangleA.getLineB();
+    var lineAC = triangleA.getLineC();
+
+    var lineBA = triangleB.getLineA();
+    var lineBB = triangleB.getLineB();
+    var lineBC = triangleB.getLineC();
+
+    //  Now check the lines against each line of TriangleB
+    if (LineToLine(lineAA, lineBA) || LineToLine(lineAA, lineBB) || LineToLine(lineAA, lineBC))
+    {
+        return true;
+    }
+
+    if (LineToLine(lineAB, lineBA) || LineToLine(lineAB, lineBB) || LineToLine(lineAB, lineBC))
+    {
+        return true;
+    }
+
+    if (LineToLine(lineAC, lineBA) || LineToLine(lineAC, lineBB) || LineToLine(lineAC, lineBC))
+    {
+        return true;
+    }
+
+    //  Nope, so check to see if any of the points of triangleA are within triangleB
+
+    var points = Decompose(triangleA);
+    var within = ContainsArray(triangleB, points, true);
+
+    if (within.length > 0)
+    {
+        return true;
+    }
+
+    //  Finally check to see if any of the points of triangleB are within triangleA
+
+    points = Decompose(triangleB);
+    within = ContainsArray(triangleA, points, true);
+
+    if (within.length > 0)
+    {
+        return true;
+    }
+
+    return false;
+};
+
+module.exports = TriangleToTriangle;
+
+
+/***/ }),
+/* 295 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Decomposes a Triangle into an array of its points.
+ *
+ * @function Phaser.Geom.Triangle.Decompose
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to decompose.
+ * @param {array} [out] - An array to store the points into.
+ *
+ * @return {array} The provided `out` array, or a new array if none was provided, with three objects with `x` and `y` properties representing each point of the Triangle appended to it.
+ */
+var Decompose = function (triangle, out)
+{
+    if (out === undefined) { out = []; }
+
+    out.push({ x: triangle.x1, y: triangle.y1 });
+    out.push({ x: triangle.x2, y: triangle.y2 });
+    out.push({ x: triangle.x3, y: triangle.y3 });
+
+    return out;
+};
+
+module.exports = Decompose;
+
+
+/***/ }),
+/* 296 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @author       Florian Mertens
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Checks if the a Point falls between the two end-points of a Line, based on the given line thickness.
+ * 
+ * Assumes that the line end points are circular, not square.
+ *
+ * @function Phaser.Geom.Intersects.PointToLine
+ * @since 3.0.0
+ *
+ * @param {(Phaser.Geom.Point|any)} point - The point, or point-like object to check.
+ * @param {Phaser.Geom.Line} line - The line segment to test for intersection on.
+ * @param {number} [lineThickness=1] - The line thickness. Assumes that the line end points are circular.
+ *
+ * @return {boolean} `true` if the Point falls on the Line, otherwise `false`.
+ */
+var PointToLine = function (point, line, lineThickness)
+{
+    if (lineThickness === undefined) { lineThickness = 1; }
+
+    var x1 = line.x1;
+    var y1 = line.y1;
+
+    var x2 = line.x2;
+    var y2 = line.y2;
+
+    var px = point.x;
+    var py = point.y;
+
+    var L2 = (((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
+
+    if (L2 === 0)
+    {
+        return false;
+    }
+
+    var r = (((px - x1) * (x2 - x1)) + ((py - y1) * (y2 - y1))) / L2;
+
+    //  Assume line thickness is circular
+    if (r < 0)
+    {
+        //  Outside line1
+        return (Math.sqrt(((x1 - px) * (x1 - px)) + ((y1 - py) * (y1 - py))) <= lineThickness);
+    }
+    else if ((r >= 0) && (r <= 1))
+    {
+        //  On the line segment
+        var s = (((y1 - py) * (x2 - x1)) - ((x1 - px) * (y2 - y1))) / L2;
+
+        return (Math.abs(s) * Math.sqrt(L2) <= lineThickness);
+    }
+    else
+    {
+        //  Outside line2
+        return (Math.sqrt(((x2 - px) * (x2 - px)) + ((y2 - py) * (y2 - py))) <= lineThickness);
+    }
+};
+
+module.exports = PointToLine;
+
+
+/***/ }),
+/* 297 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var MATH_CONST = __webpack_require__(7);
+var Wrap = __webpack_require__(69);
+var Angle = __webpack_require__(43);
+
+/**
+ * Get the angle of the normal of the given line in radians.
+ *
+ * @function Phaser.Geom.Line.NormalAngle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The line to calculate the angle of the normal of.
+ *
+ * @return {number} The angle of the normal of the line in radians.
+ */
+var NormalAngle = function (line)
+{
+    var angle = Angle(line) - MATH_CONST.TAU;
+
+    return Wrap(angle, -Math.PI, Math.PI);
+};
+
+module.exports = NormalAngle;
+
+
+/***/ }),
+/* 298 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Calculate the magnitude of the point, which equivalent to the length of the line from the origin to this point.
+ *
+ * @function Phaser.Geom.Point.GetMagnitude
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Point} point - The point to calculate the magnitude for
+ *
+ * @return {number} The resulting magnitude
+ */
+var GetMagnitude = function (point)
+{
+    return Math.sqrt((point.x * point.x) + (point.y * point.y));
+};
+
+module.exports = GetMagnitude;
+
+
+/***/ }),
+/* 299 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Calculates the square of magnitude of given point.(Can be used for fast magnitude calculation of point)
+ *
+ * @function Phaser.Geom.Point.GetMagnitudeSq
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Point} point - Returns square of the magnitude/length of given point.
+ *
+ * @return {number} Returns square of the magnitude of given point.
+ */
+var GetMagnitudeSq = function (point)
+{
+    return (point.x * point.x) + (point.y * point.y);
+};
+
+module.exports = GetMagnitudeSq;
+
+
+/***/ }),
+/* 300 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Class = __webpack_require__(0);
+var Contains = __webpack_require__(130);
+var GetPoints = __webpack_require__(301);
+var GEOM_CONST = __webpack_require__(21);
+
+/**
+ * @classdesc
+ * A Polygon object
+ *
+ * The polygon is a closed shape consists of a series of connected straight lines defined by list of ordered points.
+ * Several formats are supported to define the list of points, check the setTo method for details.
+ * This is a geometry object allowing you to define and inspect the shape.
+ * It is not a Game Object, in that you cannot add it to the display list, and it has no texture.
+ * To render a Polygon you should look at the capabilities of the Graphics class.
+ *
+ * @class Polygon
+ * @memberof Phaser.Geom
+ * @constructor
+ * @since 3.0.0
+ *
+ * @param {(string|number[]|Phaser.Types.Math.Vector2Like[])} [points] - List of points defining the perimeter of this Polygon. Several formats are supported:
+ * - A string containing paired x y values separated by a single space: `'40 0 40 20 100 20 100 80 40 80 40 100 0 50'`
+ * - An array of Point objects: `[new Phaser.Point(x1, y1), ...]`
+ * - An array of objects with public x y properties: `[obj1, obj2, ...]`
+ * - An array of paired numbers that represent point coordinates: `[x1,y1, x2,y2, ...]`
+ * - An array of arrays with two elements representing x/y coordinates: `[[x1, y1], [x2, y2], ...]`
+ */
+var Polygon = new Class({
+
+    initialize:
+
+    function Polygon (points)
+    {
+        /**
+         * The geometry constant type of this object: `GEOM_CONST.POLYGON`.
+         * Used for fast type comparisons.
+         *
+         * @name Phaser.Geom.Polygon#type
+         * @type {number}
+         * @readonly
+         * @since 3.19.0
+         */
+        this.type = GEOM_CONST.POLYGON;
+
+        /**
+         * The area of this Polygon.
+         *
+         * @name Phaser.Geom.Polygon#area
+         * @type {number}
+         * @default 0
+         * @since 3.0.0
+         */
+        this.area = 0;
+
+        /**
+         * An array of number pair objects that make up this polygon. I.e. [ {x,y}, {x,y}, {x,y} ]
+         *
+         * @name Phaser.Geom.Polygon#points
+         * @type {Phaser.Geom.Point[]}
+         * @since 3.0.0
+         */
+        this.points = [];
+
+        if (points)
+        {
+            this.setTo(points);
+        }
+    },
+
+    /**
+     * Check to see if the Polygon contains the given x / y coordinates.
+     *
+     * @method Phaser.Geom.Polygon#contains
+     * @since 3.0.0
+     *
+     * @param {number} x - The x coordinate to check within the polygon.
+     * @param {number} y - The y coordinate to check within the polygon.
+     *
+     * @return {boolean} `true` if the coordinates are within the polygon, otherwise `false`.
+     */
+    contains: function (x, y)
+    {
+        return Contains(this, x, y);
+    },
+
+    /**
+     * Sets this Polygon to the given points.
+     *
+     * The points can be set from a variety of formats:
+     *
+     * - A string containing paired values separated by a single space: `'40 0 40 20 100 20 100 80 40 80 40 100 0 50'`
+     * - An array of Point objects: `[new Phaser.Point(x1, y1), ...]`
+     * - An array of objects with public x/y properties: `[obj1, obj2, ...]`
+     * - An array of paired numbers that represent point coordinates: `[x1,y1, x2,y2, ...]`
+     * - An array of arrays with two elements representing x/y coordinates: `[[x1, y1], [x2, y2], ...]`
+     *
+     * `setTo` may also be called without any arguments to remove all points.
+     *
+     * @method Phaser.Geom.Polygon#setTo
+     * @since 3.0.0
+     *
+     * @param {(string|number[]|Phaser.Types.Math.Vector2Like[])} [points] - Points defining the perimeter of this polygon. Please check function description above for the different supported formats.
+     *
+     * @return {this} This Polygon object.
+     */
+    setTo: function (points)
+    {
+        this.area = 0;
+        this.points = [];
+
+        if (typeof points === 'string')
+        {
+            points = points.split(' ');
+        }
+
+        if (!Array.isArray(points))
+        {
+            return this;
+        }
+
+        var p;
+        var y0 = Number.MAX_VALUE;
+
+        //  The points argument is an array, so iterate through it
+        for (var i = 0; i < points.length; i++)
+        {
+            p = { x: 0, y: 0 };
+
+            if (typeof points[i] === 'number' || typeof points[i] === 'string')
+            {
+                p.x = parseFloat(points[i]);
+                p.y = parseFloat(points[i + 1]);
+                i++;
+            }
+            else if (Array.isArray(points[i]))
+            {
+                //  An array of arrays?
+                p.x = points[i][0];
+                p.y = points[i][1];
+            }
+            else
+            {
+                p.x = points[i].x;
+                p.y = points[i].y;
+            }
+
+            this.points.push(p);
+
+            //  Lowest boundary
+            if (p.y < y0)
+            {
+                y0 = p.y;
+            }
+        }
+
+        this.calculateArea(y0);
+
+        return this;
+    },
+
+    /**
+     * Calculates the area of the Polygon. This is available in the property Polygon.area
+     *
+     * @method Phaser.Geom.Polygon#calculateArea
+     * @since 3.0.0
+     *
+     * @return {number} The area of the polygon.
+     */
+    calculateArea: function ()
+    {
+        if (this.points.length < 3)
+        {
+            this.area = 0;
+
+            return this.area;
+        }
+
+        var sum = 0;
+        var p1;
+        var p2;
+
+        for (var i = 0; i < this.points.length - 1; i++)
+        {
+            p1 = this.points[i];
+            p2 = this.points[i + 1];
+
+            sum += (p2.x - p1.x) * (p1.y + p2.y);
+        }
+
+        p1 = this.points[0];
+        p2 = this.points[this.points.length - 1];
+
+        sum += (p1.x - p2.x) * (p2.y + p1.y);
+
+        this.area = -sum * 0.5;
+
+        return this.area;
+    },
+
+    /**
+     * Returns an array of Point objects containing the coordinates of the points around the perimeter of the Polygon,
+     * based on the given quantity or stepRate values.
+     *
+     * @method Phaser.Geom.Polygon#getPoints
+     * @since 3.12.0
+     *
+     * @generic {Phaser.Geom.Point[]} O - [output,$return]
+     *
+     * @param {number} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
+     * @param {number} [stepRate] - Sets the quantity by getting the perimeter of the Polygon and dividing it by the stepRate.
+     * @param {(array|Phaser.Geom.Point[])} [output] - An array to insert the points in to. If not provided a new array will be created.
+     *
+     * @return {(array|Phaser.Geom.Point[])} An array of Point objects pertaining to the points around the perimeter of the Polygon.
+     */
+    getPoints: function (quantity, step, output)
+    {
+        return GetPoints(this, quantity, step, output);
+    }
+
+});
+
+module.exports = Polygon;
+
+
+/***/ }),
+/* 301 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Length = __webpack_require__(27);
+var Line = __webpack_require__(26);
+var Perimeter = __webpack_require__(302);
+
+/**
+ * Returns an array of Point objects containing the coordinates of the points around the perimeter of the Polygon,
+ * based on the given quantity or stepRate values.
+ *
+ * @function Phaser.Geom.Polygon.GetPoints
+ * @since 3.12.0
+ *
+ * @param {Phaser.Geom.Polygon} polygon - The Polygon to get the points from.
+ * @param {number} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
+ * @param {number} [stepRate] - Sets the quantity by getting the perimeter of the Polygon and dividing it by the stepRate.
+ * @param {array} [output] - An array to insert the points in to. If not provided a new array will be created.
+ *
+ * @return {Phaser.Geom.Point[]} An array of Point objects pertaining to the points around the perimeter of the Polygon.
+ */
+var GetPoints = function (polygon, quantity, stepRate, out)
+{
+    if (out === undefined) { out = []; }
+
+    var points = polygon.points;
+    var perimeter = Perimeter(polygon);
+
+    //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
+    if (!quantity && stepRate > 0)
+    {
+        quantity = perimeter / stepRate;
+    }
+
+    for (var i = 0; i < quantity; i++)
+    {
+        var position = perimeter * (i / quantity);
+        var accumulatedPerimeter = 0;
+
+        for (var j = 0; j < points.length; j++)
+        {
+            var pointA = points[j];
+            var pointB = points[(j + 1) % points.length];
+            var line = new Line(
+                pointA.x,
+                pointA.y,
+                pointB.x,
+                pointB.y
+            );
+            var length = Length(line);
+
+            if (position < accumulatedPerimeter || position > accumulatedPerimeter + length)
+            {
+                accumulatedPerimeter += length;
+                continue;
+            }
+
+            var point = line.getPoint((position - accumulatedPerimeter) / length);
+            out.push(point);
+
+            break;
+        }
+    }
+
+    return out;
+};
+
+module.exports = GetPoints;
+
+
+/***/ }),
+/* 302 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Length = __webpack_require__(27);
+var Line = __webpack_require__(26);
+
+/**
+ * Returns the perimeter of the given Polygon.
+ *
+ * @function Phaser.Geom.Polygon.Perimeter
+ * @since 3.12.0
+ *
+ * @param {Phaser.Geom.Polygon} polygon - The Polygon to get the perimeter of.
+ *
+ * @return {number} The perimeter of the Polygon.
+ */
+var Perimeter = function (polygon)
+{
+    var points = polygon.points;
+    var perimeter = 0;
+
+    for (var i = 0; i < points.length; i++)
+    {
+        var pointA = points[i];
+        var pointB = points[(i + 1) % points.length];
+        var line = new Line(
+            pointA.x,
+            pointA.y,
+            pointB.x,
+            pointB.y
+        );
+
+        perimeter += Length(line);
+    }
+
+    return perimeter;
+};
+
+module.exports = Perimeter;
+
+
+/***/ }),
+/* 303 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Tests if one rectangle fully contains another.
+ *
+ * @function Phaser.Geom.Rectangle.ContainsRect
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Rectangle} rectA - The first rectangle.
+ * @param {Phaser.Geom.Rectangle} rectB - The second rectangle.
+ *
+ * @return {boolean} True only if rectA fully contains rectB.
+ */
+var ContainsRect = function (rectA, rectB)
+{
+    //  Volume check (if rectB volume > rectA then rectA cannot contain it)
+    if ((rectB.width * rectB.height) > (rectA.width * rectA.height))
+    {
+        return false;
+    }
+
+    return (
+        (rectB.x > rectA.x && rectB.x < rectA.right) &&
+        (rectB.right > rectA.x && rectB.right < rectA.right) &&
+        (rectB.y > rectA.y && rectB.y < rectA.bottom) &&
+        (rectB.bottom > rectA.y && rectB.bottom < rectA.bottom)
+    );
+};
+
+module.exports = ContainsRect;
+
+
+/***/ }),
+/* 304 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+var Length = __webpack_require__(27);
+
+/**
+ * Returns a Point from around the perimeter of a Triangle.
+ *
+ * @function Phaser.Geom.Triangle.GetPoint
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to get the point on its perimeter from.
+ * @param {number} position - The position along the perimeter of the triangle. A value between 0 and 1.
+ * @param {(Phaser.Geom.Point|object)} [out] - An option Point, or Point-like object to store the value in. If not given a new Point will be created.
+ *
+ * @return {(Phaser.Geom.Point|object)} A Point object containing the given position from the perimeter of the triangle.
+ */
+var GetPoint = function (triangle, position, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    var line1 = triangle.getLineA();
+    var line2 = triangle.getLineB();
+    var line3 = triangle.getLineC();
+
+    if (position <= 0 || position >= 1)
+    {
+        out.x = line1.x1;
+        out.y = line1.y1;
+
+        return out;
+    }
+
+    var length1 = Length(line1);
+    var length2 = Length(line2);
+    var length3 = Length(line3);
+
+    var perimeter = length1 + length2 + length3;
+
+    var p = perimeter * position;
+    var localPosition = 0;
+
+    //  Which line is it on?
+
+    if (p < length1)
+    {
+        //  Line 1
+        localPosition = p / length1;
+
+        out.x = line1.x1 + (line1.x2 - line1.x1) * localPosition;
+        out.y = line1.y1 + (line1.y2 - line1.y1) * localPosition;
+    }
+    else if (p > length1 + length2)
+    {
+        //  Line 3
+        p -= length1 + length2;
+        localPosition = p / length3;
+
+        out.x = line3.x1 + (line3.x2 - line3.x1) * localPosition;
+        out.y = line3.y1 + (line3.y2 - line3.y1) * localPosition;
+    }
+    else
+    {
+        //  Line 2
+        p -= length1;
+        localPosition = p / length2;
+
+        out.x = line2.x1 + (line2.x2 - line2.x1) * localPosition;
+        out.y = line2.y1 + (line2.y2 - line2.y1) * localPosition;
+    }
+
+    return out;
+};
+
+module.exports = GetPoint;
+
+
+/***/ }),
+/* 305 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Length = __webpack_require__(27);
+var Point = __webpack_require__(2);
+
+/**
+ * Returns an array of evenly spaced points on the perimeter of a Triangle.
+ *
+ * @function Phaser.Geom.Triangle.GetPoints
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to get the points from.
+ * @param {number} quantity - The number of evenly spaced points to return. Set to 0 to return an arbitrary number of points based on the `stepRate`.
+ * @param {number} stepRate - If `quantity` is 0, the distance between each returned point.
+ * @param {(array|Phaser.Geom.Point[])} [out] - An array to which the points should be appended.
+ *
+ * @return {(array|Phaser.Geom.Point[])} The modified `out` array, or a new array if none was provided.
+ */
+var GetPoints = function (triangle, quantity, stepRate, out)
+{
+    if (out === undefined) { out = []; }
+
+    var line1 = triangle.getLineA();
+    var line2 = triangle.getLineB();
+    var line3 = triangle.getLineC();
+
+    var length1 = Length(line1);
+    var length2 = Length(line2);
+    var length3 = Length(line3);
+
+    var perimeter = length1 + length2 + length3;
+
+    //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
+    if (!quantity && stepRate > 0)
+    {
+        quantity = perimeter / stepRate;
+    }
+
+    for (var i = 0; i < quantity; i++)
+    {
+        var p = perimeter * (i / quantity);
+        var localPosition = 0;
+
+        var point = new Point();
+
+        //  Which line is it on?
+
+        if (p < length1)
+        {
+            //  Line 1
+            localPosition = p / length1;
+
+            point.x = line1.x1 + (line1.x2 - line1.x1) * localPosition;
+            point.y = line1.y1 + (line1.y2 - line1.y1) * localPosition;
+        }
+        else if (p > length1 + length2)
+        {
+            //  Line 3
+            p -= length1 + length2;
+            localPosition = p / length3;
+
+            point.x = line3.x1 + (line3.x2 - line3.x1) * localPosition;
+            point.y = line3.y1 + (line3.y2 - line3.y1) * localPosition;
+        }
+        else
+        {
+            //  Line 2
+            p -= length1;
+            localPosition = p / length2;
+
+            point.x = line2.x1 + (line2.x2 - line2.x1) * localPosition;
+            point.y = line2.y1 + (line2.y2 - line2.y1) * localPosition;
+        }
+
+        out.push(point);
+    }
+
+    return out;
+};
+
+module.exports = GetPoints;
+
+
+/***/ }),
+/* 306 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Returns a random Point from within the area of the given Triangle.
+ *
+ * @function Phaser.Geom.Triangle.Random
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to get a random point from.
+ * @param {Phaser.Geom.Point} [out] - The Point object to store the position in. If not given, a new Point instance is created.
+ *
+ * @return {Phaser.Geom.Point} A Point object holding the coordinates of a random position within the Triangle.
+ */
+var Random = function (triangle, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    //  Basis vectors
+    var ux = triangle.x2 - triangle.x1;
+    var uy = triangle.y2 - triangle.y1;
+
+    var vx = triangle.x3 - triangle.x1;
+    var vy = triangle.y3 - triangle.y1;
+
+    //  Random point within the unit square
+    var r = Math.random();
+    var s = Math.random();
+
+    //  Point outside the triangle? Remap it.
+    if (r + s >= 1)
+    {
+        r = 1 - r;
+        s = 1 - s;
+    }
+
+    out.x = triangle.x1 + ((ux * r) + (vx * s));
+    out.y = triangle.y1 + ((uy * r) + (vy * s));
+
+    return out;
+};
+
+module.exports = Random;
+
+
+/***/ }),
+/* 307 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+//  The three medians (the lines drawn from the vertices to the bisectors of the opposite sides)
+//  meet in the centroid or center of mass (center of gravity).
+//  The centroid divides each median in a ratio of 2:1
+
+/**
+ * Calculates the position of a Triangle's centroid, which is also its center of mass (center of gravity).
+ *
+ * The centroid is the point in a Triangle at which its three medians (the lines drawn from the vertices to the bisectors of the opposite sides) meet. It divides each one in a 2:1 ratio.
+ *
+ * @function Phaser.Geom.Triangle.Centroid
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to use.
+ * @param {(Phaser.Geom.Point|object)} [out] - An object to store the coordinates in.
+ *
+ * @return {(Phaser.Geom.Point|object)} The `out` object with modified `x` and `y` properties, or a new Point if none was provided.
+ */
+var Centroid = function (triangle, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    out.x = (triangle.x1 + triangle.x2 + triangle.x3) / 3;
+    out.y = (triangle.y1 + triangle.y2 + triangle.y3) / 3;
+
+    return out;
+};
+
+module.exports = Centroid;
+
+
+/***/ }),
+/* 308 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Moves each point (vertex) of a Triangle by a given offset, thus moving the entire Triangle by that offset.
+ *
+ * @function Phaser.Geom.Triangle.Offset
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Triangle} O - [triangle,$return]
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to move.
+ * @param {number} x - The horizontal offset (distance) by which to move each point. Can be positive or negative.
+ * @param {number} y - The vertical offset (distance) by which to move each point. Can be positive or negative.
+ *
+ * @return {Phaser.Geom.Triangle} The modified Triangle.
+ */
+var Offset = function (triangle, x, y)
+{
+    triangle.x1 += x;
+    triangle.y1 += y;
+
+    triangle.x2 += x;
+    triangle.y2 += y;
+
+    triangle.x3 += x;
+    triangle.y3 += y;
+
+    return triangle;
+};
+
+module.exports = Offset;
+
+
+/***/ }),
+/* 309 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+// The three angle bisectors of a triangle meet in one point called the incenter.
+// It is the center of the incircle, the circle inscribed in the triangle.
+
+function getLength (x1, y1, x2, y2)
+{
+    var x = x1 - x2;
+    var y = y1 - y2;
+    var magnitude = (x * x) + (y * y);
+
+    return Math.sqrt(magnitude);
+}
+
+/**
+ * Calculates the position of the incenter of a Triangle object. This is the point where its three angle bisectors meet and it's also the center of the incircle, which is the circle inscribed in the triangle.
+ *
+ * @function Phaser.Geom.Triangle.InCenter
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to find the incenter of.
+ * @param {Phaser.Geom.Point} [out] - An optional Point in which to store the coordinates.
+ *
+ * @return {Phaser.Geom.Point} Point (x, y) of the center pixel of the triangle.
+ */
+var InCenter = function (triangle, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    var x1 = triangle.x1;
+    var y1 = triangle.y1;
+
+    var x2 = triangle.x2;
+    var y2 = triangle.y2;
+
+    var x3 = triangle.x3;
+    var y3 = triangle.y3;
+
+    var d1 = getLength(x3, y3, x2, y2);
+    var d2 = getLength(x1, y1, x3, y3);
+    var d3 = getLength(x2, y2, x1, y1);
+
+    var p = d1 + d2 + d3;
+
+    out.x = (x1 * d1 + x2 * d2 + x3 * d3) / p;
+    out.y = (y1 * d1 + y2 * d2 + y3 * d3) / p;
+
+    return out;
+};
+
+module.exports = InCenter;
+
+
+/***/ }),
+/* 310 */
 /***/ (function(module, exports) {
 
 /**
@@ -72361,7 +78560,7 @@ module.exports = CreatePixelPerfectHandler;
 
 
 /***/ }),
-/* 249 */
+/* 311 */
 /***/ (function(module, exports) {
 
 /**
@@ -72432,7 +78631,7 @@ module.exports = CreateInteractiveObject;
 
 
 /***/ }),
-/* 250 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -72557,7 +78756,7 @@ module.exports = Axis;
 
 
 /***/ }),
-/* 251 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -72567,7 +78766,7 @@ module.exports = Axis;
  */
 
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(104);
+var Events = __webpack_require__(133);
 
 /**
  * @classdesc
@@ -72703,7 +78902,7 @@ module.exports = Button;
 
 
 /***/ }),
-/* 252 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -72712,10 +78911,10 @@ module.exports = Button;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Axis = __webpack_require__(250);
-var Button = __webpack_require__(251);
+var Axis = __webpack_require__(312);
+var Button = __webpack_require__(313);
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(2);
+var EventEmitter = __webpack_require__(3);
 var Vector2 = __webpack_require__(6);
 
 /**
@@ -73476,140 +79675,7 @@ module.exports = Gamepad;
 
 
 /***/ }),
-/* 253 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * Check to see if the Circle contains the given x / y coordinates.
- *
- * @function Phaser.Geom.Circle.Contains
- * @since 3.0.0
- *
- * @param {Phaser.Geom.Circle} circle - The Circle to check.
- * @param {number} x - The x coordinate to check within the circle.
- * @param {number} y - The y coordinate to check within the circle.
- *
- * @return {boolean} True if the coordinates are within the circle, otherwise false.
- */
-var Contains = function (circle, x, y)
-{
-    //  Check if x/y are within the bounds first
-    if (circle.radius > 0 && x >= circle.left && x <= circle.right && y >= circle.top && y <= circle.bottom)
-    {
-        var dx = (circle.x - x) * (circle.x - x);
-        var dy = (circle.y - y) * (circle.y - y);
-
-        return (dx + dy) <= (circle.radius * circle.radius);
-    }
-    else
-    {
-        return false;
-    }
-};
-
-module.exports = Contains;
-
-
-/***/ }),
-/* 254 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Point = __webpack_require__(12);
-
-/**
- * Returns a Point object containing the coordinates of a point on the circumference of the Circle based on the given angle.
- *
- * @function Phaser.Geom.Circle.CircumferencePoint
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Point} O - [out,$return]
- *
- * @param {Phaser.Geom.Circle} circle - The Circle to get the circumference point on.
- * @param {number} angle - The angle from the center of the Circle to the circumference to return the point from. Given in radians.
- * @param {(Phaser.Geom.Point|object)} [out] - A Point, or point-like object, to store the results in. If not given a Point will be created.
- *
- * @return {(Phaser.Geom.Point|object)} A Point object where the `x` and `y` properties are the point on the circumference.
- */
-var CircumferencePoint = function (circle, angle, out)
-{
-    if (out === undefined) { out = new Point(); }
-
-    out.x = circle.x + (circle.radius * Math.cos(angle));
-    out.y = circle.y + (circle.radius * Math.sin(angle));
-
-    return out;
-};
-
-module.exports = CircumferencePoint;
-
-
-/***/ }),
-/* 255 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-//  http://www.blackpawn.com/texts/pointinpoly/
-
-/**
- * Checks if a point (as a pair of coordinates) is inside a Triangle's bounds.
- *
- * @function Phaser.Geom.Triangle.Contains
- * @since 3.0.0
- *
- * @param {Phaser.Geom.Triangle} triangle - The Triangle to check.
- * @param {number} x - The X coordinate of the point to check.
- * @param {number} y - The Y coordinate of the point to check.
- *
- * @return {boolean} `true` if the point is inside the Triangle, otherwise `false`.
- */
-var Contains = function (triangle, x, y)
-{
-    var v0x = triangle.x3 - triangle.x1;
-    var v0y = triangle.y3 - triangle.y1;
-
-    var v1x = triangle.x2 - triangle.x1;
-    var v1y = triangle.y2 - triangle.y1;
-
-    var v2x = x - triangle.x1;
-    var v2y = y - triangle.y1;
-
-    var dot00 = (v0x * v0x) + (v0y * v0y);
-    var dot01 = (v0x * v1x) + (v0y * v1y);
-    var dot02 = (v0x * v2x) + (v0y * v2y);
-    var dot11 = (v1x * v1x) + (v1y * v1y);
-    var dot12 = (v1x * v2x) + (v1y * v2y);
-
-    // Compute barycentric coordinates
-    var b = ((dot00 * dot11) - (dot01 * dot01));
-    var inv = (b === 0) ? 0 : (1 / b);
-    var u = ((dot11 * dot02) - (dot01 * dot12)) * inv;
-    var v = ((dot00 * dot12) - (dot01 * dot02)) * inv;
-
-    return (u >= 0 && v >= 0 && (u + v < 1));
-};
-
-module.exports = Contains;
-
-
-/***/ }),
-/* 256 */
+/* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -73619,8 +79685,8 @@ module.exports = Contains;
  */
 
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(71);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(88);
 
 /**
  * @classdesc
@@ -74011,7 +80077,7 @@ module.exports = Key;
 
 
 /***/ }),
-/* 257 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -74021,10 +80087,10 @@ module.exports = Key;
  */
 
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(71);
+var Events = __webpack_require__(88);
 var GetFastValue = __webpack_require__(1);
-var ProcessKeyCombo = __webpack_require__(258);
-var ResetKeyCombo = __webpack_require__(260);
+var ProcessKeyCombo = __webpack_require__(317);
+var ResetKeyCombo = __webpack_require__(319);
 
 /**
  * @classdesc
@@ -74304,7 +80370,7 @@ module.exports = KeyCombo;
 
 
 /***/ }),
-/* 258 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -74313,7 +80379,7 @@ module.exports = KeyCombo;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var AdvanceKeyCombo = __webpack_require__(259);
+var AdvanceKeyCombo = __webpack_require__(318);
 
 /**
  * Used internally by the KeyCombo class.
@@ -74385,7 +80451,7 @@ module.exports = ProcessKeyCombo;
 
 
 /***/ }),
-/* 259 */
+/* 318 */
 /***/ (function(module, exports) {
 
 /**
@@ -74427,7 +80493,7 @@ module.exports = AdvanceKeyCombo;
 
 
 /***/ }),
-/* 260 */
+/* 319 */
 /***/ (function(module, exports) {
 
 /**
@@ -74462,7 +80528,7 @@ module.exports = ResetKeyCombo;
 
 
 /***/ }),
-/* 261 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -74471,7 +80537,7 @@ module.exports = ResetKeyCombo;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var MergeXHRSettings = __webpack_require__(106);
+var MergeXHRSettings = __webpack_require__(135);
 
 /**
  * Creates a new XMLHttpRequest (xhr) object based on the given File and XHRSettings
@@ -74543,7 +80609,7 @@ module.exports = XHRLoader;
 
 
 /***/ }),
-/* 262 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -74553,12 +80619,12 @@ module.exports = XHRLoader;
  */
 
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(21);
-var File = __webpack_require__(22);
-var FileTypesManager = __webpack_require__(10);
+var CONST = __webpack_require__(24);
+var File = __webpack_require__(25);
+var FileTypesManager = __webpack_require__(13);
 var GetFastValue = __webpack_require__(1);
-var HTML5AudioFile = __webpack_require__(263);
-var IsPlainObject = __webpack_require__(11);
+var HTML5AudioFile = __webpack_require__(322);
+var IsPlainObject = __webpack_require__(15);
 
 /**
  * @classdesc
@@ -74817,7 +80883,7 @@ module.exports = AudioFile;
 
 
 /***/ }),
-/* 263 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -74827,11 +80893,11 @@ module.exports = AudioFile;
  */
 
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(48);
-var File = __webpack_require__(22);
+var Events = __webpack_require__(58);
+var File = __webpack_require__(25);
 var GetFastValue = __webpack_require__(1);
-var GetURL = __webpack_require__(105);
-var IsPlainObject = __webpack_require__(11);
+var GetURL = __webpack_require__(134);
+var IsPlainObject = __webpack_require__(15);
 
 /**
  * @classdesc
@@ -75020,7 +81086,7 @@ module.exports = HTML5AudioFile;
 
 
 /***/ }),
-/* 264 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -75469,7 +81535,7 @@ module.exports = Set;
 
 
 /***/ }),
-/* 265 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -75599,7 +81665,7 @@ module.exports = BasePlugin;
 
 
 /***/ }),
-/* 266 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -75964,7 +82030,7 @@ module.exports = TimerEvent;
 
 
 /***/ }),
-/* 267 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -75973,7 +82039,7 @@ module.exports = TimerEvent;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var RESERVED = __webpack_require__(775);
+var RESERVED = __webpack_require__(942);
 
 /**
  * Internal function used by the Tween Builder to return an array of properties
@@ -76025,7 +82091,7 @@ module.exports = GetProps;
 
 
 /***/ }),
-/* 268 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -76034,7 +82100,7 @@ module.exports = GetProps;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetValue = __webpack_require__(4);
+var GetValue = __webpack_require__(5);
 
 /**
  * Internal function used by the Timeline Builder.
@@ -76073,7 +82139,7 @@ module.exports = GetTweens;
 
 
 /***/ }),
-/* 269 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -76082,15 +82148,15 @@ module.exports = GetTweens;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Defaults = __webpack_require__(109);
-var GetAdvancedValue = __webpack_require__(18);
-var GetBoolean = __webpack_require__(37);
-var GetEaseFunction = __webpack_require__(53);
-var GetNewValue = __webpack_require__(75);
-var GetValue = __webpack_require__(4);
-var GetValueOp = __webpack_require__(108);
-var Tween = __webpack_require__(110);
-var TweenData = __webpack_require__(112);
+var Defaults = __webpack_require__(138);
+var GetAdvancedValue = __webpack_require__(20);
+var GetBoolean = __webpack_require__(48);
+var GetEaseFunction = __webpack_require__(44);
+var GetNewValue = __webpack_require__(92);
+var GetValue = __webpack_require__(5);
+var GetValueOp = __webpack_require__(137);
+var Tween = __webpack_require__(139);
+var TweenData = __webpack_require__(141);
 
 /**
  * Creates a new Number Tween.
@@ -76203,7 +82269,7 @@ module.exports = NumberTweenBuilder;
 
 
 /***/ }),
-/* 270 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -76212,9 +82278,9 @@ module.exports = NumberTweenBuilder;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetEaseFunction = __webpack_require__(53);
-var GetValue = __webpack_require__(4);
-var MATH_CONST = __webpack_require__(13);
+var GetEaseFunction = __webpack_require__(44);
+var GetValue = __webpack_require__(5);
+var MATH_CONST = __webpack_require__(7);
 
 /**
  * Creates a Stagger function to be used by a Tween property.
@@ -76449,7 +82515,7 @@ module.exports = StaggerBuilder;
 
 
 /***/ }),
-/* 271 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -76458,17 +82524,17 @@ module.exports = StaggerBuilder;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clone = __webpack_require__(49);
-var Defaults = __webpack_require__(109);
-var GetAdvancedValue = __webpack_require__(18);
-var GetBoolean = __webpack_require__(37);
-var GetEaseFunction = __webpack_require__(53);
-var GetNewValue = __webpack_require__(75);
-var GetTargets = __webpack_require__(107);
-var GetTweens = __webpack_require__(268);
-var GetValue = __webpack_require__(4);
-var Timeline = __webpack_require__(272);
-var TweenBuilder = __webpack_require__(76);
+var Clone = __webpack_require__(59);
+var Defaults = __webpack_require__(138);
+var GetAdvancedValue = __webpack_require__(20);
+var GetBoolean = __webpack_require__(48);
+var GetEaseFunction = __webpack_require__(44);
+var GetNewValue = __webpack_require__(92);
+var GetTargets = __webpack_require__(136);
+var GetTweens = __webpack_require__(327);
+var GetValue = __webpack_require__(5);
+var Timeline = __webpack_require__(331);
+var TweenBuilder = __webpack_require__(93);
 
 /**
  * Builds a Timeline of Tweens based on a configuration object.
@@ -76603,7 +82669,7 @@ module.exports = TimelineBuilder;
 
 
 /***/ }),
-/* 272 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -76613,10 +82679,10 @@ module.exports = TimelineBuilder;
  */
 
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(111);
-var TweenBuilder = __webpack_require__(76);
-var TWEEN_CONST = __webpack_require__(38);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(140);
+var TweenBuilder = __webpack_require__(93);
+var TWEEN_CONST = __webpack_require__(49);
 
 /**
  * @classdesc
@@ -77508,7 +83574,7 @@ module.exports = Timeline;
 
 
 /***/ }),
-/* 273 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -77517,9 +83583,9 @@ module.exports = Timeline;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-__webpack_require__(275);
+__webpack_require__(334);
 
-var CONST = __webpack_require__(15);
+var CONST = __webpack_require__(16);
 var Extend = __webpack_require__(14);
 
 /**
@@ -77528,96 +83594,97 @@ var Extend = __webpack_require__(14);
 
 var Phaser = {
 
-    Animations: __webpack_require__(284),
-    BlendModes: __webpack_require__(27),
-    Cache: __webpack_require__(312),
-    Cameras: { Scene2D: __webpack_require__(315) },
-    Core: __webpack_require__(429),
+    Animations: __webpack_require__(343),
+    BlendModes: __webpack_require__(32),
+    Cache: __webpack_require__(371),
+    Cameras: { Scene2D: __webpack_require__(374) },
+    Core: __webpack_require__(482),
     Class: __webpack_require__(0),
-    Data: __webpack_require__(525),
-    Display: { Masks: __webpack_require__(532) },
-    DOM: __webpack_require__(533),
-    Events: __webpack_require__(534),
-    Game: __webpack_require__(535),
+    Data: __webpack_require__(575),
+    Display: { Masks: __webpack_require__(582) },
+    DOM: __webpack_require__(583),
+    Events: __webpack_require__(584),
+    Game: __webpack_require__(585),
     GameObjects: {
-        DisplayList: __webpack_require__(630),
-        GameObjectCreator: __webpack_require__(25),
-        GameObjectFactory: __webpack_require__(26),
-        UpdateList: __webpack_require__(672),
-        Components: __webpack_require__(28),
-        BuildGameObject: __webpack_require__(50),
-        BuildGameObjectAnimation: __webpack_require__(241),
-        GameObject: __webpack_require__(51),
-        Graphics: __webpack_require__(98),
-        Image: __webpack_require__(100),
-        Layer: __webpack_require__(101),
-        Sprite: __webpack_require__(102),
-        Text: __webpack_require__(103),
+        DisplayList: __webpack_require__(680),
+        GameObjectCreator: __webpack_require__(30),
+        GameObjectFactory: __webpack_require__(31),
+        UpdateList: __webpack_require__(722),
+        Components: __webpack_require__(33),
+        BuildGameObject: __webpack_require__(60),
+        BuildGameObjectAnimation: __webpack_require__(271),
+        GameObject: __webpack_require__(61),
+        Graphics: __webpack_require__(117),
+        Image: __webpack_require__(120),
+        Layer: __webpack_require__(121),
+        Sprite: __webpack_require__(122),
+        Text: __webpack_require__(123),
         Factories: {
-            Graphics: __webpack_require__(696),
-            Image: __webpack_require__(697),
-            Layer: __webpack_require__(698),
-            Sprite: __webpack_require__(699),
-            Text: __webpack_require__(700)
+            Graphics: __webpack_require__(742),
+            Image: __webpack_require__(743),
+            Layer: __webpack_require__(744),
+            Sprite: __webpack_require__(745),
+            Text: __webpack_require__(746)
         },
         Creators: {
-            Graphics: __webpack_require__(701),
-            Image: __webpack_require__(702),
-            Layer: __webpack_require__(703),
-            Sprite: __webpack_require__(704),
-            Text: __webpack_require__(705)
+            Graphics: __webpack_require__(747),
+            Image: __webpack_require__(748),
+            Layer: __webpack_require__(749),
+            Sprite: __webpack_require__(750),
+            Text: __webpack_require__(751)
         }
     },
-    Input: __webpack_require__(706),
+    Geom: __webpack_require__(752),
+    Input: __webpack_require__(882),
     Loader: {
         FileTypes: {
-            AnimationJSONFile: __webpack_require__(745),
-            AtlasJSONFile: __webpack_require__(746),
-            AudioFile: __webpack_require__(262),
-            AudioSpriteFile: __webpack_require__(747),
-            HTML5AudioFile: __webpack_require__(263),
-            ImageFile: __webpack_require__(73),
-            JSONFile: __webpack_require__(52),
-            MultiAtlasFile: __webpack_require__(748),
-            PluginFile: __webpack_require__(749),
-            ScriptFile: __webpack_require__(750),
-            SpriteSheetFile: __webpack_require__(751),
-            TextFile: __webpack_require__(752),
-            XMLFile: __webpack_require__(753)
+            AnimationJSONFile: __webpack_require__(912),
+            AtlasJSONFile: __webpack_require__(913),
+            AudioFile: __webpack_require__(321),
+            AudioSpriteFile: __webpack_require__(914),
+            HTML5AudioFile: __webpack_require__(322),
+            ImageFile: __webpack_require__(90),
+            JSONFile: __webpack_require__(65),
+            MultiAtlasFile: __webpack_require__(915),
+            PluginFile: __webpack_require__(916),
+            ScriptFile: __webpack_require__(917),
+            SpriteSheetFile: __webpack_require__(918),
+            TextFile: __webpack_require__(919),
+            XMLFile: __webpack_require__(920)
         },
-        File: __webpack_require__(22),
-        FileTypesManager: __webpack_require__(10),
-        GetURL: __webpack_require__(105),
-        LoaderPlugin: __webpack_require__(754),
-        MergeXHRSettings: __webpack_require__(106),
-        MultiFile: __webpack_require__(74),
-        XHRLoader: __webpack_require__(261),
-        XHRSettings: __webpack_require__(72)
+        File: __webpack_require__(25),
+        FileTypesManager: __webpack_require__(13),
+        GetURL: __webpack_require__(134),
+        LoaderPlugin: __webpack_require__(921),
+        MergeXHRSettings: __webpack_require__(135),
+        MultiFile: __webpack_require__(91),
+        XHRLoader: __webpack_require__(320),
+        XHRSettings: __webpack_require__(89)
     },
     Math: {
-        Between: __webpack_require__(168),
-        DegToRad: __webpack_require__(55),
-        FloatBetween: __webpack_require__(59),
-        RadToDeg: __webpack_require__(169),
+        Between: __webpack_require__(105),
+        DegToRad: __webpack_require__(47),
+        FloatBetween: __webpack_require__(72),
+        RadToDeg: __webpack_require__(199),
         Vector2: __webpack_require__(6)
     },
-    Plugins: __webpack_require__(755),
-    Renderer: __webpack_require__(757),
-    Scale: __webpack_require__(764),
-    ScaleModes: __webpack_require__(77),
-    Scene: __webpack_require__(215),
-    Scenes: __webpack_require__(765),
-    Structs: __webpack_require__(767),
-    Textures: __webpack_require__(769),
-    Time: __webpack_require__(771),
-    Tweens: __webpack_require__(773)
+    Plugins: __webpack_require__(922),
+    Renderer: __webpack_require__(924),
+    Scale: __webpack_require__(931),
+    ScaleModes: __webpack_require__(94),
+    Scene: __webpack_require__(245),
+    Scenes: __webpack_require__(932),
+    Structs: __webpack_require__(934),
+    Textures: __webpack_require__(936),
+    Time: __webpack_require__(938),
+    Tweens: __webpack_require__(940)
 };
 
 //   Merge in the consts//  Merge in the optional plugins and WebGL only features
 
 if (typeof FEATURE_SOUND)
 {
-    Phaser.Sound = __webpack_require__(791);
+    Phaser.Sound = __webpack_require__(958);
 }
 
 //   Merge in the consts
@@ -77643,10 +83710,10 @@ global.Phaser = Phaser;
  *  -- Dick Brandon
  */
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(274)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(333)))
 
 /***/ }),
-/* 274 */
+/* 333 */
 /***/ (function(module, exports) {
 
 var g;
@@ -77672,21 +83739,21 @@ module.exports = g;
 
 
 /***/ }),
-/* 275 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(276);
-__webpack_require__(277);
-__webpack_require__(278);
-__webpack_require__(279);
-__webpack_require__(280);
-__webpack_require__(281);
-__webpack_require__(282);
-__webpack_require__(283);
+__webpack_require__(335);
+__webpack_require__(336);
+__webpack_require__(337);
+__webpack_require__(338);
+__webpack_require__(339);
+__webpack_require__(340);
+__webpack_require__(341);
+__webpack_require__(342);
 
 
 /***/ }),
-/* 276 */
+/* 335 */
 /***/ (function(module, exports) {
 
 /**
@@ -77726,7 +83793,7 @@ if (!Array.prototype.forEach)
 
 
 /***/ }),
-/* 277 */
+/* 336 */
 /***/ (function(module, exports) {
 
 /**
@@ -77742,7 +83809,7 @@ if (!Array.isArray)
 
 
 /***/ }),
-/* 278 */
+/* 337 */
 /***/ (function(module, exports) {
 
 /* Copyright 2013 Chris Wilson
@@ -77929,7 +83996,7 @@ BiquadFilterNode.type and OscillatorNode.type.
 
 
 /***/ }),
-/* 279 */
+/* 338 */
 /***/ (function(module, exports) {
 
 /**
@@ -77944,7 +84011,7 @@ if (!window.console)
 
 
 /***/ }),
-/* 280 */
+/* 339 */
 /***/ (function(module, exports) {
 
 // ES6 Math.trunc - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc
@@ -77956,7 +84023,7 @@ if (!Math.trunc) {
 
 
 /***/ }),
-/* 281 */
+/* 340 */
 /***/ (function(module, exports) {
 
 /**
@@ -77993,7 +84060,7 @@ if (!Math.trunc) {
 
 
 /***/ }),
-/* 282 */
+/* 341 */
 /***/ (function(module, exports) {
 
 // References:
@@ -78050,7 +84117,7 @@ if (!window.cancelAnimationFrame)
 
 
 /***/ }),
-/* 283 */
+/* 342 */
 /***/ (function(module, exports) {
 
 /**
@@ -78103,7 +84170,7 @@ if (typeof window.Uint32Array !== 'function' && typeof window.Uint32Array !== 'o
 
 
 /***/ }),
-/* 284 */
+/* 343 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -78118,17 +84185,17 @@ if (typeof window.Uint32Array !== 'function' && typeof window.Uint32Array !== 'o
 
 module.exports = {
 
-    Animation: __webpack_require__(78),
-    AnimationFrame: __webpack_require__(114),
-    AnimationManager: __webpack_require__(116),
-    AnimationState: __webpack_require__(119),
-    Events: __webpack_require__(54)
+    Animation: __webpack_require__(95),
+    AnimationFrame: __webpack_require__(143),
+    AnimationManager: __webpack_require__(145),
+    AnimationState: __webpack_require__(148),
+    Events: __webpack_require__(66)
 
 };
 
 
 /***/ }),
-/* 285 */
+/* 344 */
 /***/ (function(module, exports) {
 
 /**
@@ -78155,7 +84222,7 @@ module.exports = 'add';
 
 
 /***/ }),
-/* 286 */
+/* 345 */
 /***/ (function(module, exports) {
 
 /**
@@ -78201,7 +84268,7 @@ module.exports = 'animationcomplete';
 
 
 /***/ }),
-/* 287 */
+/* 346 */
 /***/ (function(module, exports) {
 
 /**
@@ -78251,7 +84318,7 @@ module.exports = 'animationcomplete-';
 
 
 /***/ }),
-/* 288 */
+/* 347 */
 /***/ (function(module, exports) {
 
 /**
@@ -78294,7 +84361,7 @@ module.exports = 'animationrepeat';
 
 
 /***/ }),
-/* 289 */
+/* 348 */
 /***/ (function(module, exports) {
 
 /**
@@ -78335,7 +84402,7 @@ module.exports = 'animationrestart';
 
 
 /***/ }),
-/* 290 */
+/* 349 */
 /***/ (function(module, exports) {
 
 /**
@@ -78377,7 +84444,7 @@ module.exports = 'animationstart';
 
 
 /***/ }),
-/* 291 */
+/* 350 */
 /***/ (function(module, exports) {
 
 /**
@@ -78419,7 +84486,7 @@ module.exports = 'animationstop';
 
 
 /***/ }),
-/* 292 */
+/* 351 */
 /***/ (function(module, exports) {
 
 /**
@@ -78465,7 +84532,7 @@ module.exports = 'animationupdate';
 
 
 /***/ }),
-/* 293 */
+/* 352 */
 /***/ (function(module, exports) {
 
 /**
@@ -78489,7 +84556,7 @@ module.exports = 'pauseall';
 
 
 /***/ }),
-/* 294 */
+/* 353 */
 /***/ (function(module, exports) {
 
 /**
@@ -78513,7 +84580,7 @@ module.exports = 'remove';
 
 
 /***/ }),
-/* 295 */
+/* 354 */
 /***/ (function(module, exports) {
 
 /**
@@ -78536,7 +84603,7 @@ module.exports = 'resumeall';
 
 
 /***/ }),
-/* 296 */
+/* 355 */
 /***/ (function(module, exports) {
 
 /**
@@ -78559,7 +84626,7 @@ module.exports = 'blur';
 
 
 /***/ }),
-/* 297 */
+/* 356 */
 /***/ (function(module, exports) {
 
 /**
@@ -78581,7 +84648,7 @@ module.exports = 'boot';
 
 
 /***/ }),
-/* 298 */
+/* 357 */
 /***/ (function(module, exports) {
 
 /**
@@ -78604,7 +84671,7 @@ module.exports = 'contextlost';
 
 
 /***/ }),
-/* 299 */
+/* 358 */
 /***/ (function(module, exports) {
 
 /**
@@ -78627,7 +84694,7 @@ module.exports = 'contextrestored';
 
 
 /***/ }),
-/* 300 */
+/* 359 */
 /***/ (function(module, exports) {
 
 /**
@@ -78650,7 +84717,7 @@ module.exports = 'destroy';
 
 
 /***/ }),
-/* 301 */
+/* 360 */
 /***/ (function(module, exports) {
 
 /**
@@ -78672,7 +84739,7 @@ module.exports = 'focus';
 
 
 /***/ }),
-/* 302 */
+/* 361 */
 /***/ (function(module, exports) {
 
 /**
@@ -78698,7 +84765,7 @@ module.exports = 'hidden';
 
 
 /***/ }),
-/* 303 */
+/* 362 */
 /***/ (function(module, exports) {
 
 /**
@@ -78719,7 +84786,7 @@ module.exports = 'pause';
 
 
 /***/ }),
-/* 304 */
+/* 363 */
 /***/ (function(module, exports) {
 
 /**
@@ -78745,7 +84812,7 @@ module.exports = 'postrender';
 
 
 /***/ }),
-/* 305 */
+/* 364 */
 /***/ (function(module, exports) {
 
 /**
@@ -78770,7 +84837,7 @@ module.exports = 'poststep';
 
 
 /***/ }),
-/* 306 */
+/* 365 */
 /***/ (function(module, exports) {
 
 /**
@@ -78795,7 +84862,7 @@ module.exports = 'prerender';
 
 
 /***/ }),
-/* 307 */
+/* 366 */
 /***/ (function(module, exports) {
 
 /**
@@ -78820,7 +84887,7 @@ module.exports = 'prestep';
 
 
 /***/ }),
-/* 308 */
+/* 367 */
 /***/ (function(module, exports) {
 
 /**
@@ -78842,7 +84909,7 @@ module.exports = 'ready';
 
 
 /***/ }),
-/* 309 */
+/* 368 */
 /***/ (function(module, exports) {
 
 /**
@@ -78863,7 +84930,7 @@ module.exports = 'resume';
 
 
 /***/ }),
-/* 310 */
+/* 369 */
 /***/ (function(module, exports) {
 
 /**
@@ -78888,7 +84955,7 @@ module.exports = 'step';
 
 
 /***/ }),
-/* 311 */
+/* 370 */
 /***/ (function(module, exports) {
 
 /**
@@ -78912,7 +84979,7 @@ module.exports = 'visible';
 
 
 /***/ }),
-/* 312 */
+/* 371 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -78927,15 +84994,15 @@ module.exports = 'visible';
 
 module.exports = {
 
-    BaseCache: __webpack_require__(120),
-    CacheManager: __webpack_require__(122),
-    Events: __webpack_require__(121)
+    BaseCache: __webpack_require__(149),
+    CacheManager: __webpack_require__(151),
+    Events: __webpack_require__(150)
 
 };
 
 
 /***/ }),
-/* 313 */
+/* 372 */
 /***/ (function(module, exports) {
 
 /**
@@ -78960,7 +85027,7 @@ module.exports = 'add';
 
 
 /***/ }),
-/* 314 */
+/* 373 */
 /***/ (function(module, exports) {
 
 /**
@@ -78985,7 +85052,7 @@ module.exports = 'remove';
 
 
 /***/ }),
-/* 315 */
+/* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -79000,17 +85067,17 @@ module.exports = 'remove';
 
 module.exports = {
 
-    Camera: __webpack_require__(123),
-    BaseCamera: __webpack_require__(79),
-    CameraManager: __webpack_require__(401),
-    Effects: __webpack_require__(143),
-    Events: __webpack_require__(16)
+    Camera: __webpack_require__(152),
+    BaseCamera: __webpack_require__(96),
+    CameraManager: __webpack_require__(454),
+    Effects: __webpack_require__(173),
+    Events: __webpack_require__(17)
 
 };
 
 
 /***/ }),
-/* 316 */
+/* 375 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -79019,7 +85086,7 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = __webpack_require__(5);
+var Clamp = __webpack_require__(8);
 
 //  bitmask flag for GameObject.renderMask
 var _FLAG = 2; // 0010
@@ -79305,7 +85372,7 @@ module.exports = Alpha;
 
 
 /***/ }),
-/* 317 */
+/* 376 */
 /***/ (function(module, exports) {
 
 /**
@@ -79454,7 +85521,7 @@ module.exports = ComputedSize;
 
 
 /***/ }),
-/* 318 */
+/* 377 */
 /***/ (function(module, exports) {
 
 /**
@@ -79579,7 +85646,7 @@ module.exports = Crop;
 
 
 /***/ }),
-/* 319 */
+/* 378 */
 /***/ (function(module, exports) {
 
 /**
@@ -79743,7 +85810,7 @@ module.exports = Flip;
 
 
 /***/ }),
-/* 320 */
+/* 379 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -79752,8 +85819,8 @@ module.exports = Flip;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Rectangle = __webpack_require__(36);
-var RotateAround = __webpack_require__(130);
+var Rectangle = __webpack_require__(10);
+var RotateAround = __webpack_require__(161);
 var Vector2 = __webpack_require__(6);
 
 /**
@@ -80102,243 +86169,7 @@ module.exports = GetBounds;
 
 
 /***/ }),
-/* 321 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var GetPoint = __webpack_require__(127);
-var Perimeter = __webpack_require__(128);
-
-//  Return an array of points from the perimeter of the rectangle
-//  each spaced out based on the quantity or step required
-
-/**
- * Return an array of points from the perimeter of the rectangle, each spaced out based on the quantity or step required.
- *
- * @function Phaser.Geom.Rectangle.GetPoints
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Point[]} O - [out,$return]
- *
- * @param {Phaser.Geom.Rectangle} rectangle - The Rectangle object to get the points from.
- * @param {number} step - Step between points. Used to calculate the number of points to return when quantity is falsey. Ignored if quantity is positive.
- * @param {number} quantity - The number of evenly spaced points from the rectangles perimeter to return. If falsey, step param will be used to calculate the number of points.
- * @param {(array|Phaser.Geom.Point[])} [out] - An optional array to store the points in.
- *
- * @return {(array|Phaser.Geom.Point[])} An array of Points from the perimeter of the rectangle.
- */
-var GetPoints = function (rectangle, quantity, stepRate, out)
-{
-    if (out === undefined) { out = []; }
-
-    //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
-    if (!quantity && stepRate > 0)
-    {
-        quantity = Perimeter(rectangle) / stepRate;
-    }
-
-    for (var i = 0; i < quantity; i++)
-    {
-        var position = i / quantity;
-
-        out.push(GetPoint(rectangle, position));
-    }
-
-    return out;
-};
-
-module.exports = GetPoints;
-
-
-/***/ }),
-/* 322 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Point = __webpack_require__(12);
-
-/**
- * Get a point on a line that's a given percentage along its length.
- *
- * @function Phaser.Geom.Line.GetPoint
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Point} O - [out,$return]
- *
- * @param {Phaser.Geom.Line} line - The line.
- * @param {number} position - A value between 0 and 1, where 0 is the start, 0.5 is the middle and 1 is the end of the line.
- * @param {(Phaser.Geom.Point|object)} [out] - An optional point, or point-like object, to store the coordinates of the point on the line.
- *
- * @return {(Phaser.Geom.Point|object)} The point on the line.
- */
-var GetPoint = function (line, position, out)
-{
-    if (out === undefined) { out = new Point(); }
-
-    out.x = line.x1 + (line.x2 - line.x1) * position;
-    out.y = line.y1 + (line.y2 - line.y1) * position;
-
-    return out;
-};
-
-module.exports = GetPoint;
-
-
-/***/ }),
-/* 323 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Length = __webpack_require__(81);
-var Point = __webpack_require__(12);
-
-/**
- * Get a number of points along a line's length.
- *
- * Provide a `quantity` to get an exact number of points along the line.
- *
- * Provide a `stepRate` to ensure a specific distance between each point on the line. Set `quantity` to `0` when
- * providing a `stepRate`.
- *
- * @function Phaser.Geom.Line.GetPoints
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Point[]} O - [out,$return]
- *
- * @param {Phaser.Geom.Line} line - The line.
- * @param {number} quantity - The number of points to place on the line. Set to `0` to use `stepRate` instead.
- * @param {number} [stepRate] - The distance between each point on the line. When set, `quantity` is implied and should be set to `0`.
- * @param {(array|Phaser.Geom.Point[])} [out] - An optional array of Points, or point-like objects, to store the coordinates of the points on the line.
- *
- * @return {(array|Phaser.Geom.Point[])} An array of Points, or point-like objects, containing the coordinates of the points on the line.
- */
-var GetPoints = function (line, quantity, stepRate, out)
-{
-    if (out === undefined) { out = []; }
-
-    //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
-    if (!quantity && stepRate > 0)
-    {
-        quantity = Length(line) / stepRate;
-    }
-
-    var x1 = line.x1;
-    var y1 = line.y1;
-
-    var x2 = line.x2;
-    var y2 = line.y2;
-
-    for (var i = 0; i < quantity; i++)
-    {
-        var position = i / quantity;
-
-        var x = x1 + (x2 - x1) * position;
-        var y = y1 + (y2 - y1) * position;
-
-        out.push(new Point(x, y));
-    }
-
-    return out;
-};
-
-module.exports = GetPoints;
-
-
-/***/ }),
-/* 324 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Point = __webpack_require__(12);
-
-/**
- * Returns a random point on a given Line.
- *
- * @function Phaser.Geom.Line.Random
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Point} O - [out,$return]
- *
- * @param {Phaser.Geom.Line} line - The Line to calculate the random Point on.
- * @param {(Phaser.Geom.Point|object)} [out] - An instance of a Point to be modified.
- *
- * @return {(Phaser.Geom.Point|object)} A random Point on the Line.
- */
-var Random = function (line, out)
-{
-    if (out === undefined) { out = new Point(); }
-
-    var t = Math.random();
-
-    out.x = line.x1 + t * (line.x2 - line.x1);
-    out.y = line.y1 + t * (line.y2 - line.y1);
-
-    return out;
-};
-
-module.exports = Random;
-
-
-/***/ }),
-/* 325 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Point = __webpack_require__(12);
-
-/**
- * Returns a random point within a Rectangle.
- *
- * @function Phaser.Geom.Rectangle.Random
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Point} O - [out,$return]
- *
- * @param {Phaser.Geom.Rectangle} rect - The Rectangle to return a point from.
- * @param {Phaser.Geom.Point} out - The object to update with the point's coordinates.
- *
- * @return {Phaser.Geom.Point} The modified `out` object, or a new Point if none was provided.
- */
-var Random = function (rect, out)
-{
-    if (out === undefined) { out = new Point(); }
-
-    out.x = rect.x + (Math.random() * rect.width);
-    out.y = rect.y + (Math.random() * rect.height);
-
-    return out;
-};
-
-module.exports = Random;
-
-
-/***/ }),
-/* 326 */
+/* 380 */
 /***/ (function(module, exports) {
 
 /**
@@ -80360,7 +86191,7 @@ module.exports = 'postrender';
 
 
 /***/ }),
-/* 327 */
+/* 381 */
 /***/ (function(module, exports) {
 
 /**
@@ -80383,7 +86214,7 @@ module.exports = 'prerender';
 
 
 /***/ }),
-/* 328 */
+/* 382 */
 /***/ (function(module, exports) {
 
 /**
@@ -80409,7 +86240,7 @@ module.exports = 'render';
 
 
 /***/ }),
-/* 329 */
+/* 383 */
 /***/ (function(module, exports) {
 
 /**
@@ -80434,7 +86265,7 @@ module.exports = 'resize';
 
 
 /***/ }),
-/* 330 */
+/* 384 */
 /***/ (function(module, exports) {
 
 /**
@@ -80637,7 +86468,7 @@ module.exports = Origin;
 
 
 /***/ }),
-/* 331 */
+/* 385 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -80646,10 +86477,10 @@ module.exports = Origin;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var DegToRad = __webpack_require__(55);
-var GetBoolean = __webpack_require__(37);
-var GetValue = __webpack_require__(4);
-var TWEEN_CONST = __webpack_require__(38);
+var DegToRad = __webpack_require__(47);
+var GetBoolean = __webpack_require__(48);
+var GetValue = __webpack_require__(5);
+var TWEEN_CONST = __webpack_require__(49);
 var Vector2 = __webpack_require__(6);
 
 /**
@@ -81064,7 +86895,7 @@ module.exports = PathFollower;
 
 
 /***/ }),
-/* 332 */
+/* 386 */
 /***/ (function(module, exports) {
 
 /**
@@ -81251,7 +87082,7 @@ module.exports = Size;
 
 
 /***/ }),
-/* 333 */
+/* 387 */
 /***/ (function(module, exports) {
 
 /**
@@ -81381,7 +87212,7 @@ module.exports = Texture;
 
 
 /***/ }),
-/* 334 */
+/* 388 */
 /***/ (function(module, exports) {
 
 /**
@@ -81589,7 +87420,7 @@ module.exports = TextureCrop;
 
 
 /***/ }),
-/* 335 */
+/* 389 */
 /***/ (function(module, exports) {
 
 /**
@@ -81826,7 +87657,7 @@ module.exports = Tint;
 
 
 /***/ }),
-/* 336 */
+/* 390 */
 /***/ (function(module, exports) {
 
 /**
@@ -81849,7 +87680,7 @@ module.exports = 'cameradestroy';
 
 
 /***/ }),
-/* 337 */
+/* 391 */
 /***/ (function(module, exports) {
 
 /**
@@ -81875,7 +87706,7 @@ module.exports = 'camerafadeincomplete';
 
 
 /***/ }),
-/* 338 */
+/* 392 */
 /***/ (function(module, exports) {
 
 /**
@@ -81905,7 +87736,7 @@ module.exports = 'camerafadeinstart';
 
 
 /***/ }),
-/* 339 */
+/* 393 */
 /***/ (function(module, exports) {
 
 /**
@@ -81931,7 +87762,7 @@ module.exports = 'camerafadeoutcomplete';
 
 
 /***/ }),
-/* 340 */
+/* 394 */
 /***/ (function(module, exports) {
 
 /**
@@ -81961,7 +87792,7 @@ module.exports = 'camerafadeoutstart';
 
 
 /***/ }),
-/* 341 */
+/* 395 */
 /***/ (function(module, exports) {
 
 /**
@@ -81985,7 +87816,7 @@ module.exports = 'cameraflashcomplete';
 
 
 /***/ }),
-/* 342 */
+/* 396 */
 /***/ (function(module, exports) {
 
 /**
@@ -82013,7 +87844,7 @@ module.exports = 'cameraflashstart';
 
 
 /***/ }),
-/* 343 */
+/* 397 */
 /***/ (function(module, exports) {
 
 /**
@@ -82041,7 +87872,7 @@ module.exports = 'followupdate';
 
 
 /***/ }),
-/* 344 */
+/* 398 */
 /***/ (function(module, exports) {
 
 /**
@@ -82065,7 +87896,7 @@ module.exports = 'camerapancomplete';
 
 
 /***/ }),
-/* 345 */
+/* 399 */
 /***/ (function(module, exports) {
 
 /**
@@ -82092,7 +87923,7 @@ module.exports = 'camerapanstart';
 
 
 /***/ }),
-/* 346 */
+/* 400 */
 /***/ (function(module, exports) {
 
 /**
@@ -82118,7 +87949,7 @@ module.exports = 'postrender';
 
 
 /***/ }),
-/* 347 */
+/* 401 */
 /***/ (function(module, exports) {
 
 /**
@@ -82144,7 +87975,7 @@ module.exports = 'prerender';
 
 
 /***/ }),
-/* 348 */
+/* 402 */
 /***/ (function(module, exports) {
 
 /**
@@ -82168,7 +87999,7 @@ module.exports = 'camerarotatecomplete';
 
 
 /***/ }),
-/* 349 */
+/* 403 */
 /***/ (function(module, exports) {
 
 /**
@@ -82194,7 +88025,7 @@ module.exports = 'camerarotatestart';
 
 
 /***/ }),
-/* 350 */
+/* 404 */
 /***/ (function(module, exports) {
 
 /**
@@ -82218,7 +88049,7 @@ module.exports = 'camerashakecomplete';
 
 
 /***/ }),
-/* 351 */
+/* 405 */
 /***/ (function(module, exports) {
 
 /**
@@ -82244,7 +88075,7 @@ module.exports = 'camerashakestart';
 
 
 /***/ }),
-/* 352 */
+/* 406 */
 /***/ (function(module, exports) {
 
 /**
@@ -82268,7 +88099,7 @@ module.exports = 'camerazoomcomplete';
 
 
 /***/ }),
-/* 353 */
+/* 407 */
 /***/ (function(module, exports) {
 
 /**
@@ -82294,7 +88125,7 @@ module.exports = 'camerazoomstart';
 
 
 /***/ }),
-/* 354 */
+/* 408 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -82303,7 +88134,7 @@ module.exports = 'camerazoomstart';
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Color = __webpack_require__(23);
+var Color = __webpack_require__(28);
 
 /**
  * Converts a hex string into a Phaser Color object.
@@ -82347,7 +88178,7 @@ module.exports = HexStringToColor;
 
 
 /***/ }),
-/* 355 */
+/* 409 */
 /***/ (function(module, exports) {
 
 /**
@@ -82378,7 +88209,7 @@ module.exports = GetColor32;
 
 
 /***/ }),
-/* 356 */
+/* 410 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -82387,7 +88218,7 @@ module.exports = GetColor32;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetColor = __webpack_require__(142);
+var GetColor = __webpack_require__(101);
 
 /**
  * RGB space conversion.
@@ -82459,7 +88290,7 @@ module.exports = HSVToRGB;
 
 
 /***/ }),
-/* 357 */
+/* 411 */
 /***/ (function(module, exports) {
 
 /**
@@ -82539,7 +88370,7 @@ module.exports = RGBToHSV;
 
 
 /***/ }),
-/* 358 */
+/* 412 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -82548,8 +88379,8 @@ module.exports = RGBToHSV;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Color = __webpack_require__(23);
-var IntegerToRGB = __webpack_require__(359);
+var Color = __webpack_require__(28);
+var IntegerToRGB = __webpack_require__(413);
 
 /**
  * Converts the given color value into an instance of a Color object.
@@ -82572,7 +88403,7 @@ module.exports = IntegerToColor;
 
 
 /***/ }),
-/* 359 */
+/* 413 */
 /***/ (function(module, exports) {
 
 /**
@@ -82620,7 +88451,7 @@ module.exports = IntegerToRGB;
 
 
 /***/ }),
-/* 360 */
+/* 414 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -82629,7 +88460,7 @@ module.exports = IntegerToRGB;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Color = __webpack_require__(23);
+var Color = __webpack_require__(28);
 
 /**
  * Converts an object containing `r`, `g`, `b` and `a` properties into a Color class instance.
@@ -82650,7 +88481,7 @@ module.exports = ObjectToColor;
 
 
 /***/ }),
-/* 361 */
+/* 415 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -82659,7 +88490,7 @@ module.exports = ObjectToColor;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Color = __webpack_require__(23);
+var Color = __webpack_require__(28);
 
 /**
  * Converts a CSS 'web' string into a Phaser Color object.
@@ -82696,44 +88527,7 @@ module.exports = RGBStringToColor;
 
 
 /***/ }),
-/* 362 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-// Centers this Rectangle so that the center coordinates match the given x and y values.
-
-/**
- * Moves the top-left corner of a Rectangle so that its center is at the given coordinates.
- *
- * @function Phaser.Geom.Rectangle.CenterOn
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Rectangle} O - [rect,$return]
- *
- * @param {Phaser.Geom.Rectangle} rect - The Rectangle to be centered.
- * @param {number} x - The X coordinate of the Rectangle's center.
- * @param {number} y - The Y coordinate of the Rectangle's center.
- *
- * @return {Phaser.Geom.Rectangle} The centered rectangle.
- */
-var CenterOn = function (rect, x, y)
-{
-    rect.x = x - (rect.width / 2);
-    rect.y = y - (rect.height / 2);
-
-    return rect;
-};
-
-module.exports = CenterOn;
-
-
-/***/ }),
-/* 363 */
+/* 416 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -82742,9 +88536,9 @@ module.exports = CenterOn;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = __webpack_require__(5);
+var Clamp = __webpack_require__(8);
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(16);
+var Events = __webpack_require__(17);
 
 /**
  * @classdesc
@@ -83121,7 +88915,7 @@ module.exports = Fade;
 
 
 /***/ }),
-/* 364 */
+/* 417 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -83130,9 +88924,9 @@ module.exports = Fade;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = __webpack_require__(5);
+var Clamp = __webpack_require__(8);
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(16);
+var Events = __webpack_require__(17);
 
 /**
  * @classdesc
@@ -83472,7 +89266,7 @@ module.exports = Flash;
 
 
 /***/ }),
-/* 365 */
+/* 418 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -83481,10 +89275,10 @@ module.exports = Flash;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = __webpack_require__(5);
+var Clamp = __webpack_require__(8);
 var Class = __webpack_require__(0);
-var EaseMap = __webpack_require__(57);
-var Events = __webpack_require__(16);
+var EaseMap = __webpack_require__(70);
+var Events = __webpack_require__(17);
 var Vector2 = __webpack_require__(6);
 
 /**
@@ -83797,7 +89591,7 @@ module.exports = Pan;
 
 
 /***/ }),
-/* 366 */
+/* 419 */
 /***/ (function(module, exports) {
 
 /**
@@ -83828,7 +89622,7 @@ module.exports = In;
 
 
 /***/ }),
-/* 367 */
+/* 420 */
 /***/ (function(module, exports) {
 
 /**
@@ -83859,7 +89653,7 @@ module.exports = Out;
 
 
 /***/ }),
-/* 368 */
+/* 421 */
 /***/ (function(module, exports) {
 
 /**
@@ -83899,7 +89693,7 @@ module.exports = InOut;
 
 
 /***/ }),
-/* 369 */
+/* 422 */
 /***/ (function(module, exports) {
 
 /**
@@ -83944,7 +89738,7 @@ module.exports = In;
 
 
 /***/ }),
-/* 370 */
+/* 423 */
 /***/ (function(module, exports) {
 
 /**
@@ -83987,7 +89781,7 @@ module.exports = Out;
 
 
 /***/ }),
-/* 371 */
+/* 424 */
 /***/ (function(module, exports) {
 
 /**
@@ -84051,7 +89845,7 @@ module.exports = InOut;
 
 
 /***/ }),
-/* 372 */
+/* 425 */
 /***/ (function(module, exports) {
 
 /**
@@ -84079,7 +89873,7 @@ module.exports = In;
 
 
 /***/ }),
-/* 373 */
+/* 426 */
 /***/ (function(module, exports) {
 
 /**
@@ -84107,7 +89901,7 @@ module.exports = Out;
 
 
 /***/ }),
-/* 374 */
+/* 427 */
 /***/ (function(module, exports) {
 
 /**
@@ -84142,7 +89936,7 @@ module.exports = InOut;
 
 
 /***/ }),
-/* 375 */
+/* 428 */
 /***/ (function(module, exports) {
 
 /**
@@ -84170,7 +89964,7 @@ module.exports = In;
 
 
 /***/ }),
-/* 376 */
+/* 429 */
 /***/ (function(module, exports) {
 
 /**
@@ -84198,7 +89992,7 @@ module.exports = Out;
 
 
 /***/ }),
-/* 377 */
+/* 430 */
 /***/ (function(module, exports) {
 
 /**
@@ -84233,7 +90027,7 @@ module.exports = InOut;
 
 
 /***/ }),
-/* 378 */
+/* 431 */
 /***/ (function(module, exports) {
 
 /**
@@ -84288,7 +90082,7 @@ module.exports = In;
 
 
 /***/ }),
-/* 379 */
+/* 432 */
 /***/ (function(module, exports) {
 
 /**
@@ -84343,7 +90137,7 @@ module.exports = Out;
 
 
 /***/ }),
-/* 380 */
+/* 433 */
 /***/ (function(module, exports) {
 
 /**
@@ -84405,7 +90199,7 @@ module.exports = InOut;
 
 
 /***/ }),
-/* 381 */
+/* 434 */
 /***/ (function(module, exports) {
 
 /**
@@ -84433,7 +90227,7 @@ module.exports = In;
 
 
 /***/ }),
-/* 382 */
+/* 435 */
 /***/ (function(module, exports) {
 
 /**
@@ -84461,7 +90255,7 @@ module.exports = Out;
 
 
 /***/ }),
-/* 383 */
+/* 436 */
 /***/ (function(module, exports) {
 
 /**
@@ -84496,7 +90290,7 @@ module.exports = InOut;
 
 
 /***/ }),
-/* 384 */
+/* 437 */
 /***/ (function(module, exports) {
 
 /**
@@ -84524,7 +90318,7 @@ module.exports = Linear;
 
 
 /***/ }),
-/* 385 */
+/* 438 */
 /***/ (function(module, exports) {
 
 /**
@@ -84552,7 +90346,7 @@ module.exports = In;
 
 
 /***/ }),
-/* 386 */
+/* 439 */
 /***/ (function(module, exports) {
 
 /**
@@ -84580,7 +90374,7 @@ module.exports = Out;
 
 
 /***/ }),
-/* 387 */
+/* 440 */
 /***/ (function(module, exports) {
 
 /**
@@ -84615,7 +90409,7 @@ module.exports = InOut;
 
 
 /***/ }),
-/* 388 */
+/* 441 */
 /***/ (function(module, exports) {
 
 /**
@@ -84643,7 +90437,7 @@ module.exports = In;
 
 
 /***/ }),
-/* 389 */
+/* 442 */
 /***/ (function(module, exports) {
 
 /**
@@ -84671,7 +90465,7 @@ module.exports = Out;
 
 
 /***/ }),
-/* 390 */
+/* 443 */
 /***/ (function(module, exports) {
 
 /**
@@ -84706,7 +90500,7 @@ module.exports = InOut;
 
 
 /***/ }),
-/* 391 */
+/* 444 */
 /***/ (function(module, exports) {
 
 /**
@@ -84734,7 +90528,7 @@ module.exports = In;
 
 
 /***/ }),
-/* 392 */
+/* 445 */
 /***/ (function(module, exports) {
 
 /**
@@ -84762,7 +90556,7 @@ module.exports = Out;
 
 
 /***/ }),
-/* 393 */
+/* 446 */
 /***/ (function(module, exports) {
 
 /**
@@ -84797,7 +90591,7 @@ module.exports = InOut;
 
 
 /***/ }),
-/* 394 */
+/* 447 */
 /***/ (function(module, exports) {
 
 /**
@@ -84836,7 +90630,7 @@ module.exports = In;
 
 
 /***/ }),
-/* 395 */
+/* 448 */
 /***/ (function(module, exports) {
 
 /**
@@ -84875,7 +90669,7 @@ module.exports = Out;
 
 
 /***/ }),
-/* 396 */
+/* 449 */
 /***/ (function(module, exports) {
 
 /**
@@ -84914,7 +90708,7 @@ module.exports = InOut;
 
 
 /***/ }),
-/* 397 */
+/* 450 */
 /***/ (function(module, exports) {
 
 /**
@@ -84956,7 +90750,7 @@ module.exports = Stepped;
 
 
 /***/ }),
-/* 398 */
+/* 451 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -84965,9 +90759,9 @@ module.exports = Stepped;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = __webpack_require__(5);
+var Clamp = __webpack_require__(8);
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(16);
+var Events = __webpack_require__(17);
 var Vector2 = __webpack_require__(6);
 
 /**
@@ -85275,7 +91069,7 @@ module.exports = Shake;
 
 
 /***/ }),
-/* 399 */
+/* 452 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -85284,10 +91078,10 @@ module.exports = Shake;
  * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
  */
 
-var Clamp = __webpack_require__(5);
+var Clamp = __webpack_require__(8);
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(16);
-var EaseMap = __webpack_require__(57);
+var Events = __webpack_require__(17);
+var EaseMap = __webpack_require__(70);
 
 /**
  * @classdesc
@@ -85708,7 +91502,7 @@ module.exports = RotateTo;
 
 
 /***/ }),
-/* 400 */
+/* 453 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -85717,10 +91511,10 @@ module.exports = RotateTo;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = __webpack_require__(5);
+var Clamp = __webpack_require__(8);
 var Class = __webpack_require__(0);
-var EaseMap = __webpack_require__(57);
-var Events = __webpack_require__(16);
+var EaseMap = __webpack_require__(70);
+var Events = __webpack_require__(17);
 
 /**
  * @classdesc
@@ -86001,7 +91795,7 @@ module.exports = Zoom;
 
 
 /***/ }),
-/* 401 */
+/* 454 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -86010,13 +91804,13 @@ module.exports = Zoom;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Camera = __webpack_require__(123);
+var Camera = __webpack_require__(152);
 var Class = __webpack_require__(0);
 var GetFastValue = __webpack_require__(1);
-var PluginCache = __webpack_require__(9);
-var RectangleContains = __webpack_require__(80);
-var ScaleEvents = __webpack_require__(40);
-var SceneEvents = __webpack_require__(8);
+var PluginCache = __webpack_require__(12);
+var RectangleContains = __webpack_require__(38);
+var ScaleEvents = __webpack_require__(51);
+var SceneEvents = __webpack_require__(11);
 
 /**
  * @classdesc
@@ -86783,7 +92577,7 @@ module.exports = CameraManager;
 
 
 /***/ }),
-/* 402 */
+/* 455 */
 /***/ (function(module, exports) {
 
 /**
@@ -86802,7 +92596,7 @@ module.exports = 'enterfullscreen';
 
 
 /***/ }),
-/* 403 */
+/* 456 */
 /***/ (function(module, exports) {
 
 /**
@@ -86821,7 +92615,7 @@ module.exports = 'fullscreenfailed';
 
 
 /***/ }),
-/* 404 */
+/* 457 */
 /***/ (function(module, exports) {
 
 /**
@@ -86840,7 +92634,7 @@ module.exports = 'fullscreenunsupported';
 
 
 /***/ }),
-/* 405 */
+/* 458 */
 /***/ (function(module, exports) {
 
 /**
@@ -86860,7 +92654,7 @@ module.exports = 'leavefullscreen';
 
 
 /***/ }),
-/* 406 */
+/* 459 */
 /***/ (function(module, exports) {
 
 /**
@@ -86883,7 +92677,7 @@ module.exports = 'orientationchange';
 
 
 /***/ }),
-/* 407 */
+/* 460 */
 /***/ (function(module, exports) {
 
 /**
@@ -86913,7 +92707,7 @@ module.exports = 'resize';
 
 
 /***/ }),
-/* 408 */
+/* 461 */
 /***/ (function(module, exports) {
 
 /**
@@ -86939,7 +92733,7 @@ module.exports = 'addedtoscene';
 
 
 /***/ }),
-/* 409 */
+/* 462 */
 /***/ (function(module, exports) {
 
 /**
@@ -86964,7 +92758,7 @@ module.exports = 'boot';
 
 
 /***/ }),
-/* 410 */
+/* 463 */
 /***/ (function(module, exports) {
 
 /**
@@ -86993,7 +92787,7 @@ module.exports = 'create';
 
 
 /***/ }),
-/* 411 */
+/* 464 */
 /***/ (function(module, exports) {
 
 /**
@@ -87020,7 +92814,7 @@ module.exports = 'destroy';
 
 
 /***/ }),
-/* 412 */
+/* 465 */
 /***/ (function(module, exports) {
 
 /**
@@ -87047,7 +92841,7 @@ module.exports = 'pause';
 
 
 /***/ }),
-/* 413 */
+/* 466 */
 /***/ (function(module, exports) {
 
 /**
@@ -87084,7 +92878,7 @@ module.exports = 'postupdate';
 
 
 /***/ }),
-/* 414 */
+/* 467 */
 /***/ (function(module, exports) {
 
 /**
@@ -87121,7 +92915,7 @@ module.exports = 'preupdate';
 
 
 /***/ }),
-/* 415 */
+/* 468 */
 /***/ (function(module, exports) {
 
 /**
@@ -87149,7 +92943,7 @@ module.exports = 'ready';
 
 
 /***/ }),
-/* 416 */
+/* 469 */
 /***/ (function(module, exports) {
 
 /**
@@ -87175,7 +92969,7 @@ module.exports = 'removedfromscene';
 
 
 /***/ }),
-/* 417 */
+/* 470 */
 /***/ (function(module, exports) {
 
 /**
@@ -87211,7 +93005,7 @@ module.exports = 'render';
 
 
 /***/ }),
-/* 418 */
+/* 471 */
 /***/ (function(module, exports) {
 
 /**
@@ -87238,7 +93032,7 @@ module.exports = 'resume';
 
 
 /***/ }),
-/* 419 */
+/* 472 */
 /***/ (function(module, exports) {
 
 /**
@@ -87268,7 +93062,7 @@ module.exports = 'shutdown';
 
 
 /***/ }),
-/* 420 */
+/* 473 */
 /***/ (function(module, exports) {
 
 /**
@@ -87295,7 +93089,7 @@ module.exports = 'sleep';
 
 
 /***/ }),
-/* 421 */
+/* 474 */
 /***/ (function(module, exports) {
 
 /**
@@ -87320,7 +93114,7 @@ module.exports = 'start';
 
 
 /***/ }),
-/* 422 */
+/* 475 */
 /***/ (function(module, exports) {
 
 /**
@@ -87356,7 +93150,7 @@ module.exports = 'transitioncomplete';
 
 
 /***/ }),
-/* 423 */
+/* 476 */
 /***/ (function(module, exports) {
 
 /**
@@ -87393,7 +93187,7 @@ module.exports = 'transitioninit';
 
 
 /***/ }),
-/* 424 */
+/* 477 */
 /***/ (function(module, exports) {
 
 /**
@@ -87427,7 +93221,7 @@ module.exports = 'transitionout';
 
 
 /***/ }),
-/* 425 */
+/* 478 */
 /***/ (function(module, exports) {
 
 /**
@@ -87467,7 +93261,7 @@ module.exports = 'transitionstart';
 
 
 /***/ }),
-/* 426 */
+/* 479 */
 /***/ (function(module, exports) {
 
 /**
@@ -87502,7 +93296,7 @@ module.exports = 'transitionwake';
 
 
 /***/ }),
-/* 427 */
+/* 480 */
 /***/ (function(module, exports) {
 
 /**
@@ -87539,7 +93333,7 @@ module.exports = 'update';
 
 
 /***/ }),
-/* 428 */
+/* 481 */
 /***/ (function(module, exports) {
 
 /**
@@ -87566,7 +93360,7 @@ module.exports = 'wake';
 
 
 /***/ }),
-/* 429 */
+/* 482 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -87581,18 +93375,18 @@ module.exports = 'wake';
 
 module.exports = {
 
-    Config: __webpack_require__(156),
-    CreateRenderer: __webpack_require__(173),
-    DebugHeader: __webpack_require__(191),
-    Events: __webpack_require__(7),
-    TimeStep: __webpack_require__(192),
-    VisibilityHandler: __webpack_require__(194)
+    Config: __webpack_require__(186),
+    CreateRenderer: __webpack_require__(203),
+    DebugHeader: __webpack_require__(221),
+    Events: __webpack_require__(9),
+    TimeStep: __webpack_require__(222),
+    VisibilityHandler: __webpack_require__(224)
 
 };
 
 
 /***/ }),
-/* 430 */
+/* 483 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -87782,7 +93576,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 431 */
+/* 484 */
 /***/ (function(module, exports) {
 
 /**
@@ -87914,7 +93708,7 @@ module.exports = Smoothing();
 
 
 /***/ }),
-/* 432 */
+/* 485 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -87923,7 +93717,7 @@ module.exports = Smoothing();
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Browser = __webpack_require__(58);
+var Browser = __webpack_require__(71);
 
 /**
  * Determines the input support of the browser running this Phaser Game instance.
@@ -87989,7 +93783,7 @@ module.exports = init();
 
 
 /***/ }),
-/* 433 */
+/* 486 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -87998,7 +93792,7 @@ module.exports = init();
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Browser = __webpack_require__(58);
+var Browser = __webpack_require__(71);
 
 /**
  * Determines the audio playback capabilities of the device running this Phaser Game instance.
@@ -88113,7 +93907,7 @@ module.exports = init();
 
 
 /***/ }),
-/* 434 */
+/* 487 */
 /***/ (function(module, exports) {
 
 /**
@@ -88200,7 +93994,7 @@ module.exports = init();
 
 
 /***/ }),
-/* 435 */
+/* 488 */
 /***/ (function(module, exports) {
 
 /**
@@ -88304,7 +94098,7 @@ module.exports = init();
 
 
 /***/ }),
-/* 436 */
+/* 489 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -88319,25 +94113,25 @@ module.exports = init();
 
 module.exports = {
 
-    Between: __webpack_require__(160),
-    BetweenPoints: __webpack_require__(437),
-    BetweenPointsY: __webpack_require__(438),
-    BetweenY: __webpack_require__(439),
-    CounterClockwise: __webpack_require__(440),
-    Normalize: __webpack_require__(161),
-    Random: __webpack_require__(441),
-    RandomDegrees: __webpack_require__(442),
-    Reverse: __webpack_require__(443),
-    RotateTo: __webpack_require__(444),
-    ShortestBetween: __webpack_require__(445),
-    Wrap: __webpack_require__(138),
-    WrapDegrees: __webpack_require__(139)
+    Between: __webpack_require__(190),
+    BetweenPoints: __webpack_require__(490),
+    BetweenPointsY: __webpack_require__(491),
+    BetweenY: __webpack_require__(492),
+    CounterClockwise: __webpack_require__(493),
+    Normalize: __webpack_require__(191),
+    Random: __webpack_require__(494),
+    RandomDegrees: __webpack_require__(495),
+    Reverse: __webpack_require__(496),
+    RotateTo: __webpack_require__(497),
+    ShortestBetween: __webpack_require__(498),
+    Wrap: __webpack_require__(169),
+    WrapDegrees: __webpack_require__(170)
 
 };
 
 
 /***/ }),
-/* 437 */
+/* 490 */
 /***/ (function(module, exports) {
 
 /**
@@ -88368,7 +94162,7 @@ module.exports = BetweenPoints;
 
 
 /***/ }),
-/* 438 */
+/* 491 */
 /***/ (function(module, exports) {
 
 /**
@@ -88400,7 +94194,7 @@ module.exports = BetweenPointsY;
 
 
 /***/ }),
-/* 439 */
+/* 492 */
 /***/ (function(module, exports) {
 
 /**
@@ -88434,7 +94228,7 @@ module.exports = BetweenY;
 
 
 /***/ }),
-/* 440 */
+/* 493 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -88443,7 +94237,7 @@ module.exports = BetweenY;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = __webpack_require__(13);
+var CONST = __webpack_require__(7);
 
 /**
  * Takes an angle in Phasers default clockwise format and converts it so that
@@ -88479,7 +94273,7 @@ module.exports = CounterClockwise;
 
 
 /***/ }),
-/* 441 */
+/* 494 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -88489,7 +94283,7 @@ module.exports = CounterClockwise;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var FloatBetween = __webpack_require__(59);
+var FloatBetween = __webpack_require__(72);
 
 /**
  * Returns a random angle in the range [-pi, pi].
@@ -88508,7 +94302,7 @@ module.exports = Random;
 
 
 /***/ }),
-/* 442 */
+/* 495 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -88518,7 +94312,7 @@ module.exports = Random;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var FloatBetween = __webpack_require__(59);
+var FloatBetween = __webpack_require__(72);
 
 /**
  * Returns a random angle in the range [-180, 180].
@@ -88537,7 +94331,7 @@ module.exports = RandomDegrees;
 
 
 /***/ }),
-/* 443 */
+/* 496 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -88546,7 +94340,7 @@ module.exports = RandomDegrees;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Normalize = __webpack_require__(161);
+var Normalize = __webpack_require__(191);
 
 /**
  * Reverse the given angle.
@@ -88567,7 +94361,7 @@ module.exports = Reverse;
 
 
 /***/ }),
-/* 444 */
+/* 497 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -88576,7 +94370,7 @@ module.exports = Reverse;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var MATH_CONST = __webpack_require__(13);
+var MATH_CONST = __webpack_require__(7);
 
 /**
  * Rotates `currentAngle` towards `targetAngle`, taking the shortest rotation distance. The `lerp` argument is the amount to rotate by in this call.
@@ -88634,7 +94428,7 @@ module.exports = RotateTo;
 
 
 /***/ }),
-/* 445 */
+/* 498 */
 /***/ (function(module, exports) {
 
 /**
@@ -88681,7 +94475,7 @@ module.exports = ShortestBetween;
 
 
 /***/ }),
-/* 446 */
+/* 499 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -88696,51 +94490,19 @@ module.exports = ShortestBetween;
 
 module.exports = {
 
-    Between: __webpack_require__(88),
-    BetweenPoints: __webpack_require__(447),
-    BetweenPointsSquared: __webpack_require__(448),
-    Chebyshev: __webpack_require__(449),
-    Power: __webpack_require__(450),
-    Snake: __webpack_require__(451),
-    Squared: __webpack_require__(452)
+    Between: __webpack_require__(73),
+    BetweenPoints: __webpack_require__(192),
+    BetweenPointsSquared: __webpack_require__(500),
+    Chebyshev: __webpack_require__(501),
+    Power: __webpack_require__(502),
+    Snake: __webpack_require__(503),
+    Squared: __webpack_require__(504)
 
 };
 
 
 /***/ }),
-/* 447 */
-/***/ (function(module, exports) {
-
-/**
- * @author       samme
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * Calculate the distance between two points.
- *
- * @function Phaser.Math.Distance.BetweenPoints
- * @since 3.22.0
- *
- * @param {Phaser.Types.Math.Vector2Like} a - The first point.
- * @param {Phaser.Types.Math.Vector2Like} b - The second point.
- *
- * @return {number} The distance between the points.
- */
-var DistanceBetweenPoints = function (a, b)
-{
-    var dx = a.x - b.x;
-    var dy = a.y - b.y;
-
-    return Math.sqrt(dx * dx + dy * dy);
-};
-
-module.exports = DistanceBetweenPoints;
-
-
-/***/ }),
-/* 448 */
+/* 500 */
 /***/ (function(module, exports) {
 
 /**
@@ -88772,7 +94534,7 @@ module.exports = DistanceBetweenPointsSquared;
 
 
 /***/ }),
-/* 449 */
+/* 501 */
 /***/ (function(module, exports) {
 
 /**
@@ -88806,7 +94568,7 @@ module.exports = ChebyshevDistance;
 
 
 /***/ }),
-/* 450 */
+/* 502 */
 /***/ (function(module, exports) {
 
 /**
@@ -88840,7 +94602,7 @@ module.exports = DistancePower;
 
 
 /***/ }),
-/* 451 */
+/* 503 */
 /***/ (function(module, exports) {
 
 /**
@@ -88874,7 +94636,7 @@ module.exports = SnakeDistance;
 
 
 /***/ }),
-/* 452 */
+/* 504 */
 /***/ (function(module, exports) {
 
 /**
@@ -88908,7 +94670,7 @@ module.exports = DistanceSquared;
 
 
 /***/ }),
-/* 453 */
+/* 505 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -88923,24 +94685,24 @@ module.exports = DistanceSquared;
 
 module.exports = {
 
-    Back: __webpack_require__(144),
-    Bounce: __webpack_require__(145),
-    Circular: __webpack_require__(146),
-    Cubic: __webpack_require__(147),
-    Elastic: __webpack_require__(148),
-    Expo: __webpack_require__(149),
-    Linear: __webpack_require__(150),
-    Quadratic: __webpack_require__(151),
-    Quartic: __webpack_require__(152),
-    Quintic: __webpack_require__(153),
-    Sine: __webpack_require__(154),
-    Stepped: __webpack_require__(155)
+    Back: __webpack_require__(174),
+    Bounce: __webpack_require__(175),
+    Circular: __webpack_require__(176),
+    Cubic: __webpack_require__(177),
+    Elastic: __webpack_require__(178),
+    Expo: __webpack_require__(179),
+    Linear: __webpack_require__(180),
+    Quadratic: __webpack_require__(181),
+    Quartic: __webpack_require__(182),
+    Quintic: __webpack_require__(183),
+    Sine: __webpack_require__(184),
+    Stepped: __webpack_require__(185)
 
 };
 
 
 /***/ }),
-/* 454 */
+/* 506 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -88955,17 +94717,17 @@ module.exports = {
 
 module.exports = {
 
-    Ceil: __webpack_require__(455),
-    Equal: __webpack_require__(82),
-    Floor: __webpack_require__(456),
-    GreaterThan: __webpack_require__(457),
-    LessThan: __webpack_require__(458)
+    Ceil: __webpack_require__(507),
+    Equal: __webpack_require__(98),
+    Floor: __webpack_require__(508),
+    GreaterThan: __webpack_require__(509),
+    LessThan: __webpack_require__(510)
 
 };
 
 
 /***/ }),
-/* 455 */
+/* 507 */
 /***/ (function(module, exports) {
 
 /**
@@ -88996,7 +94758,7 @@ module.exports = Ceil;
 
 
 /***/ }),
-/* 456 */
+/* 508 */
 /***/ (function(module, exports) {
 
 /**
@@ -89027,7 +94789,7 @@ module.exports = Floor;
 
 
 /***/ }),
-/* 457 */
+/* 509 */
 /***/ (function(module, exports) {
 
 /**
@@ -89061,7 +94823,7 @@ module.exports = GreaterThan;
 
 
 /***/ }),
-/* 458 */
+/* 510 */
 /***/ (function(module, exports) {
 
 /**
@@ -89095,7 +94857,7 @@ module.exports = LessThan;
 
 
 /***/ }),
-/* 459 */
+/* 511 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -89110,19 +94872,19 @@ module.exports = LessThan;
 
 module.exports = {
 
-    Bezier: __webpack_require__(460),
-    CatmullRom: __webpack_require__(461),
-    CubicBezier: __webpack_require__(462),
-    Linear: __webpack_require__(463),
-    QuadraticBezier: __webpack_require__(464),
-    SmoothStep: __webpack_require__(165),
-    SmootherStep: __webpack_require__(465)
+    Bezier: __webpack_require__(512),
+    CatmullRom: __webpack_require__(513),
+    CubicBezier: __webpack_require__(514),
+    Linear: __webpack_require__(515),
+    QuadraticBezier: __webpack_require__(516),
+    SmoothStep: __webpack_require__(196),
+    SmootherStep: __webpack_require__(517)
 
 };
 
 
 /***/ }),
-/* 460 */
+/* 512 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -89131,7 +94893,7 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Bernstein = __webpack_require__(162);
+var Bernstein = __webpack_require__(193);
 
 /**
  * A bezier interpolation method.
@@ -89161,7 +94923,7 @@ module.exports = BezierInterpolation;
 
 
 /***/ }),
-/* 461 */
+/* 513 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -89170,7 +94932,7 @@ module.exports = BezierInterpolation;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CatmullRom = __webpack_require__(164);
+var CatmullRom = __webpack_require__(195);
 
 /**
  * A Catmull-Rom interpolation method.
@@ -89218,7 +94980,7 @@ module.exports = CatmullRomInterpolation;
 
 
 /***/ }),
-/* 462 */
+/* 514 */
 /***/ (function(module, exports) {
 
 /**
@@ -89288,7 +95050,7 @@ module.exports = CubicBezierInterpolation;
 
 
 /***/ }),
-/* 463 */
+/* 515 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -89297,7 +95059,7 @@ module.exports = CubicBezierInterpolation;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Linear = __webpack_require__(86);
+var Linear = __webpack_require__(103);
 
 /**
  * A linear interpolation method.
@@ -89335,7 +95097,7 @@ module.exports = LinearInterpolation;
 
 
 /***/ }),
-/* 464 */
+/* 516 */
 /***/ (function(module, exports) {
 
 /**
@@ -89394,7 +95156,7 @@ module.exports = QuadraticBezierInterpolation;
 
 
 /***/ }),
-/* 465 */
+/* 517 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -89403,7 +95165,7 @@ module.exports = QuadraticBezierInterpolation;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SmootherStep = __webpack_require__(167);
+var SmootherStep = __webpack_require__(198);
 
 /**
  * A Smoother Step interpolation method.
@@ -89427,7 +95189,7 @@ module.exports = SmootherStepInterpolation;
 
 
 /***/ }),
-/* 466 */
+/* 518 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -89442,15 +95204,15 @@ module.exports = SmootherStepInterpolation;
 
 module.exports = {
 
-    GetNext: __webpack_require__(467),
-    IsSize: __webpack_require__(60),
-    IsValue: __webpack_require__(468)
+    GetNext: __webpack_require__(519),
+    IsSize: __webpack_require__(74),
+    IsValue: __webpack_require__(520)
 
 };
 
 
 /***/ }),
-/* 467 */
+/* 519 */
 /***/ (function(module, exports) {
 
 /**
@@ -89480,7 +95242,7 @@ module.exports = GetPowerOfTwo;
 
 
 /***/ }),
-/* 468 */
+/* 520 */
 /***/ (function(module, exports) {
 
 /**
@@ -89508,7 +95270,7 @@ module.exports = IsValuePowerOfTwo;
 
 
 /***/ }),
-/* 469 */
+/* 521 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -89523,15 +95285,15 @@ module.exports = IsValuePowerOfTwo;
 
 module.exports = {
 
-    Ceil: __webpack_require__(470),
-    Floor: __webpack_require__(61),
-    To: __webpack_require__(471)
+    Ceil: __webpack_require__(522),
+    Floor: __webpack_require__(75),
+    To: __webpack_require__(523)
 
 };
 
 
 /***/ }),
-/* 470 */
+/* 522 */
 /***/ (function(module, exports) {
 
 /**
@@ -89575,7 +95337,7 @@ module.exports = SnapCeil;
 
 
 /***/ }),
-/* 471 */
+/* 523 */
 /***/ (function(module, exports) {
 
 /**
@@ -89618,7 +95380,7 @@ module.exports = SnapTo;
 
 
 /***/ }),
-/* 472 */
+/* 524 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -90128,7 +95890,7 @@ module.exports = RandomDataGenerator;
 
 
 /***/ }),
-/* 473 */
+/* 525 */
 /***/ (function(module, exports) {
 
 /**
@@ -90163,7 +95925,7 @@ module.exports = Average;
 
 
 /***/ }),
-/* 474 */
+/* 526 */
 /***/ (function(module, exports) {
 
 /**
@@ -90200,7 +95962,7 @@ module.exports = CeilTo;
 
 
 /***/ }),
-/* 475 */
+/* 527 */
 /***/ (function(module, exports) {
 
 /**
@@ -90229,7 +95991,7 @@ module.exports = Difference;
 
 
 /***/ }),
-/* 476 */
+/* 528 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -90238,10 +96000,10 @@ module.exports = Difference;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = __webpack_require__(5);
+var Clamp = __webpack_require__(8);
 var Class = __webpack_require__(0);
-var Matrix4 = __webpack_require__(42);
-var NOOP = __webpack_require__(3);
+var Matrix4 = __webpack_require__(34);
+var NOOP = __webpack_require__(4);
 
 var tempMatrix = new Matrix4();
 
@@ -90512,7 +96274,7 @@ module.exports = Euler;
 
 
 /***/ }),
-/* 477 */
+/* 529 */
 /***/ (function(module, exports) {
 
 /**
@@ -90549,7 +96311,7 @@ module.exports = FloorTo;
 
 
 /***/ }),
-/* 478 */
+/* 530 */
 /***/ (function(module, exports) {
 
 /**
@@ -90582,7 +96344,7 @@ module.exports = GetSpeed;
 
 
 /***/ }),
-/* 479 */
+/* 531 */
 /***/ (function(module, exports) {
 
 /**
@@ -90613,7 +96375,7 @@ module.exports = IsEven;
 
 
 /***/ }),
-/* 480 */
+/* 532 */
 /***/ (function(module, exports) {
 
 /**
@@ -90642,7 +96404,7 @@ module.exports = IsEvenStrict;
 
 
 /***/ }),
-/* 481 */
+/* 533 */
 /***/ (function(module, exports) {
 
 /**
@@ -90672,7 +96434,7 @@ module.exports = MaxAdd;
 
 
 /***/ }),
-/* 482 */
+/* 534 */
 /***/ (function(module, exports) {
 
 /**
@@ -90702,7 +96464,7 @@ module.exports = MinSub;
 
 
 /***/ }),
-/* 483 */
+/* 535 */
 /***/ (function(module, exports) {
 
 /**
@@ -90761,7 +96523,7 @@ module.exports = Percent;
 
 
 /***/ }),
-/* 484 */
+/* 536 */
 /***/ (function(module, exports) {
 
 /**
@@ -90801,7 +96563,7 @@ module.exports = RandomXY;
 
 
 /***/ }),
-/* 485 */
+/* 537 */
 /***/ (function(module, exports) {
 
 /**
@@ -90840,7 +96602,7 @@ module.exports = RandomXYZ;
 
 
 /***/ }),
-/* 486 */
+/* 538 */
 /***/ (function(module, exports) {
 
 /**
@@ -90876,7 +96638,7 @@ module.exports = RandomXYZW;
 
 
 /***/ }),
-/* 487 */
+/* 539 */
 /***/ (function(module, exports) {
 
 /**
@@ -90911,7 +96673,7 @@ module.exports = Rotate;
 
 
 /***/ }),
-/* 488 */
+/* 540 */
 /***/ (function(module, exports) {
 
 /**
@@ -90952,7 +96714,7 @@ module.exports = RotateAroundDistance;
 
 
 /***/ }),
-/* 489 */
+/* 541 */
 /***/ (function(module, exports) {
 
 /**
@@ -90989,7 +96751,7 @@ module.exports = RotateTo;
 
 
 /***/ }),
-/* 490 */
+/* 542 */
 /***/ (function(module, exports) {
 
 /**
@@ -91041,7 +96803,7 @@ module.exports = RoundTo;
 
 
 /***/ }),
-/* 491 */
+/* 543 */
 /***/ (function(module, exports) {
 
 /**
@@ -91094,7 +96856,7 @@ module.exports = SinCosTableGenerator;
 
 
 /***/ }),
-/* 492 */
+/* 544 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -91152,7 +96914,7 @@ module.exports = ToXY;
 
 
 /***/ }),
-/* 493 */
+/* 545 */
 /***/ (function(module, exports) {
 
 /**
@@ -91182,7 +96944,7 @@ module.exports = Within;
 
 
 /***/ }),
-/* 494 */
+/* 546 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -91191,550 +96953,9 @@ module.exports = Within;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-//  Adapted from [gl-matrix](https://github.com/toji/gl-matrix) by toji
-//  and [vecmath](https://github.com/mattdesl/vecmath) by mattdesl
-
-var Class = __webpack_require__(0);
-
-/**
- * @classdesc
- * A representation of a vector in 4D space.
- *
- * A four-component vector.
- *
- * @class Vector4
- * @memberof Phaser.Math
- * @constructor
- * @since 3.0.0
- *
- * @param {number} [x] - The x component.
- * @param {number} [y] - The y component.
- * @param {number} [z] - The z component.
- * @param {number} [w] - The w component.
- */
-var Vector4 = new Class({
-
-    initialize:
-
-    function Vector4 (x, y, z, w)
-    {
-        /**
-         * The x component of this Vector.
-         *
-         * @name Phaser.Math.Vector4#x
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x = 0;
-
-        /**
-         * The y component of this Vector.
-         *
-         * @name Phaser.Math.Vector4#y
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y = 0;
-
-        /**
-         * The z component of this Vector.
-         *
-         * @name Phaser.Math.Vector4#z
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.z = 0;
-
-        /**
-         * The w component of this Vector.
-         *
-         * @name Phaser.Math.Vector4#w
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.w = 0;
-
-        if (typeof x === 'object')
-        {
-            this.x = x.x || 0;
-            this.y = x.y || 0;
-            this.z = x.z || 0;
-            this.w = x.w || 0;
-        }
-        else
-        {
-            this.x = x || 0;
-            this.y = y || 0;
-            this.z = z || 0;
-            this.w = w || 0;
-        }
-    },
-
-    /**
-     * Make a clone of this Vector4.
-     *
-     * @method Phaser.Math.Vector4#clone
-     * @since 3.0.0
-     *
-     * @return {Phaser.Math.Vector4} A clone of this Vector4.
-     */
-    clone: function ()
-    {
-        return new Vector4(this.x, this.y, this.z, this.w);
-    },
-
-    /**
-     * Copy the components of a given Vector into this Vector.
-     *
-     * @method Phaser.Math.Vector4#copy
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Vector4} src - The Vector to copy the components from.
-     *
-     * @return {Phaser.Math.Vector4} This Vector4.
-     */
-    copy: function (src)
-    {
-        this.x = src.x;
-        this.y = src.y;
-        this.z = src.z || 0;
-        this.w = src.w || 0;
-
-        return this;
-    },
-
-    /**
-     * Check whether this Vector is equal to a given Vector.
-     *
-     * Performs a strict quality check against each Vector's components.
-     *
-     * @method Phaser.Math.Vector4#equals
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Vector4} v - The vector to check equality with.
-     *
-     * @return {boolean} A boolean indicating whether the two Vectors are equal or not.
-     */
-    equals: function (v)
-    {
-        return ((this.x === v.x) && (this.y === v.y) && (this.z === v.z) && (this.w === v.w));
-    },
-
-    /**
-     * Set the `x`, `y`, `z` and `w` components of the this Vector to the given `x`, `y`, `z` and `w` values.
-     *
-     * @method Phaser.Math.Vector4#set
-     * @since 3.0.0
-     *
-     * @param {(number|object)} x - The x value to set for this Vector, or an object containing x, y, z and w components.
-     * @param {number} y - The y value to set for this Vector.
-     * @param {number} z - The z value to set for this Vector.
-     * @param {number} w - The z value to set for this Vector.
-     *
-     * @return {Phaser.Math.Vector4} This Vector4.
-     */
-    set: function (x, y, z, w)
-    {
-        if (typeof x === 'object')
-        {
-            this.x = x.x || 0;
-            this.y = x.y || 0;
-            this.z = x.z || 0;
-            this.w = x.w || 0;
-        }
-        else
-        {
-            this.x = x || 0;
-            this.y = y || 0;
-            this.z = z || 0;
-            this.w = w || 0;
-        }
-
-        return this;
-    },
-
-    /**
-     * Add a given Vector to this Vector. Addition is component-wise.
-     *
-     * @method Phaser.Math.Vector4#add
-     * @since 3.0.0
-     *
-     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3|Phaser.Math.Vector4)} v - The Vector to add to this Vector.
-     *
-     * @return {Phaser.Math.Vector4} This Vector4.
-     */
-    add: function (v)
-    {
-        this.x += v.x;
-        this.y += v.y;
-        this.z += v.z || 0;
-        this.w += v.w || 0;
-
-        return this;
-    },
-
-    /**
-     * Subtract the given Vector from this Vector. Subtraction is component-wise.
-     *
-     * @method Phaser.Math.Vector4#subtract
-     * @since 3.0.0
-     *
-     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3|Phaser.Math.Vector4)} v - The Vector to subtract from this Vector.
-     *
-     * @return {Phaser.Math.Vector4} This Vector4.
-     */
-    subtract: function (v)
-    {
-        this.x -= v.x;
-        this.y -= v.y;
-        this.z -= v.z || 0;
-        this.w -= v.w || 0;
-
-        return this;
-    },
-
-    /**
-     * Scale this Vector by the given value.
-     *
-     * @method Phaser.Math.Vector4#scale
-     * @since 3.0.0
-     *
-     * @param {number} scale - The value to scale this Vector by.
-     *
-     * @return {Phaser.Math.Vector4} This Vector4.
-     */
-    scale: function (scale)
-    {
-        this.x *= scale;
-        this.y *= scale;
-        this.z *= scale;
-        this.w *= scale;
-
-        return this;
-    },
-
-    /**
-     * Calculate the length (or magnitude) of this Vector.
-     *
-     * @method Phaser.Math.Vector4#length
-     * @since 3.0.0
-     *
-     * @return {number} The length of this Vector.
-     */
-    length: function ()
-    {
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-        var w = this.w;
-
-        return Math.sqrt(x * x + y * y + z * z + w * w);
-    },
-
-    /**
-     * Calculate the length of this Vector squared.
-     *
-     * @method Phaser.Math.Vector4#lengthSq
-     * @since 3.0.0
-     *
-     * @return {number} The length of this Vector, squared.
-     */
-    lengthSq: function ()
-    {
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-        var w = this.w;
-
-        return x * x + y * y + z * z + w * w;
-    },
-
-    /**
-     * Normalize this Vector.
-     *
-     * Makes the vector a unit length vector (magnitude of 1) in the same direction.
-     *
-     * @method Phaser.Math.Vector4#normalize
-     * @since 3.0.0
-     *
-     * @return {Phaser.Math.Vector4} This Vector4.
-     */
-    normalize: function ()
-    {
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-        var w = this.w;
-        var len = x * x + y * y + z * z + w * w;
-
-        if (len > 0)
-        {
-            len = 1 / Math.sqrt(len);
-
-            this.x = x * len;
-            this.y = y * len;
-            this.z = z * len;
-            this.w = w * len;
-        }
-
-        return this;
-    },
-
-    /**
-     * Calculate the dot product of this Vector and the given Vector.
-     *
-     * @method Phaser.Math.Vector4#dot
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Vector4} v - The Vector4 to dot product with this Vector4.
-     *
-     * @return {number} The dot product of this Vector and the given Vector.
-     */
-    dot: function (v)
-    {
-        return this.x * v.x + this.y * v.y + this.z * v.z + this.w * v.w;
-    },
-
-    /**
-     * Linearly interpolate between this Vector and the given Vector.
-     *
-     * Interpolates this Vector towards the given Vector.
-     *
-     * @method Phaser.Math.Vector4#lerp
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Vector4} v - The Vector4 to interpolate towards.
-     * @param {number} [t=0] - The interpolation percentage, between 0 and 1.
-     *
-     * @return {Phaser.Math.Vector4} This Vector4.
-     */
-    lerp: function (v, t)
-    {
-        if (t === undefined) { t = 0; }
-
-        var ax = this.x;
-        var ay = this.y;
-        var az = this.z;
-        var aw = this.w;
-
-        this.x = ax + t * (v.x - ax);
-        this.y = ay + t * (v.y - ay);
-        this.z = az + t * (v.z - az);
-        this.w = aw + t * (v.w - aw);
-
-        return this;
-    },
-
-    /**
-     * Perform a component-wise multiplication between this Vector and the given Vector.
-     *
-     * Multiplies this Vector by the given Vector.
-     *
-     * @method Phaser.Math.Vector4#multiply
-     * @since 3.0.0
-     *
-     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3|Phaser.Math.Vector4)} v - The Vector to multiply this Vector by.
-     *
-     * @return {Phaser.Math.Vector4} This Vector4.
-     */
-    multiply: function (v)
-    {
-        this.x *= v.x;
-        this.y *= v.y;
-        this.z *= v.z || 1;
-        this.w *= v.w || 1;
-
-        return this;
-    },
-
-    /**
-     * Perform a component-wise division between this Vector and the given Vector.
-     *
-     * Divides this Vector by the given Vector.
-     *
-     * @method Phaser.Math.Vector4#divide
-     * @since 3.0.0
-     *
-     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3|Phaser.Math.Vector4)} v - The Vector to divide this Vector by.
-     *
-     * @return {Phaser.Math.Vector4} This Vector4.
-     */
-    divide: function (v)
-    {
-        this.x /= v.x;
-        this.y /= v.y;
-        this.z /= v.z || 1;
-        this.w /= v.w || 1;
-
-        return this;
-    },
-
-    /**
-     * Calculate the distance between this Vector and the given Vector.
-     *
-     * @method Phaser.Math.Vector4#distance
-     * @since 3.0.0
-     *
-     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3|Phaser.Math.Vector4)} v - The Vector to calculate the distance to.
-     *
-     * @return {number} The distance from this Vector to the given Vector.
-     */
-    distance: function (v)
-    {
-        var dx = v.x - this.x;
-        var dy = v.y - this.y;
-        var dz = v.z - this.z || 0;
-        var dw = v.w - this.w || 0;
-
-        return Math.sqrt(dx * dx + dy * dy + dz * dz + dw * dw);
-    },
-
-    /**
-     * Calculate the distance between this Vector and the given Vector, squared.
-     *
-     * @method Phaser.Math.Vector4#distanceSq
-     * @since 3.0.0
-     *
-     * @param {(Phaser.Math.Vector2|Phaser.Math.Vector3|Phaser.Math.Vector4)} v - The Vector to calculate the distance to.
-     *
-     * @return {number} The distance from this Vector to the given Vector, squared.
-     */
-    distanceSq: function (v)
-    {
-        var dx = v.x - this.x;
-        var dy = v.y - this.y;
-        var dz = v.z - this.z || 0;
-        var dw = v.w - this.w || 0;
-
-        return dx * dx + dy * dy + dz * dz + dw * dw;
-    },
-
-    /**
-     * Negate the `x`, `y`, `z` and `w` components of this Vector.
-     *
-     * @method Phaser.Math.Vector4#negate
-     * @since 3.0.0
-     *
-     * @return {Phaser.Math.Vector4} This Vector4.
-     */
-    negate: function ()
-    {
-        this.x = -this.x;
-        this.y = -this.y;
-        this.z = -this.z;
-        this.w = -this.w;
-
-        return this;
-    },
-
-    /**
-     * Transform this Vector with the given Matrix.
-     *
-     * @method Phaser.Math.Vector4#transformMat4
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Matrix4} mat - The Matrix4 to transform this Vector4 with.
-     *
-     * @return {Phaser.Math.Vector4} This Vector4.
-     */
-    transformMat4: function (mat)
-    {
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-        var w = this.w;
-        var m = mat.val;
-
-        this.x = m[0] * x + m[4] * y + m[8] * z + m[12] * w;
-        this.y = m[1] * x + m[5] * y + m[9] * z + m[13] * w;
-        this.z = m[2] * x + m[6] * y + m[10] * z + m[14] * w;
-        this.w = m[3] * x + m[7] * y + m[11] * z + m[15] * w;
-
-        return this;
-    },
-
-    /**
-     * Transform this Vector with the given Quaternion.
-     *
-     * @method Phaser.Math.Vector4#transformQuat
-     * @since 3.0.0
-     *
-     * @param {Phaser.Math.Quaternion} q - The Quaternion to transform this Vector with.
-     *
-     * @return {Phaser.Math.Vector4} This Vector4.
-     */
-    transformQuat: function (q)
-    {
-        var x = this.x;
-        var y = this.y;
-        var z = this.z;
-        var qx = q.x;
-        var qy = q.y;
-        var qz = q.z;
-        var qw = q.w;
-
-        // calculate quat * vec
-        var ix = qw * x + qy * z - qz * y;
-        var iy = qw * y + qz * x - qx * z;
-        var iz = qw * z + qx * y - qy * x;
-        var iw = -qx * x - qy * y - qz * z;
-
-        // calculate result * inverse quat
-        this.x = ix * qw + iw * -qx + iy * -qz - iz * -qy;
-        this.y = iy * qw + iw * -qy + iz * -qx - ix * -qz;
-        this.z = iz * qw + iw * -qz + ix * -qy - iy * -qx;
-
-        return this;
-    },
-
-    /**
-     * Make this Vector the zero vector (0, 0, 0, 0).
-     *
-     * @method Phaser.Math.Vector4#reset
-     * @since 3.0.0
-     *
-     * @return {Phaser.Math.Vector4} This Vector4.
-     */
-    reset: function ()
-    {
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
-        this.w = 0;
-
-        return this;
-    }
-
-});
-
-Vector4.prototype.sub = Vector4.prototype.subtract;
-Vector4.prototype.mul = Vector4.prototype.multiply;
-Vector4.prototype.div = Vector4.prototype.divide;
-Vector4.prototype.dist = Vector4.prototype.distance;
-Vector4.prototype.distSq = Vector4.prototype.distanceSq;
-Vector4.prototype.len = Vector4.prototype.length;
-Vector4.prototype.lenSq = Vector4.prototype.lengthSq;
-
-module.exports = Vector4;
-
-
-/***/ }),
-/* 495 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Vector3 = __webpack_require__(62);
-var Matrix4 = __webpack_require__(42);
-var Quaternion = __webpack_require__(172);
+var Vector3 = __webpack_require__(19);
+var Matrix4 = __webpack_require__(34);
+var Quaternion = __webpack_require__(202);
 
 var tmpMat4 = new Matrix4();
 var tmpQuat = new Quaternion();
@@ -91771,7 +96992,7 @@ module.exports = RotateVec3;
 
 
 /***/ }),
-/* 496 */
+/* 547 */
 /***/ (function(module, exports) {
 
 /**
@@ -91834,7 +97055,7 @@ module.exports = CanvasInterpolation;
 
 
 /***/ }),
-/* 497 */
+/* 548 */
 /***/ (function(module, exports) {
 
 /**
@@ -91860,7 +97081,7 @@ module.exports = 'addtexture';
 
 
 /***/ }),
-/* 498 */
+/* 549 */
 /***/ (function(module, exports) {
 
 /**
@@ -91886,7 +97107,7 @@ module.exports = 'onerror';
 
 
 /***/ }),
-/* 499 */
+/* 550 */
 /***/ (function(module, exports) {
 
 /**
@@ -91915,7 +97136,7 @@ module.exports = 'onload';
 
 
 /***/ }),
-/* 500 */
+/* 551 */
 /***/ (function(module, exports) {
 
 /**
@@ -91938,7 +97159,7 @@ module.exports = 'ready';
 
 
 /***/ }),
-/* 501 */
+/* 552 */
 /***/ (function(module, exports) {
 
 /**
@@ -91966,7 +97187,7 @@ module.exports = 'removetexture';
 
 
 /***/ }),
-/* 502 */
+/* 553 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -92002,7 +97223,7 @@ module.exports = [
 
 
 /***/ }),
-/* 503 */
+/* 554 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -92021,7 +97242,7 @@ module.exports = [
 
 
 /***/ }),
-/* 504 */
+/* 555 */
 /***/ (function(module, exports) {
 
 /**
@@ -92046,7 +97267,7 @@ module.exports = 'pipelineafterflush';
 
 
 /***/ }),
-/* 505 */
+/* 556 */
 /***/ (function(module, exports) {
 
 /**
@@ -92071,7 +97292,7 @@ module.exports = 'pipelinebeforeflush';
 
 
 /***/ }),
-/* 506 */
+/* 557 */
 /***/ (function(module, exports) {
 
 /**
@@ -92095,7 +97316,7 @@ module.exports = 'pipelinebind';
 
 
 /***/ }),
-/* 507 */
+/* 558 */
 /***/ (function(module, exports) {
 
 /**
@@ -92118,7 +97339,7 @@ module.exports = 'pipelineboot';
 
 
 /***/ }),
-/* 508 */
+/* 559 */
 /***/ (function(module, exports) {
 
 /**
@@ -92141,7 +97362,7 @@ module.exports = 'pipelinedestroy';
 
 
 /***/ }),
-/* 509 */
+/* 560 */
 /***/ (function(module, exports) {
 
 /**
@@ -92165,7 +97386,7 @@ module.exports = 'pipelinerebind';
 
 
 /***/ }),
-/* 510 */
+/* 561 */
 /***/ (function(module, exports) {
 
 /**
@@ -92191,771 +97412,7 @@ module.exports = 'pipelineresize';
 
 
 /***/ }),
-/* 511 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * This module implements a modified ear slicing algorithm, optimized by z-order curve hashing and extended to
- * handle holes, twisted polygons, degeneracies and self-intersections in a way that doesn't guarantee correctness
- * of triangulation, but attempts to always produce acceptable results for practical data.
- *
- * Example:
- *
- * ```javascript
- * const triangles = Phaser.Geom.Polygon.Earcut([10,0, 0,50, 60,60, 70,10]); // returns [1,0,3, 3,2,1]
- * ```
- *
- * Each group of three vertex indices in the resulting array forms a triangle.
- *
- * ```javascript
- * // triangulating a polygon with a hole
- * earcut([0,0, 100,0, 100,100, 0,100,  20,20, 80,20, 80,80, 20,80], [4]);
- * // [3,0,4, 5,4,0, 3,4,7, 5,0,1, 2,3,7, 6,5,1, 2,7,6, 6,1,2]
- *
- * // triangulating a polygon with 3d coords
- * earcut([10,0,1, 0,50,2, 60,60,3, 70,10,4], null, 3);
- * // [1,0,3, 3,2,1]
- * ```
- *
- * If you pass a single vertex as a hole, Earcut treats it as a Steiner point.
- *
- * If your input is a multi-dimensional array (e.g. GeoJSON Polygon), you can convert it to the format
- * expected by Earcut with `Phaser.Geom.Polygon.Earcut.flatten`:
- *
- * ```javascript
- * var data = earcut.flatten(geojson.geometry.coordinates);
- * var triangles = earcut(data.vertices, data.holes, data.dimensions);
- * ```
- *
- * After getting a triangulation, you can verify its correctness with `Phaser.Geom.Polygon.Earcut.deviation`:
- *
- * ```javascript
- * var deviation = earcut.deviation(vertices, holes, dimensions, triangles);
- * ```
- * Returns the relative difference between the total area of triangles and the area of the input polygon.
- * 0 means the triangulation is fully correct.
- *
- * For more information see https://github.com/mapbox/earcut
- *
- * @function Phaser.Geom.Polygon.Earcut
- * @since 3.50.0
- *
- * @param {number[]} data - A flat array of vertex coordinate, like [x0,y0, x1,y1, x2,y2, ...]
- * @param {number[]} [holeIndices] - An array of hole indices if any (e.g. [5, 8] for a 12-vertex input would mean one hole with vertices 5–7 and another with 8–11).
- * @param {number} [dimensions=2] - The number of coordinates per vertex in the input array (2 by default).
- *
- * @return {number[]} An array of triangulated data.
- */
-
- //  Earcut 2.2.2 (January 21st 2020)
-
-/*
- * ISC License
- *
- * Copyright (c) 2016, Mapbox
- *
- * Permission to use, copy, modify, and/or distribute this software for any purpose
- * with or without fee is hereby granted, provided that the above copyright notice
- * and this permission notice appear in all copies.
- *
- * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
- * REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
- * INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
- * OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
- * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
- * THIS SOFTWARE.
- */
-
-
-
-function earcut(data, holeIndices, dim) {
-
-    dim = dim || 2;
-
-    var hasHoles = holeIndices && holeIndices.length,
-        outerLen = hasHoles ? holeIndices[0] * dim : data.length,
-        outerNode = linkedList(data, 0, outerLen, dim, true),
-        triangles = [];
-
-    if (!outerNode || outerNode.next === outerNode.prev) return triangles;
-
-    var minX, minY, maxX, maxY, x, y, invSize;
-
-    if (hasHoles) outerNode = eliminateHoles(data, holeIndices, outerNode, dim);
-
-    // if the shape is not too simple, we'll use z-order curve hash later; calculate polygon bbox
-    if (data.length > 80 * dim) {
-        minX = maxX = data[0];
-        minY = maxY = data[1];
-
-        for (var i = dim; i < outerLen; i += dim) {
-            x = data[i];
-            y = data[i + 1];
-            if (x < minX) minX = x;
-            if (y < minY) minY = y;
-            if (x > maxX) maxX = x;
-            if (y > maxY) maxY = y;
-        }
-
-        // minX, minY and invSize are later used to transform coords into integers for z-order calculation
-        invSize = Math.max(maxX - minX, maxY - minY);
-        invSize = invSize !== 0 ? 1 / invSize : 0;
-    }
-
-    earcutLinked(outerNode, triangles, dim, minX, minY, invSize);
-
-    return triangles;
-}
-
-// create a circular doubly linked list from polygon points in the specified winding order
-function linkedList(data, start, end, dim, clockwise) {
-    var i, last;
-
-    if (clockwise === (signedArea(data, start, end, dim) > 0)) {
-        for (i = start; i < end; i += dim) last = insertNode(i, data[i], data[i + 1], last);
-    } else {
-        for (i = end - dim; i >= start; i -= dim) last = insertNode(i, data[i], data[i + 1], last);
-    }
-
-    if (last && equals(last, last.next)) {
-        removeNode(last);
-        last = last.next;
-    }
-
-    return last;
-}
-
-// eliminate colinear or duplicate points
-function filterPoints(start, end) {
-    if (!start) return start;
-    if (!end) end = start;
-
-    var p = start,
-        again;
-    do {
-        again = false;
-
-        if (!p.steiner && (equals(p, p.next) || area(p.prev, p, p.next) === 0)) {
-            removeNode(p);
-            p = end = p.prev;
-            if (p === p.next) break;
-            again = true;
-
-        } else {
-            p = p.next;
-        }
-    } while (again || p !== end);
-
-    return end;
-}
-
-// main ear slicing loop which triangulates a polygon (given as a linked list)
-function earcutLinked(ear, triangles, dim, minX, minY, invSize, pass) {
-    if (!ear) return;
-
-    // interlink polygon nodes in z-order
-    if (!pass && invSize) indexCurve(ear, minX, minY, invSize);
-
-    var stop = ear,
-        prev, next;
-
-    // iterate through ears, slicing them one by one
-    while (ear.prev !== ear.next) {
-        prev = ear.prev;
-        next = ear.next;
-
-        if (invSize ? isEarHashed(ear, minX, minY, invSize) : isEar(ear)) {
-            // cut off the triangle
-            triangles.push(prev.i / dim);
-            triangles.push(ear.i / dim);
-            triangles.push(next.i / dim);
-
-            removeNode(ear);
-
-            // skipping the next vertex leads to less sliver triangles
-            ear = next.next;
-            stop = next.next;
-
-            continue;
-        }
-
-        ear = next;
-
-        // if we looped through the whole remaining polygon and can't find any more ears
-        if (ear === stop) {
-            // try filtering points and slicing again
-            if (!pass) {
-                earcutLinked(filterPoints(ear), triangles, dim, minX, minY, invSize, 1);
-
-            // if this didn't work, try curing all small self-intersections locally
-            } else if (pass === 1) {
-                ear = cureLocalIntersections(filterPoints(ear), triangles, dim);
-                earcutLinked(ear, triangles, dim, minX, minY, invSize, 2);
-
-            // as a last resort, try splitting the remaining polygon into two
-            } else if (pass === 2) {
-                splitEarcut(ear, triangles, dim, minX, minY, invSize);
-            }
-
-            break;
-        }
-    }
-}
-
-// check whether a polygon node forms a valid ear with adjacent nodes
-function isEar(ear) {
-    var a = ear.prev,
-        b = ear,
-        c = ear.next;
-
-    if (area(a, b, c) >= 0) return false; // reflex, can't be an ear
-
-    // now make sure we don't have other points inside the potential ear
-    var p = ear.next.next;
-
-    while (p !== ear.prev) {
-        if (pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, p.x, p.y) &&
-            area(p.prev, p, p.next) >= 0) return false;
-        p = p.next;
-    }
-
-    return true;
-}
-
-function isEarHashed(ear, minX, minY, invSize) {
-    var a = ear.prev,
-        b = ear,
-        c = ear.next;
-
-    if (area(a, b, c) >= 0) return false; // reflex, can't be an ear
-
-    // triangle bbox; min & max are calculated like this for speed
-    var minTX = a.x < b.x ? (a.x < c.x ? a.x : c.x) : (b.x < c.x ? b.x : c.x),
-        minTY = a.y < b.y ? (a.y < c.y ? a.y : c.y) : (b.y < c.y ? b.y : c.y),
-        maxTX = a.x > b.x ? (a.x > c.x ? a.x : c.x) : (b.x > c.x ? b.x : c.x),
-        maxTY = a.y > b.y ? (a.y > c.y ? a.y : c.y) : (b.y > c.y ? b.y : c.y);
-
-    // z-order range for the current triangle bbox;
-    var minZ = zOrder(minTX, minTY, minX, minY, invSize),
-        maxZ = zOrder(maxTX, maxTY, minX, minY, invSize);
-
-    var p = ear.prevZ,
-        n = ear.nextZ;
-
-    // look for points inside the triangle in both directions
-    while (p && p.z >= minZ && n && n.z <= maxZ) {
-        if (p !== ear.prev && p !== ear.next &&
-            pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, p.x, p.y) &&
-            area(p.prev, p, p.next) >= 0) return false;
-        p = p.prevZ;
-
-        if (n !== ear.prev && n !== ear.next &&
-            pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, n.x, n.y) &&
-            area(n.prev, n, n.next) >= 0) return false;
-        n = n.nextZ;
-    }
-
-    // look for remaining points in decreasing z-order
-    while (p && p.z >= minZ) {
-        if (p !== ear.prev && p !== ear.next &&
-            pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, p.x, p.y) &&
-            area(p.prev, p, p.next) >= 0) return false;
-        p = p.prevZ;
-    }
-
-    // look for remaining points in increasing z-order
-    while (n && n.z <= maxZ) {
-        if (n !== ear.prev && n !== ear.next &&
-            pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, n.x, n.y) &&
-            area(n.prev, n, n.next) >= 0) return false;
-        n = n.nextZ;
-    }
-
-    return true;
-}
-
-// go through all polygon nodes and cure small local self-intersections
-function cureLocalIntersections(start, triangles, dim) {
-    var p = start;
-    do {
-        var a = p.prev,
-            b = p.next.next;
-
-        if (!equals(a, b) && intersects(a, p, p.next, b) && locallyInside(a, b) && locallyInside(b, a)) {
-
-            triangles.push(a.i / dim);
-            triangles.push(p.i / dim);
-            triangles.push(b.i / dim);
-
-            // remove two nodes involved
-            removeNode(p);
-            removeNode(p.next);
-
-            p = start = b;
-        }
-        p = p.next;
-    } while (p !== start);
-
-    return filterPoints(p);
-}
-
-// try splitting polygon into two and triangulate them independently
-function splitEarcut(start, triangles, dim, minX, minY, invSize) {
-    // look for a valid diagonal that divides the polygon into two
-    var a = start;
-    do {
-        var b = a.next.next;
-        while (b !== a.prev) {
-            if (a.i !== b.i && isValidDiagonal(a, b)) {
-                // split the polygon in two by the diagonal
-                var c = splitPolygon(a, b);
-
-                // filter colinear points around the cuts
-                a = filterPoints(a, a.next);
-                c = filterPoints(c, c.next);
-
-                // run earcut on each half
-                earcutLinked(a, triangles, dim, minX, minY, invSize);
-                earcutLinked(c, triangles, dim, minX, minY, invSize);
-                return;
-            }
-            b = b.next;
-        }
-        a = a.next;
-    } while (a !== start);
-}
-
-// link every hole into the outer loop, producing a single-ring polygon without holes
-function eliminateHoles(data, holeIndices, outerNode, dim) {
-    var queue = [],
-        i, len, start, end, list;
-
-    for (i = 0, len = holeIndices.length; i < len; i++) {
-        start = holeIndices[i] * dim;
-        end = i < len - 1 ? holeIndices[i + 1] * dim : data.length;
-        list = linkedList(data, start, end, dim, false);
-        if (list === list.next) list.steiner = true;
-        queue.push(getLeftmost(list));
-    }
-
-    queue.sort(compareX);
-
-    // process holes from left to right
-    for (i = 0; i < queue.length; i++) {
-        eliminateHole(queue[i], outerNode);
-        outerNode = filterPoints(outerNode, outerNode.next);
-    }
-
-    return outerNode;
-}
-
-function compareX(a, b) {
-    return a.x - b.x;
-}
-
-// find a bridge between vertices that connects hole with an outer ring and and link it
-function eliminateHole(hole, outerNode) {
-    outerNode = findHoleBridge(hole, outerNode);
-    if (outerNode) {
-        var b = splitPolygon(outerNode, hole);
-
-        // filter collinear points around the cuts
-        filterPoints(outerNode, outerNode.next);
-        filterPoints(b, b.next);
-    }
-}
-
-// David Eberly's algorithm for finding a bridge between hole and outer polygon
-function findHoleBridge(hole, outerNode) {
-    var p = outerNode,
-        hx = hole.x,
-        hy = hole.y,
-        qx = -Infinity,
-        m;
-
-    // find a segment intersected by a ray from the hole's leftmost point to the left;
-    // segment's endpoint with lesser x will be potential connection point
-    do {
-        if (hy <= p.y && hy >= p.next.y && p.next.y !== p.y) {
-            var x = p.x + (hy - p.y) * (p.next.x - p.x) / (p.next.y - p.y);
-            if (x <= hx && x > qx) {
-                qx = x;
-                if (x === hx) {
-                    if (hy === p.y) return p;
-                    if (hy === p.next.y) return p.next;
-                }
-                m = p.x < p.next.x ? p : p.next;
-            }
-        }
-        p = p.next;
-    } while (p !== outerNode);
-
-    if (!m) return null;
-
-    if (hx === qx) return m; // hole touches outer segment; pick leftmost endpoint
-
-    // look for points inside the triangle of hole point, segment intersection and endpoint;
-    // if there are no points found, we have a valid connection;
-    // otherwise choose the point of the minimum angle with the ray as connection point
-
-    var stop = m,
-        mx = m.x,
-        my = m.y,
-        tanMin = Infinity,
-        tan;
-
-    p = m;
-
-    do {
-        if (hx >= p.x && p.x >= mx && hx !== p.x &&
-                pointInTriangle(hy < my ? hx : qx, hy, mx, my, hy < my ? qx : hx, hy, p.x, p.y)) {
-
-            tan = Math.abs(hy - p.y) / (hx - p.x); // tangential
-
-            if (locallyInside(p, hole) &&
-                (tan < tanMin || (tan === tanMin && (p.x > m.x || (p.x === m.x && sectorContainsSector(m, p)))))) {
-                m = p;
-                tanMin = tan;
-            }
-        }
-
-        p = p.next;
-    } while (p !== stop);
-
-    return m;
-}
-
-// whether sector in vertex m contains sector in vertex p in the same coordinates
-function sectorContainsSector(m, p) {
-    return area(m.prev, m, p.prev) < 0 && area(p.next, m, m.next) < 0;
-}
-
-// interlink polygon nodes in z-order
-function indexCurve(start, minX, minY, invSize) {
-    var p = start;
-    do {
-        if (p.z === null) p.z = zOrder(p.x, p.y, minX, minY, invSize);
-        p.prevZ = p.prev;
-        p.nextZ = p.next;
-        p = p.next;
-    } while (p !== start);
-
-    p.prevZ.nextZ = null;
-    p.prevZ = null;
-
-    sortLinked(p);
-}
-
-// Simon Tatham's linked list merge sort algorithm
-// http://www.chiark.greenend.org.uk/~sgtatham/algorithms/listsort.html
-function sortLinked(list) {
-    var i, p, q, e, tail, numMerges, pSize, qSize,
-        inSize = 1;
-
-    do {
-        p = list;
-        list = null;
-        tail = null;
-        numMerges = 0;
-
-        while (p) {
-            numMerges++;
-            q = p;
-            pSize = 0;
-            for (i = 0; i < inSize; i++) {
-                pSize++;
-                q = q.nextZ;
-                if (!q) break;
-            }
-            qSize = inSize;
-
-            while (pSize > 0 || (qSize > 0 && q)) {
-
-                if (pSize !== 0 && (qSize === 0 || !q || p.z <= q.z)) {
-                    e = p;
-                    p = p.nextZ;
-                    pSize--;
-                } else {
-                    e = q;
-                    q = q.nextZ;
-                    qSize--;
-                }
-
-                if (tail) tail.nextZ = e;
-                else list = e;
-
-                e.prevZ = tail;
-                tail = e;
-            }
-
-            p = q;
-        }
-
-        tail.nextZ = null;
-        inSize *= 2;
-
-    } while (numMerges > 1);
-
-    return list;
-}
-
-// z-order of a point given coords and inverse of the longer side of data bbox
-function zOrder(x, y, minX, minY, invSize) {
-    // coords are transformed into non-negative 15-bit integer range
-    x = 32767 * (x - minX) * invSize;
-    y = 32767 * (y - minY) * invSize;
-
-    x = (x | (x << 8)) & 0x00FF00FF;
-    x = (x | (x << 4)) & 0x0F0F0F0F;
-    x = (x | (x << 2)) & 0x33333333;
-    x = (x | (x << 1)) & 0x55555555;
-
-    y = (y | (y << 8)) & 0x00FF00FF;
-    y = (y | (y << 4)) & 0x0F0F0F0F;
-    y = (y | (y << 2)) & 0x33333333;
-    y = (y | (y << 1)) & 0x55555555;
-
-    return x | (y << 1);
-}
-
-// find the leftmost node of a polygon ring
-function getLeftmost(start) {
-    var p = start,
-        leftmost = start;
-    do {
-        if (p.x < leftmost.x || (p.x === leftmost.x && p.y < leftmost.y)) leftmost = p;
-        p = p.next;
-    } while (p !== start);
-
-    return leftmost;
-}
-
-// check if a point lies within a convex triangle
-function pointInTriangle(ax, ay, bx, by, cx, cy, px, py) {
-    return (cx - px) * (ay - py) - (ax - px) * (cy - py) >= 0 &&
-           (ax - px) * (by - py) - (bx - px) * (ay - py) >= 0 &&
-           (bx - px) * (cy - py) - (cx - px) * (by - py) >= 0;
-}
-
-// check if a diagonal between two polygon nodes is valid (lies in polygon interior)
-function isValidDiagonal(a, b) {
-    return a.next.i !== b.i && a.prev.i !== b.i && !intersectsPolygon(a, b) && // dones't intersect other edges
-           (locallyInside(a, b) && locallyInside(b, a) && middleInside(a, b) && // locally visible
-            (area(a.prev, a, b.prev) || area(a, b.prev, b)) || // does not create opposite-facing sectors
-            equals(a, b) && area(a.prev, a, a.next) > 0 && area(b.prev, b, b.next) > 0); // special zero-length case
-}
-
-// signed area of a triangle
-function area(p, q, r) {
-    return (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
-}
-
-// check if two points are equal
-function equals(p1, p2) {
-    return p1.x === p2.x && p1.y === p2.y;
-}
-
-// check if two segments intersect
-function intersects(p1, q1, p2, q2) {
-    var o1 = sign(area(p1, q1, p2));
-    var o2 = sign(area(p1, q1, q2));
-    var o3 = sign(area(p2, q2, p1));
-    var o4 = sign(area(p2, q2, q1));
-
-    if (o1 !== o2 && o3 !== o4) return true; // general case
-
-    if (o1 === 0 && onSegment(p1, p2, q1)) return true; // p1, q1 and p2 are collinear and p2 lies on p1q1
-    if (o2 === 0 && onSegment(p1, q2, q1)) return true; // p1, q1 and q2 are collinear and q2 lies on p1q1
-    if (o3 === 0 && onSegment(p2, p1, q2)) return true; // p2, q2 and p1 are collinear and p1 lies on p2q2
-    if (o4 === 0 && onSegment(p2, q1, q2)) return true; // p2, q2 and q1 are collinear and q1 lies on p2q2
-
-    return false;
-}
-
-// for collinear points p, q, r, check if point q lies on segment pr
-function onSegment(p, q, r) {
-    return q.x <= Math.max(p.x, r.x) && q.x >= Math.min(p.x, r.x) && q.y <= Math.max(p.y, r.y) && q.y >= Math.min(p.y, r.y);
-}
-
-function sign(num) {
-    return num > 0 ? 1 : num < 0 ? -1 : 0;
-}
-
-// check if a polygon diagonal intersects any polygon segments
-function intersectsPolygon(a, b) {
-    var p = a;
-    do {
-        if (p.i !== a.i && p.next.i !== a.i && p.i !== b.i && p.next.i !== b.i &&
-                intersects(p, p.next, a, b)) return true;
-        p = p.next;
-    } while (p !== a);
-
-    return false;
-}
-
-// check if a polygon diagonal is locally inside the polygon
-function locallyInside(a, b) {
-    return area(a.prev, a, a.next) < 0 ?
-        area(a, b, a.next) >= 0 && area(a, a.prev, b) >= 0 :
-        area(a, b, a.prev) < 0 || area(a, a.next, b) < 0;
-}
-
-// check if the middle point of a polygon diagonal is inside the polygon
-function middleInside(a, b) {
-    var p = a,
-        inside = false,
-        px = (a.x + b.x) / 2,
-        py = (a.y + b.y) / 2;
-    do {
-        if (((p.y > py) !== (p.next.y > py)) && p.next.y !== p.y &&
-                (px < (p.next.x - p.x) * (py - p.y) / (p.next.y - p.y) + p.x))
-            inside = !inside;
-        p = p.next;
-    } while (p !== a);
-
-    return inside;
-}
-
-// link two polygon vertices with a bridge; if the vertices belong to the same ring, it splits polygon into two;
-// if one belongs to the outer ring and another to a hole, it merges it into a single ring
-function splitPolygon(a, b) {
-    var a2 = new Node(a.i, a.x, a.y),
-        b2 = new Node(b.i, b.x, b.y),
-        an = a.next,
-        bp = b.prev;
-
-    a.next = b;
-    b.prev = a;
-
-    a2.next = an;
-    an.prev = a2;
-
-    b2.next = a2;
-    a2.prev = b2;
-
-    bp.next = b2;
-    b2.prev = bp;
-
-    return b2;
-}
-
-// create a node and optionally link it with previous one (in a circular doubly linked list)
-function insertNode(i, x, y, last) {
-    var p = new Node(i, x, y);
-
-    if (!last) {
-        p.prev = p;
-        p.next = p;
-
-    } else {
-        p.next = last.next;
-        p.prev = last;
-        last.next.prev = p;
-        last.next = p;
-    }
-    return p;
-}
-
-function removeNode(p) {
-    p.next.prev = p.prev;
-    p.prev.next = p.next;
-
-    if (p.prevZ) p.prevZ.nextZ = p.nextZ;
-    if (p.nextZ) p.nextZ.prevZ = p.prevZ;
-}
-
-function Node(i, x, y) {
-    // vertex index in coordinates array
-    this.i = i;
-
-    // vertex coordinates
-    this.x = x;
-    this.y = y;
-
-    // previous and next vertex nodes in a polygon ring
-    this.prev = null;
-    this.next = null;
-
-    // z-order curve value
-    this.z = null;
-
-    // previous and next nodes in z-order
-    this.prevZ = null;
-    this.nextZ = null;
-
-    // indicates whether this is a steiner point
-    this.steiner = false;
-}
-
-// return a percentage difference between the polygon area and its triangulation area;
-// used to verify correctness of triangulation
-earcut.deviation = function (data, holeIndices, dim, triangles) {
-    var hasHoles = holeIndices && holeIndices.length;
-    var outerLen = hasHoles ? holeIndices[0] * dim : data.length;
-
-    var polygonArea = Math.abs(signedArea(data, 0, outerLen, dim));
-    if (hasHoles) {
-        for (var i = 0, len = holeIndices.length; i < len; i++) {
-            var start = holeIndices[i] * dim;
-            var end = i < len - 1 ? holeIndices[i + 1] * dim : data.length;
-            polygonArea -= Math.abs(signedArea(data, start, end, dim));
-        }
-    }
-
-    var trianglesArea = 0;
-    for (i = 0; i < triangles.length; i += 3) {
-        var a = triangles[i] * dim;
-        var b = triangles[i + 1] * dim;
-        var c = triangles[i + 2] * dim;
-        trianglesArea += Math.abs(
-            (data[a] - data[c]) * (data[b + 1] - data[a + 1]) -
-            (data[a] - data[b]) * (data[c + 1] - data[a + 1]));
-    }
-
-    return polygonArea === 0 && trianglesArea === 0 ? 0 :
-        Math.abs((trianglesArea - polygonArea) / polygonArea);
-};
-
-function signedArea(data, start, end, dim) {
-    var sum = 0;
-    for (var i = start, j = end - dim; i < end; i += dim) {
-        sum += (data[j] - data[i]) * (data[i + 1] + data[j + 1]);
-        j = i;
-    }
-    return sum;
-}
-
-// turn a polygon in a multi-dimensional array form (e.g. as in GeoJSON) into a form Earcut accepts
-earcut.flatten = function (data) {
-    var dim = data[0][0].length,
-        result = {vertices: [], holes: [], dimensions: dim},
-        holeIndex = 0;
-
-    for (var i = 0; i < data.length; i++) {
-        for (var j = 0; j < data[i].length; j++) {
-            for (var d = 0; d < dim; d++) result.vertices.push(data[i][j][d]);
-        }
-        if (i > 0) {
-            holeIndex += data[i - 1].length;
-            result.holes.push(holeIndex);
-        }
-    }
-    return result;
-};
-
-module.exports = earcut;
-
-
-/***/ }),
-/* 512 */
+/* 562 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -92974,7 +97431,7 @@ module.exports = [
 
 
 /***/ }),
-/* 513 */
+/* 563 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -93000,7 +97457,7 @@ module.exports = [
 
 
 /***/ }),
-/* 514 */
+/* 564 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -93059,7 +97516,7 @@ module.exports = [
 
 
 /***/ }),
-/* 515 */
+/* 565 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -93103,7 +97560,7 @@ module.exports = [
 
 
 /***/ }),
-/* 516 */
+/* 566 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -93138,7 +97595,7 @@ module.exports = [
 
 
 /***/ }),
-/* 517 */
+/* 567 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -93173,7 +97630,7 @@ module.exports = [
 
 
 /***/ }),
-/* 518 */
+/* 568 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -93208,7 +97665,7 @@ module.exports = [
 
 
 /***/ }),
-/* 519 */
+/* 569 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -93248,7 +97705,7 @@ module.exports = [
 
 
 /***/ }),
-/* 520 */
+/* 570 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -93281,7 +97738,7 @@ module.exports = [
 
 
 /***/ }),
-/* 521 */
+/* 571 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -93307,7 +97764,7 @@ module.exports = [
 
 
 /***/ }),
-/* 522 */
+/* 572 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -93355,7 +97812,7 @@ module.exports = [
 
 
 /***/ }),
-/* 523 */
+/* 573 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -93377,7 +97834,7 @@ module.exports = [
 
 
 /***/ }),
-/* 524 */
+/* 574 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -93403,7 +97860,7 @@ module.exports = [
 
 
 /***/ }),
-/* 525 */
+/* 575 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -93418,15 +97875,15 @@ module.exports = [
 
 module.exports = {
 
-    DataManager: __webpack_require__(47),
-    DataManagerPlugin: __webpack_require__(531),
-    Events: __webpack_require__(195)
+    DataManager: __webpack_require__(57),
+    DataManagerPlugin: __webpack_require__(581),
+    Events: __webpack_require__(225)
 
 };
 
 
 /***/ }),
-/* 526 */
+/* 576 */
 /***/ (function(module, exports) {
 
 /**
@@ -93458,7 +97915,7 @@ module.exports = 'changedata';
 
 
 /***/ }),
-/* 527 */
+/* 577 */
 /***/ (function(module, exports) {
 
 /**
@@ -93488,7 +97945,7 @@ module.exports = 'changedata-';
 
 
 /***/ }),
-/* 528 */
+/* 578 */
 /***/ (function(module, exports) {
 
 /**
@@ -93509,7 +97966,7 @@ module.exports = 'destroy';
 
 
 /***/ }),
-/* 529 */
+/* 579 */
 /***/ (function(module, exports) {
 
 /**
@@ -93537,7 +97994,7 @@ module.exports = 'removedata';
 
 
 /***/ }),
-/* 530 */
+/* 580 */
 /***/ (function(module, exports) {
 
 /**
@@ -93565,7 +98022,7 @@ module.exports = 'setdata';
 
 
 /***/ }),
-/* 531 */
+/* 581 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -93575,9 +98032,9 @@ module.exports = 'setdata';
  */
 
 var Class = __webpack_require__(0);
-var DataManager = __webpack_require__(47);
-var PluginCache = __webpack_require__(9);
-var SceneEvents = __webpack_require__(8);
+var DataManager = __webpack_require__(57);
+var PluginCache = __webpack_require__(12);
+var SceneEvents = __webpack_require__(11);
 
 /**
  * @classdesc
@@ -93692,7 +98149,7 @@ module.exports = DataManagerPlugin;
 
 
 /***/ }),
-/* 532 */
+/* 582 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -93707,14 +98164,14 @@ module.exports = DataManagerPlugin;
 
 module.exports = {
 
-    BitmapMask: __webpack_require__(132),
-    GeometryMask: __webpack_require__(133)
+    BitmapMask: __webpack_require__(163),
+    GeometryMask: __webpack_require__(164)
 
 };
 
 
 /***/ }),
-/* 533 */
+/* 583 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -93729,14 +98186,14 @@ module.exports = {
 
 var Dom = {
 
-    AddToDOM: __webpack_require__(63),
-    DOMContentLoaded: __webpack_require__(196),
-    GetInnerHeight: __webpack_require__(197),
-    GetScreenOrientation: __webpack_require__(198),
-    GetTarget: __webpack_require__(203),
-    ParseXML: __webpack_require__(204),
-    RemoveFromDOM: __webpack_require__(205),
-    RequestAnimationFrame: __webpack_require__(193)
+    AddToDOM: __webpack_require__(76),
+    DOMContentLoaded: __webpack_require__(226),
+    GetInnerHeight: __webpack_require__(227),
+    GetScreenOrientation: __webpack_require__(228),
+    GetTarget: __webpack_require__(233),
+    ParseXML: __webpack_require__(234),
+    RemoveFromDOM: __webpack_require__(235),
+    RequestAnimationFrame: __webpack_require__(223)
 
 };
 
@@ -93744,7 +98201,7 @@ module.exports = Dom;
 
 
 /***/ }),
-/* 534 */
+/* 584 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -93754,8 +98211,8 @@ module.exports = Dom;
  */
 
 var Class = __webpack_require__(0);
-var EE = __webpack_require__(2);
-var PluginCache = __webpack_require__(9);
+var EE = __webpack_require__(3);
+var PluginCache = __webpack_require__(12);
 
 /**
  * @classdesc
@@ -93928,7 +98385,7 @@ module.exports = EventEmitter;
 
 
 /***/ }),
-/* 535 */
+/* 585 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -93937,33 +98394,33 @@ module.exports = EventEmitter;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var AddToDOM = __webpack_require__(63);
-var AnimationManager = __webpack_require__(116);
-var CacheManager = __webpack_require__(122);
-var CanvasPool = __webpack_require__(17);
+var AddToDOM = __webpack_require__(76);
+var AnimationManager = __webpack_require__(145);
+var CacheManager = __webpack_require__(151);
+var CanvasPool = __webpack_require__(18);
 var Class = __webpack_require__(0);
-var Config = __webpack_require__(156);
-var CreateDOMContainer = __webpack_require__(536);
-var CreateRenderer = __webpack_require__(173);
-var DataManager = __webpack_require__(47);
-var DebugHeader = __webpack_require__(191);
-var Device = __webpack_require__(157);
-var DOMContentLoaded = __webpack_require__(196);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(7);
-var InputManager = __webpack_require__(206);
-var PluginCache = __webpack_require__(9);
-var PluginManager = __webpack_require__(211);
-var ScaleManager = __webpack_require__(212);
-var SceneManager = __webpack_require__(214);
-var TextureEvents = __webpack_require__(44);
-var TextureManager = __webpack_require__(220);
-var TimeStep = __webpack_require__(192);
-var VisibilityHandler = __webpack_require__(194);
+var Config = __webpack_require__(186);
+var CreateDOMContainer = __webpack_require__(586);
+var CreateRenderer = __webpack_require__(203);
+var DataManager = __webpack_require__(57);
+var DebugHeader = __webpack_require__(221);
+var Device = __webpack_require__(187);
+var DOMContentLoaded = __webpack_require__(226);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(9);
+var InputManager = __webpack_require__(236);
+var PluginCache = __webpack_require__(12);
+var PluginManager = __webpack_require__(241);
+var ScaleManager = __webpack_require__(242);
+var SceneManager = __webpack_require__(244);
+var TextureEvents = __webpack_require__(54);
+var TextureManager = __webpack_require__(250);
+var TimeStep = __webpack_require__(222);
+var VisibilityHandler = __webpack_require__(224);
 
 if (typeof FEATURE_SOUND)
 {
-    var SoundManagerCreator = __webpack_require__(225);
+    var SoundManagerCreator = __webpack_require__(255);
 }
 
 if (false)
@@ -94631,7 +99088,7 @@ module.exports = Game;
 
 
 /***/ }),
-/* 536 */
+/* 586 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -94640,7 +99097,7 @@ module.exports = Game;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var AddToDOM = __webpack_require__(63);
+var AddToDOM = __webpack_require__(76);
 
 var CreateDOMContainer = function (game)
 {
@@ -94675,7 +99132,7 @@ module.exports = CreateDOMContainer;
 
 
 /***/ }),
-/* 537 */
+/* 587 */
 /***/ (function(module, exports) {
 
 /**
@@ -94696,7 +99153,7 @@ module.exports = 'boot';
 
 
 /***/ }),
-/* 538 */
+/* 588 */
 /***/ (function(module, exports) {
 
 /**
@@ -94717,7 +99174,7 @@ module.exports = 'destroy';
 
 
 /***/ }),
-/* 539 */
+/* 589 */
 /***/ (function(module, exports) {
 
 /**
@@ -94745,7 +99202,7 @@ module.exports = 'dragend';
 
 
 /***/ }),
-/* 540 */
+/* 590 */
 /***/ (function(module, exports) {
 
 /**
@@ -94776,7 +99233,7 @@ module.exports = 'dragenter';
 
 
 /***/ }),
-/* 541 */
+/* 591 */
 /***/ (function(module, exports) {
 
 /**
@@ -94808,7 +99265,7 @@ module.exports = 'drag';
 
 
 /***/ }),
-/* 542 */
+/* 592 */
 /***/ (function(module, exports) {
 
 /**
@@ -94839,7 +99296,7 @@ module.exports = 'dragleave';
 
 
 /***/ }),
-/* 543 */
+/* 593 */
 /***/ (function(module, exports) {
 
 /**
@@ -94873,7 +99330,7 @@ module.exports = 'dragover';
 
 
 /***/ }),
-/* 544 */
+/* 594 */
 /***/ (function(module, exports) {
 
 /**
@@ -94903,7 +99360,7 @@ module.exports = 'dragstart';
 
 
 /***/ }),
-/* 545 */
+/* 595 */
 /***/ (function(module, exports) {
 
 /**
@@ -94932,7 +99389,7 @@ module.exports = 'drop';
 
 
 /***/ }),
-/* 546 */
+/* 596 */
 /***/ (function(module, exports) {
 
 /**
@@ -94959,7 +99416,7 @@ module.exports = 'gameout';
 
 
 /***/ }),
-/* 547 */
+/* 597 */
 /***/ (function(module, exports) {
 
 /**
@@ -94986,7 +99443,7 @@ module.exports = 'gameover';
 
 
 /***/ }),
-/* 548 */
+/* 598 */
 /***/ (function(module, exports) {
 
 /**
@@ -95027,7 +99484,7 @@ module.exports = 'gameobjectdown';
 
 
 /***/ }),
-/* 549 */
+/* 599 */
 /***/ (function(module, exports) {
 
 /**
@@ -95058,7 +99515,7 @@ module.exports = 'dragend';
 
 
 /***/ }),
-/* 550 */
+/* 600 */
 /***/ (function(module, exports) {
 
 /**
@@ -95088,7 +99545,7 @@ module.exports = 'dragenter';
 
 
 /***/ }),
-/* 551 */
+/* 601 */
 /***/ (function(module, exports) {
 
 /**
@@ -95119,7 +99576,7 @@ module.exports = 'drag';
 
 
 /***/ }),
-/* 552 */
+/* 602 */
 /***/ (function(module, exports) {
 
 /**
@@ -95149,7 +99606,7 @@ module.exports = 'dragleave';
 
 
 /***/ }),
-/* 553 */
+/* 603 */
 /***/ (function(module, exports) {
 
 /**
@@ -95182,7 +99639,7 @@ module.exports = 'dragover';
 
 
 /***/ }),
-/* 554 */
+/* 604 */
 /***/ (function(module, exports) {
 
 /**
@@ -95216,7 +99673,7 @@ module.exports = 'dragstart';
 
 
 /***/ }),
-/* 555 */
+/* 605 */
 /***/ (function(module, exports) {
 
 /**
@@ -95246,7 +99703,7 @@ module.exports = 'drop';
 
 
 /***/ }),
-/* 556 */
+/* 606 */
 /***/ (function(module, exports) {
 
 /**
@@ -95287,7 +99744,7 @@ module.exports = 'gameobjectmove';
 
 
 /***/ }),
-/* 557 */
+/* 607 */
 /***/ (function(module, exports) {
 
 /**
@@ -95328,7 +99785,7 @@ module.exports = 'gameobjectout';
 
 
 /***/ }),
-/* 558 */
+/* 608 */
 /***/ (function(module, exports) {
 
 /**
@@ -95369,7 +99826,7 @@ module.exports = 'gameobjectover';
 
 
 /***/ }),
-/* 559 */
+/* 609 */
 /***/ (function(module, exports) {
 
 /**
@@ -95410,7 +99867,7 @@ module.exports = 'pointerdown';
 
 
 /***/ }),
-/* 560 */
+/* 610 */
 /***/ (function(module, exports) {
 
 /**
@@ -95451,7 +99908,7 @@ module.exports = 'pointermove';
 
 
 /***/ }),
-/* 561 */
+/* 611 */
 /***/ (function(module, exports) {
 
 /**
@@ -95490,7 +99947,7 @@ module.exports = 'pointerout';
 
 
 /***/ }),
-/* 562 */
+/* 612 */
 /***/ (function(module, exports) {
 
 /**
@@ -95531,7 +99988,7 @@ module.exports = 'pointerover';
 
 
 /***/ }),
-/* 563 */
+/* 613 */
 /***/ (function(module, exports) {
 
 /**
@@ -95572,7 +100029,7 @@ module.exports = 'pointerup';
 
 
 /***/ }),
-/* 564 */
+/* 614 */
 /***/ (function(module, exports) {
 
 /**
@@ -95614,7 +100071,7 @@ module.exports = 'wheel';
 
 
 /***/ }),
-/* 565 */
+/* 615 */
 /***/ (function(module, exports) {
 
 /**
@@ -95655,7 +100112,7 @@ module.exports = 'gameobjectup';
 
 
 /***/ }),
-/* 566 */
+/* 616 */
 /***/ (function(module, exports) {
 
 /**
@@ -95699,7 +100156,7 @@ module.exports = 'gameobjectwheel';
 
 
 /***/ }),
-/* 567 */
+/* 617 */
 /***/ (function(module, exports) {
 
 /**
@@ -95720,7 +100177,7 @@ module.exports = 'boot';
 
 
 /***/ }),
-/* 568 */
+/* 618 */
 /***/ (function(module, exports) {
 
 /**
@@ -95745,7 +100202,7 @@ module.exports = 'process';
 
 
 /***/ }),
-/* 569 */
+/* 619 */
 /***/ (function(module, exports) {
 
 /**
@@ -95766,7 +100223,7 @@ module.exports = 'update';
 
 
 /***/ }),
-/* 570 */
+/* 620 */
 /***/ (function(module, exports) {
 
 /**
@@ -95801,7 +100258,7 @@ module.exports = 'pointerdown';
 
 
 /***/ }),
-/* 571 */
+/* 621 */
 /***/ (function(module, exports) {
 
 /**
@@ -95835,7 +100292,7 @@ module.exports = 'pointerdownoutside';
 
 
 /***/ }),
-/* 572 */
+/* 622 */
 /***/ (function(module, exports) {
 
 /**
@@ -95870,7 +100327,7 @@ module.exports = 'pointermove';
 
 
 /***/ }),
-/* 573 */
+/* 623 */
 /***/ (function(module, exports) {
 
 /**
@@ -95905,7 +100362,7 @@ module.exports = 'pointerout';
 
 
 /***/ }),
-/* 574 */
+/* 624 */
 /***/ (function(module, exports) {
 
 /**
@@ -95940,7 +100397,7 @@ module.exports = 'pointerover';
 
 
 /***/ }),
-/* 575 */
+/* 625 */
 /***/ (function(module, exports) {
 
 /**
@@ -95975,7 +100432,7 @@ module.exports = 'pointerup';
 
 
 /***/ }),
-/* 576 */
+/* 626 */
 /***/ (function(module, exports) {
 
 /**
@@ -96009,7 +100466,7 @@ module.exports = 'pointerupoutside';
 
 
 /***/ }),
-/* 577 */
+/* 627 */
 /***/ (function(module, exports) {
 
 /**
@@ -96047,7 +100504,7 @@ module.exports = 'wheel';
 
 
 /***/ }),
-/* 578 */
+/* 628 */
 /***/ (function(module, exports) {
 
 /**
@@ -96071,7 +100528,7 @@ module.exports = 'pointerlockchange';
 
 
 /***/ }),
-/* 579 */
+/* 629 */
 /***/ (function(module, exports) {
 
 /**
@@ -96093,7 +100550,7 @@ module.exports = 'preupdate';
 
 
 /***/ }),
-/* 580 */
+/* 630 */
 /***/ (function(module, exports) {
 
 /**
@@ -96114,7 +100571,7 @@ module.exports = 'shutdown';
 
 
 /***/ }),
-/* 581 */
+/* 631 */
 /***/ (function(module, exports) {
 
 /**
@@ -96136,7 +100593,7 @@ module.exports = 'start';
 
 
 /***/ }),
-/* 582 */
+/* 632 */
 /***/ (function(module, exports) {
 
 /**
@@ -96161,7 +100618,7 @@ module.exports = 'update';
 
 
 /***/ }),
-/* 583 */
+/* 633 */
 /***/ (function(module, exports) {
 
 /**
@@ -96191,7 +100648,7 @@ module.exports = 'addfile';
 
 
 /***/ }),
-/* 584 */
+/* 634 */
 /***/ (function(module, exports) {
 
 /**
@@ -96219,7 +100676,7 @@ module.exports = 'complete';
 
 
 /***/ }),
-/* 585 */
+/* 635 */
 /***/ (function(module, exports) {
 
 /**
@@ -96248,7 +100705,7 @@ module.exports = 'filecomplete';
 
 
 /***/ }),
-/* 586 */
+/* 636 */
 /***/ (function(module, exports) {
 
 /**
@@ -96302,7 +100759,7 @@ module.exports = 'filecomplete-';
 
 
 /***/ }),
-/* 587 */
+/* 637 */
 /***/ (function(module, exports) {
 
 /**
@@ -96327,7 +100784,7 @@ module.exports = 'loaderror';
 
 
 /***/ }),
-/* 588 */
+/* 638 */
 /***/ (function(module, exports) {
 
 /**
@@ -96353,7 +100810,7 @@ module.exports = 'load';
 
 
 /***/ }),
-/* 589 */
+/* 639 */
 /***/ (function(module, exports) {
 
 /**
@@ -96380,7 +100837,7 @@ module.exports = 'fileprogress';
 
 
 /***/ }),
-/* 590 */
+/* 640 */
 /***/ (function(module, exports) {
 
 /**
@@ -96409,7 +100866,7 @@ module.exports = 'postprocess';
 
 
 /***/ }),
-/* 591 */
+/* 641 */
 /***/ (function(module, exports) {
 
 /**
@@ -96434,7 +100891,7 @@ module.exports = 'progress';
 
 
 /***/ }),
-/* 592 */
+/* 642 */
 /***/ (function(module, exports) {
 
 /**
@@ -96461,7 +100918,7 @@ module.exports = 'start';
 
 
 /***/ }),
-/* 593 */
+/* 643 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -96470,7 +100927,7 @@ module.exports = 'start';
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clone = __webpack_require__(49);
+var Clone = __webpack_require__(59);
 
 /**
  * Creates a new Object using all values from obj1 and obj2.
@@ -96506,7 +100963,7 @@ module.exports = Merge;
 
 
 /***/ }),
-/* 594 */
+/* 644 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -96568,7 +101025,7 @@ module.exports = InjectionMap;
 
 
 /***/ }),
-/* 595 */
+/* 645 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -96577,9 +101034,9 @@ module.exports = InjectionMap;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Arne16 = __webpack_require__(596);
-var CanvasPool = __webpack_require__(17);
-var GetValue = __webpack_require__(4);
+var Arne16 = __webpack_require__(646);
+var CanvasPool = __webpack_require__(18);
+var GetValue = __webpack_require__(5);
 
 /**
  * Generates a texture based on the given Create configuration object.
@@ -96690,7 +101147,7 @@ module.exports = GenerateTexture;
 
 
 /***/ }),
-/* 596 */
+/* 646 */
 /***/ (function(module, exports) {
 
 /**
@@ -96728,7 +101185,7 @@ module.exports = {
 
 
 /***/ }),
-/* 597 */
+/* 647 */
 /***/ (function(module, exports) {
 
 /**
@@ -96809,7 +101266,7 @@ module.exports = AtlasXML;
 
 
 /***/ }),
-/* 598 */
+/* 648 */
 /***/ (function(module, exports) {
 
 /**
@@ -96844,7 +101301,7 @@ module.exports = Canvas;
 
 
 /***/ }),
-/* 599 */
+/* 649 */
 /***/ (function(module, exports) {
 
 /**
@@ -96879,7 +101336,7 @@ module.exports = Image;
 
 
 /***/ }),
-/* 600 */
+/* 650 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -96888,7 +101345,7 @@ module.exports = Image;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clone = __webpack_require__(49);
+var Clone = __webpack_require__(59);
 
 /**
  * Parses a Texture Atlas JSON Array and adds the Frames to the Texture.
@@ -96988,7 +101445,7 @@ module.exports = JSONArray;
 
 
 /***/ }),
-/* 601 */
+/* 651 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -96997,7 +101454,7 @@ module.exports = JSONArray;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clone = __webpack_require__(49);
+var Clone = __webpack_require__(59);
 
 /**
  * Parses a Texture Atlas JSON Hash and adds the Frames to the Texture.
@@ -97101,7 +101558,7 @@ module.exports = JSONHash;
 
 
 /***/ }),
-/* 602 */
+/* 652 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -97226,7 +101683,7 @@ module.exports = SpriteSheet;
 
 
 /***/ }),
-/* 603 */
+/* 653 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -97417,7 +101874,7 @@ module.exports = SpriteSheetFromAtlas;
 
 
 /***/ }),
-/* 604 */
+/* 654 */
 /***/ (function(module, exports) {
 
 /**
@@ -97587,7 +102044,7 @@ TextureImporter:
 
 
 /***/ }),
-/* 605 */
+/* 655 */
 /***/ (function(module, exports) {
 
 /**
@@ -97618,7 +102075,7 @@ module.exports = 'complete';
 
 
 /***/ }),
-/* 606 */
+/* 656 */
 /***/ (function(module, exports) {
 
 /**
@@ -97648,7 +102105,7 @@ module.exports = 'decoded';
 
 
 /***/ }),
-/* 607 */
+/* 657 */
 /***/ (function(module, exports) {
 
 /**
@@ -97680,7 +102137,7 @@ module.exports = 'decodedall';
 
 
 /***/ }),
-/* 608 */
+/* 658 */
 /***/ (function(module, exports) {
 
 /**
@@ -97712,7 +102169,7 @@ module.exports = 'destroy';
 
 
 /***/ }),
-/* 609 */
+/* 659 */
 /***/ (function(module, exports) {
 
 /**
@@ -97745,7 +102202,7 @@ module.exports = 'detune';
 
 
 /***/ }),
-/* 610 */
+/* 660 */
 /***/ (function(module, exports) {
 
 /**
@@ -97773,7 +102230,7 @@ module.exports = 'detune';
 
 
 /***/ }),
-/* 611 */
+/* 661 */
 /***/ (function(module, exports) {
 
 /**
@@ -97800,7 +102257,7 @@ module.exports = 'mute';
 
 
 /***/ }),
-/* 612 */
+/* 662 */
 /***/ (function(module, exports) {
 
 /**
@@ -97828,7 +102285,7 @@ module.exports = 'rate';
 
 
 /***/ }),
-/* 613 */
+/* 663 */
 /***/ (function(module, exports) {
 
 /**
@@ -97855,7 +102312,7 @@ module.exports = 'volume';
 
 
 /***/ }),
-/* 614 */
+/* 664 */
 /***/ (function(module, exports) {
 
 /**
@@ -97889,7 +102346,7 @@ module.exports = 'loop';
 
 
 /***/ }),
-/* 615 */
+/* 665 */
 /***/ (function(module, exports) {
 
 /**
@@ -97923,7 +102380,7 @@ module.exports = 'looped';
 
 
 /***/ }),
-/* 616 */
+/* 666 */
 /***/ (function(module, exports) {
 
 /**
@@ -97956,7 +102413,7 @@ module.exports = 'mute';
 
 
 /***/ }),
-/* 617 */
+/* 667 */
 /***/ (function(module, exports) {
 
 /**
@@ -97989,7 +102446,7 @@ module.exports = 'pan';
 
 
 /***/ }),
-/* 618 */
+/* 668 */
 /***/ (function(module, exports) {
 
 /**
@@ -98016,7 +102473,7 @@ module.exports = 'pauseall';
 
 
 /***/ }),
-/* 619 */
+/* 669 */
 /***/ (function(module, exports) {
 
 /**
@@ -98048,7 +102505,7 @@ module.exports = 'pause';
 
 
 /***/ }),
-/* 620 */
+/* 670 */
 /***/ (function(module, exports) {
 
 /**
@@ -98079,7 +102536,7 @@ module.exports = 'play';
 
 
 /***/ }),
-/* 621 */
+/* 671 */
 /***/ (function(module, exports) {
 
 /**
@@ -98112,7 +102569,7 @@ module.exports = 'rate';
 
 
 /***/ }),
-/* 622 */
+/* 672 */
 /***/ (function(module, exports) {
 
 /**
@@ -98139,7 +102596,7 @@ module.exports = 'resumeall';
 
 
 /***/ }),
-/* 623 */
+/* 673 */
 /***/ (function(module, exports) {
 
 /**
@@ -98172,7 +102629,7 @@ module.exports = 'resume';
 
 
 /***/ }),
-/* 624 */
+/* 674 */
 /***/ (function(module, exports) {
 
 /**
@@ -98205,7 +102662,7 @@ module.exports = 'seek';
 
 
 /***/ }),
-/* 625 */
+/* 675 */
 /***/ (function(module, exports) {
 
 /**
@@ -98232,7 +102689,7 @@ module.exports = 'stopall';
 
 
 /***/ }),
-/* 626 */
+/* 676 */
 /***/ (function(module, exports) {
 
 /**
@@ -98264,7 +102721,7 @@ module.exports = 'stop';
 
 
 /***/ }),
-/* 627 */
+/* 677 */
 /***/ (function(module, exports) {
 
 /**
@@ -98291,7 +102748,7 @@ module.exports = 'unlocked';
 
 
 /***/ }),
-/* 628 */
+/* 678 */
 /***/ (function(module, exports) {
 
 /**
@@ -98324,7 +102781,7 @@ module.exports = 'volume';
 
 
 /***/ }),
-/* 629 */
+/* 679 */
 /***/ (function(module, exports) {
 
 /**
@@ -98399,7 +102856,7 @@ module.exports = Base64ToArrayBuffer;
 
 
 /***/ }),
-/* 630 */
+/* 680 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -98409,11 +102866,11 @@ module.exports = Base64ToArrayBuffer;
  */
 
 var Class = __webpack_require__(0);
-var List = __webpack_require__(95);
-var PluginCache = __webpack_require__(9);
-var GameObjectEvents = __webpack_require__(97);
-var SceneEvents = __webpack_require__(8);
-var StableSort = __webpack_require__(69);
+var List = __webpack_require__(114);
+var PluginCache = __webpack_require__(12);
+var GameObjectEvents = __webpack_require__(116);
+var SceneEvents = __webpack_require__(11);
+var StableSort = __webpack_require__(82);
 
 /**
  * @classdesc
@@ -98670,7 +103127,7 @@ module.exports = DisplayList;
 
 
 /***/ }),
-/* 631 */
+/* 681 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -98685,46 +103142,46 @@ module.exports = DisplayList;
 
 module.exports = {
 
-    Matrix: __webpack_require__(632),
+    Matrix: __webpack_require__(682),
 
-    Add: __webpack_require__(640),
-    AddAt: __webpack_require__(641),
-    BringToTop: __webpack_require__(642),
-    CountAllMatching: __webpack_require__(643),
-    Each: __webpack_require__(644),
-    EachInRange: __webpack_require__(645),
-    FindClosestInSorted: __webpack_require__(113),
-    GetAll: __webpack_require__(227),
-    GetFirst: __webpack_require__(228),
-    GetRandom: __webpack_require__(646),
-    MoveDown: __webpack_require__(647),
-    MoveTo: __webpack_require__(648),
-    MoveUp: __webpack_require__(649),
-    NumberArray: __webpack_require__(118),
-    NumberArrayStep: __webpack_require__(650),
-    QuickSelect: __webpack_require__(237),
-    Range: __webpack_require__(651),
-    Remove: __webpack_require__(33),
-    RemoveAt: __webpack_require__(652),
-    RemoveBetween: __webpack_require__(653),
-    RemoveRandomElement: __webpack_require__(654),
-    Replace: __webpack_require__(655),
-    RotateLeft: __webpack_require__(235),
-    RotateRight: __webpack_require__(236),
-    SafeRange: __webpack_require__(31),
-    SendToBack: __webpack_require__(656),
-    SetAll: __webpack_require__(657),
-    Shuffle: __webpack_require__(238),
-    SortByDigits: __webpack_require__(115),
-    SpliceOne: __webpack_require__(39),
-    StableSort: __webpack_require__(69),
-    Swap: __webpack_require__(658)
+    Add: __webpack_require__(690),
+    AddAt: __webpack_require__(691),
+    BringToTop: __webpack_require__(692),
+    CountAllMatching: __webpack_require__(693),
+    Each: __webpack_require__(694),
+    EachInRange: __webpack_require__(695),
+    FindClosestInSorted: __webpack_require__(142),
+    GetAll: __webpack_require__(257),
+    GetFirst: __webpack_require__(258),
+    GetRandom: __webpack_require__(696),
+    MoveDown: __webpack_require__(697),
+    MoveTo: __webpack_require__(698),
+    MoveUp: __webpack_require__(699),
+    NumberArray: __webpack_require__(147),
+    NumberArrayStep: __webpack_require__(700),
+    QuickSelect: __webpack_require__(267),
+    Range: __webpack_require__(701),
+    Remove: __webpack_require__(40),
+    RemoveAt: __webpack_require__(702),
+    RemoveBetween: __webpack_require__(703),
+    RemoveRandomElement: __webpack_require__(704),
+    Replace: __webpack_require__(705),
+    RotateLeft: __webpack_require__(265),
+    RotateRight: __webpack_require__(266),
+    SafeRange: __webpack_require__(37),
+    SendToBack: __webpack_require__(706),
+    SetAll: __webpack_require__(707),
+    Shuffle: __webpack_require__(268),
+    SortByDigits: __webpack_require__(144),
+    SpliceOne: __webpack_require__(50),
+    StableSort: __webpack_require__(82),
+    Swap: __webpack_require__(708)
 
 };
 
 
 /***/ }),
-/* 632 */
+/* 682 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -98739,22 +103196,22 @@ module.exports = {
 
 module.exports = {
 
-    CheckMatrix: __webpack_require__(96),
-    MatrixToString: __webpack_require__(633),
-    ReverseColumns: __webpack_require__(634),
-    ReverseRows: __webpack_require__(635),
-    Rotate180: __webpack_require__(636),
-    RotateLeft: __webpack_require__(637),
-    RotateMatrix: __webpack_require__(68),
-    RotateRight: __webpack_require__(638),
-    Translate: __webpack_require__(639),
-    TransposeMatrix: __webpack_require__(234)
+    CheckMatrix: __webpack_require__(115),
+    MatrixToString: __webpack_require__(683),
+    ReverseColumns: __webpack_require__(684),
+    ReverseRows: __webpack_require__(685),
+    Rotate180: __webpack_require__(686),
+    RotateLeft: __webpack_require__(687),
+    RotateMatrix: __webpack_require__(81),
+    RotateRight: __webpack_require__(688),
+    Translate: __webpack_require__(689),
+    TransposeMatrix: __webpack_require__(264)
 
 };
 
 
 /***/ }),
-/* 633 */
+/* 683 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -98763,8 +103220,8 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Pad = __webpack_require__(117);
-var CheckMatrix = __webpack_require__(96);
+var Pad = __webpack_require__(146);
+var CheckMatrix = __webpack_require__(115);
 
 /**
  * Generates a string (which you can pass to console.log) from the given Array Matrix.
@@ -98849,7 +103306,7 @@ module.exports = MatrixToString;
 
 
 /***/ }),
-/* 634 */
+/* 684 */
 /***/ (function(module, exports) {
 
 /**
@@ -98894,7 +103351,7 @@ module.exports = ReverseColumns;
 
 
 /***/ }),
-/* 635 */
+/* 685 */
 /***/ (function(module, exports) {
 
 /**
@@ -98944,7 +103401,7 @@ module.exports = ReverseRows;
 
 
 /***/ }),
-/* 636 */
+/* 686 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -98953,7 +103410,7 @@ module.exports = ReverseRows;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var RotateMatrix = __webpack_require__(68);
+var RotateMatrix = __webpack_require__(81);
 
 /**
  * Rotates the array matrix 180 degrees.
@@ -98991,7 +103448,7 @@ module.exports = Rotate180;
 
 
 /***/ }),
-/* 637 */
+/* 687 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -99000,7 +103457,7 @@ module.exports = Rotate180;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var RotateMatrix = __webpack_require__(68);
+var RotateMatrix = __webpack_require__(81);
 
 /**
  * Rotates the array matrix to the left (or 90 degrees)
@@ -99038,7 +103495,7 @@ module.exports = RotateLeft;
 
 
 /***/ }),
-/* 638 */
+/* 688 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -99047,7 +103504,7 @@ module.exports = RotateLeft;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var RotateMatrix = __webpack_require__(68);
+var RotateMatrix = __webpack_require__(81);
 
 /**
  * Rotates the array matrix to the left (or -90 degrees)
@@ -99085,7 +103542,7 @@ module.exports = RotateRight;
 
 
 /***/ }),
-/* 639 */
+/* 689 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -99094,8 +103551,8 @@ module.exports = RotateRight;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var RotateLeft = __webpack_require__(235);
-var RotateRight = __webpack_require__(236);
+var RotateLeft = __webpack_require__(265);
+var RotateRight = __webpack_require__(266);
 
 /**
  * Translates the given Array Matrix by shifting each column and row the
@@ -99174,7 +103631,7 @@ module.exports = TranslateMatrix;
 
 
 /***/ }),
-/* 640 */
+/* 690 */
 /***/ (function(module, exports) {
 
 /**
@@ -99291,7 +103748,7 @@ module.exports = Add;
 
 
 /***/ }),
-/* 641 */
+/* 691 */
 /***/ (function(module, exports) {
 
 /**
@@ -99413,7 +103870,7 @@ module.exports = AddAt;
 
 
 /***/ }),
-/* 642 */
+/* 692 */
 /***/ (function(module, exports) {
 
 /**
@@ -99451,7 +103908,7 @@ module.exports = BringToTop;
 
 
 /***/ }),
-/* 643 */
+/* 693 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -99460,7 +103917,7 @@ module.exports = BringToTop;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SafeRange = __webpack_require__(31);
+var SafeRange = __webpack_require__(37);
 
 /**
  * Returns the total number of elements in the array which have a property matching the given value.
@@ -99503,7 +103960,7 @@ module.exports = CountAllMatching;
 
 
 /***/ }),
-/* 644 */
+/* 694 */
 /***/ (function(module, exports) {
 
 /**
@@ -99549,7 +104006,7 @@ module.exports = Each;
 
 
 /***/ }),
-/* 645 */
+/* 695 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -99558,7 +104015,7 @@ module.exports = Each;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SafeRange = __webpack_require__(31);
+var SafeRange = __webpack_require__(37);
 
 /**
  * Passes each element in the array, between the start and end indexes, to the given callback.
@@ -99605,7 +104062,7 @@ module.exports = EachInRange;
 
 
 /***/ }),
-/* 646 */
+/* 696 */
 /***/ (function(module, exports) {
 
 /**
@@ -99640,7 +104097,7 @@ module.exports = GetRandom;
 
 
 /***/ }),
-/* 647 */
+/* 697 */
 /***/ (function(module, exports) {
 
 /**
@@ -99682,7 +104139,7 @@ module.exports = MoveDown;
 
 
 /***/ }),
-/* 648 */
+/* 698 */
 /***/ (function(module, exports) {
 
 /**
@@ -99729,7 +104186,7 @@ module.exports = MoveTo;
 
 
 /***/ }),
-/* 649 */
+/* 699 */
 /***/ (function(module, exports) {
 
 /**
@@ -99771,7 +104228,7 @@ module.exports = MoveUp;
 
 
 /***/ }),
-/* 650 */
+/* 700 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -99780,7 +104237,7 @@ module.exports = MoveUp;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var RoundAwayFromZero = __webpack_require__(170);
+var RoundAwayFromZero = __webpack_require__(200);
 
 /**
  * Create an array of numbers (positive and/or negative) progressing from `start`
@@ -99848,7 +104305,7 @@ module.exports = NumberArrayStep;
 
 
 /***/ }),
-/* 651 */
+/* 701 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -99857,8 +104314,8 @@ module.exports = NumberArrayStep;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetValue = __webpack_require__(4);
-var Shuffle = __webpack_require__(238);
+var GetValue = __webpack_require__(5);
+var Shuffle = __webpack_require__(268);
 
 var BuildChunk = function (a, b, qty)
 {
@@ -99986,7 +104443,7 @@ module.exports = Range;
 
 
 /***/ }),
-/* 652 */
+/* 702 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -99995,7 +104452,7 @@ module.exports = Range;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SpliceOne = __webpack_require__(39);
+var SpliceOne = __webpack_require__(50);
 
 /**
  * Removes the item from the given position in the array.
@@ -100037,7 +104494,7 @@ module.exports = RemoveAt;
 
 
 /***/ }),
-/* 653 */
+/* 703 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -100046,7 +104503,7 @@ module.exports = RemoveAt;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SafeRange = __webpack_require__(31);
+var SafeRange = __webpack_require__(37);
 
 /**
  * Removes the item within the given range in the array.
@@ -100100,7 +104557,7 @@ module.exports = RemoveBetween;
 
 
 /***/ }),
-/* 654 */
+/* 704 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -100109,7 +104566,7 @@ module.exports = RemoveBetween;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SpliceOne = __webpack_require__(39);
+var SpliceOne = __webpack_require__(50);
 
 /**
  * Removes a random object from the given array and returns it.
@@ -100138,7 +104595,7 @@ module.exports = RemoveRandomElement;
 
 
 /***/ }),
-/* 655 */
+/* 705 */
 /***/ (function(module, exports) {
 
 /**
@@ -100182,7 +104639,7 @@ module.exports = Replace;
 
 
 /***/ }),
-/* 656 */
+/* 706 */
 /***/ (function(module, exports) {
 
 /**
@@ -100220,7 +104677,7 @@ module.exports = SendToBack;
 
 
 /***/ }),
-/* 657 */
+/* 707 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -100229,7 +104686,7 @@ module.exports = SendToBack;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SafeRange = __webpack_require__(31);
+var SafeRange = __webpack_require__(37);
 
 /**
  * Scans the array for elements with the given property. If found, the property is set to the `value`.
@@ -100275,7 +104732,7 @@ module.exports = SetAll;
 
 
 /***/ }),
-/* 658 */
+/* 708 */
 /***/ (function(module, exports) {
 
 /**
@@ -100323,7 +104780,7 @@ module.exports = Swap;
 
 
 /***/ }),
-/* 659 */
+/* 709 */
 /***/ (function(module, exports) {
 
 /**
@@ -100349,7 +104806,7 @@ module.exports = 'addedtoscene';
 
 
 /***/ }),
-/* 660 */
+/* 710 */
 /***/ (function(module, exports) {
 
 /**
@@ -100374,7 +104831,7 @@ module.exports = 'destroy';
 
 
 /***/ }),
-/* 661 */
+/* 711 */
 /***/ (function(module, exports) {
 
 /**
@@ -100400,7 +104857,7 @@ module.exports = 'removedfromscene';
 
 
 /***/ }),
-/* 662 */
+/* 712 */
 /***/ (function(module, exports) {
 
 /**
@@ -100432,7 +104889,7 @@ module.exports = 'complete';
 
 
 /***/ }),
-/* 663 */
+/* 713 */
 /***/ (function(module, exports) {
 
 /**
@@ -100461,7 +104918,7 @@ module.exports = 'created';
 
 
 /***/ }),
-/* 664 */
+/* 714 */
 /***/ (function(module, exports) {
 
 /**
@@ -100487,7 +104944,7 @@ module.exports = 'error';
 
 
 /***/ }),
-/* 665 */
+/* 715 */
 /***/ (function(module, exports) {
 
 /**
@@ -100519,7 +104976,7 @@ module.exports = 'loop';
 
 
 /***/ }),
-/* 666 */
+/* 716 */
 /***/ (function(module, exports) {
 
 /**
@@ -100547,7 +105004,7 @@ module.exports = 'play';
 
 
 /***/ }),
-/* 667 */
+/* 717 */
 /***/ (function(module, exports) {
 
 /**
@@ -100572,7 +105029,7 @@ module.exports = 'seeked';
 
 
 /***/ }),
-/* 668 */
+/* 718 */
 /***/ (function(module, exports) {
 
 /**
@@ -100598,7 +105055,7 @@ module.exports = 'seeking';
 
 
 /***/ }),
-/* 669 */
+/* 719 */
 /***/ (function(module, exports) {
 
 /**
@@ -100624,7 +105081,7 @@ module.exports = 'stop';
 
 
 /***/ }),
-/* 670 */
+/* 720 */
 /***/ (function(module, exports) {
 
 /**
@@ -100650,7 +105107,7 @@ module.exports = 'timeout';
 
 
 /***/ }),
-/* 671 */
+/* 721 */
 /***/ (function(module, exports) {
 
 /**
@@ -100676,7 +105133,7 @@ module.exports = 'unlocked';
 
 
 /***/ }),
-/* 672 */
+/* 722 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -100686,9 +105143,9 @@ module.exports = 'unlocked';
  */
 
 var Class = __webpack_require__(0);
-var ProcessQueue = __webpack_require__(239);
-var PluginCache = __webpack_require__(9);
-var SceneEvents = __webpack_require__(8);
+var ProcessQueue = __webpack_require__(269);
+var PluginCache = __webpack_require__(12);
+var SceneEvents = __webpack_require__(11);
 
 /**
  * @classdesc
@@ -100980,7 +105437,7 @@ module.exports = UpdateList;
 
 
 /***/ }),
-/* 673 */
+/* 723 */
 /***/ (function(module, exports) {
 
 /**
@@ -101007,7 +105464,7 @@ module.exports = 'add';
 
 
 /***/ }),
-/* 674 */
+/* 724 */
 /***/ (function(module, exports) {
 
 /**
@@ -101034,7 +105491,7 @@ module.exports = 'remove';
 
 
 /***/ }),
-/* 675 */
+/* 725 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -101043,190 +105500,20 @@ module.exports = 'remove';
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CircumferencePoint = __webpack_require__(244);
-var FromPercent = __webpack_require__(43);
-var MATH_CONST = __webpack_require__(13);
-var Point = __webpack_require__(12);
-
-/**
- * Returns a Point object containing the coordinates of a point on the circumference of the Ellipse
- * based on the given angle normalized to the range 0 to 1. I.e. a value of 0.5 will give the point
- * at 180 degrees around the circle.
- *
- * @function Phaser.Geom.Ellipse.GetPoint
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Point} O - [out,$return]
- *
- * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to get the circumference point on.
- * @param {number} position - A value between 0 and 1, where 0 equals 0 degrees, 0.5 equals 180 degrees and 1 equals 360 around the ellipse.
- * @param {(Phaser.Geom.Point|object)} [out] - An object to store the return values in. If not given a Point object will be created.
- *
- * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point around the ellipse.
- */
-var GetPoint = function (ellipse, position, out)
-{
-    if (out === undefined) { out = new Point(); }
-
-    var angle = FromPercent(position, 0, MATH_CONST.PI2);
-
-    return CircumferencePoint(ellipse, angle, out);
-};
-
-module.exports = GetPoint;
-
-
-/***/ }),
-/* 676 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Circumference = __webpack_require__(677);
-var CircumferencePoint = __webpack_require__(244);
-var FromPercent = __webpack_require__(43);
-var MATH_CONST = __webpack_require__(13);
-
-/**
- * Returns an array of Point objects containing the coordinates of the points around the circumference of the Ellipse,
- * based on the given quantity or stepRate values.
- *
- * @function Phaser.Geom.Ellipse.GetPoints
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Point[]} O - [out,$return]
- *
- * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to get the points from.
- * @param {number} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
- * @param {number} [stepRate] - Sets the quantity by getting the circumference of the ellipse and dividing it by the stepRate.
- * @param {(array|Phaser.Geom.Point[])} [out] - An array to insert the points in to. If not provided a new array will be created.
- *
- * @return {(array|Phaser.Geom.Point[])} An array of Point objects pertaining to the points around the circumference of the ellipse.
- */
-var GetPoints = function (ellipse, quantity, stepRate, out)
-{
-    if (out === undefined) { out = []; }
-
-    //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
-    if (!quantity && stepRate > 0)
-    {
-        quantity = Circumference(ellipse) / stepRate;
-    }
-
-    for (var i = 0; i < quantity; i++)
-    {
-        var angle = FromPercent(i / quantity, 0, MATH_CONST.PI2);
-
-        out.push(CircumferencePoint(ellipse, angle));
-    }
-
-    return out;
-};
-
-module.exports = GetPoints;
-
-
-/***/ }),
-/* 677 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * Returns the circumference of the given Ellipse.
- *
- * @function Phaser.Geom.Ellipse.Circumference
- * @since 3.0.0
- *
- * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to get the circumference of.
- *
- * @return {number} The circumference of th Ellipse.
- */
-var Circumference = function (ellipse)
-{
-    var rx = ellipse.width / 2;
-    var ry = ellipse.height / 2;
-    var h = Math.pow((rx - ry), 2) / Math.pow((rx + ry), 2);
-
-    return (Math.PI * (rx + ry)) * (1 + ((3 * h) / (10 + Math.sqrt(4 - (3 * h)))));
-};
-
-module.exports = Circumference;
-
-
-/***/ }),
-/* 678 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Point = __webpack_require__(12);
-
-/**
- * Returns a uniformly distributed random point from anywhere within the given Ellipse.
- *
- * @function Phaser.Geom.Ellipse.Random
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Point} O - [out,$return]
- *
- * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to get a random point from.
- * @param {(Phaser.Geom.Point|object)} [out] - A Point or point-like object to set the random `x` and `y` values in.
- *
- * @return {(Phaser.Geom.Point|object)} A Point object with the random values set in the `x` and `y` properties.
- */
-var Random = function (ellipse, out)
-{
-    if (out === undefined) { out = new Point(); }
-
-    var p = Math.random() * Math.PI * 2;
-    var s = Math.sqrt(Math.random());
-
-    out.x = ellipse.x + ((s * Math.cos(p)) * ellipse.width / 2);
-    out.y = ellipse.y + ((s * Math.sin(p)) * ellipse.height / 2);
-
-    return out;
-};
-
-module.exports = Random;
-
-
-/***/ }),
-/* 679 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var renderWebGL = __webpack_require__(3);
-var renderCanvas = __webpack_require__(3);
+var renderWebGL = __webpack_require__(4);
+var renderCanvas = __webpack_require__(4);
 
 if (true)
 {
-    renderWebGL = __webpack_require__(680);
+    renderWebGL = __webpack_require__(726);
 
     //  Needed for Graphics.generateTexture
-    renderCanvas = __webpack_require__(246);
+    renderCanvas = __webpack_require__(277);
 }
 
 if (true)
 {
-    renderCanvas = __webpack_require__(246);
+    renderCanvas = __webpack_require__(277);
 }
 
 module.exports = {
@@ -101238,7 +105525,7 @@ module.exports = {
 
 
 /***/ }),
-/* 680 */
+/* 726 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -101247,10 +105534,10 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Commands = __webpack_require__(99);
-var GetCalcMatrix = __webpack_require__(245);
-var TransformMatrix = __webpack_require__(19);
-var Utils = __webpack_require__(34);
+var Commands = __webpack_require__(118);
+var GetCalcMatrix = __webpack_require__(276);
+var TransformMatrix = __webpack_require__(22);
+var Utils = __webpack_require__(35);
 
 var Point = function (x, y, width)
 {
@@ -101593,7 +105880,7 @@ module.exports = GraphicsWebGLRenderer;
 
 
 /***/ }),
-/* 681 */
+/* 727 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -101602,17 +105889,17 @@ module.exports = GraphicsWebGLRenderer;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var renderWebGL = __webpack_require__(3);
-var renderCanvas = __webpack_require__(3);
+var renderWebGL = __webpack_require__(4);
+var renderCanvas = __webpack_require__(4);
 
 if (true)
 {
-    renderWebGL = __webpack_require__(682);
+    renderWebGL = __webpack_require__(728);
 }
 
 if (true)
 {
-    renderCanvas = __webpack_require__(683);
+    renderCanvas = __webpack_require__(729);
 }
 
 module.exports = {
@@ -101624,7 +105911,7 @@ module.exports = {
 
 
 /***/ }),
-/* 682 */
+/* 728 */
 /***/ (function(module, exports) {
 
 /**
@@ -101658,7 +105945,7 @@ module.exports = ImageWebGLRenderer;
 
 
 /***/ }),
-/* 683 */
+/* 729 */
 /***/ (function(module, exports) {
 
 /**
@@ -101692,7 +105979,7 @@ module.exports = ImageCanvasRenderer;
 
 
 /***/ }),
-/* 684 */
+/* 730 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -101701,17 +105988,17 @@ module.exports = ImageCanvasRenderer;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var renderWebGL = __webpack_require__(3);
-var renderCanvas = __webpack_require__(3);
+var renderWebGL = __webpack_require__(4);
+var renderCanvas = __webpack_require__(4);
 
 if (true)
 {
-    renderWebGL = __webpack_require__(685);
+    renderWebGL = __webpack_require__(731);
 }
 
 if (true)
 {
-    renderCanvas = __webpack_require__(686);
+    renderCanvas = __webpack_require__(732);
 }
 
 module.exports = {
@@ -101723,7 +106010,7 @@ module.exports = {
 
 
 /***/ }),
-/* 685 */
+/* 731 */
 /***/ (function(module, exports) {
 
 /**
@@ -101846,7 +106133,7 @@ module.exports = LayerWebGLRenderer;
 
 
 /***/ }),
-/* 686 */
+/* 732 */
 /***/ (function(module, exports) {
 
 /**
@@ -101932,7 +106219,7 @@ module.exports = LayerCanvasRenderer;
 
 
 /***/ }),
-/* 687 */
+/* 733 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -101941,17 +106228,17 @@ module.exports = LayerCanvasRenderer;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var renderWebGL = __webpack_require__(3);
-var renderCanvas = __webpack_require__(3);
+var renderWebGL = __webpack_require__(4);
+var renderCanvas = __webpack_require__(4);
 
 if (true)
 {
-    renderWebGL = __webpack_require__(688);
+    renderWebGL = __webpack_require__(734);
 }
 
 if (true)
 {
-    renderCanvas = __webpack_require__(689);
+    renderCanvas = __webpack_require__(735);
 }
 
 module.exports = {
@@ -101963,7 +106250,7 @@ module.exports = {
 
 
 /***/ }),
-/* 688 */
+/* 734 */
 /***/ (function(module, exports) {
 
 /**
@@ -101997,7 +106284,7 @@ module.exports = SpriteWebGLRenderer;
 
 
 /***/ }),
-/* 689 */
+/* 735 */
 /***/ (function(module, exports) {
 
 /**
@@ -102031,7 +106318,7 @@ module.exports = SpriteCanvasRenderer;
 
 
 /***/ }),
-/* 690 */
+/* 736 */
 /***/ (function(module, exports) {
 
 /**
@@ -102113,7 +106400,7 @@ module.exports = GetTextSize;
 
 
 /***/ }),
-/* 691 */
+/* 737 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -102122,17 +106409,17 @@ module.exports = GetTextSize;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var renderWebGL = __webpack_require__(3);
-var renderCanvas = __webpack_require__(3);
+var renderWebGL = __webpack_require__(4);
+var renderCanvas = __webpack_require__(4);
 
 if (true)
 {
-    renderWebGL = __webpack_require__(692);
+    renderWebGL = __webpack_require__(738);
 }
 
 if (true)
 {
-    renderCanvas = __webpack_require__(693);
+    renderCanvas = __webpack_require__(739);
 }
 
 module.exports = {
@@ -102144,7 +106431,7 @@ module.exports = {
 
 
 /***/ }),
-/* 692 */
+/* 738 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -102153,7 +106440,7 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Utils = __webpack_require__(34);
+var Utils = __webpack_require__(35);
 
 /**
  * Renders this Game Object with the WebGL Renderer to the given Camera.
@@ -102219,7 +106506,7 @@ module.exports = TextWebGLRenderer;
 
 
 /***/ }),
-/* 693 */
+/* 739 */
 /***/ (function(module, exports) {
 
 /**
@@ -102258,7 +106545,7 @@ module.exports = TextCanvasRenderer;
 
 
 /***/ }),
-/* 694 */
+/* 740 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -102268,9 +106555,9 @@ module.exports = TextCanvasRenderer;
  */
 
 var Class = __webpack_require__(0);
-var GetAdvancedValue = __webpack_require__(18);
-var GetValue = __webpack_require__(4);
-var MeasureText = __webpack_require__(695);
+var GetAdvancedValue = __webpack_require__(20);
+var GetValue = __webpack_require__(5);
+var MeasureText = __webpack_require__(741);
 
 //  Key: [ Object Key, Default Value ]
 
@@ -103364,7 +107651,7 @@ module.exports = TextStyle;
 
 
 /***/ }),
-/* 695 */
+/* 741 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -103373,7 +107660,7 @@ module.exports = TextStyle;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CanvasPool = __webpack_require__(17);
+var CanvasPool = __webpack_require__(18);
 
 /**
  * Calculates the ascent, descent and fontSize of a given font style.
@@ -103512,7 +107799,7 @@ module.exports = MeasureText;
 
 
 /***/ }),
-/* 696 */
+/* 742 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -103521,8 +107808,8 @@ module.exports = MeasureText;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Graphics = __webpack_require__(98);
-var GameObjectFactory = __webpack_require__(26);
+var Graphics = __webpack_require__(117);
+var GameObjectFactory = __webpack_require__(31);
 
 /**
  * Creates a new Graphics Game Object and adds it to the Scene.
@@ -103551,7 +107838,7 @@ GameObjectFactory.register('graphics', function (config)
 
 
 /***/ }),
-/* 697 */
+/* 743 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -103560,8 +107847,8 @@ GameObjectFactory.register('graphics', function (config)
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Image = __webpack_require__(100);
-var GameObjectFactory = __webpack_require__(26);
+var Image = __webpack_require__(120);
+var GameObjectFactory = __webpack_require__(31);
 
 /**
  * Creates a new Image Game Object and adds it to the Scene.
@@ -103593,7 +107880,7 @@ GameObjectFactory.register('image', function (x, y, key, frame)
 
 
 /***/ }),
-/* 698 */
+/* 744 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -103602,8 +107889,8 @@ GameObjectFactory.register('image', function (x, y, key, frame)
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Layer = __webpack_require__(101);
-var GameObjectFactory = __webpack_require__(26);
+var Layer = __webpack_require__(121);
+var GameObjectFactory = __webpack_require__(31);
 
 /**
  * Creates a new Layer Game Object and adds it to the Scene.
@@ -103624,7 +107911,7 @@ GameObjectFactory.register('layer', function (children)
 
 
 /***/ }),
-/* 699 */
+/* 745 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -103633,8 +107920,8 @@ GameObjectFactory.register('layer', function (children)
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GameObjectFactory = __webpack_require__(26);
-var Sprite = __webpack_require__(102);
+var GameObjectFactory = __webpack_require__(31);
+var Sprite = __webpack_require__(122);
 
 /**
  * Creates a new Sprite Game Object and adds it to the Scene.
@@ -103670,7 +107957,7 @@ GameObjectFactory.register('sprite', function (x, y, key, frame)
 
 
 /***/ }),
-/* 700 */
+/* 746 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -103679,8 +107966,8 @@ GameObjectFactory.register('sprite', function (x, y, key, frame)
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Text = __webpack_require__(103);
-var GameObjectFactory = __webpack_require__(26);
+var Text = __webpack_require__(123);
+var GameObjectFactory = __webpack_require__(31);
 
 /**
  * Creates a new Text Game Object and adds it to the Scene.
@@ -103735,7 +108022,7 @@ GameObjectFactory.register('text', function (x, y, text, style)
 
 
 /***/ }),
-/* 701 */
+/* 747 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -103744,8 +108031,8 @@ GameObjectFactory.register('text', function (x, y, text, style)
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GameObjectCreator = __webpack_require__(25);
-var Graphics = __webpack_require__(98);
+var GameObjectCreator = __webpack_require__(30);
+var Graphics = __webpack_require__(117);
 
 /**
  * Creates a new Graphics Game Object and returns it.
@@ -103783,7 +108070,7 @@ GameObjectCreator.register('graphics', function (config, addToScene)
 
 
 /***/ }),
-/* 702 */
+/* 748 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -103792,10 +108079,10 @@ GameObjectCreator.register('graphics', function (config, addToScene)
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BuildGameObject = __webpack_require__(50);
-var GameObjectCreator = __webpack_require__(25);
-var GetAdvancedValue = __webpack_require__(18);
-var Image = __webpack_require__(100);
+var BuildGameObject = __webpack_require__(60);
+var GameObjectCreator = __webpack_require__(30);
+var GetAdvancedValue = __webpack_require__(20);
+var Image = __webpack_require__(120);
 
 /**
  * Creates a new Image Game Object and returns it.
@@ -103833,7 +108120,7 @@ GameObjectCreator.register('image', function (config, addToScene)
 
 
 /***/ }),
-/* 703 */
+/* 749 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -103842,10 +108129,10 @@ GameObjectCreator.register('image', function (config, addToScene)
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BuildGameObject = __webpack_require__(50);
-var Layer = __webpack_require__(101);
-var GameObjectCreator = __webpack_require__(25);
-var GetAdvancedValue = __webpack_require__(18);
+var BuildGameObject = __webpack_require__(60);
+var Layer = __webpack_require__(121);
+var GameObjectCreator = __webpack_require__(30);
+var GetAdvancedValue = __webpack_require__(20);
 
 /**
  * Creates a new Layer Game Object and returns it.
@@ -103880,7 +108167,7 @@ GameObjectCreator.register('layer', function (config, addToScene)
 
 
 /***/ }),
-/* 704 */
+/* 750 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -103889,11 +108176,11 @@ GameObjectCreator.register('layer', function (config, addToScene)
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BuildGameObject = __webpack_require__(50);
-var BuildGameObjectAnimation = __webpack_require__(241);
-var GameObjectCreator = __webpack_require__(25);
-var GetAdvancedValue = __webpack_require__(18);
-var Sprite = __webpack_require__(102);
+var BuildGameObject = __webpack_require__(60);
+var BuildGameObjectAnimation = __webpack_require__(271);
+var GameObjectCreator = __webpack_require__(30);
+var GetAdvancedValue = __webpack_require__(20);
+var Sprite = __webpack_require__(122);
 
 /**
  * Creates a new Sprite Game Object and returns it.
@@ -103933,7 +108220,7 @@ GameObjectCreator.register('sprite', function (config, addToScene)
 
 
 /***/ }),
-/* 705 */
+/* 751 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -103942,10 +108229,10 @@ GameObjectCreator.register('sprite', function (config, addToScene)
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var BuildGameObject = __webpack_require__(50);
-var GameObjectCreator = __webpack_require__(25);
-var GetAdvancedValue = __webpack_require__(18);
-var Text = __webpack_require__(103);
+var BuildGameObject = __webpack_require__(60);
+var GameObjectCreator = __webpack_require__(30);
+var GetAdvancedValue = __webpack_require__(20);
+var Text = __webpack_require__(123);
 
 /**
  * Creates a new Text Game Object and returns it.
@@ -104020,7 +108307,7 @@ GameObjectCreator.register('text', function (config, addToScene)
 
 
 /***/ }),
-/* 706 */
+/* 752 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -104029,7 +108316,6513 @@ GameObjectCreator.register('text', function (config, addToScene)
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = __webpack_require__(92);
+var CONST = __webpack_require__(21);
+var Extend = __webpack_require__(14);
+
+/**
+ * @namespace Phaser.Geom
+ */
+
+var Geom = {
+
+    Circle: __webpack_require__(753),
+    Ellipse: __webpack_require__(763),
+    Intersects: __webpack_require__(773),
+    Line: __webpack_require__(784),
+    Mesh: __webpack_require__(807),
+    Point: __webpack_require__(814),
+    Polygon: __webpack_require__(828),
+    Rectangle: __webpack_require__(837),
+    Triangle: __webpack_require__(867)
+
+};
+
+//   Merge in the consts
+Geom = Extend(false, Geom, CONST);
+
+module.exports = Geom;
+
+
+/***/ }),
+/* 753 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Circle = __webpack_require__(84);
+
+Circle.Area = __webpack_require__(754);
+Circle.Circumference = __webpack_require__(281);
+Circle.CircumferencePoint = __webpack_require__(124);
+Circle.Clone = __webpack_require__(755);
+Circle.Contains = __webpack_require__(41);
+Circle.ContainsPoint = __webpack_require__(756);
+Circle.ContainsRect = __webpack_require__(757);
+Circle.CopyFrom = __webpack_require__(758);
+Circle.Equals = __webpack_require__(759);
+Circle.GetBounds = __webpack_require__(760);
+Circle.GetPoint = __webpack_require__(279);
+Circle.GetPoints = __webpack_require__(280);
+Circle.Offset = __webpack_require__(761);
+Circle.OffsetPoint = __webpack_require__(762);
+Circle.Random = __webpack_require__(282);
+
+module.exports = Circle;
+
+
+/***/ }),
+/* 754 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Calculates the area of the circle.
+ *
+ * @function Phaser.Geom.Circle.Area
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Circle} circle - The Circle to get the area of.
+ *
+ * @return {number} The area of the Circle.
+ */
+var Area = function (circle)
+{
+    return (circle.radius > 0) ? Math.PI * circle.radius * circle.radius : 0;
+};
+
+module.exports = Area;
+
+
+/***/ }),
+/* 755 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Circle = __webpack_require__(84);
+
+/**
+ * Creates a new Circle instance based on the values contained in the given source.
+ *
+ * @function Phaser.Geom.Circle.Clone
+ * @since 3.0.0
+ *
+ * @param {(Phaser.Geom.Circle|object)} source - The Circle to be cloned. Can be an instance of a Circle or a circle-like object, with x, y and radius properties.
+ *
+ * @return {Phaser.Geom.Circle} A clone of the source Circle.
+ */
+var Clone = function (source)
+{
+    return new Circle(source.x, source.y, source.radius);
+};
+
+module.exports = Clone;
+
+
+/***/ }),
+/* 756 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Contains = __webpack_require__(41);
+
+/**
+ * Check to see if the Circle contains the given Point object.
+ *
+ * @function Phaser.Geom.Circle.ContainsPoint
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Circle} circle - The Circle to check.
+ * @param {(Phaser.Geom.Point|object)} point - The Point object to check if it's within the Circle or not.
+ *
+ * @return {boolean} True if the Point coordinates are within the circle, otherwise false.
+ */
+var ContainsPoint = function (circle, point)
+{
+    return Contains(circle, point.x, point.y);
+};
+
+module.exports = ContainsPoint;
+
+
+/***/ }),
+/* 757 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Contains = __webpack_require__(41);
+
+/**
+ * Check to see if the Circle contains all four points of the given Rectangle object.
+ *
+ * @function Phaser.Geom.Circle.ContainsRect
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Circle} circle - The Circle to check.
+ * @param {(Phaser.Geom.Rectangle|object)} rect - The Rectangle object to check if it's within the Circle or not.
+ *
+ * @return {boolean} True if all of the Rectangle coordinates are within the circle, otherwise false.
+ */
+var ContainsRect = function (circle, rect)
+{
+    return (
+        Contains(circle, rect.x, rect.y) &&
+        Contains(circle, rect.right, rect.y) &&
+        Contains(circle, rect.x, rect.bottom) &&
+        Contains(circle, rect.right, rect.bottom)
+    );
+};
+
+module.exports = ContainsRect;
+
+
+/***/ }),
+/* 758 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Copies the `x`, `y` and `radius` properties from the `source` Circle
+ * into the given `dest` Circle, then returns the `dest` Circle.
+ *
+ * @function Phaser.Geom.Circle.CopyFrom
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Circle} O - [dest,$return]
+ *
+ * @param {Phaser.Geom.Circle} source - The source Circle to copy the values from.
+ * @param {Phaser.Geom.Circle} dest - The destination Circle to copy the values to.
+ *
+ * @return {Phaser.Geom.Circle} The destination Circle.
+ */
+var CopyFrom = function (source, dest)
+{
+    return dest.setTo(source.x, source.y, source.radius);
+};
+
+module.exports = CopyFrom;
+
+
+/***/ }),
+/* 759 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Compares the `x`, `y` and `radius` properties of the two given Circles.
+ * Returns `true` if they all match, otherwise returns `false`.
+ *
+ * @function Phaser.Geom.Circle.Equals
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Circle} circle - The first Circle to compare.
+ * @param {Phaser.Geom.Circle} toCompare - The second Circle to compare.
+ *
+ * @return {boolean} `true` if the two Circles equal each other, otherwise `false`.
+ */
+var Equals = function (circle, toCompare)
+{
+    return (
+        circle.x === toCompare.x &&
+        circle.y === toCompare.y &&
+        circle.radius === toCompare.radius
+    );
+};
+
+module.exports = Equals;
+
+
+/***/ }),
+/* 760 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Rectangle = __webpack_require__(10);
+
+/**
+ * Returns the bounds of the Circle object.
+ *
+ * @function Phaser.Geom.Circle.GetBounds
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Circle} circle - The Circle to get the bounds from.
+ * @param {(Phaser.Geom.Rectangle|object)} [out] - A Rectangle, or rectangle-like object, to store the circle bounds in. If not given a new Rectangle will be created.
+ *
+ * @return {(Phaser.Geom.Rectangle|object)} The Rectangle object containing the Circles bounds.
+ */
+var GetBounds = function (circle, out)
+{
+    if (out === undefined) { out = new Rectangle(); }
+
+    out.x = circle.left;
+    out.y = circle.top;
+    out.width = circle.diameter;
+    out.height = circle.diameter;
+
+    return out;
+};
+
+module.exports = GetBounds;
+
+
+/***/ }),
+/* 761 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Offsets the Circle by the values given.
+ *
+ * @function Phaser.Geom.Circle.Offset
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Circle} O - [circle,$return]
+ *
+ * @param {Phaser.Geom.Circle} circle - The Circle to be offset (translated.)
+ * @param {number} x - The amount to horizontally offset the Circle by.
+ * @param {number} y - The amount to vertically offset the Circle by.
+ *
+ * @return {Phaser.Geom.Circle} The Circle that was offset.
+ */
+var Offset = function (circle, x, y)
+{
+    circle.x += x;
+    circle.y += y;
+
+    return circle;
+};
+
+module.exports = Offset;
+
+
+/***/ }),
+/* 762 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Offsets the Circle by the values given in the `x` and `y` properties of the Point object.
+ *
+ * @function Phaser.Geom.Circle.OffsetPoint
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Circle} O - [circle,$return]
+ *
+ * @param {Phaser.Geom.Circle} circle - The Circle to be offset (translated.)
+ * @param {(Phaser.Geom.Point|object)} point - The Point object containing the values to offset the Circle by.
+ *
+ * @return {Phaser.Geom.Circle} The Circle that was offset.
+ */
+var OffsetPoint = function (circle, point)
+{
+    circle.x += point.x;
+    circle.y += point.y;
+
+    return circle;
+};
+
+module.exports = OffsetPoint;
+
+
+/***/ }),
+/* 763 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Ellipse = __webpack_require__(83);
+
+Ellipse.Area = __webpack_require__(764);
+Ellipse.Circumference = __webpack_require__(274);
+Ellipse.CircumferencePoint = __webpack_require__(119);
+Ellipse.Clone = __webpack_require__(765);
+Ellipse.Contains = __webpack_require__(62);
+Ellipse.ContainsPoint = __webpack_require__(766);
+Ellipse.ContainsRect = __webpack_require__(767);
+Ellipse.CopyFrom = __webpack_require__(768);
+Ellipse.Equals = __webpack_require__(769);
+Ellipse.GetBounds = __webpack_require__(770);
+Ellipse.GetPoint = __webpack_require__(272);
+Ellipse.GetPoints = __webpack_require__(273);
+Ellipse.Offset = __webpack_require__(771);
+Ellipse.OffsetPoint = __webpack_require__(772);
+Ellipse.Random = __webpack_require__(275);
+
+module.exports = Ellipse;
+
+
+/***/ }),
+/* 764 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Calculates the area of the Ellipse.
+ *
+ * @function Phaser.Geom.Ellipse.Area
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to get the area of.
+ *
+ * @return {number} The area of the Ellipse.
+ */
+var Area = function (ellipse)
+{
+    if (ellipse.isEmpty())
+    {
+        return 0;
+    }
+
+    //  units squared
+    return (ellipse.getMajorRadius() * ellipse.getMinorRadius() * Math.PI);
+};
+
+module.exports = Area;
+
+
+/***/ }),
+/* 765 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Ellipse = __webpack_require__(83);
+
+/**
+ * Creates a new Ellipse instance based on the values contained in the given source.
+ *
+ * @function Phaser.Geom.Ellipse.Clone
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Ellipse} source - The Ellipse to be cloned. Can be an instance of an Ellipse or a ellipse-like object, with x, y, width and height properties.
+ *
+ * @return {Phaser.Geom.Ellipse} A clone of the source Ellipse.
+ */
+var Clone = function (source)
+{
+    return new Ellipse(source.x, source.y, source.width, source.height);
+};
+
+module.exports = Clone;
+
+
+/***/ }),
+/* 766 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Contains = __webpack_require__(62);
+
+/**
+ * Check to see if the Ellipse contains the given Point object.
+ *
+ * @function Phaser.Geom.Ellipse.ContainsPoint
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to check.
+ * @param {(Phaser.Geom.Point|object)} point - The Point object to check if it's within the Circle or not.
+ *
+ * @return {boolean} True if the Point coordinates are within the circle, otherwise false.
+ */
+var ContainsPoint = function (ellipse, point)
+{
+    return Contains(ellipse, point.x, point.y);
+};
+
+module.exports = ContainsPoint;
+
+
+/***/ }),
+/* 767 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Contains = __webpack_require__(62);
+
+/**
+ * Check to see if the Ellipse contains all four points of the given Rectangle object.
+ *
+ * @function Phaser.Geom.Ellipse.ContainsRect
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to check.
+ * @param {(Phaser.Geom.Rectangle|object)} rect - The Rectangle object to check if it's within the Ellipse or not.
+ *
+ * @return {boolean} True if all of the Rectangle coordinates are within the ellipse, otherwise false.
+ */
+var ContainsRect = function (ellipse, rect)
+{
+    return (
+        Contains(ellipse, rect.x, rect.y) &&
+        Contains(ellipse, rect.right, rect.y) &&
+        Contains(ellipse, rect.x, rect.bottom) &&
+        Contains(ellipse, rect.right, rect.bottom)
+    );
+};
+
+module.exports = ContainsRect;
+
+
+/***/ }),
+/* 768 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Copies the `x`, `y`, `width` and `height` properties from the `source` Ellipse
+ * into the given `dest` Ellipse, then returns the `dest` Ellipse.
+ *
+ * @function Phaser.Geom.Ellipse.CopyFrom
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Ellipse} O - [dest,$return]
+ *
+ * @param {Phaser.Geom.Ellipse} source - The source Ellipse to copy the values from.
+ * @param {Phaser.Geom.Ellipse} dest - The destination Ellipse to copy the values to.
+ *
+ * @return {Phaser.Geom.Ellipse} The destination Ellipse.
+ */
+var CopyFrom = function (source, dest)
+{
+    return dest.setTo(source.x, source.y, source.width, source.height);
+};
+
+module.exports = CopyFrom;
+
+
+/***/ }),
+/* 769 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Compares the `x`, `y`, `width` and `height` properties of the two given Ellipses.
+ * Returns `true` if they all match, otherwise returns `false`.
+ *
+ * @function Phaser.Geom.Ellipse.Equals
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Ellipse} ellipse - The first Ellipse to compare.
+ * @param {Phaser.Geom.Ellipse} toCompare - The second Ellipse to compare.
+ *
+ * @return {boolean} `true` if the two Ellipse equal each other, otherwise `false`.
+ */
+var Equals = function (ellipse, toCompare)
+{
+    return (
+        ellipse.x === toCompare.x &&
+        ellipse.y === toCompare.y &&
+        ellipse.width === toCompare.width &&
+        ellipse.height === toCompare.height
+    );
+};
+
+module.exports = Equals;
+
+
+/***/ }),
+/* 770 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Rectangle = __webpack_require__(10);
+
+/**
+ * Returns the bounds of the Ellipse object.
+ *
+ * @function Phaser.Geom.Ellipse.GetBounds
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to get the bounds from.
+ * @param {(Phaser.Geom.Rectangle|object)} [out] - A Rectangle, or rectangle-like object, to store the ellipse bounds in. If not given a new Rectangle will be created.
+ *
+ * @return {(Phaser.Geom.Rectangle|object)} The Rectangle object containing the Ellipse bounds.
+ */
+var GetBounds = function (ellipse, out)
+{
+    if (out === undefined) { out = new Rectangle(); }
+
+    out.x = ellipse.left;
+    out.y = ellipse.top;
+    out.width = ellipse.width;
+    out.height = ellipse.height;
+
+    return out;
+};
+
+module.exports = GetBounds;
+
+
+/***/ }),
+/* 771 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Offsets the Ellipse by the values given.
+ *
+ * @function Phaser.Geom.Ellipse.Offset
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Ellipse} O - [ellipse,$return]
+ *
+ * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to be offset (translated.)
+ * @param {number} x - The amount to horizontally offset the Ellipse by.
+ * @param {number} y - The amount to vertically offset the Ellipse by.
+ *
+ * @return {Phaser.Geom.Ellipse} The Ellipse that was offset.
+ */
+var Offset = function (ellipse, x, y)
+{
+    ellipse.x += x;
+    ellipse.y += y;
+
+    return ellipse;
+};
+
+module.exports = Offset;
+
+
+/***/ }),
+/* 772 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Offsets the Ellipse by the values given in the `x` and `y` properties of the Point object.
+ *
+ * @function Phaser.Geom.Ellipse.OffsetPoint
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Ellipse} O - [ellipse,$return]
+ *
+ * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to be offset (translated.)
+ * @param {(Phaser.Geom.Point|object)} point - The Point object containing the values to offset the Ellipse by.
+ *
+ * @return {Phaser.Geom.Ellipse} The Ellipse that was offset.
+ */
+var OffsetPoint = function (ellipse, point)
+{
+    ellipse.x += point.x;
+    ellipse.y += point.y;
+
+    return ellipse;
+};
+
+module.exports = OffsetPoint;
+
+
+/***/ }),
+/* 773 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * @namespace Phaser.Geom.Intersects
+ */
+
+module.exports = {
+
+    CircleToCircle: __webpack_require__(283),
+    CircleToRectangle: __webpack_require__(284),
+    GetCircleToCircle: __webpack_require__(774),
+    GetCircleToRectangle: __webpack_require__(775),
+    GetLineToCircle: __webpack_require__(125),
+    GetLineToLine: __webpack_require__(285),
+    GetLineToPoints: __webpack_require__(286),
+    GetLineToPolygon: __webpack_require__(287),
+    GetLineToRectangle: __webpack_require__(127),
+    GetRaysFromPointToPolygon: __webpack_require__(776),
+    GetRectangleIntersection: __webpack_require__(777),
+    GetRectangleToRectangle: __webpack_require__(778),
+    GetRectangleToTriangle: __webpack_require__(779),
+    GetTriangleToCircle: __webpack_require__(780),
+    GetTriangleToLine: __webpack_require__(292),
+    GetTriangleToTriangle: __webpack_require__(781),
+    LineToCircle: __webpack_require__(126),
+    LineToLine: __webpack_require__(42),
+    LineToRectangle: __webpack_require__(288),
+    PointToLine: __webpack_require__(296),
+    PointToLineSegment: __webpack_require__(782),
+    RectangleToRectangle: __webpack_require__(63),
+    RectangleToTriangle: __webpack_require__(289),
+    RectangleToValues: __webpack_require__(783),
+    TriangleToCircle: __webpack_require__(291),
+    TriangleToLine: __webpack_require__(293),
+    TriangleToTriangle: __webpack_require__(294)
+
+};
+
+
+/***/ }),
+/* 774 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Florian Vazelle
+ * @author       Geoffrey Glaive
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+var CircleToCircle = __webpack_require__(283);
+
+/**
+ * Checks if two Circles intersect and returns the intersection points as a Point object array.
+ *
+ * @function Phaser.Geom.Intersects.GetCircleToCircle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Circle} circleA - The first Circle to check for intersection.
+ * @param {Phaser.Geom.Circle} circleB - The second Circle to check for intersection.
+ * @param {array} [out] - An optional array in which to store the points of intersection.
+ *
+ * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
+ */
+var GetCircleToCircle = function (circleA, circleB, out)
+{
+    if (out === undefined) { out = []; }
+
+    if (CircleToCircle(circleA, circleB))
+    {
+        var x0 = circleA.x;
+        var y0 = circleA.y;
+        var r0 = circleA.radius;
+
+        var x1 = circleB.x;
+        var y1 = circleB.y;
+        var r1 = circleB.radius;
+
+        var coefficientA, coefficientB, coefficientC, lambda, x;
+
+        if (y0 === y1)
+        {
+            x = ((r1 * r1) - (r0 * r0) - (x1 * x1) + (x0 * x0)) / (2 * (x0 - x1));
+
+            coefficientA = 1;
+            coefficientB = -2 * y1;
+            coefficientC = (x1 * x1) + (x * x) - (2 * x1 * x) + (y1 * y1) - (r1 * r1);
+
+            lambda = (coefficientB * coefficientB) - (4 * coefficientA * coefficientC);
+
+            if (lambda === 0)
+            {
+                out.push(new Point(x, (-coefficientB / (2 * coefficientA))));
+            }
+            else if (lambda > 0)
+            {
+                out.push(new Point(x, (-coefficientB + Math.sqrt(lambda)) / (2 * coefficientA)));
+                out.push(new Point(x, (-coefficientB - Math.sqrt(lambda)) / (2 * coefficientA)));
+            }
+        }
+        else
+        {
+            var v1 = (x0 - x1) / (y0 - y1);
+            var n = (r1 * r1 - r0 * r0 - x1 * x1 + x0 * x0 - y1 * y1 + y0 * y0) / (2 * (y0 - y1));
+
+            coefficientA = (v1 * v1) + 1;
+            coefficientB = (2 * y0 * v1) - (2 * n * v1) - (2 * x0);
+            coefficientC = (x0 * x0) + (y0 * y0) + (n * n) - (r0 * r0) - (2 * y0 * n);
+
+            lambda = (coefficientB * coefficientB) - (4 * coefficientA * coefficientC);
+
+            if (lambda === 0)
+            {
+                x = (-coefficientB / (2 * coefficientA));
+                out.push(new Point(x, (n - (x * v1))));
+            }
+            else if (lambda > 0)
+            {
+                x = (-coefficientB + Math.sqrt(lambda)) / (2 * coefficientA);
+                out.push(new Point(x, (n - (x * v1))));
+                x = (-coefficientB - Math.sqrt(lambda)) / (2 * coefficientA);
+                out.push(new Point(x, (n - (x * v1))));
+            }
+        }
+    }
+
+    return out;
+};
+
+module.exports = GetCircleToCircle;
+
+
+/***/ }),
+/* 775 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Florian Vazelle
+ * @author       Geoffrey Glaive
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var GetLineToCircle = __webpack_require__(125);
+var CircleToRectangle = __webpack_require__(284);
+
+/**
+ * Checks for intersection between a circle and a rectangle,
+ * and returns the intersection points as a Point object array.
+ *
+ * @function Phaser.Geom.Intersects.GetCircleToRectangle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Circle} circle - The circle to be checked.
+ * @param {Phaser.Geom.Rectangle} rect - The rectangle to be checked.
+ * @param {array} [out] - An optional array in which to store the points of intersection.
+ *
+ * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
+ */
+var GetCircleToRectangle = function (circle, rect, out)
+{
+    if (out === undefined) { out = []; }
+
+    if (CircleToRectangle(circle, rect))
+    {
+        var lineA = rect.getLineA();
+        var lineB = rect.getLineB();
+        var lineC = rect.getLineC();
+        var lineD = rect.getLineD();
+
+        GetLineToCircle(lineA, circle, out);
+        GetLineToCircle(lineB, circle, out);
+        GetLineToCircle(lineC, circle, out);
+        GetLineToCircle(lineD, circle, out);
+    }
+
+    return out;
+};
+
+module.exports = GetCircleToRectangle;
+
+
+/***/ }),
+/* 776 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Vector4 = __webpack_require__(106);
+var GetLineToPolygon = __webpack_require__(287);
+var Line = __webpack_require__(26);
+
+//  Temp calculation segment
+var segment = new Line();
+
+/**
+ * @ignore
+ */
+function CheckIntersects (angle, x, y, polygons, intersects)
+{
+    var dx = Math.cos(angle);
+    var dy = Math.sin(angle);
+
+    segment.setTo(x, y, x + dx, y + dy);
+
+    var closestIntersect = GetLineToPolygon(segment, polygons);
+
+    if (closestIntersect)
+    {
+        intersects.push(new Vector4(closestIntersect.x, closestIntersect.y, angle, closestIntersect.w));
+    }
+}
+
+/**
+ * @ignore
+ */
+function SortIntersects (a, b)
+{
+    return a.z - b.z;
+}
+
+/**
+ * Projects rays out from the given point to each line segment of the polygons.
+ *
+ * If the rays intersect with the polygons, the points of intersection are returned in an array.
+ *
+ * If no intersections are found, the returned array will be empty.
+ *
+ * Each Vector4 intersection result has the following properties:
+ *
+ * The `x` and `y` components contain the point of the intersection.
+ * The `z` component contains the angle of intersection.
+ * The `w` component contains the index of the polygon, in the given array, that triggered the intersection.
+ *
+ * @function Phaser.Geom.Intersects.GetRaysFromPointToPolygon
+ * @since 3.50.0
+ *
+ * @param {number} x - The x coordinate to project the rays from.
+ * @param {number} y - The y coordinate to project the rays from.
+ * @param {Phaser.Geom.Polygon | Phaser.Geom.Polygon[]} polygons - A single polygon, or array of polygons, to check against the rays.
+ *
+ * @return {Phaser.Math.Vector4[]} An array containing all intersections in Vector4s.
+ */
+var GetRaysFromPointToPolygon = function (x, y, polygons)
+{
+    if (!Array.isArray(polygons))
+    {
+        polygons = [ polygons ];
+    }
+
+    var intersects = [];
+    var angles = [];
+
+    for (var i = 0; i < polygons.length; i++)
+    {
+        var points = polygons[i].points;
+
+        for (var p = 0; p < points.length; p++)
+        {
+            var angle = Math.atan2(points[p].y - y, points[p].x - x);
+
+            if (angles.indexOf(angle) === -1)
+            {
+                //  +- 0.00001 rads to catch lines behind segment corners
+
+                CheckIntersects(angle, x, y, polygons, intersects);
+                CheckIntersects(angle - 0.00001, x, y, polygons, intersects);
+                CheckIntersects(angle + 0.00001, x, y, polygons, intersects);
+
+                angles.push(angle);
+            }
+        }
+    }
+
+    return intersects.sort(SortIntersects);
+};
+
+module.exports = GetRaysFromPointToPolygon;
+
+
+/***/ }),
+/* 777 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Rectangle = __webpack_require__(10);
+var RectangleToRectangle = __webpack_require__(63);
+
+/**
+ * Checks if two Rectangle shapes intersect and returns the area of this intersection as Rectangle object.
+ * 
+ * If optional `output` parameter is omitted, new Rectangle object is created and returned. If there is intersection, it will contain intersection area. If there is no intersection, it wil be empty Rectangle (all values set to zero).
+ * 
+ * If Rectangle object is passed as `output` and there is intersection, then intersection area data will be loaded into it and it will be returned. If there is no intersection, it will be returned without any change.
+ *
+ * @function Phaser.Geom.Intersects.GetRectangleIntersection
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [output,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rectA - The first Rectangle object.
+ * @param {Phaser.Geom.Rectangle} rectB - The second Rectangle object.
+ * @param {Phaser.Geom.Rectangle} [output] - Optional Rectangle object. If given, the intersection data will be loaded into it (in case of no intersection, it will be left unchanged). Otherwise, new Rectangle object will be created and returned with either intersection data or empty (all values set to zero), if there is no intersection.
+ *
+ * @return {Phaser.Geom.Rectangle} A rectangle object with intersection data.
+ */
+var GetRectangleIntersection = function (rectA, rectB, output)
+{
+    if (output === undefined) { output = new Rectangle(); }
+
+    if (RectangleToRectangle(rectA, rectB))
+    {
+        output.x = Math.max(rectA.x, rectB.x);
+        output.y = Math.max(rectA.y, rectB.y);
+        output.width = Math.min(rectA.right, rectB.right) - output.x;
+        output.height = Math.min(rectA.bottom, rectB.bottom) - output.y;
+    }
+
+    return output;
+};
+
+module.exports = GetRectangleIntersection;
+
+
+/***/ }),
+/* 778 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Florian Vazelle
+ * @author       Geoffrey Glaive
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var GetLineToRectangle = __webpack_require__(127);
+var RectangleToRectangle = __webpack_require__(63);
+
+/**
+ * Checks if two Rectangles intersect and returns the intersection points as a Point object array.
+ *
+ * A Rectangle intersects another Rectangle if any part of its bounds is within the other Rectangle's bounds. As such, the two Rectangles are considered "solid". A Rectangle with no width or no height will never intersect another Rectangle.
+ *
+ * @function Phaser.Geom.Intersects.GetRectangleToRectangle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Rectangle} rectA - The first Rectangle to check for intersection.
+ * @param {Phaser.Geom.Rectangle} rectB - The second Rectangle to check for intersection.
+ * @param {array} [out] - An optional array in which to store the points of intersection.
+ *
+ * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
+ */
+var GetRectangleToRectangle = function (rectA, rectB, out)
+{
+    if (out === undefined) { out = []; }
+
+    if (RectangleToRectangle(rectA, rectB))
+    {
+        var lineA = rectA.getLineA();
+        var lineB = rectA.getLineB();
+        var lineC = rectA.getLineC();
+        var lineD = rectA.getLineD();
+
+        GetLineToRectangle(lineA, rectB, out);
+        GetLineToRectangle(lineB, rectB, out);
+        GetLineToRectangle(lineC, rectB, out);
+        GetLineToRectangle(lineD, rectB, out);
+    }
+
+    return out;
+};
+
+module.exports = GetRectangleToRectangle;
+
+
+/***/ }),
+/* 779 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Florian Vazelle
+ * @author       Geoffrey Glaive
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var RectangleToTriangle = __webpack_require__(289);
+var GetLineToRectangle = __webpack_require__(127);
+
+/**
+ * Checks for intersection between Rectangle shape and Triangle shape,
+ * and returns the intersection points as a Point object array.
+ *
+ * @function Phaser.Geom.Intersects.GetRectangleToTriangle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Rectangle} rect - Rectangle object to test.
+ * @param {Phaser.Geom.Triangle} triangle - Triangle object to test.
+ * @param {array} [out] - An optional array in which to store the points of intersection.
+ *
+ * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
+ */
+var GetRectangleToTriangle = function (rect, triangle, out)
+{
+    if (out === undefined) { out = []; }
+
+    if (RectangleToTriangle(rect, triangle))
+    {
+        var lineA = triangle.getLineA();
+        var lineB = triangle.getLineB();
+        var lineC = triangle.getLineC();
+
+        GetLineToRectangle(lineA, rect, out);
+        GetLineToRectangle(lineB, rect, out);
+        GetLineToRectangle(lineC, rect, out);
+    }
+
+    return out;
+};
+
+module.exports = GetRectangleToTriangle;
+
+
+/***/ }),
+/* 780 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Florian Vazelle
+ * @author       Geoffrey Glaive
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var GetLineToCircle = __webpack_require__(125);
+var TriangleToCircle = __webpack_require__(291);
+
+/**
+ * Checks if a Triangle and a Circle intersect, and returns the intersection points as a Point object array.
+ *
+ * A Circle intersects a Triangle if its center is located within it or if any of the Triangle's sides intersect the Circle. As such, the Triangle and the Circle are considered "solid" for the intersection.
+ *
+ * @function Phaser.Geom.Intersects.GetTriangleToCircle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to check for intersection.
+ * @param {Phaser.Geom.Circle} circle - The Circle to check for intersection.
+ * @param {array} [out] - An optional array in which to store the points of intersection.
+ *
+ * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
+ */
+var GetTriangleToCircle = function (triangle, circle, out)
+{
+    if (out === undefined) { out = []; }
+
+    if (TriangleToCircle(triangle, circle))
+    {
+        var lineA = triangle.getLineA();
+        var lineB = triangle.getLineB();
+        var lineC = triangle.getLineC();
+
+        GetLineToCircle(lineA, circle, out);
+        GetLineToCircle(lineB, circle, out);
+        GetLineToCircle(lineC, circle, out);
+    }
+
+    return out;
+};
+
+module.exports = GetTriangleToCircle;
+
+
+/***/ }),
+/* 781 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Florian Vazelle
+ * @author       Geoffrey Glaive
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var TriangleToTriangle = __webpack_require__(294);
+var GetTriangleToLine = __webpack_require__(292);
+
+/**
+ * Checks if two Triangles intersect, and returns the intersection points as a Point object array.
+ *
+ * A Triangle intersects another Triangle if any pair of their lines intersects or if any point of one Triangle is within the other Triangle. Thus, the Triangles are considered "solid".
+ *
+ * @function Phaser.Geom.Intersects.GetTriangleToTriangle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Triangle} triangleA - The first Triangle to check for intersection.
+ * @param {Phaser.Geom.Triangle} triangleB - The second Triangle to check for intersection.
+ * @param {array} [out] - An optional array in which to store the points of intersection.
+ *
+ * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
+ */
+var GetTriangleToTriangle = function (triangleA, triangleB, out)
+{
+    if (out === undefined) { out = []; }
+
+    if (TriangleToTriangle(triangleA, triangleB))
+    {
+        var lineA = triangleB.getLineA();
+        var lineB = triangleB.getLineB();
+        var lineC = triangleB.getLineC();
+
+        GetTriangleToLine(triangleA, lineA, out);
+        GetTriangleToLine(triangleA, lineB, out);
+        GetTriangleToLine(triangleA, lineC, out);
+    }
+
+    return out;
+};
+
+module.exports = GetTriangleToTriangle;
+
+
+/***/ }),
+/* 782 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var PointToLine = __webpack_require__(296);
+
+/**
+ * Checks if a Point is located on the given line segment.
+ *
+ * @function Phaser.Geom.Intersects.PointToLineSegment
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Point} point - The Point to check for intersection.
+ * @param {Phaser.Geom.Line} line - The line segment to check for intersection.
+ *
+ * @return {boolean} `true` if the Point is on the given line segment, otherwise `false`.
+ */
+var PointToLineSegment = function (point, line)
+{
+    if (!PointToLine(point, line))
+    {
+        return false;
+    }
+
+    var xMin = Math.min(line.x1, line.x2);
+    var xMax = Math.max(line.x1, line.x2);
+    var yMin = Math.min(line.y1, line.y2);
+    var yMax = Math.max(line.y1, line.y2);
+
+    return ((point.x >= xMin && point.x <= xMax) && (point.y >= yMin && point.y <= yMax));
+};
+
+module.exports = PointToLineSegment;
+
+
+/***/ }),
+/* 783 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Check if rectangle intersects with values.
+ *
+ * @function Phaser.Geom.Intersects.RectangleToValues
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The rectangle object
+ * @param {number} left - The x coordinate of the left of the Rectangle.
+ * @param {number} right - The x coordinate of the right of the Rectangle.
+ * @param {number} top - The y coordinate of the top of the Rectangle.
+ * @param {number} bottom - The y coordinate of the bottom of the Rectangle.
+ * @param {number} [tolerance=0] - Tolerance allowed in the calculation, expressed in pixels.
+ *
+ * @return {boolean} Returns true if there is an intersection.
+ */
+var RectangleToValues = function (rect, left, right, top, bottom, tolerance)
+{
+    if (tolerance === undefined) { tolerance = 0; }
+
+    return !(
+        left > rect.right + tolerance ||
+        right < rect.left - tolerance ||
+        top > rect.bottom + tolerance ||
+        bottom < rect.top - tolerance
+    );
+};
+
+module.exports = RectangleToValues;
+
+
+/***/ }),
+/* 784 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Line = __webpack_require__(26);
+
+Line.Angle = __webpack_require__(43);
+Line.BresenhamPoints = __webpack_require__(785);
+Line.CenterOn = __webpack_require__(786);
+Line.Clone = __webpack_require__(787);
+Line.CopyFrom = __webpack_require__(788);
+Line.Equals = __webpack_require__(789);
+Line.Extend = __webpack_require__(790);
+Line.GetEasedPoints = __webpack_require__(791);
+Line.GetMidPoint = __webpack_require__(792);
+Line.GetNearestPoint = __webpack_require__(793);
+Line.GetNormal = __webpack_require__(794);
+Line.GetPoint = __webpack_require__(157);
+Line.GetPoints = __webpack_require__(158);
+Line.GetShortestDistance = __webpack_require__(795);
+Line.Height = __webpack_require__(796);
+Line.Length = __webpack_require__(27);
+Line.NormalAngle = __webpack_require__(297);
+Line.NormalX = __webpack_require__(797);
+Line.NormalY = __webpack_require__(798);
+Line.Offset = __webpack_require__(799);
+Line.PerpSlope = __webpack_require__(800);
+Line.Random = __webpack_require__(159);
+Line.ReflectAngle = __webpack_require__(801);
+Line.Rotate = __webpack_require__(802);
+Line.RotateAroundPoint = __webpack_require__(803);
+Line.RotateAroundXY = __webpack_require__(129);
+Line.SetToAngle = __webpack_require__(804);
+Line.Slope = __webpack_require__(805);
+Line.Width = __webpack_require__(806);
+
+module.exports = Line;
+
+
+/***/ }),
+/* 785 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Using Bresenham's line algorithm this will return an array of all coordinates on this line.
+ *
+ * The `start` and `end` points are rounded before this runs as the algorithm works on integers.
+ *
+ * @function Phaser.Geom.Line.BresenhamPoints
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The line.
+ * @param {number} [stepRate=1] - The optional step rate for the points on the line.
+ * @param {Phaser.Types.Math.Vector2Like[]} [results] - An optional array to push the resulting coordinates into.
+ *
+ * @return {Phaser.Types.Math.Vector2Like[]} The array of coordinates on the line.
+ */
+var BresenhamPoints = function (line, stepRate, results)
+{
+    if (stepRate === undefined) { stepRate = 1; }
+    if (results === undefined) { results = []; }
+
+    var x1 = Math.round(line.x1);
+    var y1 = Math.round(line.y1);
+    var x2 = Math.round(line.x2);
+    var y2 = Math.round(line.y2);
+
+    var dx = Math.abs(x2 - x1);
+    var dy = Math.abs(y2 - y1);
+    var sx = (x1 < x2) ? 1 : -1;
+    var sy = (y1 < y2) ? 1 : -1;
+    var err = dx - dy;
+
+    results.push({ x: x1, y: y1 });
+
+    var i = 1;
+
+    while (!((x1 === x2) && (y1 === y2)))
+    {
+        var e2 = err << 1;
+
+        if (e2 > -dy)
+        {
+            err -= dy;
+            x1 += sx;
+        }
+
+        if (e2 < dx)
+        {
+            err += dx;
+            y1 += sy;
+        }
+
+        if (i % stepRate === 0)
+        {
+            results.push({ x: x1, y: y1 });
+        }
+
+        i++;
+    }
+
+    return results;
+};
+
+module.exports = BresenhamPoints;
+
+
+/***/ }),
+/* 786 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+
+/**
+ * Center a line on the given coordinates.
+ *
+ * @function Phaser.Geom.Line.CenterOn
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The line to center.
+ * @param {number} x - The horizontal coordinate to center the line on.
+ * @param {number} y - The vertical coordinate to center the line on.
+ *
+ * @return {Phaser.Geom.Line} The centered line.
+ */
+var CenterOn = function (line, x, y)
+{
+    var tx = x - ((line.x1 + line.x2) / 2);
+    var ty = y - ((line.y1 + line.y2) / 2);
+
+    line.x1 += tx;
+    line.y1 += ty;
+
+    line.x2 += tx;
+    line.y2 += ty;
+
+    return line;
+};
+
+module.exports = CenterOn;
+
+
+/***/ }),
+/* 787 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Line = __webpack_require__(26);
+
+/**
+ * Clone the given line.
+ *
+ * @function Phaser.Geom.Line.Clone
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} source - The source line to clone.
+ *
+ * @return {Phaser.Geom.Line} The cloned line.
+ */
+var Clone = function (source)
+{
+    return new Line(source.x1, source.y1, source.x2, source.y2);
+};
+
+module.exports = Clone;
+
+
+/***/ }),
+/* 788 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Copy the values of one line to a destination line.
+ *
+ * @function Phaser.Geom.Line.CopyFrom
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Line} O - [dest,$return]
+ *
+ * @param {Phaser.Geom.Line} source - The source line to copy the values from.
+ * @param {Phaser.Geom.Line} dest - The destination line to copy the values to.
+ *
+ * @return {Phaser.Geom.Line} The destination line.
+ */
+var CopyFrom = function (source, dest)
+{
+    return dest.setTo(source.x1, source.y1, source.x2, source.y2);
+};
+
+module.exports = CopyFrom;
+
+
+/***/ }),
+/* 789 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Compare two lines for strict equality.
+ *
+ * @function Phaser.Geom.Line.Equals
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The first line to compare.
+ * @param {Phaser.Geom.Line} toCompare - The second line to compare.
+ *
+ * @return {boolean} Whether the two lines are equal.
+ */
+var Equals = function (line, toCompare)
+{
+    return (
+        line.x1 === toCompare.x1 &&
+        line.y1 === toCompare.y1 &&
+        line.x2 === toCompare.x2 &&
+        line.y2 === toCompare.y2
+    );
+};
+
+module.exports = Equals;
+
+
+/***/ }),
+/* 790 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Length = __webpack_require__(27);
+
+/**
+ * Extends the start and end points of a Line by the given amounts.
+ *
+ * The amounts can be positive or negative. Positive points will increase the length of the line,
+ * while negative ones will decrease it.
+ *
+ * If no `right` value is provided it will extend the length of the line equally in both directions.
+ *
+ * Pass a value of zero to leave the start or end point unchanged.
+ *
+ * @function Phaser.Geom.Line.Extend
+ * @since 3.16.0
+ *
+ * @param {Phaser.Geom.Line} line - The line instance to extend.
+ * @param {number} left - The amount to extend the start of the line by.
+ * @param {number} [right] - The amount to extend the end of the line by. If not given it will be set to the `left` value.
+ *
+ * @return {Phaser.Geom.Line} The modified Line instance.
+ */
+var Extend = function (line, left, right)
+{
+    if (right === undefined) { right = left; }
+
+    var length = Length(line);
+
+    var slopX = line.x2 - line.x1;
+    var slopY = line.y2 - line.y1;
+
+    if (left)
+    {
+        line.x1 = line.x1 - slopX / length * left;
+        line.y1 = line.y1 - slopY / length * left;
+    }
+
+    if (right)
+    {
+        line.x2 = line.x2 + slopX / length * right;
+        line.y2 = line.y2 + slopY / length * right;
+    }
+
+    return line;
+};
+
+module.exports = Extend;
+
+
+/***/ }),
+/* 791 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var DistanceBetweenPoints = __webpack_require__(192);
+var GetEaseFunction = __webpack_require__(44);
+var Point = __webpack_require__(2);
+
+/**
+ * Returns an array of `quantity` Points where each point is taken from the given Line,
+ * spaced out according to the ease function specified.
+ * 
+ * ```javascript
+ * const line = new Phaser.Geom.Line(100, 300, 700, 300);
+ * const points = Phaser.Geom.Line.GetEasedPoints(line, 'sine.out', 32)
+ * ```
+ * 
+ * In the above example, the `points` array will contain 32 points spread-out across
+ * the length of `line`, where the position of each point is determined by the `Sine.out`
+ * ease function.
+ * 
+ * You can optionally provide a collinear threshold. In this case, the resulting points
+ * are checked against each other, and if they are `< collinearThreshold` distance apart,
+ * they are dropped from the results. This can help avoid lots of clustered points at
+ * far ends of the line with tightly-packed eases such as Quartic. Leave the value set
+ * to zero to skip this check.
+ * 
+ * Note that if you provide a collinear threshold, the resulting array may not always
+ * contain `quantity` points.
+ *
+ * @function Phaser.Geom.Line.GetEasedPoints
+ * @since 3.23.0
+ *
+ * @generic {Phaser.Geom.Point[]} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Line} line - The Line object.
+ * @param {(string|function)} ease - The ease to use. This can be either a string from the EaseMap, or a custom function.
+ * @param {number} quantity - The number of points to return. Note that if you provide a `collinearThreshold`, the resulting array may not always contain this number of points.
+ * @param {number} [collinearThreshold=0] - An optional threshold. The final array is reduced so that each point is spaced out at least this distance apart. This helps reduce clustering in noisey eases.
+ * @param {number[]} [easeParams] - An optional array of ease parameters to go with the ease.
+ *
+ * @return {Phaser.Geom.Point[]} An array of Geom.Points containing the coordinates of the points on the line.
+ */
+var GetEasedPoints = function (line, ease, quantity, collinearThreshold, easeParams)
+{
+    if (collinearThreshold === undefined) { collinearThreshold = 0; }
+    if (easeParams === undefined) { easeParams = []; }
+
+    var results = [];
+
+    var x1 = line.x1;
+    var y1 = line.y1;
+
+    var spaceX = line.x2 - x1;
+    var spaceY = line.y2 - y1;
+
+    var easeFunc = GetEaseFunction(ease, easeParams);
+
+    var i;
+    var v;
+    var q = quantity - 1;
+
+    for (i = 0; i < q; i++)
+    {
+        v = easeFunc(i / q);
+
+        results.push(new Point(x1 + (spaceX * v), y1 + (spaceY * v)));
+    }
+
+    //  Always include the end of the line
+    v = easeFunc(1);
+
+    results.push(new Point(x1 + (spaceX * v), y1 + (spaceY * v)));
+
+    //  Remove collinear parts
+    if (collinearThreshold > 0)
+    {
+        var prevPoint = results[0];
+
+        //  Store the new results here
+        var sortedResults = [ prevPoint ];
+
+        for (i = 1; i < results.length - 1; i++)
+        {
+            var point = results[i];
+
+            if (DistanceBetweenPoints(prevPoint, point) >= collinearThreshold)
+            {
+                sortedResults.push(point);
+                prevPoint = point;
+            }
+        }
+
+        //  Top and tail
+        var endPoint = results[results.length - 1];
+
+        if (DistanceBetweenPoints(prevPoint, endPoint) < collinearThreshold)
+        {
+            sortedResults.pop();
+        }
+
+        sortedResults.push(endPoint);
+
+        return sortedResults;
+    }
+    else
+    {
+        return results;
+    }
+};
+
+module.exports = GetEasedPoints;
+
+
+/***/ }),
+/* 792 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Get the midpoint of the given line.
+ *
+ * @function Phaser.Geom.Line.GetMidPoint
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Line} line - The line to get the midpoint of.
+ * @param {(Phaser.Geom.Point|object)} [out] - An optional point object to store the midpoint in.
+ *
+ * @return {(Phaser.Geom.Point|object)} The midpoint of the Line.
+ */
+var GetMidPoint = function (line, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    out.x = (line.x1 + line.x2) / 2;
+    out.y = (line.y1 + line.y2) / 2;
+
+    return out;
+};
+
+module.exports = GetMidPoint;
+
+
+/***/ }),
+/* 793 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @author       Florian Mertens
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Get the nearest point on a line perpendicular to the given point.
+ *
+ * @function Phaser.Geom.Line.GetNearestPoint
+ * @since 3.16.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Line} line - The line to get the nearest point on.
+ * @param {(Phaser.Geom.Point|object)} point - The point to get the nearest point to.
+ * @param {(Phaser.Geom.Point|object)} [out] - An optional point, or point-like object, to store the coordinates of the nearest point on the line.
+ *
+ * @return {(Phaser.Geom.Point|object)} The nearest point on the line.
+ */
+var GetNearestPoint = function (line, point, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    var x1 = line.x1;
+    var y1 = line.y1;
+
+    var x2 = line.x2;
+    var y2 = line.y2;
+
+    var L2 = (((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
+
+    if (L2 === 0)
+    {
+        return out;
+    }
+
+    var r = (((point.x - x1) * (x2 - x1)) + ((point.y - y1) * (y2 - y1))) / L2;
+
+    out.x = x1 + (r * (x2 - x1));
+    out.y = y1 + (r * (y2 - y1));
+
+    return out;
+};
+
+module.exports = GetNearestPoint;
+
+
+/***/ }),
+/* 794 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var MATH_CONST = __webpack_require__(7);
+var Angle = __webpack_require__(43);
+var Point = __webpack_require__(2);
+
+/**
+ * Calculate the normal of the given line.
+ *
+ * The normal of a line is a vector that points perpendicular from it.
+ *
+ * @function Phaser.Geom.Line.GetNormal
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Line} line - The line to calculate the normal of.
+ * @param {(Phaser.Geom.Point|object)} [out] - An optional point object to store the normal in.
+ *
+ * @return {(Phaser.Geom.Point|object)} The normal of the Line.
+ */
+var GetNormal = function (line, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    var a = Angle(line) - MATH_CONST.TAU;
+
+    out.x = Math.cos(a);
+    out.y = Math.sin(a);
+
+    return out;
+};
+
+module.exports = GetNormal;
+
+
+/***/ }),
+/* 795 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @author       Florian Mertens
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Get the shortest distance from a Line to the given Point.
+ *
+ * @function Phaser.Geom.Line.GetShortestDistance
+ * @since 3.16.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Line} line - The line to get the distance from.
+ * @param {(Phaser.Geom.Point|object)} point - The point to get the shortest distance to.
+ *
+ * @return {number} The shortest distance from the line to the point.
+ */
+var GetShortestDistance = function (line, point)
+{
+    var x1 = line.x1;
+    var y1 = line.y1;
+
+    var x2 = line.x2;
+    var y2 = line.y2;
+
+    var L2 = (((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
+
+    if (L2 === 0)
+    {
+        return false;
+    }
+
+    var s = (((y1 - point.y) * (x2 - x1)) - ((x1 - point.x) * (y2 - y1))) / L2;
+
+    return Math.abs(s) * Math.sqrt(L2);
+};
+
+module.exports = GetShortestDistance;
+
+
+/***/ }),
+/* 796 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Calculate the height of the given line.
+ *
+ * @function Phaser.Geom.Line.Height
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The line to calculate the height of.
+ *
+ * @return {number} The height of the line.
+ */
+var Height = function (line)
+{
+    return Math.abs(line.y1 - line.y2);
+};
+
+module.exports = Height;
+
+
+/***/ }),
+/* 797 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var MATH_CONST = __webpack_require__(7);
+var Angle = __webpack_require__(43);
+
+/**
+ * Returns the x component of the normal vector of the given line.
+ *
+ * @function Phaser.Geom.Line.NormalX
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The Line object to get the normal value from.
+ *
+ * @return {number} The x component of the normal vector of the line.
+ */
+var NormalX = function (line)
+{
+    return Math.cos(Angle(line) - MATH_CONST.TAU);
+};
+
+module.exports = NormalX;
+
+
+/***/ }),
+/* 798 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var MATH_CONST = __webpack_require__(7);
+var Angle = __webpack_require__(43);
+
+/**
+ * The Y value of the normal of the given line.
+ * The normal of a line is a vector that points perpendicular from it.
+ *
+ * @function Phaser.Geom.Line.NormalY
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The line to calculate the normal of.
+ *
+ * @return {number} The Y value of the normal of the Line.
+ */
+var NormalY = function (line)
+{
+    return Math.sin(Angle(line) - MATH_CONST.TAU);
+};
+
+module.exports = NormalY;
+
+
+/***/ }),
+/* 799 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Offset a line by the given amount.
+ *
+ * @function Phaser.Geom.Line.Offset
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Line} O - [line,$return]
+ *
+ * @param {Phaser.Geom.Line} line - The line to offset.
+ * @param {number} x - The horizontal offset to add to the line.
+ * @param {number} y - The vertical offset to add to the line.
+ *
+ * @return {Phaser.Geom.Line} The offset line.
+ */
+var Offset = function (line, x, y)
+{
+    line.x1 += x;
+    line.y1 += y;
+
+    line.x2 += x;
+    line.y2 += y;
+
+    return line;
+};
+
+module.exports = Offset;
+
+
+/***/ }),
+/* 800 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Calculate the perpendicular slope of the given line.
+ *
+ * @function Phaser.Geom.Line.PerpSlope
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The line to calculate the perpendicular slope of.
+ *
+ * @return {number} The perpendicular slope of the line.
+ */
+var PerpSlope = function (line)
+{
+    return -((line.x2 - line.x1) / (line.y2 - line.y1));
+};
+
+module.exports = PerpSlope;
+
+
+/***/ }),
+/* 801 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Angle = __webpack_require__(43);
+var NormalAngle = __webpack_require__(297);
+
+/**
+ * Calculate the reflected angle between two lines.
+ *
+ * This is the outgoing angle based on the angle of Line 1 and the normalAngle of Line 2.
+ *
+ * @function Phaser.Geom.Line.ReflectAngle
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} lineA - The first line.
+ * @param {Phaser.Geom.Line} lineB - The second line.
+ *
+ * @return {number} The reflected angle between each line.
+ */
+var ReflectAngle = function (lineA, lineB)
+{
+    return (2 * NormalAngle(lineB) - Math.PI - Angle(lineA));
+};
+
+module.exports = ReflectAngle;
+
+
+/***/ }),
+/* 802 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var RotateAroundXY = __webpack_require__(129);
+
+/**
+ * Rotate a line around its midpoint by the given angle in radians.
+ *
+ * @function Phaser.Geom.Line.Rotate
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Line} O - [line,$return]
+ *
+ * @param {Phaser.Geom.Line} line - The line to rotate.
+ * @param {number} angle - The angle of rotation in radians.
+ *
+ * @return {Phaser.Geom.Line} The rotated line.
+ */
+var Rotate = function (line, angle)
+{
+    var x = (line.x1 + line.x2) / 2;
+    var y = (line.y1 + line.y2) / 2;
+
+    return RotateAroundXY(line, x, y, angle);
+};
+
+module.exports = Rotate;
+
+
+/***/ }),
+/* 803 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var RotateAroundXY = __webpack_require__(129);
+
+/**
+ * Rotate a line around a point by the given angle in radians.
+ *
+ * @function Phaser.Geom.Line.RotateAroundPoint
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Line} O - [line,$return]
+ *
+ * @param {Phaser.Geom.Line} line - The line to rotate.
+ * @param {(Phaser.Geom.Point|object)} point - The point to rotate the line around.
+ * @param {number} angle - The angle of rotation in radians.
+ *
+ * @return {Phaser.Geom.Line} The rotated line.
+ */
+var RotateAroundPoint = function (line, point, angle)
+{
+    return RotateAroundXY(line, point.x, point.y, angle);
+};
+
+module.exports = RotateAroundPoint;
+
+
+/***/ }),
+/* 804 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Set a line to a given position, angle and length.
+ *
+ * @function Phaser.Geom.Line.SetToAngle
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Line} O - [line,$return]
+ *
+ * @param {Phaser.Geom.Line} line - The line to set.
+ * @param {number} x - The horizontal start position of the line.
+ * @param {number} y - The vertical start position of the line.
+ * @param {number} angle - The angle of the line in radians.
+ * @param {number} length - The length of the line.
+ *
+ * @return {Phaser.Geom.Line} The updated line.
+ */
+var SetToAngle = function (line, x, y, angle, length)
+{
+    line.x1 = x;
+    line.y1 = y;
+
+    line.x2 = x + (Math.cos(angle) * length);
+    line.y2 = y + (Math.sin(angle) * length);
+
+    return line;
+};
+
+module.exports = SetToAngle;
+
+
+/***/ }),
+/* 805 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Calculate the slope of the given line.
+ *
+ * @function Phaser.Geom.Line.Slope
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The line to calculate the slope of.
+ *
+ * @return {number} The slope of the line.
+ */
+var Slope = function (line)
+{
+    return (line.y2 - line.y1) / (line.x2 - line.x1);
+};
+
+module.exports = Slope;
+
+
+/***/ }),
+/* 806 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Calculate the width of the given line.
+ *
+ * @function Phaser.Geom.Line.Width
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Line} line - The line to calculate the width of.
+ *
+ * @return {number} The width of the line.
+ */
+var Width = function (line)
+{
+    return Math.abs(line.x1 - line.x2);
+};
+
+module.exports = Width;
+
+
+/***/ }),
+/* 807 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * @namespace Phaser.Geom.Mesh
+ */
+
+var Mesh = {
+
+    Face: __webpack_require__(85),
+    GenerateGridVerts: __webpack_require__(808),
+    GenerateObjVerts: __webpack_require__(809),
+    GenerateVerts: __webpack_require__(810),
+    ParseObj: __webpack_require__(811),
+    ParseObjMaterial: __webpack_require__(812),
+    RotateFace: __webpack_require__(813),
+    Vertex: __webpack_require__(86)
+
+};
+
+module.exports = Mesh;
+
+
+/***/ }),
+/* 808 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Face = __webpack_require__(85);
+var GetFastValue = __webpack_require__(1);
+var Matrix4 = __webpack_require__(34);
+var Vector3 = __webpack_require__(19);
+var Vertex = __webpack_require__(86);
+
+var tempPosition = new Vector3();
+var tempRotation = new Vector3();
+var tempMatrix = new Matrix4();
+
+/**
+ * Creates a grid of vertices based on the given configuration object and optionally adds it to a Mesh.
+ *
+ * The size of the grid is given in pixels. An example configuration may be:
+ *
+ * `{ width: 256, height: 256, widthSegments: 2, heightSegments: 2, tile: true }`
+ *
+ * This will create a grid 256 x 256 pixels in size, split into 2 x 2 segments, with
+ * the texture tiling across the cells.
+ *
+ * You can split the grid into segments both vertically and horizontally. This will
+ * generate two faces per grid segment as a result.
+ *
+ * The `tile` parameter allows you to control if the tile will repeat across the grid
+ * segments, or be displayed in full.
+ *
+ * If adding this grid to a Mesh you can offset the grid via the `x` and `y` properties.
+ *
+ * UV coordinates are generated based on the given texture and frame in the config. For
+ * example, no frame is given, the UVs will be in the range 0 to 1. If a frame is given,
+ * such as from a texture atlas, the UVs will be generated within the range of that frame.
+ *
+ * @function Phaser.Geom.Mesh.GenerateGridVerts
+ * @since 3.50.0
+ *
+ * @param {Phaser.Types.Geom.Mesh.GenerateGridConfig} config - A Grid configuration object.
+ *
+ * @return {Phaser.Types.Geom.Mesh.GenerateGridVertsResult} A Grid Result object, containing the generated vertices and indicies.
+ */
+var GenerateGridVerts = function (config)
+{
+    var mesh = GetFastValue(config, 'mesh');
+    var texture = GetFastValue(config, 'texture', null);
+    var frame = GetFastValue(config, 'frame');
+    var width = GetFastValue(config, 'width', 1);
+    var height = GetFastValue(config, 'height', width);
+    var widthSegments = GetFastValue(config, 'widthSegments', 1);
+    var heightSegments = GetFastValue(config, 'heightSegments', widthSegments);
+    var posX = GetFastValue(config, 'x', 0);
+    var posY = GetFastValue(config, 'y', 0);
+    var posZ = GetFastValue(config, 'z', 0);
+    var rotateX = GetFastValue(config, 'rotateX', 0);
+    var rotateY = GetFastValue(config, 'rotateY', 0);
+    var rotateZ = GetFastValue(config, 'rotateZ', 0);
+    var zIsUp = GetFastValue(config, 'zIsUp', true);
+    var isOrtho = GetFastValue(config, 'isOrtho', (mesh) ? mesh.dirtyCache[11] : false);
+    var colors = GetFastValue(config, 'colors', [ 0xffffff ]);
+    var alphas = GetFastValue(config, 'alphas', [ 1 ]);
+    var tile = GetFastValue(config, 'tile', false);
+    var flipY = GetFastValue(config, 'flipY', false);
+
+    var widthSet = GetFastValue(config, 'width', null);
+
+    var result = {
+        faces: [],
+        verts: []
+    };
+
+    tempPosition.set(posX, posY, posZ);
+    tempRotation.set(rotateX, rotateY, rotateZ);
+    tempMatrix.fromRotationXYTranslation(tempRotation, tempPosition, zIsUp);
+
+    if (!texture && mesh)
+    {
+        texture = mesh.texture;
+    }
+    else if (mesh && typeof(texture) === 'string')
+    {
+        texture = mesh.scene.sys.textures.get(texture);
+    }
+    else
+    {
+        //  There's nothing more we can do without a texture
+        return result;
+    }
+
+    var textureFrame = texture.get(frame);
+
+    //  If the Mesh is ortho and no width / height is given, we'll default to texture sizes (if set!)
+    if (!widthSet && isOrtho && texture && mesh)
+    {
+        width = textureFrame.width / mesh.height;
+        height = textureFrame.height / mesh.height;
+    }
+
+    var halfWidth = width / 2;
+    var halfHeight = height / 2;
+
+    var gridX = Math.floor(widthSegments);
+    var gridY = Math.floor(heightSegments);
+
+    var gridX1 = gridX + 1;
+    var gridY1 = gridY + 1;
+
+    var segmentWidth = width / gridX;
+    var segmentHeight = height / gridY;
+
+    var uvs = [];
+    var vertices = [];
+
+    var ix;
+    var iy;
+
+    var frameU0 = 0;
+    var frameU1 = 1;
+    var frameV0 = 0;
+    var frameV1 = 1;
+
+    if (textureFrame)
+    {
+        frameU0 = textureFrame.u0;
+        frameU1 = textureFrame.u1;
+
+        if (!flipY)
+        {
+            frameV0 = textureFrame.v0;
+            frameV1 = textureFrame.v1;
+        }
+        else
+        {
+            frameV0 = textureFrame.v1;
+            frameV1 = textureFrame.v0;
+        }
+    }
+
+    var frameU = frameU1 - frameU0;
+    var frameV = frameV1 - frameV0;
+
+    for (iy = 0; iy < gridY1; iy++)
+    {
+        var y = iy * segmentHeight - halfHeight;
+
+        for (ix = 0; ix < gridX1; ix++)
+        {
+            var x = ix * segmentWidth - halfWidth;
+
+            vertices.push(x, -y);
+
+            var tu = frameU0 + frameU * (ix / gridX);
+            var tv = frameV0 + frameV * (iy / gridY);
+
+            uvs.push(tu, tv);
+        }
+    }
+
+    if (!Array.isArray(colors))
+    {
+        colors = [ colors ];
+    }
+
+    if (!Array.isArray(alphas))
+    {
+        alphas = [ alphas ];
+    }
+
+    var alphaIndex = 0;
+    var colorIndex = 0;
+
+    for (iy = 0; iy < gridY; iy++)
+    {
+        for (ix = 0; ix < gridX; ix++)
+        {
+            var a = (ix + gridX1 * iy) * 2;
+            var b = (ix + gridX1 * (iy + 1)) * 2;
+            var c = ((ix + 1) + gridX1 * (iy + 1)) * 2;
+            var d = ((ix + 1) + gridX1 * iy) * 2;
+
+            var color = colors[colorIndex];
+            var alpha = alphas[alphaIndex];
+
+            var vert1 = new Vertex(vertices[a], vertices[a + 1], 0, uvs[a], uvs[a + 1], color, alpha).transformMat4(tempMatrix);
+            var vert2 = new Vertex(vertices[b], vertices[b + 1], 0, uvs[b], uvs[b + 1], color, alpha).transformMat4(tempMatrix);
+            var vert3 = new Vertex(vertices[d], vertices[d + 1], 0, uvs[d], uvs[d + 1], color, alpha).transformMat4(tempMatrix);
+            var vert4 = new Vertex(vertices[b], vertices[b + 1], 0, uvs[b], uvs[b + 1], color, alpha).transformMat4(tempMatrix);
+            var vert5 = new Vertex(vertices[c], vertices[c + 1], 0, uvs[c], uvs[c + 1], color, alpha).transformMat4(tempMatrix);
+            var vert6 = new Vertex(vertices[d], vertices[d + 1], 0, uvs[d], uvs[d + 1], color, alpha).transformMat4(tempMatrix);
+
+            if (tile)
+            {
+                vert1.setUVs(frameU0, frameV1);
+                vert2.setUVs(frameU0, frameV0);
+                vert3.setUVs(frameU1, frameV1);
+                vert4.setUVs(frameU0, frameV0);
+                vert5.setUVs(frameU1, frameV0);
+                vert6.setUVs(frameU1, frameV1);
+            }
+
+            colorIndex++;
+
+            if (colorIndex === colors.length)
+            {
+                colorIndex = 0;
+            }
+
+            alphaIndex++;
+
+            if (alphaIndex === alphas.length)
+            {
+                alphaIndex = 0;
+            }
+
+            result.verts.push(vert1, vert2, vert3, vert4, vert5, vert6);
+
+            result.faces.push(
+                new Face(vert1, vert2, vert3),
+                new Face(vert4, vert5, vert6)
+            );
+        }
+    }
+
+    if (mesh)
+    {
+        mesh.faces = mesh.faces.concat(result.faces);
+        mesh.vertices = mesh.vertices.concat(result.verts);
+    }
+
+    return result;
+};
+
+module.exports = GenerateGridVerts;
+
+
+/***/ }),
+/* 809 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Face = __webpack_require__(85);
+var Matrix4 = __webpack_require__(34);
+var Vector3 = __webpack_require__(19);
+var Vertex = __webpack_require__(86);
+
+var tempPosition = new Vector3();
+var tempRotation = new Vector3();
+var tempMatrix = new Matrix4();
+
+/**
+ * This method will return an object containing Face and Vertex instances, generated
+ * from the parsed triangulated OBJ Model data given to this function.
+ *
+ * The obj data should have been parsed in advance via the ParseObj function:
+ *
+ * ```javascript
+ * var data = Phaser.Geom.Mesh.ParseObj(rawData, flipUV);
+ *
+ * var results = GenerateObjVerts(data);
+ * ```
+ *
+ * Alternatively, you can parse obj files loaded via the OBJFile loader:
+ *
+ * ```javascript
+ * preload ()
+ * {
+ *   this.load.obj('alien', 'assets/3d/alien.obj);
+ * }
+ *
+ * var results = GenerateObjVerts(this.cache.obj.get('alien));
+ * ```
+ *
+ * Make sure your 3D package has triangulated the model data prior to exporting it.
+ *
+ * You can use the data returned by this function to populate the vertices of a Mesh Game Object.
+ *
+ * You may add multiple models to a single Mesh, although they will act as one when
+ * moved or rotated. You can scale the model data, should it be too small (or large) to visualize.
+ * You can also offset the model via the `x`, `y` and `z` parameters.
+ *
+ * @function Phaser.Geom.Mesh.GenerateObjVerts
+ * @since 3.50.0
+ *
+ * @param {Phaser.Types.Geom.Mesh.OBJData} data - The parsed OBJ model data.
+ * @param {Phaser.GameObjects.Mesh} [mesh] - An optional Mesh Game Object. If given, the generated Faces will be automatically added to this Mesh. Set to `null` to skip.
+ * @param {number} [scale=1] - An amount to scale the model data by. Use this if the model has exported too small, or large, to see.
+ * @param {number} [x=0] - Translate the model x position by this amount.
+ * @param {number} [y=0] - Translate the model y position by this amount.
+ * @param {number} [z=0] - Translate the model z position by this amount.
+ * @param {number} [rotateX=0] - Rotate the model on the x axis by this amount, in radians.
+ * @param {number} [rotateY=0] - Rotate the model on the y axis by this amount, in radians.
+ * @param {number} [rotateZ=0] - Rotate the model on the z axis by this amount, in radians.
+ * @param {boolean} [zIsUp=true] - Is the z axis up (true), or is y axis up (false)?
+ *
+ * @return {Phaser.Types.Geom.Mesh.GenerateVertsResult} The parsed Face and Vertex objects.
+ */
+var GenerateObjVerts = function (data, mesh, scale, x, y, z, rotateX, rotateY, rotateZ, zIsUp)
+{
+    if (scale === undefined) { scale = 1; }
+    if (x === undefined) { x = 0; }
+    if (y === undefined) { y = 0; }
+    if (z === undefined) { z = 0; }
+    if (rotateX === undefined) { rotateX = 0; }
+    if (rotateY === undefined) { rotateY = 0; }
+    if (rotateZ === undefined) { rotateZ = 0; }
+    if (zIsUp === undefined) { zIsUp = true; }
+
+    var result = {
+        faces: [],
+        verts: []
+    };
+
+    var materials = data.materials;
+
+    tempPosition.set(x, y, z);
+    tempRotation.set(rotateX, rotateY, rotateZ);
+    tempMatrix.fromRotationXYTranslation(tempRotation, tempPosition, zIsUp);
+
+    for (var m = 0; m < data.models.length; m++)
+    {
+        var model = data.models[m];
+
+        var vertices = model.vertices;
+        var textureCoords = model.textureCoords;
+        var faces = model.faces;
+
+        for (var i = 0; i < faces.length; i++)
+        {
+            var face = faces[i];
+
+            var v1 = face.vertices[0];
+            var v2 = face.vertices[1];
+            var v3 = face.vertices[2];
+
+            var m1 = vertices[v1.vertexIndex];
+            var m2 = vertices[v2.vertexIndex];
+            var m3 = vertices[v3.vertexIndex];
+
+            var t1 = v1.textureCoordsIndex;
+            var t2 = v2.textureCoordsIndex;
+            var t3 = v3.textureCoordsIndex;
+
+            var uv1 = (t1 === -1) ? { u: 0, v: 1 } : textureCoords[t1];
+            var uv2 = (t2 === -1) ? { u: 0, v: 0 } : textureCoords[t2];
+            var uv3 = (t3 === -1) ? { u: 1, v: 1 } : textureCoords[t3];
+
+            var color = 0xffffff;
+
+            if (face.material !== '' && materials[face.material])
+            {
+                color = materials[face.material];
+            }
+
+            var vert1 = new Vertex(m1.x * scale, m1.y * scale, m1.z * scale, uv1.u, uv1.v, color).transformMat4(tempMatrix);
+            var vert2 = new Vertex(m2.x * scale, m2.y * scale, m2.z * scale, uv2.u, uv2.v, color).transformMat4(tempMatrix);
+            var vert3 = new Vertex(m3.x * scale, m3.y * scale, m3.z * scale, uv3.u, uv3.v, color).transformMat4(tempMatrix);
+
+            result.verts.push(vert1, vert2, vert3);
+            result.faces.push(new Face(vert1, vert2, vert3));
+        }
+    }
+
+    if (mesh)
+    {
+        mesh.faces = mesh.faces.concat(result.faces);
+        mesh.vertices = mesh.vertices.concat(result.verts);
+    }
+
+    return result;
+};
+
+module.exports = GenerateObjVerts;
+
+
+/***/ }),
+/* 810 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Face = __webpack_require__(85);
+var Vertex = __webpack_require__(86);
+
+/**
+ * Generates a set of Face and Vertex objects by parsing the given data.
+ *
+ * This method will take vertex data in one of two formats, based on the `containsZ` parameter.
+ *
+ * If your vertex data are `x`, `y` pairs, then `containsZ` should be `false` (this is the default)
+ *
+ * If your vertex data is groups of `x`, `y` and `z` values, then the `containsZ` parameter must be true.
+ *
+ * The `uvs` parameter is a numeric array consisting of `u` and `v` pairs.
+ *
+ * The `normals` parameter is a numeric array consisting of `x`, `y` vertex normal values and, if `containsZ` is true, `z` values as well.
+ *
+ * The `indicies` parameter is an optional array that, if given, is an indexed list of vertices to be added.
+ *
+ * The `colors` parameter is an optional array, or single value, that if given sets the color of each vertex created.
+ *
+ * The `alphas` parameter is an optional array, or single value, that if given sets the alpha of each vertex created.
+ *
+ * When providing indexed data it is assumed that _all_ of the arrays are indexed, not just the vertices.
+ *
+ * The following example will create a 256 x 256 sized quad using an index array:
+ *
+ * ```javascript
+ * const vertices = [
+ *   -128, 128,
+ *   128, 128,
+ *   -128, -128,
+ *   128, -128
+ * ];
+ *
+ * const uvs = [
+ *   0, 1,
+ *   1, 1,
+ *   0, 0,
+ *   1, 0
+ * ];
+ *
+ * const indices = [ 0, 2, 1, 2, 3, 1 ];
+ *
+ * GenerateVerts(vertices, uvs, indicies);
+ * ```
+ *
+ * If the data is not indexed, it's assumed that the arrays all contain sequential data.
+ *
+ * @function Phaser.Geom.Mesh.GenerateVerts
+ * @since 3.50.0
+ *
+ * @param {number[]} vertices - The vertices array. Either `xy` pairs, or `xyz` if the `containsZ` parameter is `true`.
+ * @param {number[]} uvs - The UVs pairs array.
+ * @param {number[]} [indicies] - Optional vertex indicies array. If you don't have one, pass `null` or an empty array.
+ * @param {boolean} [containsZ=false] - Does the vertices data include a `z` component?
+ * @param {number[]} [normals] - Optional vertex normals array. If you don't have one, pass `null` or an empty array.
+ * @param {number|number[]} [colors=0xffffff] - An array of colors, one per vertex, or a single color value applied to all vertices.
+ * @param {number|number[]} [alphas=1] - An array of alpha values, one per vertex, or a single alpha value applied to all vertices.
+ *
+ * @return {Phaser.Types.Geom.Mesh.GenerateVertsResult} The parsed Face and Vertex objects.
+ */
+var GenerateVerts = function (vertices, uvs, indicies, containsZ, normals, colors, alphas)
+{
+    if (containsZ === undefined) { containsZ = false; }
+    if (colors === undefined) { colors = 0xffffff; }
+    if (alphas === undefined) { alphas = 1; }
+
+    if (vertices.length !== uvs.length)
+    {
+        console.warn('GenerateVerts: vertices and uvs count not equal');
+        return;
+    }
+
+    var result = {
+        faces: [],
+        vertices: []
+    };
+
+    var i;
+
+    var x;
+    var y;
+    var z;
+
+    var u;
+    var v;
+
+    var color;
+    var alpha;
+
+    var normalX;
+    var normalY;
+    var normalZ;
+
+    var iInc = (containsZ) ? 3 : 2;
+
+    var isColorArray = Array.isArray(colors);
+    var isAlphaArray = Array.isArray(alphas);
+
+    if (Array.isArray(indicies) && indicies.length > 0)
+    {
+        for (i = 0; i < indicies.length; i++)
+        {
+            var index1 = indicies[i];
+            var index2 = indicies[i] * 2;
+            var index3 = indicies[i] * iInc;
+
+            x = vertices[index3];
+            y = vertices[index3 + 1];
+            z = (containsZ) ? vertices[index3 + 2] : 0;
+
+            u = uvs[index2];
+            v = uvs[index2 + 1];
+
+            color = (isColorArray) ? colors[index1] : colors;
+            alpha = (isAlphaArray) ? alphas[index1] : alphas;
+
+            normalX = 0;
+            normalY = 0;
+            normalZ = 0;
+
+            if (normals)
+            {
+                normalX = normals[index3];
+                normalY = normals[index3 + 1];
+                normalZ = (containsZ) ? normals[index3 + 2] : 0;
+            }
+
+            result.vertices.push(new Vertex(x, y, z, u, v, color, alpha, normalX, normalY, normalZ));
+        }
+    }
+    else
+    {
+        var uvIndex = 0;
+        var colorIndex = 0;
+
+        for (i = 0; i < vertices.length; i += iInc)
+        {
+            x = vertices[i];
+            y = vertices[i + 1];
+            z = (containsZ) ? vertices[i + 2] : 0;
+
+            u = uvs[uvIndex];
+            v = uvs[uvIndex + 1];
+
+            color = (isColorArray) ? colors[colorIndex] : colors;
+            alpha = (isAlphaArray) ? alphas[colorIndex] : alphas;
+
+            normalX = 0;
+            normalY = 0;
+            normalZ = 0;
+
+            if (normals)
+            {
+                normalX = normals[i];
+                normalY = normals[i + 1];
+                normalZ = (containsZ) ? normals[i + 2] : 0;
+            }
+
+            result.vertices.push(new Vertex(x, y, z, u, v, color, alpha, normalX, normalY, normalZ));
+
+            uvIndex += 2;
+            colorIndex++;
+        }
+    }
+
+    for (i = 0; i < result.vertices.length; i += 3)
+    {
+        var vert1 = result.vertices[i];
+        var vert2 = result.vertices[i + 1];
+        var vert3 = result.vertices[i + 2];
+
+        result.faces.push(new Face(vert1, vert2, vert3));
+    }
+
+    return result;
+};
+
+module.exports = GenerateVerts;
+
+
+/***/ }),
+/* 811 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var flip = true;
+
+var defaultModelName = 'untitled';
+var currentGroup = '';
+var currentMaterial = '';
+
+/**
+ * @ignore
+ */
+function stripComments (line)
+{
+    var idx = line.indexOf('#');
+
+    return (idx > -1) ? line.substring(0, idx) : line;
+}
+
+/**
+ * @ignore
+ */
+function currentModel (result)
+{
+    if (result.models.length === 0)
+    {
+        result.models.push({
+            faces: [],
+            name: defaultModelName,
+            textureCoords: [],
+            vertexNormals: [],
+            vertices: []
+        });
+    }
+
+    currentGroup = '';
+
+    return result.models[result.models.length - 1];
+}
+
+/**
+ * @ignore
+ */
+function parseObject (lineItems, result)
+{
+    var modelName = lineItems.length >= 2 ? lineItems[1] : defaultModelName;
+
+    result.models.push({
+        faces: [],
+        name: modelName,
+        textureCoords: [],
+        vertexNormals: [],
+        vertices: []
+    });
+
+    currentGroup = '';
+}
+
+/**
+ * @ignore
+ */
+function parseGroup (lineItems)
+{
+    if (lineItems.length === 2)
+    {
+        currentGroup = lineItems[1];
+    }
+}
+
+/**
+ * @ignore
+ */
+function parseVertexCoords (lineItems, result)
+{
+    var len = lineItems.length;
+
+    var x = (len >= 2) ? parseFloat(lineItems[1]) : 0;
+    var y = (len >= 3) ? parseFloat(lineItems[2]) : 0;
+    var z = (len >= 4) ? parseFloat(lineItems[3]) : 0;
+
+    currentModel(result).vertices.push({ x: x, y: y, z: z });
+}
+
+/**
+ * @ignore
+ */
+function parseTextureCoords (lineItems, result)
+{
+    var len = lineItems.length;
+
+    var u = (len >= 2) ? parseFloat(lineItems[1]) : 0;
+    var v = (len >= 3) ? parseFloat(lineItems[2]) : 0;
+    var w = (len >= 4) ? parseFloat(lineItems[3]) : 0;
+
+    if (isNaN(u))
+    {
+        u = 0;
+    }
+
+    if (isNaN(v))
+    {
+        v = 0;
+    }
+
+    if (isNaN(w))
+    {
+        w = 0;
+    }
+
+    if (flip)
+    {
+        v = 1 - v;
+    }
+
+    currentModel(result).textureCoords.push({ u: u, v: v, w: w });
+}
+
+/**
+ * @ignore
+ */
+function parseVertexNormal (lineItems, result)
+{
+    var len = lineItems.length;
+
+    var x = (len >= 2) ? parseFloat(lineItems[1]) : 0;
+    var y = (len >= 3) ? parseFloat(lineItems[2]) : 0;
+    var z = (len >= 4) ? parseFloat(lineItems[3]) : 0;
+
+    currentModel(result).vertexNormals.push({ x: x, y: y, z: z });
+}
+
+/**
+ * @ignore
+ */
+function parsePolygon (lineItems, result)
+{
+    var totalVertices = lineItems.length - 1;
+
+    if (totalVertices < 3)
+    {
+        return;
+    }
+
+    var face = {
+        group: currentGroup,
+        material: currentMaterial,
+        vertices: []
+    };
+
+    for (var i = 0; i < totalVertices; i++)
+    {
+        var vertexString = lineItems[i + 1];
+        var vertexValues = vertexString.split('/');
+        var vvLen = vertexValues.length;
+
+        if (vvLen < 1 || vvLen > 3)
+        {
+            continue;
+        }
+
+        var vertexIndex = 0;
+        var textureCoordsIndex = 0;
+        var vertexNormalIndex = 0;
+
+        vertexIndex = parseInt(vertexValues[0], 10);
+
+        if (vvLen > 1 && vertexValues[1] !== '')
+        {
+            textureCoordsIndex = parseInt(vertexValues[1], 10);
+        }
+
+        if (vvLen > 2)
+        {
+            vertexNormalIndex = parseInt(vertexValues[2], 10);
+        }
+
+        if (vertexIndex !== 0)
+        {
+            // Negative vertex indices refer to the nth last defined vertex
+            // convert these to postive indices for simplicity
+            if (vertexIndex < 0)
+            {
+                vertexIndex = currentModel(result).vertices.length + 1 + vertexIndex;
+            }
+
+            textureCoordsIndex -= 1;
+            vertexIndex -= 1;
+            vertexNormalIndex -= 1;
+
+            face.vertices.push({
+                textureCoordsIndex: textureCoordsIndex,
+                vertexIndex: vertexIndex,
+                vertexNormalIndex: vertexNormalIndex
+            });
+        }
+    }
+
+    currentModel(result).faces.push(face);
+}
+
+/**
+ * @ignore
+ */
+function parseMtlLib (lineItems, result)
+{
+    if (lineItems.length >= 2)
+    {
+        result.materialLibraries.push(lineItems[1]);
+    }
+}
+
+/**
+ * @ignore
+ */
+function parseUseMtl (lineItems)
+{
+    if (lineItems.length >= 2)
+    {
+        currentMaterial = lineItems[1];
+    }
+}
+
+/**
+ * Parses a Wavefront OBJ File, extracting the models from it and returning them in an array.
+ *
+ * The model data *must* be triangulated for a Mesh Game Object to be able to render it.
+ *
+ * @function Phaser.Geom.Mesh.ParseObj
+ * @since 3.50.0
+ *
+ * @param {string} data - The OBJ File data as a raw string.
+ * @param {boolean} [flipUV=true] - Flip the UV coordinates?
+ *
+ * @return {Phaser.Types.Geom.Mesh.OBJData} The parsed model and material data.
+ */
+var ParseObj = function (data, flipUV)
+{
+    if (flipUV === undefined) { flipUV = true; }
+
+    flip = flipUV;
+
+    //  Store results in here
+    var result = {
+        materials: {},
+        materialLibraries: [],
+        models: []
+    };
+
+    currentGroup = '';
+    currentMaterial = '';
+
+    var lines = data.split('\n');
+
+    for (var i = 0; i < lines.length; i++)
+    {
+        var line = stripComments(lines[i]);
+
+        var lineItems = line.replace(/\s\s+/g, ' ').trim().split(' ');
+
+        switch (lineItems[0].toLowerCase())
+        {
+            case 'o':
+                // Start A New Model
+                parseObject(lineItems, result);
+                break;
+
+            case 'g':
+                // Start a new polygon group
+                parseGroup(lineItems);
+                break;
+
+            case 'v':
+                // Define a vertex for the current model
+                parseVertexCoords(lineItems, result);
+                break;
+
+            case 'vt':
+                // Texture Coords
+                parseTextureCoords(lineItems, result);
+                break;
+
+            case 'vn':
+                // Define a vertex normal for the current model
+                parseVertexNormal(lineItems, result);
+                break;
+
+            case 'f':
+                // Define a Face/Polygon
+                parsePolygon(lineItems, result);
+                break;
+
+            case 'mtllib':
+                // Reference to a material library file (.mtl)
+                parseMtlLib(lineItems, result);
+                break;
+
+            case 'usemtl':
+                // Sets the current material to be applied to polygons defined from this point forward
+                parseUseMtl(lineItems);
+                break;
+        }
+    }
+
+    return result;
+};
+
+module.exports = ParseObj;
+
+
+/***/ }),
+/* 812 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var GetColor = __webpack_require__(101);
+
+/**
+ * Takes a Wavefront Material file and extracts the diffuse reflectivity of the named
+ * materials, converts them to integer color values and returns them.
+ *
+ * This is used internally by the `addOBJ` and `addModel` methods, but is exposed for
+ * public consumption as well.
+ *
+ * Note this only works with diffuse values, specified in the `Kd r g b` format, where
+ * `g` and `b` are optional, but `r` is required. It does not support spectral rfl files,
+ * or any other material statement (such as `Ka` or `Ks`)
+ *
+ * @method Phaser.Geom.Mesh.ParseObjMaterial
+ * @since 3.50.0
+ *
+ * @param {string} mtl - The OBJ MTL file as a raw string, i.e. loaded via `this.load.text`.
+ *
+ * @return {object} The parsed material colors, where each property of the object matches the material name.
+ */
+var ParseObjMaterial = function (mtl)
+{
+    var output = {};
+
+    var lines = mtl.split('\n');
+
+    var currentMaterial = '';
+
+    for (var i = 0; i < lines.length; i++)
+    {
+        var line = lines[i].trim();
+
+        if (line.indexOf('#') === 0 || line === '')
+        {
+            continue;
+        }
+
+        var lineItems = line.replace(/\s\s+/g, ' ').trim().split(' ');
+
+        switch (lineItems[0].toLowerCase())
+        {
+            case 'newmtl':
+            {
+                currentMaterial = lineItems[1];
+                break;
+            }
+
+            //  The diffuse reflectivity of the current material
+            //  Support r, [g], [b] format, where g and b are optional
+            case 'kd':
+            {
+                var r = Math.floor(lineItems[1] * 255);
+                var g = (lineItems.length >= 2) ? Math.floor(lineItems[2] * 255) : r;
+                var b = (lineItems.length >= 3) ? Math.floor(lineItems[3] * 255) : r;
+
+                output[currentMaterial] = GetColor(r, g, b);
+
+                break;
+            }
+        }
+    }
+
+    return output;
+};
+
+module.exports = ParseObjMaterial;
+
+
+/***/ }),
+/* 813 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Rotates the vertices of a Face to the given angle.
+ *
+ * The actual vertex positions are adjusted, not their transformed positions.
+ *
+ * Therefore, this updates the vertex data directly.
+ *
+ * @function Phaser.Geom.Mesh.RotateFace
+ * @since 3.50.0
+ *
+ * @param {Phaser.Geom.Mesh.Face} face - The Face to rotate.
+ * @param {number} angle - The angle to rotate to, in radians.
+ * @param {number} [cx] - An optional center of rotation. If not given, the Face in-center is used.
+ * @param {number} [cy] - An optional center of rotation. If not given, the Face in-center is used.
+ */
+var RotateFace = function (face, angle, cx, cy)
+{
+    var x;
+    var y;
+
+    //  No point of rotation? Use the inCenter instead, then.
+    if (cx === undefined && cy === undefined)
+    {
+        var inCenter = face.getInCenter();
+
+        x = inCenter.x;
+        y = inCenter.y;
+    }
+
+    var c = Math.cos(angle);
+    var s = Math.sin(angle);
+
+    var v1 = face.vertex1;
+    var v2 = face.vertex2;
+    var v3 = face.vertex3;
+
+    var tx = v1.x - x;
+    var ty = v1.y - y;
+
+    v1.set(tx * c - ty * s + x, tx * s + ty * c + y);
+
+    tx = v2.x - x;
+    ty = v2.y - y;
+
+    v2.set(tx * c - ty * s + x, tx * s + ty * c + y);
+
+    tx = v3.x - x;
+    ty = v3.y - y;
+
+    v3.set(tx * c - ty * s + x, tx * s + ty * c + y);
+};
+
+module.exports = RotateFace;
+
+
+/***/ }),
+/* 814 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+Point.Ceil = __webpack_require__(815);
+Point.Clone = __webpack_require__(816);
+Point.CopyFrom = __webpack_require__(817);
+Point.Equals = __webpack_require__(818);
+Point.Floor = __webpack_require__(819);
+Point.GetCentroid = __webpack_require__(820);
+Point.GetMagnitude = __webpack_require__(298);
+Point.GetMagnitudeSq = __webpack_require__(299);
+Point.GetRectangleFromPoints = __webpack_require__(821);
+Point.Interpolate = __webpack_require__(822);
+Point.Invert = __webpack_require__(823);
+Point.Negative = __webpack_require__(824);
+Point.Project = __webpack_require__(825);
+Point.ProjectUnit = __webpack_require__(826);
+Point.SetMagnitude = __webpack_require__(827);
+
+module.exports = Point;
+
+
+/***/ }),
+/* 815 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Apply `Math.ceil()` to each coordinate of the given Point.
+ *
+ * @function Phaser.Geom.Point.Ceil
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [point,$return]
+ *
+ * @param {Phaser.Geom.Point} point - The Point to ceil.
+ *
+ * @return {Phaser.Geom.Point} The Point with `Math.ceil()` applied to its coordinates.
+ */
+var Ceil = function (point)
+{
+    return point.setTo(Math.ceil(point.x), Math.ceil(point.y));
+};
+
+module.exports = Ceil;
+
+
+/***/ }),
+/* 816 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Clone the given Point.
+ *
+ * @function Phaser.Geom.Point.Clone
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Point} source - The source Point to clone.
+ *
+ * @return {Phaser.Geom.Point} The cloned Point.
+ */
+var Clone = function (source)
+{
+    return new Point(source.x, source.y);
+};
+
+module.exports = Clone;
+
+
+/***/ }),
+/* 817 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Copy the values of one Point to a destination Point.
+ *
+ * @function Phaser.Geom.Point.CopyFrom
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [dest,$return]
+ *
+ * @param {Phaser.Geom.Point} source - The source Point to copy the values from.
+ * @param {Phaser.Geom.Point} dest - The destination Point to copy the values to.
+ *
+ * @return {Phaser.Geom.Point} The destination Point.
+ */
+var CopyFrom = function (source, dest)
+{
+    return dest.setTo(source.x, source.y);
+};
+
+module.exports = CopyFrom;
+
+
+/***/ }),
+/* 818 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * A comparison of two `Point` objects to see if they are equal.
+ *
+ * @function Phaser.Geom.Point.Equals
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Point} point - The original `Point` to compare against.
+ * @param {Phaser.Geom.Point} toCompare - The second `Point` to compare.
+ *
+ * @return {boolean} Returns true if the both `Point` objects are equal.
+ */
+var Equals = function (point, toCompare)
+{
+    return (point.x === toCompare.x && point.y === toCompare.y);
+};
+
+module.exports = Equals;
+
+
+/***/ }),
+/* 819 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Apply `Math.ceil()` to each coordinate of the given Point.
+ *
+ * @function Phaser.Geom.Point.Floor
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [point,$return]
+ *
+ * @param {Phaser.Geom.Point} point - The Point to floor.
+ *
+ * @return {Phaser.Geom.Point} The Point with `Math.floor()` applied to its coordinates.
+ */
+var Floor = function (point)
+{
+    return point.setTo(Math.floor(point.x), Math.floor(point.y));
+};
+
+module.exports = Floor;
+
+
+/***/ }),
+/* 820 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Get the centroid or geometric center of a plane figure (the arithmetic mean position of all the points in the figure).
+ * Informally, it is the point at which a cutout of the shape could be perfectly balanced on the tip of a pin.
+ *
+ * @function Phaser.Geom.Point.GetCentroid
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Types.Math.Vector2Like[]} points - An array of Vector2Like objects to get the geometric center of.
+ * @param {Phaser.Geom.Point} [out] - A Point object to store the output coordinates in. If not given, a new Point instance is created.
+ *
+ * @return {Phaser.Geom.Point} A Point object representing the geometric center of the given points.
+ */
+var GetCentroid = function (points, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    if (!Array.isArray(points))
+    {
+        throw new Error('GetCentroid points argument must be an array');
+    }
+
+    var len = points.length;
+
+    if (len < 1)
+    {
+        throw new Error('GetCentroid points array must not be empty');
+    }
+    else if (len === 1)
+    {
+        out.x = points[0].x;
+        out.y = points[0].y;
+    }
+    else
+    {
+        for (var i = 0; i < len; i++)
+        {
+            out.x += points[i].x;
+            out.y += points[i].y;
+        }
+
+        out.x /= len;
+        out.y /= len;
+    }
+
+    return out;
+};
+
+module.exports = GetCentroid;
+
+
+/***/ }),
+/* 821 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Rectangle = __webpack_require__(10);
+
+/**
+ * Calculates the Axis Aligned Bounding Box (or aabb) from an array of points.
+ *
+ * @function Phaser.Geom.Point.GetRectangleFromPoints
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [out,$return]
+ *
+ * @param {Phaser.Types.Math.Vector2Like[]} points - An array of Vector2Like objects to get the AABB from.
+ * @param {Phaser.Geom.Rectangle} [out] - A Rectangle object to store the results in. If not given, a new Rectangle instance is created.
+ *
+ * @return {Phaser.Geom.Rectangle} A Rectangle object holding the AABB values for the given points.
+ */
+var GetRectangleFromPoints = function (points, out)
+{
+    if (out === undefined) { out = new Rectangle(); }
+
+    var xMax = Number.NEGATIVE_INFINITY;
+    var xMin = Number.POSITIVE_INFINITY;
+    var yMax = Number.NEGATIVE_INFINITY;
+    var yMin = Number.POSITIVE_INFINITY;
+
+    for (var i = 0; i < points.length; i++)
+    {
+        var point = points[i];
+
+        if (point.x > xMax)
+        {
+            xMax = point.x;
+        }
+
+        if (point.x < xMin)
+        {
+            xMin = point.x;
+        }
+
+        if (point.y > yMax)
+        {
+            yMax = point.y;
+        }
+
+        if (point.y < yMin)
+        {
+            yMin = point.y;
+        }
+    }
+
+    out.x = xMin;
+    out.y = yMin;
+    out.width = xMax - xMin;
+    out.height = yMax - yMin;
+
+    return out;
+};
+
+module.exports = GetRectangleFromPoints;
+
+
+/***/ }),
+/* 822 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Returns the linear interpolation point between the two given points, based on `t`.
+ *
+ * @function Phaser.Geom.Point.Interpolate
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Point} pointA - The starting `Point` for the interpolation.
+ * @param {Phaser.Geom.Point} pointB - The target `Point` for the interpolation.
+ * @param {number} [t=0] - The amount to interpolate between the two points. Generally, a value between 0 (returns the starting `Point`) and 1 (returns the target `Point`). If omitted, 0 is used.
+ * @param {(Phaser.Geom.Point|object)} [out] - An optional `Point` object whose `x` and `y` values will be set to the result of the interpolation (can also be any object with `x` and `y` properties). If omitted, a new `Point` created and returned.
+ *
+ * @return {(Phaser.Geom.Point|object)} Either the object from the `out` argument with the properties `x` and `y` set to the result of the interpolation or a newly created `Point` object.
+ */
+var Interpolate = function (pointA, pointB, t, out)
+{
+    if (t === undefined) { t = 0; }
+    if (out === undefined) { out = new Point(); }
+
+    out.x = pointA.x + ((pointB.x - pointA.x) * t);
+    out.y = pointA.y + ((pointB.y - pointA.y) * t);
+
+    return out;
+};
+
+module.exports = Interpolate;
+
+
+/***/ }),
+/* 823 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Swaps the X and the Y coordinate of a point.
+ *
+ * @function Phaser.Geom.Point.Invert
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [point,$return]
+ *
+ * @param {Phaser.Geom.Point} point - The Point to modify.
+ *
+ * @return {Phaser.Geom.Point} The modified `point`.
+ */
+var Invert = function (point)
+{
+    return point.setTo(point.y, point.x);
+};
+
+module.exports = Invert;
+
+
+/***/ }),
+/* 824 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Inverts a Point's coordinates.
+ *
+ * @function Phaser.Geom.Point.Negative
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Point} point - The Point to invert.
+ * @param {Phaser.Geom.Point} [out] - The Point to return the inverted coordinates in.
+ *
+ * @return {Phaser.Geom.Point} The modified `out` Point, or a new Point if none was provided.
+ */
+var Negative = function (point, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    return out.setTo(-point.x, -point.y);
+};
+
+module.exports = Negative;
+
+
+/***/ }),
+/* 825 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+var GetMagnitudeSq = __webpack_require__(299);
+
+/**
+ * Calculates the vector projection of `pointA` onto the nonzero `pointB`. This is the
+ * orthogonal projection of `pointA` onto a straight line paralle to `pointB`.
+ *
+ * @function Phaser.Geom.Point.Project
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Point} pointA - Point A, to be projected onto Point B.
+ * @param {Phaser.Geom.Point} pointB - Point B, to have Point A projected upon it.
+ * @param {Phaser.Geom.Point} [out] - The Point object to store the position in. If not given, a new Point instance is created.
+ *
+ * @return {Phaser.Geom.Point} A Point object holding the coordinates of the vector projection of `pointA` onto `pointB`.
+ */
+var Project = function (pointA, pointB, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    var dot = ((pointA.x * pointB.x) + (pointA.y * pointB.y));
+    var amt = dot / GetMagnitudeSq(pointB);
+
+    if (amt !== 0)
+    {
+        out.x = amt * pointB.x;
+        out.y = amt * pointB.y;
+    }
+
+    return out;
+};
+
+module.exports = Project;
+
+
+/***/ }),
+/* 826 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Calculates the vector projection of `pointA` onto the nonzero `pointB`. This is the
+ * orthogonal projection of `pointA` onto a straight line paralle to `pointB`.
+ *
+ * @function Phaser.Geom.Point.ProjectUnit
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Point} pointA - Point A, to be projected onto Point B. Must be a normalized point with a magnitude of 1.
+ * @param {Phaser.Geom.Point} pointB - Point B, to have Point A projected upon it.
+ * @param {Phaser.Geom.Point} [out] - The Point object to store the position in. If not given, a new Point instance is created.
+ *
+ * @return {Phaser.Geom.Point} A unit Point object holding the coordinates of the vector projection of `pointA` onto `pointB`.
+ */
+var ProjectUnit = function (pointA, pointB, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    var amt = ((pointA.x * pointB.x) + (pointA.y * pointB.y));
+
+    if (amt !== 0)
+    {
+        out.x = amt * pointB.x;
+        out.y = amt * pointB.y;
+    }
+
+    return out;
+};
+
+module.exports = ProjectUnit;
+
+
+/***/ }),
+/* 827 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var GetMagnitude = __webpack_require__(298);
+
+/**
+ * Changes the magnitude (length) of a two-dimensional vector without changing its direction.
+ *
+ * @function Phaser.Geom.Point.SetMagnitude
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [point,$return]
+ *
+ * @param {Phaser.Geom.Point} point - The Point to treat as the end point of the vector.
+ * @param {number} magnitude - The new magnitude of the vector.
+ *
+ * @return {Phaser.Geom.Point} The modified Point.
+ */
+var SetMagnitude = function (point, magnitude)
+{
+    if (point.x !== 0 || point.y !== 0)
+    {
+        var m = GetMagnitude(point);
+
+        point.x /= m;
+        point.y /= m;
+    }
+
+    point.x *= magnitude;
+    point.y *= magnitude;
+
+    return point;
+};
+
+module.exports = SetMagnitude;
+
+
+/***/ }),
+/* 828 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Polygon = __webpack_require__(300);
+
+Polygon.Clone = __webpack_require__(829);
+Polygon.Contains = __webpack_require__(130);
+Polygon.ContainsPoint = __webpack_require__(830);
+Polygon.Earcut = __webpack_require__(109);
+Polygon.GetAABB = __webpack_require__(831);
+Polygon.GetNumberArray = __webpack_require__(832);
+Polygon.GetPoints = __webpack_require__(301);
+Polygon.Perimeter = __webpack_require__(302);
+Polygon.Reverse = __webpack_require__(833);
+Polygon.Simplify = __webpack_require__(834);
+Polygon.Smooth = __webpack_require__(835);
+Polygon.Translate = __webpack_require__(836);
+
+module.exports = Polygon;
+
+
+/***/ }),
+/* 829 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Polygon = __webpack_require__(300);
+
+/**
+ * Create a new polygon which is a copy of the specified polygon
+ *
+ * @function Phaser.Geom.Polygon.Clone
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Polygon} polygon - The polygon to create a clone of
+ *
+ * @return {Phaser.Geom.Polygon} A new separate Polygon cloned from the specified polygon, based on the same points.
+ */
+var Clone = function (polygon)
+{
+    return new Polygon(polygon.points);
+};
+
+module.exports = Clone;
+
+
+/***/ }),
+/* 830 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Contains = __webpack_require__(130);
+
+/**
+ * Checks the given Point again the Polygon to see if the Point lays within its vertices.
+ *
+ * @function Phaser.Geom.Polygon.ContainsPoint
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Polygon} polygon - The Polygon to check.
+ * @param {Phaser.Geom.Point} point - The Point to check if it's within the Polygon.
+ *
+ * @return {boolean} `true` if the Point is within the Polygon, otherwise `false`.
+ */
+var ContainsPoint = function (polygon, point)
+{
+    return Contains(polygon, point.x, point.y);
+};
+
+module.exports = ContainsPoint;
+
+
+/***/ }),
+/* 831 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Rectangle = __webpack_require__(10);
+
+/**
+ * Calculates the bounding AABB rectangle of a polygon.
+ *
+ * @function Phaser.Geom.Polygon.GetAABB
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Polygon} polygon - The polygon that should be calculated.
+ * @param {(Phaser.Geom.Rectangle|object)} [out] - The rectangle or object that has x, y, width, and height properties to store the result. Optional.
+ *
+ * @return {(Phaser.Geom.Rectangle|object)} The resulting rectangle or object that is passed in with position and dimensions of the polygon's AABB.
+ */
+var GetAABB = function (polygon, out)
+{
+    if (out === undefined) { out = new Rectangle(); }
+
+    var minX = Infinity;
+    var minY = Infinity;
+    var maxX = -minX;
+    var maxY = -minY;
+    var p;
+
+    for (var i = 0; i < polygon.points.length; i++)
+    {
+        p = polygon.points[i];
+
+        minX = Math.min(minX, p.x);
+        minY = Math.min(minY, p.y);
+        maxX = Math.max(maxX, p.x);
+        maxY = Math.max(maxY, p.y);
+    }
+
+    out.x = minX;
+    out.y = minY;
+    out.width = maxX - minX;
+    out.height = maxY - minY;
+
+    return out;
+};
+
+module.exports = GetAABB;
+
+
+/***/ }),
+/* 832 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+// Export the points as an array of flat numbers, following the sequence [ x,y, x,y, x,y ]
+
+/**
+ * Stores all of the points of a Polygon into a flat array of numbers following the sequence [ x,y, x,y, x,y ],
+ * i.e. each point of the Polygon, in the order it's defined, corresponds to two elements of the resultant
+ * array for the point's X and Y coordinate.
+ *
+ * @function Phaser.Geom.Polygon.GetNumberArray
+ * @since 3.0.0
+ *
+ * @generic {number[]} O - [output,$return]
+ *
+ * @param {Phaser.Geom.Polygon} polygon - The Polygon whose points to export.
+ * @param {(array|number[])} [output] - An array to which the points' coordinates should be appended.
+ *
+ * @return {(array|number[])} The modified `output` array, or a new array if none was given.
+ */
+var GetNumberArray = function (polygon, output)
+{
+    if (output === undefined) { output = []; }
+
+    for (var i = 0; i < polygon.points.length; i++)
+    {
+        output.push(polygon.points[i].x);
+        output.push(polygon.points[i].y);
+    }
+
+    return output;
+};
+
+module.exports = GetNumberArray;
+
+
+/***/ }),
+/* 833 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Reverses the order of the points of a Polygon.
+ *
+ * @function Phaser.Geom.Polygon.Reverse
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Polygon} O - [polygon,$return]
+ *
+ * @param {Phaser.Geom.Polygon} polygon - The Polygon to modify.
+ *
+ * @return {Phaser.Geom.Polygon} The modified Polygon.
+ */
+var Reverse = function (polygon)
+{
+    polygon.points.reverse();
+
+    return polygon;
+};
+
+module.exports = Reverse;
+
+
+/***/ }),
+/* 834 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @author       Vladimir Agafonkin
+ * @see          Based on Simplify.js mourner.github.io/simplify-js
+ */
+
+/**
+ * Copyright (c) 2017, Vladimir Agafonkin
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
+ * TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/**
+ * @ignore
+ */
+function getSqDist (p1, p2)
+{
+    var dx = p1.x - p2.x,
+        dy = p1.y - p2.y;
+
+    return dx * dx + dy * dy;
+}
+
+/**
+ * Square distance from a point to a segment
+ *
+ * @ignore
+ */
+function getSqSegDist (p, p1, p2)
+{
+    var x = p1.x,
+        y = p1.y,
+        dx = p2.x - x,
+        dy = p2.y - y;
+
+    if (dx !== 0 || dy !== 0)
+    {
+        var t = ((p.x - x) * dx + (p.y - y) * dy) / (dx * dx + dy * dy);
+
+        if (t > 1)
+        {
+            x = p2.x;
+            y = p2.y;
+        }
+        else if (t > 0)
+        {
+            x += dx * t;
+            y += dy * t;
+        }
+    }
+
+    dx = p.x - x;
+    dy = p.y - y;
+
+    return dx * dx + dy * dy;
+}
+
+/**
+ * Basic distance-based simplification
+ *
+ * @ignore
+ */
+function simplifyRadialDist (points, sqTolerance)
+{
+    var prevPoint = points[0],
+        newPoints = [ prevPoint ],
+        point;
+
+    for (var i = 1, len = points.length; i < len; i++)
+    {
+        point = points[i];
+
+        if (getSqDist(point, prevPoint) > sqTolerance)
+        {
+            newPoints.push(point);
+            prevPoint = point;
+        }
+    }
+
+    if (prevPoint !== point)
+    {
+        newPoints.push(point);
+    }
+
+    return newPoints;
+}
+
+/**
+ * @ignore
+ */
+function simplifyDPStep (points, first, last, sqTolerance, simplified)
+{
+    var maxSqDist = sqTolerance,
+        index;
+
+    for (var i = first + 1; i < last; i++)
+    {
+        var sqDist = getSqSegDist(points[i], points[first], points[last]);
+
+        if (sqDist > maxSqDist)
+        {
+            index = i;
+            maxSqDist = sqDist;
+        }
+    }
+
+    if (maxSqDist > sqTolerance)
+    {
+        if (index - first > 1)
+        {
+            simplifyDPStep(points, first, index, sqTolerance, simplified);
+        }
+
+        simplified.push(points[index]);
+
+        if (last - index > 1)
+        {
+            simplifyDPStep(points, index, last, sqTolerance, simplified);
+        }
+    }
+}
+
+/**
+ * Simplification using Ramer-Douglas-Peucker algorithm
+ *
+ * @ignore
+ */
+function simplifyDouglasPeucker (points, sqTolerance)
+{
+    var last = points.length - 1;
+
+    var simplified = [ points[0] ];
+
+    simplifyDPStep(points, 0, last, sqTolerance, simplified);
+
+    simplified.push(points[last]);
+
+    return simplified;
+}
+
+/**
+ * Takes a Polygon object and simplifies the points by running them through a combination of
+ * Douglas-Peucker and Radial Distance algorithms. Simplification dramatically reduces the number of
+ * points in a polygon while retaining its shape, giving a huge performance boost when processing
+ * it and also reducing visual noise.
+ *
+ * @function Phaser.Geom.Polygon.Simplify
+ * @since 3.50.0
+ *
+ * @generic {Phaser.Geom.Polygon} O - [polygon,$return]
+ *
+ * @param {Phaser.Geom.Polygon} polygon - The polygon to be simplified. The polygon will be modified in-place and returned.
+ * @param {number} [tolerance=1] - Affects the amount of simplification (in the same metric as the point coordinates).
+ * @param {boolean} [highestQuality=false] - Excludes distance-based preprocessing step which leads to highest quality simplification but runs ~10-20 times slower.
+ *
+ * @return {Phaser.Geom.Polygon} The input polygon.
+ */
+var Simplify = function (polygon, tolerance, highestQuality)
+{
+    if (tolerance === undefined) { tolerance = 1; }
+    if (highestQuality === undefined) { highestQuality = false; }
+
+    var points = polygon.points;
+
+    if (points.length > 2)
+    {
+        var sqTolerance = tolerance * tolerance;
+
+        if (!highestQuality)
+        {
+            points = simplifyRadialDist(points, sqTolerance);
+        }
+
+        polygon.setTo(simplifyDouglasPeucker(points, sqTolerance));
+    }
+
+    return polygon;
+};
+
+module.exports = Simplify;
+
+
+/***/ }),
+/* 835 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @author       Igor Ognichenko <ognichenko.igor@gmail.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * @ignore
+ */
+var copy = function (out, a)
+{
+    out[0] = a[0];
+    out[1] = a[1];
+  
+    return out;
+};
+
+/**
+ * Takes a Polygon object and applies Chaikin's smoothing algorithm on its points.
+ *
+ * @function Phaser.Geom.Polygon.Smooth
+ * @since 3.13.0
+ *
+ * @generic {Phaser.Geom.Polygon} O - [polygon,$return]
+ *
+ * @param {Phaser.Geom.Polygon} polygon - The polygon to be smoothed. The polygon will be modified in-place and returned.
+ *
+ * @return {Phaser.Geom.Polygon} The input polygon.
+ */
+var Smooth = function (polygon)
+{
+    var i;
+    var points = [];
+    var data = polygon.points;
+
+    for (i = 0; i < data.length; i++)
+    {
+        points.push([ data[i].x, data[i].y ]);
+    }
+
+    var output = [];
+  
+    if (points.length > 0)
+    {
+        output.push(copy([ 0, 0 ], points[0]));
+    }
+  
+    for (i = 0; i < points.length - 1; i++)
+    {
+        var p0 = points[i];
+        var p1 = points[i + 1];
+        var p0x = p0[0];
+        var p0y = p0[1];
+        var p1x = p1[0];
+        var p1y = p1[1];
+
+        output.push([ 0.85 * p0x + 0.15 * p1x, 0.85 * p0y + 0.15 * p1y ]);
+        output.push([ 0.15 * p0x + 0.85 * p1x, 0.15 * p0y + 0.85 * p1y ]);
+    }
+  
+    if (points.length > 1)
+    {
+        output.push(copy([ 0, 0 ], points[points.length - 1]));
+    }
+  
+    return polygon.setTo(output);
+};
+
+module.exports = Smooth;
+
+
+/***/ }),
+/* 836 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Tranlates the points of the given Polygon.
+ *
+ * @function Phaser.Geom.Polygon.Translate
+ * @since 3.50.0
+ *
+ * @generic {Phaser.Geom.Polygon} O - [polygon,$return]
+ *
+ * @param {Phaser.Geom.Polygon} polygon - The Polygon to modify.
+ * @param {number} x - The amount to horizontally translate the points by.
+ * @param {number} y - The amount to vertically translate the points by.
+ *
+ * @return {Phaser.Geom.Polygon} The modified Polygon.
+ */
+var Translate = function (polygon, x, y)
+{
+    var points = polygon.points;
+
+    for (var i = 0; i < points.length; i++)
+    {
+        points[i].x += x;
+        points[i].y += y;
+    }
+
+    return polygon;
+};
+
+module.exports = Translate;
+
+
+/***/ }),
+/* 837 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Rectangle = __webpack_require__(10);
+
+Rectangle.Area = __webpack_require__(838);
+Rectangle.Ceil = __webpack_require__(839);
+Rectangle.CeilAll = __webpack_require__(840);
+Rectangle.CenterOn = __webpack_require__(102);
+Rectangle.Clone = __webpack_require__(841);
+Rectangle.Contains = __webpack_require__(38);
+Rectangle.ContainsPoint = __webpack_require__(842);
+Rectangle.ContainsRect = __webpack_require__(303);
+Rectangle.CopyFrom = __webpack_require__(843);
+Rectangle.Decompose = __webpack_require__(290);
+Rectangle.Equals = __webpack_require__(844);
+Rectangle.FitInside = __webpack_require__(845);
+Rectangle.FitOutside = __webpack_require__(846);
+Rectangle.Floor = __webpack_require__(847);
+Rectangle.FloorAll = __webpack_require__(848);
+Rectangle.FromPoints = __webpack_require__(849);
+Rectangle.FromXY = __webpack_require__(850);
+Rectangle.GetAspectRatio = __webpack_require__(131);
+Rectangle.GetCenter = __webpack_require__(851);
+Rectangle.GetPoint = __webpack_require__(97);
+Rectangle.GetPoints = __webpack_require__(156);
+Rectangle.GetSize = __webpack_require__(852);
+Rectangle.Inflate = __webpack_require__(853);
+Rectangle.Intersection = __webpack_require__(854);
+Rectangle.MarchingAnts = __webpack_require__(855);
+Rectangle.MergePoints = __webpack_require__(856);
+Rectangle.MergeRect = __webpack_require__(857);
+Rectangle.MergeXY = __webpack_require__(858);
+Rectangle.Offset = __webpack_require__(859);
+Rectangle.OffsetPoint = __webpack_require__(860);
+Rectangle.Overlaps = __webpack_require__(861);
+Rectangle.Perimeter = __webpack_require__(67);
+Rectangle.PerimeterPoint = __webpack_require__(862);
+Rectangle.Random = __webpack_require__(160);
+Rectangle.RandomOutside = __webpack_require__(863);
+Rectangle.SameDimensions = __webpack_require__(864);
+Rectangle.Scale = __webpack_require__(865);
+Rectangle.Union = __webpack_require__(866);
+
+module.exports = Rectangle;
+
+
+/***/ }),
+/* 838 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Calculates the area of the given Rectangle object.
+ *
+ * @function Phaser.Geom.Rectangle.Area
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The rectangle to calculate the area of.
+ *
+ * @return {number} The area of the Rectangle object.
+ */
+var Area = function (rect)
+{
+    return rect.width * rect.height;
+};
+
+module.exports = Area;
+
+
+/***/ }),
+/* 839 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Rounds a Rectangle's position up to the smallest integer greater than or equal to each current coordinate.
+ *
+ * @function Phaser.Geom.Rectangle.Ceil
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [rect,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle to adjust.
+ *
+ * @return {Phaser.Geom.Rectangle} The adjusted Rectangle.
+ */
+var Ceil = function (rect)
+{
+    rect.x = Math.ceil(rect.x);
+    rect.y = Math.ceil(rect.y);
+
+    return rect;
+};
+
+module.exports = Ceil;
+
+
+/***/ }),
+/* 840 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Rounds a Rectangle's position and size up to the smallest integer greater than or equal to each respective value.
+ *
+ * @function Phaser.Geom.Rectangle.CeilAll
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [rect,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle to modify.
+ *
+ * @return {Phaser.Geom.Rectangle} The modified Rectangle.
+ */
+var CeilAll = function (rect)
+{
+    rect.x = Math.ceil(rect.x);
+    rect.y = Math.ceil(rect.y);
+    rect.width = Math.ceil(rect.width);
+    rect.height = Math.ceil(rect.height);
+
+    return rect;
+};
+
+module.exports = CeilAll;
+
+
+/***/ }),
+/* 841 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Rectangle = __webpack_require__(10);
+
+/**
+ * Creates a new Rectangle which is identical to the given one.
+ *
+ * @function Phaser.Geom.Rectangle.Clone
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Rectangle} source - The Rectangle to clone.
+ *
+ * @return {Phaser.Geom.Rectangle} The newly created Rectangle, which is separate from the given one.
+ */
+var Clone = function (source)
+{
+    return new Rectangle(source.x, source.y, source.width, source.height);
+};
+
+module.exports = Clone;
+
+
+/***/ }),
+/* 842 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Contains = __webpack_require__(38);
+
+/**
+ * Determines whether the specified point is contained within the rectangular region defined by this Rectangle object.
+ *
+ * @function Phaser.Geom.Rectangle.ContainsPoint
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle object.
+ * @param {Phaser.Geom.Point} point - The point object to be checked. Can be a Phaser Point object or any object with x and y values.
+ *
+ * @return {boolean} A value of true if the Rectangle object contains the specified point, otherwise false.
+ */
+var ContainsPoint = function (rect, point)
+{
+    return Contains(rect, point.x, point.y);
+};
+
+module.exports = ContainsPoint;
+
+
+/***/ }),
+/* 843 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Copy the values of one Rectangle to a destination Rectangle.
+ *
+ * @function Phaser.Geom.Rectangle.CopyFrom
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [dest,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} source - The source Rectangle to copy the values from.
+ * @param {Phaser.Geom.Rectangle} dest - The destination Rectangle to copy the values to.
+ *
+ * @return {Phaser.Geom.Rectangle} The destination Rectangle.
+ */
+var CopyFrom = function (source, dest)
+{
+    return dest.setTo(source.x, source.y, source.width, source.height);
+};
+
+module.exports = CopyFrom;
+
+
+/***/ }),
+/* 844 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Compares the `x`, `y`, `width` and `height` properties of two rectangles.
+ *
+ * @function Phaser.Geom.Rectangle.Equals
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Rectangle} rect - Rectangle A
+ * @param {Phaser.Geom.Rectangle} toCompare - Rectangle B
+ *
+ * @return {boolean} `true` if the rectangles' properties are an exact match, otherwise `false`.
+ */
+var Equals = function (rect, toCompare)
+{
+    return (
+        rect.x === toCompare.x &&
+        rect.y === toCompare.y &&
+        rect.width === toCompare.width &&
+        rect.height === toCompare.height
+    );
+};
+
+module.exports = Equals;
+
+
+/***/ }),
+/* 845 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var GetAspectRatio = __webpack_require__(131);
+
+/**
+ * Adjusts the target rectangle, changing its width, height and position,
+ * so that it fits inside the area of the source rectangle, while maintaining its original
+ * aspect ratio.
+ * 
+ * Unlike the `FitOutside` function, there may be some space inside the source area not covered.
+ *
+ * @function Phaser.Geom.Rectangle.FitInside
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [target,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} target - The target rectangle to adjust.
+ * @param {Phaser.Geom.Rectangle} source - The source rectangle to envelop the target in.
+ *
+ * @return {Phaser.Geom.Rectangle} The modified target rectangle instance.
+ */
+var FitInside = function (target, source)
+{
+    var ratio = GetAspectRatio(target);
+
+    if (ratio < GetAspectRatio(source))
+    {
+        //  Taller than Wide
+        target.setSize(source.height * ratio, source.height);
+    }
+    else
+    {
+        //  Wider than Tall
+        target.setSize(source.width, source.width / ratio);
+    }
+
+    return target.setPosition(
+        source.centerX - (target.width / 2),
+        source.centerY - (target.height / 2)
+    );
+};
+
+module.exports = FitInside;
+
+
+/***/ }),
+/* 846 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var GetAspectRatio = __webpack_require__(131);
+
+/**
+ * Adjusts the target rectangle, changing its width, height and position,
+ * so that it fully covers the area of the source rectangle, while maintaining its original
+ * aspect ratio.
+ * 
+ * Unlike the `FitInside` function, the target rectangle may extend further out than the source.
+ *
+ * @function Phaser.Geom.Rectangle.FitOutside
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [target,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} target - The target rectangle to adjust.
+ * @param {Phaser.Geom.Rectangle} source - The source rectangle to envelope the target in.
+ *
+ * @return {Phaser.Geom.Rectangle} The modified target rectangle instance.
+ */
+var FitOutside = function (target, source)
+{
+    var ratio = GetAspectRatio(target);
+
+    if (ratio > GetAspectRatio(source))
+    {
+        //  Wider than Tall
+        target.setSize(source.height * ratio, source.height);
+    }
+    else
+    {
+        //  Taller than Wide
+        target.setSize(source.width, source.width / ratio);
+    }
+
+    return target.setPosition(
+        source.centerX - target.width / 2,
+        source.centerY - target.height / 2
+    );
+};
+
+module.exports = FitOutside;
+
+
+/***/ }),
+/* 847 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Rounds down (floors) the top left X and Y coordinates of the given Rectangle to the largest integer less than or equal to them
+ *
+ * @function Phaser.Geom.Rectangle.Floor
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [rect,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The rectangle to floor the top left X and Y coordinates of
+ *
+ * @return {Phaser.Geom.Rectangle} The rectangle that was passed to this function with its coordinates floored.
+ */
+var Floor = function (rect)
+{
+    rect.x = Math.floor(rect.x);
+    rect.y = Math.floor(rect.y);
+
+    return rect;
+};
+
+module.exports = Floor;
+
+
+/***/ }),
+/* 848 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Rounds a Rectangle's position and size down to the largest integer less than or equal to each current coordinate or dimension.
+ *
+ * @function Phaser.Geom.Rectangle.FloorAll
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [rect,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle to adjust.
+ *
+ * @return {Phaser.Geom.Rectangle} The adjusted Rectangle.
+ */
+var FloorAll = function (rect)
+{
+    rect.x = Math.floor(rect.x);
+    rect.y = Math.floor(rect.y);
+    rect.width = Math.floor(rect.width);
+    rect.height = Math.floor(rect.height);
+
+    return rect;
+};
+
+module.exports = FloorAll;
+
+
+/***/ }),
+/* 849 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Rectangle = __webpack_require__(10);
+var MATH_CONST = __webpack_require__(7);
+
+//  points is an array of Point-like objects,
+//  either 2 dimensional arrays, or objects with public x/y properties:
+//  var points = [
+//      [100, 200],
+//      [200, 400],
+//      { x: 30, y: 60 }
+//  ]
+
+/**
+ * Constructs new Rectangle or repositions and resizes an existing Rectangle so that all of the given points are on or within its bounds.
+ *
+ * @function Phaser.Geom.Rectangle.FromPoints
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [out,$return]
+ *
+ * @param {array} points - An array of points (either arrays with two elements corresponding to the X and Y coordinate or an object with public `x` and `y` properties) which should be surrounded by the Rectangle.
+ * @param {Phaser.Geom.Rectangle} [out] - Optional Rectangle to adjust.
+ *
+ * @return {Phaser.Geom.Rectangle} The adjusted `out` Rectangle, or a new Rectangle if none was provided.
+ */
+var FromPoints = function (points, out)
+{
+    if (out === undefined) { out = new Rectangle(); }
+
+    if (points.length === 0)
+    {
+        return out;
+    }
+
+    var minX = Number.MAX_VALUE;
+    var minY = Number.MAX_VALUE;
+
+    var maxX = MATH_CONST.MIN_SAFE_INTEGER;
+    var maxY = MATH_CONST.MIN_SAFE_INTEGER;
+
+    var p;
+    var px;
+    var py;
+
+    for (var i = 0; i < points.length; i++)
+    {
+        p = points[i];
+
+        if (Array.isArray(p))
+        {
+            px = p[0];
+            py = p[1];
+        }
+        else
+        {
+            px = p.x;
+            py = p.y;
+        }
+
+        minX = Math.min(minX, px);
+        minY = Math.min(minY, py);
+
+        maxX = Math.max(maxX, px);
+        maxY = Math.max(maxY, py);
+    }
+
+    out.x = minX;
+    out.y = minY;
+    out.width = maxX - minX;
+    out.height = maxY - minY;
+
+    return out;
+};
+
+module.exports = FromPoints;
+
+
+/***/ }),
+/* 850 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       samme
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Rectangle = __webpack_require__(10);
+
+/**
+ * Create the smallest Rectangle containing two coordinate pairs.
+ *
+ * @function Phaser.Geom.Rectangle.FromXY
+ * @since 3.23.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [out,$return]
+ *
+ * @param {number} x1 - The X coordinate of the first point.
+ * @param {number} y1 - The Y coordinate of the first point.
+ * @param {number} x2 - The X coordinate of the second point.
+ * @param {number} y2 - The Y coordinate of the second point.
+ * @param {Phaser.Geom.Rectangle} [out] - Optional Rectangle to adjust.
+ *
+ * @return {Phaser.Geom.Rectangle} The adjusted `out` Rectangle, or a new Rectangle if none was provided.
+ */
+var FromXY = function (x1, y1, x2, y2, out)
+{
+    if (out === undefined) { out = new Rectangle(); }
+
+    return out.setTo(
+        Math.min(x1, x2),
+        Math.min(y1, y2),
+        Math.abs(x1 - x2),
+        Math.abs(y1 - y2)
+    );
+};
+
+module.exports = FromXY;
+
+
+/***/ }),
+/* 851 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+/**
+ * Returns the center of a Rectangle as a Point.
+ *
+ * @function Phaser.Geom.Rectangle.GetCenter
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle to get the center of.
+ * @param {(Phaser.Geom.Point|object)} [out] - Optional point-like object to update with the center coordinates.
+ *
+ * @return {(Phaser.Geom.Point|object)} The modified `out` object, or a new Point if none was provided.
+ */
+var GetCenter = function (rect, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    out.x = rect.centerX;
+    out.y = rect.centerY;
+
+    return out;
+};
+
+module.exports = GetCenter;
+
+
+/***/ }),
+/* 852 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+
+
+/**
+ * Returns the size of the Rectangle, expressed as a Point object.
+ * With the value of the `width` as the `x` property and the `height` as the `y` property.
+ *
+ * @function Phaser.Geom.Rectangle.GetSize
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle to get the size from.
+ * @param {(Phaser.Geom.Point|object)} [out] - The Point object to store the size in. If not given, a new Point instance is created.
+ *
+ * @return {(Phaser.Geom.Point|object)} A Point object where `x` holds the width and `y` holds the height of the Rectangle.
+ */
+var GetSize = function (rect, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    out.x = rect.width;
+    out.y = rect.height;
+
+    return out;
+};
+
+module.exports = GetSize;
+
+
+/***/ }),
+/* 853 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var CenterOn = __webpack_require__(102);
+
+
+/**
+ * Increases the size of a Rectangle by a specified amount.
+ *
+ * The center of the Rectangle stays the same. The amounts are added to each side, so the actual increase in width or height is two times bigger than the respective argument.
+ *
+ * @function Phaser.Geom.Rectangle.Inflate
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [rect,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle to inflate.
+ * @param {number} x - How many pixels the left and the right side should be moved by horizontally.
+ * @param {number} y - How many pixels the top and the bottom side should be moved by vertically.
+ *
+ * @return {Phaser.Geom.Rectangle} The inflated Rectangle.
+ */
+var Inflate = function (rect, x, y)
+{
+    var cx = rect.centerX;
+    var cy = rect.centerY;
+
+    rect.setSize(rect.width + (x * 2), rect.height + (y * 2));
+
+    return CenterOn(rect, cx, cy);
+};
+
+module.exports = Inflate;
+
+
+/***/ }),
+/* 854 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Rectangle = __webpack_require__(10);
+var Intersects = __webpack_require__(63);
+
+/**
+ * Takes two Rectangles and first checks to see if they intersect.
+ * If they intersect it will return the area of intersection in the `out` Rectangle.
+ * If they do not intersect, the `out` Rectangle will have a width and height of zero.
+ *
+ * @function Phaser.Geom.Rectangle.Intersection
+ * @since 3.11.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [rect,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rectA - The first Rectangle to get the intersection from.
+ * @param {Phaser.Geom.Rectangle} rectB - The second Rectangle to get the intersection from.
+ * @param {Phaser.Geom.Rectangle} [out] - A Rectangle to store the intersection results in.
+ *
+ * @return {Phaser.Geom.Rectangle} The intersection result. If the width and height are zero, no intersection occurred.
+ */
+var Intersection = function (rectA, rectB, out)
+{
+    if (out === undefined) { out = new Rectangle(); }
+
+    if (Intersects(rectA, rectB))
+    {
+        out.x = Math.max(rectA.x, rectB.x);
+        out.y = Math.max(rectA.y, rectB.y);
+        out.width = Math.min(rectA.right, rectB.right) - out.x;
+        out.height = Math.min(rectA.bottom, rectB.bottom) - out.y;
+    }
+    else
+    {
+        out.setEmpty();
+    }
+
+    return out;
+};
+
+module.exports = Intersection;
+
+
+/***/ }),
+/* 855 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Perimeter = __webpack_require__(67);
+var Point = __webpack_require__(2);
+
+
+/**
+ * Returns an array of points from the perimeter of the Rectangle, where each point is spaced out based
+ * on either the `step` value, or the `quantity`.
+ *
+ * @function Phaser.Geom.Rectangle.MarchingAnts
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point[]} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle to get the perimeter points from.
+ * @param {number} [step] - The distance between each point of the perimeter. Set to `null` if you wish to use the `quantity` parameter instead.
+ * @param {number} [quantity] - The total number of points to return. The step is then calculated based on the length of the Rectangle, divided by this value.
+ * @param {(array|Phaser.Geom.Point[])} [out] - An array in which the perimeter points will be stored. If not given, a new array instance is created.
+ *
+ * @return {(array|Phaser.Geom.Point[])} An array containing the perimeter points from the Rectangle.
+ */
+var MarchingAnts = function (rect, step, quantity, out)
+{
+    if (out === undefined) { out = []; }
+
+    if (!step && !quantity)
+    {
+        //  Bail out
+        return out;
+    }
+
+    //  If step is a falsey value (false, null, 0, undefined, etc) then we calculate
+    //  it based on the quantity instead, otherwise we always use the step value
+    if (!step)
+    {
+        step = Perimeter(rect) / quantity;
+    }
+    else
+    {
+        quantity = Math.round(Perimeter(rect) / step);
+    }
+
+    var x = rect.x;
+    var y = rect.y;
+    var face = 0;
+
+    //  Loop across each face of the rectangle
+
+    for (var i = 0; i < quantity; i++)
+    {
+        out.push(new Point(x, y));
+
+        switch (face)
+        {
+
+            //  Top face
+            case 0:
+                x += step;
+
+                if (x >= rect.right)
+                {
+                    face = 1;
+                    y += (x - rect.right);
+                    x = rect.right;
+                }
+                break;
+
+            //  Right face
+            case 1:
+                y += step;
+
+                if (y >= rect.bottom)
+                {
+                    face = 2;
+                    x -= (y - rect.bottom);
+                    y = rect.bottom;
+                }
+                break;
+
+            //  Bottom face
+            case 2:
+                x -= step;
+
+                if (x <= rect.left)
+                {
+                    face = 3;
+                    y -= (rect.left - x);
+                    x = rect.left;
+                }
+                break;
+
+            //  Left face
+            case 3:
+                y -= step;
+
+                if (y <= rect.top)
+                {
+                    face = 0;
+                    y = rect.top;
+                }
+                break;
+        }
+    }
+
+    return out;
+};
+
+module.exports = MarchingAnts;
+
+
+/***/ }),
+/* 856 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Merges a Rectangle with a list of points by repositioning and/or resizing it such that all points are located on or within its bounds.
+ *
+ * @function Phaser.Geom.Rectangle.MergePoints
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [target,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} target - The Rectangle which should be merged.
+ * @param {Phaser.Geom.Point[]} points - An array of Points (or any object with public `x` and `y` properties) which should be merged with the Rectangle.
+ *
+ * @return {Phaser.Geom.Rectangle} The modified Rectangle.
+ */
+var MergePoints = function (target, points)
+{
+    var minX = target.x;
+    var maxX = target.right;
+    var minY = target.y;
+    var maxY = target.bottom;
+
+    for (var i = 0; i < points.length; i++)
+    {
+        minX = Math.min(minX, points[i].x);
+        maxX = Math.max(maxX, points[i].x);
+        minY = Math.min(minY, points[i].y);
+        maxY = Math.max(maxY, points[i].y);
+    }
+
+    target.x = minX;
+    target.y = minY;
+    target.width = maxX - minX;
+    target.height = maxY - minY;
+
+    return target;
+};
+
+module.exports = MergePoints;
+
+
+/***/ }),
+/* 857 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+//  Merges source rectangle into target rectangle and returns target
+//  Neither rect should have negative widths or heights
+
+/**
+ * Merges the source rectangle into the target rectangle and returns the target.
+ * Neither rectangle should have a negative width or height.
+ *
+ * @function Phaser.Geom.Rectangle.MergeRect
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [target,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} target - Target rectangle. Will be modified to include source rectangle.
+ * @param {Phaser.Geom.Rectangle} source - Rectangle that will be merged into target rectangle.
+ *
+ * @return {Phaser.Geom.Rectangle} Modified target rectangle that contains source rectangle.
+ */
+var MergeRect = function (target, source)
+{
+    var minX = Math.min(target.x, source.x);
+    var maxX = Math.max(target.right, source.right);
+
+    target.x = minX;
+    target.width = maxX - minX;
+
+    var minY = Math.min(target.y, source.y);
+    var maxY = Math.max(target.bottom, source.bottom);
+
+    target.y = minY;
+    target.height = maxY - minY;
+
+    return target;
+};
+
+module.exports = MergeRect;
+
+
+/***/ }),
+/* 858 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Merges a Rectangle with a point by repositioning and/or resizing it so that the point is on or within its bounds.
+ *
+ * @function Phaser.Geom.Rectangle.MergeXY
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [target,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} target - The Rectangle which should be merged and modified.
+ * @param {number} x - The X coordinate of the point which should be merged.
+ * @param {number} y - The Y coordinate of the point which should be merged.
+ *
+ * @return {Phaser.Geom.Rectangle} The modified `target` Rectangle.
+ */
+var MergeXY = function (target, x, y)
+{
+    var minX = Math.min(target.x, x);
+    var maxX = Math.max(target.right, x);
+
+    target.x = minX;
+    target.width = maxX - minX;
+
+    var minY = Math.min(target.y, y);
+    var maxY = Math.max(target.bottom, y);
+
+    target.y = minY;
+    target.height = maxY - minY;
+
+    return target;
+};
+
+module.exports = MergeXY;
+
+
+/***/ }),
+/* 859 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Nudges (translates) the top left corner of a Rectangle by a given offset.
+ *
+ * @function Phaser.Geom.Rectangle.Offset
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [rect,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle to adjust.
+ * @param {number} x - The distance to move the Rectangle horizontally.
+ * @param {number} y - The distance to move the Rectangle vertically.
+ *
+ * @return {Phaser.Geom.Rectangle} The adjusted Rectangle.
+ */
+var Offset = function (rect, x, y)
+{
+    rect.x += x;
+    rect.y += y;
+
+    return rect;
+};
+
+module.exports = Offset;
+
+
+/***/ }),
+/* 860 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Nudges (translates) the top-left corner of a Rectangle by the coordinates of a point (translation vector).
+ *
+ * @function Phaser.Geom.Rectangle.OffsetPoint
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [rect,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle to adjust.
+ * @param {(Phaser.Geom.Point|Phaser.Math.Vector2)} point - The point whose coordinates should be used as an offset.
+ *
+ * @return {Phaser.Geom.Rectangle} The adjusted Rectangle.
+ */
+var OffsetPoint = function (rect, point)
+{
+    rect.x += point.x;
+    rect.y += point.y;
+
+    return rect;
+};
+
+module.exports = OffsetPoint;
+
+
+/***/ }),
+/* 861 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Checks if two Rectangles overlap. If a Rectangle is within another Rectangle, the two will be considered overlapping. Thus, the Rectangles are treated as "solid".
+ *
+ * @function Phaser.Geom.Rectangle.Overlaps
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Rectangle} rectA - The first Rectangle to check.
+ * @param {Phaser.Geom.Rectangle} rectB - The second Rectangle to check.
+ *
+ * @return {boolean} `true` if the two Rectangles overlap, `false` otherwise.
+ */
+var Overlaps = function (rectA, rectB)
+{
+    return (
+        rectA.x < rectB.right &&
+        rectA.right > rectB.x &&
+        rectA.y < rectB.bottom &&
+        rectA.bottom > rectB.y
+    );
+};
+
+module.exports = Overlaps;
+
+
+/***/ }),
+/* 862 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Point = __webpack_require__(2);
+var DegToRad = __webpack_require__(47);
+
+/**
+ * Returns a Point from the perimeter of a Rectangle based on the given angle.
+ *
+ * @function Phaser.Geom.Rectangle.PerimeterPoint
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rectangle - The Rectangle to get the perimeter point from.
+ * @param {number} angle - The angle of the point, in degrees.
+ * @param {Phaser.Geom.Point} [out] - The Point object to store the position in. If not given, a new Point instance is created.
+ *
+ * @return {Phaser.Geom.Point} A Point object holding the coordinates of the Rectangle perimeter.
+ */
+var PerimeterPoint = function (rectangle, angle, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    angle = DegToRad(angle);
+
+    var s = Math.sin(angle);
+    var c = Math.cos(angle);
+
+    var dx = (c > 0) ? rectangle.width / 2 : rectangle.width / -2;
+    var dy = (s > 0) ? rectangle.height / 2 : rectangle.height / -2;
+
+    if (Math.abs(dx * s) < Math.abs(dy * c))
+    {
+        dy = (dx * s) / c;
+    }
+    else
+    {
+        dx = (dy * c) / s;
+    }
+
+    out.x = dx + rectangle.centerX;
+    out.y = dy + rectangle.centerY;
+
+    return out;
+};
+
+module.exports = PerimeterPoint;
+
+
+/***/ }),
+/* 863 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Between = __webpack_require__(105);
+var ContainsRect = __webpack_require__(303);
+var Point = __webpack_require__(2);
+
+/**
+ * Calculates a random point that lies within the `outer` Rectangle, but outside of the `inner` Rectangle.
+ * The inner Rectangle must be fully contained within the outer rectangle.
+ *
+ * @function Phaser.Geom.Rectangle.RandomOutside
+ * @since 3.10.0
+ *
+ * @generic {Phaser.Geom.Point} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} outer - The outer Rectangle to get the random point within.
+ * @param {Phaser.Geom.Rectangle} inner - The inner Rectangle to exclude from the returned point.
+ * @param {Phaser.Geom.Point} [out] - A Point, or Point-like object to store the result in. If not specified, a new Point will be created.
+ *
+ * @return {Phaser.Geom.Point} A Point object containing the random values in its `x` and `y` properties.
+ */
+var RandomOutside = function (outer, inner, out)
+{
+    if (out === undefined) { out = new Point(); }
+
+    if (ContainsRect(outer, inner))
+    {
+        //  Pick a random quadrant
+        //
+        //  The quadrants don't extend the full widths / heights of the outer rect to give
+        //  us a better uniformed distribution, otherwise you get clumping in the corners where
+        //  the 4 quads would overlap
+
+        switch (Between(0, 3))
+        {
+            case 0: // Top
+                out.x = outer.x + (Math.random() * (inner.right - outer.x));
+                out.y = outer.y + (Math.random() * (inner.top - outer.y));
+                break;
+
+            case 1: // Bottom
+                out.x = inner.x + (Math.random() * (outer.right - inner.x));
+                out.y = inner.bottom + (Math.random() * (outer.bottom - inner.bottom));
+                break;
+
+            case 2: // Left
+                out.x = outer.x + (Math.random() * (inner.x - outer.x));
+                out.y = inner.y + (Math.random() * (outer.bottom - inner.y));
+                break;
+
+            case 3: // Right
+                out.x = inner.right + (Math.random() * (outer.right - inner.right));
+                out.y = outer.y + (Math.random() * (inner.bottom - outer.y));
+                break;
+        }
+    }
+
+    return out;
+};
+
+module.exports = RandomOutside;
+
+
+/***/ }),
+/* 864 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Determines if the two objects (either Rectangles or Rectangle-like) have the same width and height values under strict equality.
+ *
+ * @function Phaser.Geom.Rectangle.SameDimensions
+ * @since 3.15.0
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The first Rectangle object.
+ * @param {Phaser.Geom.Rectangle} toCompare - The second Rectangle object.
+ *
+ * @return {boolean} `true` if the objects have equivalent values for the `width` and `height` properties, otherwise `false`.
+ */
+var SameDimensions = function (rect, toCompare)
+{
+    return (rect.width === toCompare.width && rect.height === toCompare.height);
+};
+
+module.exports = SameDimensions;
+
+
+/***/ }),
+/* 865 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+// Scales the width and height of this Rectangle by the given amounts.
+
+/**
+ * Scales the width and height of this Rectangle by the given amounts.
+ *
+ * @function Phaser.Geom.Rectangle.Scale
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [rect,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The `Rectangle` object that will be scaled by the specified amount(s).
+ * @param {number} x - The factor by which to scale the rectangle horizontally.
+ * @param {number} y - The amount by which to scale the rectangle vertically. If this is not specified, the rectangle will be scaled by the factor `x` in both directions.
+ *
+ * @return {Phaser.Geom.Rectangle} The rectangle object with updated `width` and `height` properties as calculated from the scaling factor(s).
+ */
+var Scale = function (rect, x, y)
+{
+    if (y === undefined) { y = x; }
+
+    rect.width *= x;
+    rect.height *= y;
+
+    return rect;
+};
+
+module.exports = Scale;
+
+
+/***/ }),
+/* 866 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Rectangle = __webpack_require__(10);
+
+/**
+ * Creates a new Rectangle or repositions and/or resizes an existing Rectangle so that it encompasses the two given Rectangles, i.e. calculates their union.
+ *
+ * @function Phaser.Geom.Rectangle.Union
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Rectangle} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rectA - The first Rectangle to use.
+ * @param {Phaser.Geom.Rectangle} rectB - The second Rectangle to use.
+ * @param {Phaser.Geom.Rectangle} [out] - The Rectangle to store the union in.
+ *
+ * @return {Phaser.Geom.Rectangle} The modified `out` Rectangle, or a new Rectangle if none was provided.
+ */
+var Union = function (rectA, rectB, out)
+{
+    if (out === undefined) { out = new Rectangle(); }
+
+    //  Cache vars so we can use one of the input rects as the output rect
+    var x = Math.min(rectA.x, rectB.x);
+    var y = Math.min(rectA.y, rectB.y);
+    var w = Math.max(rectA.right, rectB.right) - x;
+    var h = Math.max(rectA.bottom, rectB.bottom) - y;
+
+    return out.setTo(x, y, w, h);
+};
+
+module.exports = Union;
+
+
+/***/ }),
+/* 867 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Triangle = __webpack_require__(45);
+
+Triangle.Area = __webpack_require__(868);
+Triangle.BuildEquilateral = __webpack_require__(869);
+Triangle.BuildFromPolygon = __webpack_require__(870);
+Triangle.BuildRight = __webpack_require__(871);
+Triangle.CenterOn = __webpack_require__(872);
+Triangle.Centroid = __webpack_require__(307);
+Triangle.CircumCenter = __webpack_require__(873);
+Triangle.CircumCircle = __webpack_require__(874);
+Triangle.Clone = __webpack_require__(875);
+Triangle.Contains = __webpack_require__(64);
+Triangle.ContainsArray = __webpack_require__(128);
+Triangle.ContainsPoint = __webpack_require__(876);
+Triangle.CopyFrom = __webpack_require__(877);
+Triangle.Decompose = __webpack_require__(295);
+Triangle.Equals = __webpack_require__(878);
+Triangle.GetPoint = __webpack_require__(304);
+Triangle.GetPoints = __webpack_require__(305);
+Triangle.InCenter = __webpack_require__(309);
+Triangle.Perimeter = __webpack_require__(879);
+Triangle.Offset = __webpack_require__(308);
+Triangle.Random = __webpack_require__(306);
+Triangle.Rotate = __webpack_require__(880);
+Triangle.RotateAroundPoint = __webpack_require__(881);
+Triangle.RotateAroundXY = __webpack_require__(132);
+
+module.exports = Triangle;
+
+
+/***/ }),
+/* 868 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+// The 2D area of a triangle. The area value is always non-negative.
+
+/**
+ * Returns the area of a Triangle.
+ *
+ * @function Phaser.Geom.Triangle.Area
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to use.
+ *
+ * @return {number} The area of the Triangle, always non-negative.
+ */
+var Area = function (triangle)
+{
+    var x1 = triangle.x1;
+    var y1 = triangle.y1;
+
+    var x2 = triangle.x2;
+    var y2 = triangle.y2;
+
+    var x3 = triangle.x3;
+    var y3 = triangle.y3;
+
+    return Math.abs(((x3 - x1) * (y2 - y1) - (x2 - x1) * (y3 - y1)) / 2);
+};
+
+module.exports = Area;
+
+
+/***/ }),
+/* 869 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Triangle = __webpack_require__(45);
+
+/**
+ * Builds an equilateral triangle. In the equilateral triangle, all the sides are the same length (congruent) and all the angles are the same size (congruent).
+ * The x/y specifies the top-middle of the triangle (x1/y1) and length is the length of each side.
+ *
+ * @function Phaser.Geom.Triangle.BuildEquilateral
+ * @since 3.0.0
+ *
+ * @param {number} x - x coordinate of the top point of the triangle.
+ * @param {number} y - y coordinate of the top point of the triangle.
+ * @param {number} length - Length of each side of the triangle.
+ *
+ * @return {Phaser.Geom.Triangle} The Triangle object of the given size.
+ */
+var BuildEquilateral = function (x, y, length)
+{
+    var height = length * (Math.sqrt(3) / 2);
+
+    var x1 = x;
+    var y1 = y;
+
+    var x2 = x + (length / 2);
+    var y2 = y + height;
+
+    var x3 = x - (length / 2);
+    var y3 = y + height;
+
+    return new Triangle(x1, y1, x2, y2, x3, y3);
+};
+
+module.exports = BuildEquilateral;
+
+
+/***/ }),
+/* 870 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var EarCut = __webpack_require__(109);
+var Triangle = __webpack_require__(45);
+
+/**
+ * Takes an array of vertex coordinates, and optionally an array of hole indices, then returns an array
+ * of Triangle instances, where the given vertices have been decomposed into a series of triangles.
+ *
+ * @function Phaser.Geom.Triangle.BuildFromPolygon
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Triangle[]} O - [out,$return]
+ *
+ * @param {array} data - A flat array of vertex coordinates like [x0,y0, x1,y1, x2,y2, ...]
+ * @param {array} [holes=null] - An array of hole indices if any (e.g. [5, 8] for a 12-vertex input would mean one hole with vertices 5–7 and another with 8–11).
+ * @param {number} [scaleX=1] - Horizontal scale factor to multiply the resulting points by.
+ * @param {number} [scaleY=1] - Vertical scale factor to multiply the resulting points by.
+ * @param {(array|Phaser.Geom.Triangle[])} [out] - An array to store the resulting Triangle instances in. If not provided, a new array is created.
+ *
+ * @return {(array|Phaser.Geom.Triangle[])} An array of Triangle instances, where each triangle is based on the decomposed vertices data.
+ */
+var BuildFromPolygon = function (data, holes, scaleX, scaleY, out)
+{
+    if (holes === undefined) { holes = null; }
+    if (scaleX === undefined) { scaleX = 1; }
+    if (scaleY === undefined) { scaleY = 1; }
+    if (out === undefined) { out = []; }
+
+    var tris = EarCut(data, holes);
+
+    var a;
+    var b;
+    var c;
+
+    var x1;
+    var y1;
+
+    var x2;
+    var y2;
+
+    var x3;
+    var y3;
+
+    for (var i = 0; i < tris.length; i += 3)
+    {
+        a = tris[i];
+        b = tris[i + 1];
+        c = tris[i + 2];
+
+        x1 = data[a * 2] * scaleX;
+        y1 = data[(a * 2) + 1] * scaleY;
+
+        x2 = data[b * 2] * scaleX;
+        y2 = data[(b * 2) + 1] * scaleY;
+
+        x3 = data[c * 2] * scaleX;
+        y3 = data[(c * 2) + 1] * scaleY;
+
+        out.push(new Triangle(x1, y1, x2, y2, x3, y3));
+    }
+
+    return out;
+};
+
+module.exports = BuildFromPolygon;
+
+
+/***/ }),
+/* 871 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Triangle = __webpack_require__(45);
+
+//  Builds a right triangle, with one 90 degree angle and two acute angles
+//  The x/y is the coordinate of the 90 degree angle (and will map to x1/y1 in the resulting Triangle)
+//  w/h can be positive or negative and represent the length of each side
+
+/**
+ * Builds a right triangle, i.e. one which has a 90-degree angle and two acute angles.
+ *
+ * @function Phaser.Geom.Triangle.BuildRight
+ * @since 3.0.0
+ *
+ * @param {number} x - The X coordinate of the right angle, which will also be the first X coordinate of the constructed Triangle.
+ * @param {number} y - The Y coordinate of the right angle, which will also be the first Y coordinate of the constructed Triangle.
+ * @param {number} width - The length of the side which is to the left or to the right of the right angle.
+ * @param {number} height - The length of the side which is above or below the right angle.
+ *
+ * @return {Phaser.Geom.Triangle} The constructed right Triangle.
+ */
+var BuildRight = function (x, y, width, height)
+{
+    if (height === undefined) { height = width; }
+
+    //  90 degree angle
+    var x1 = x;
+    var y1 = y;
+
+    var x2 = x;
+    var y2 = y - height;
+
+    var x3 = x + width;
+    var y3 = y;
+
+    return new Triangle(x1, y1, x2, y2, x3, y3);
+};
+
+module.exports = BuildRight;
+
+
+/***/ }),
+/* 872 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Centroid = __webpack_require__(307);
+var Offset = __webpack_require__(308);
+
+/**
+ * @callback CenterFunction
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to return the center coordinates of.
+ *
+ * @return {Phaser.Math.Vector2} The center point of the Triangle according to the function.
+ */
+
+/**
+ * Positions the Triangle so that it is centered on the given coordinates.
+ *
+ * @function Phaser.Geom.Triangle.CenterOn
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Triangle} O - [triangle,$return]
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The triangle to be positioned.
+ * @param {number} x - The horizontal coordinate to center on.
+ * @param {number} y - The vertical coordinate to center on.
+ * @param {CenterFunction} [centerFunc] - The function used to center the triangle. Defaults to Centroid centering.
+ *
+ * @return {Phaser.Geom.Triangle} The Triangle that was centered.
+ */
+var CenterOn = function (triangle, x, y, centerFunc)
+{
+    if (centerFunc === undefined) { centerFunc = Centroid; }
+
+    //  Get the center of the triangle
+    var center = centerFunc(triangle);
+
+    //  Difference
+    var diffX = x - center.x;
+    var diffY = y - center.y;
+
+    return Offset(triangle, diffX, diffY);
+};
+
+module.exports = CenterOn;
+
+
+/***/ }),
+/* 873 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Vector2 = __webpack_require__(6);
+
+//  Adapted from http://bjornharrtell.github.io/jsts/doc/api/jsts_geom_Triangle.js.html
+
+/**
+ * Computes the determinant of a 2x2 matrix. Uses standard double-precision arithmetic, so is susceptible to round-off error.
+ *
+ * @function det
+ * @private
+ * @since 3.0.0
+ *
+ * @param {number} m00 - The [0,0] entry of the matrix.
+ * @param {number} m01 - The [0,1] entry of the matrix.
+ * @param {number} m10 - The [1,0] entry of the matrix.
+ * @param {number} m11 - The [1,1] entry of the matrix.
+ *
+ * @return {number} the determinant.
+ */
+function det (m00, m01, m10, m11)
+{
+    return (m00 * m11) - (m01 * m10);
+}
+
+/**
+ * Computes the circumcentre of a triangle. The circumcentre is the centre of
+ * the circumcircle, the smallest circle which encloses the triangle. It is also
+ * the common intersection point of the perpendicular bisectors of the sides of
+ * the triangle, and is the only point which has equal distance to all three
+ * vertices of the triangle.
+ *
+ * @function Phaser.Geom.Triangle.CircumCenter
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Math.Vector2} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to get the circumcenter of.
+ * @param {Phaser.Math.Vector2} [out] - The Vector2 object to store the position in. If not given, a new Vector2 instance is created.
+ *
+ * @return {Phaser.Math.Vector2} A Vector2 object holding the coordinates of the circumcenter of the Triangle.
+ */
+var CircumCenter = function (triangle, out)
+{
+    if (out === undefined) { out = new Vector2(); }
+
+    var cx = triangle.x3;
+    var cy = triangle.y3;
+
+    var ax = triangle.x1 - cx;
+    var ay = triangle.y1 - cy;
+
+    var bx = triangle.x2 - cx;
+    var by = triangle.y2 - cy;
+
+    var denom = 2 * det(ax, ay, bx, by);
+    var numx = det(ay, ax * ax + ay * ay, by, bx * bx + by * by);
+    var numy = det(ax, ax * ax + ay * ay, bx, bx * bx + by * by);
+
+    out.x = cx - numx / denom;
+    out.y = cy + numy / denom;
+
+    return out;
+};
+
+module.exports = CircumCenter;
+
+
+/***/ }),
+/* 874 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Circle = __webpack_require__(84);
+
+//  Adapted from https://gist.github.com/mutoo/5617691
+
+/**
+ * Finds the circumscribed circle (circumcircle) of a Triangle object. The circumcircle is the circle which touches all of the triangle's vertices.
+ *
+ * @function Phaser.Geom.Triangle.CircumCircle
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Circle} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to use as input.
+ * @param {Phaser.Geom.Circle} [out] - An optional Circle to store the result in.
+ *
+ * @return {Phaser.Geom.Circle} The updated `out` Circle, or a new Circle if none was provided.
+ */
+var CircumCircle = function (triangle, out)
+{
+    if (out === undefined) { out = new Circle(); }
+
+    //  A
+    var x1 = triangle.x1;
+    var y1 = triangle.y1;
+
+    //  B
+    var x2 = triangle.x2;
+    var y2 = triangle.y2;
+
+    //  C
+    var x3 = triangle.x3;
+    var y3 = triangle.y3;
+
+    var A = x2 - x1;
+    var B = y2 - y1;
+    var C = x3 - x1;
+    var D = y3 - y1;
+    var E = A * (x1 + x2) + B * (y1 + y2);
+    var F = C * (x1 + x3) + D * (y1 + y3);
+    var G = 2 * (A * (y3 - y2) - B * (x3 - x2));
+
+    var dx;
+    var dy;
+
+    //  If the points of the triangle are collinear, then just find the
+    //  extremes and use the midpoint as the center of the circumcircle.
+
+    if (Math.abs(G) < 0.000001)
+    {
+        var minX = Math.min(x1, x2, x3);
+        var minY = Math.min(y1, y2, y3);
+        dx = (Math.max(x1, x2, x3) - minX) * 0.5;
+        dy = (Math.max(y1, y2, y3) - minY) * 0.5;
+
+        out.x = minX + dx;
+        out.y = minY + dy;
+        out.radius = Math.sqrt(dx * dx + dy * dy);
+    }
+    else
+    {
+        out.x = (D * E - B * F) / G;
+        out.y = (A * F - C * E) / G;
+        dx = out.x - x1;
+        dy = out.y - y1;
+        out.radius = Math.sqrt(dx * dx + dy * dy);
+    }
+
+    return out;
+};
+
+module.exports = CircumCircle;
+
+
+/***/ }),
+/* 875 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Triangle = __webpack_require__(45);
+
+/**
+ * Clones a Triangle object.
+ *
+ * @function Phaser.Geom.Triangle.Clone
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Triangle} source - The Triangle to clone.
+ *
+ * @return {Phaser.Geom.Triangle} A new Triangle identical to the given one but separate from it.
+ */
+var Clone = function (source)
+{
+    return new Triangle(source.x1, source.y1, source.x2, source.y2, source.x3, source.y3);
+};
+
+module.exports = Clone;
+
+
+/***/ }),
+/* 876 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Contains = __webpack_require__(64);
+
+/**
+ * Tests if a triangle contains a point.
+ *
+ * @function Phaser.Geom.Triangle.ContainsPoint
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The triangle.
+ * @param {(Phaser.Geom.Point|Phaser.Math.Vector2|any)} point - The point to test, or any point-like object with public `x` and `y` properties.
+ *
+ * @return {boolean} `true` if the point is within the triangle, otherwise `false`.
+ */
+var ContainsPoint = function (triangle, point)
+{
+    return Contains(triangle, point.x, point.y);
+};
+
+module.exports = ContainsPoint;
+
+
+/***/ }),
+/* 877 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Copy the values of one Triangle to a destination Triangle.
+ *
+ * @function Phaser.Geom.Triangle.CopyFrom
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Triangle} O - [dest,$return]
+ *
+ * @param {Phaser.Geom.Triangle} source - The source Triangle to copy the values from.
+ * @param {Phaser.Geom.Triangle} dest - The destination Triangle to copy the values to.
+ *
+ * @return {Phaser.Geom.Triangle} The destination Triangle.
+ */
+var CopyFrom = function (source, dest)
+{
+    return dest.setTo(source.x1, source.y1, source.x2, source.y2, source.x3, source.y3);
+};
+
+module.exports = CopyFrom;
+
+
+/***/ }),
+/* 878 */
+/***/ (function(module, exports) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+/**
+ * Returns true if two triangles have the same coordinates.
+ *
+ * @function Phaser.Geom.Triangle.Equals
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The first triangle to check.
+ * @param {Phaser.Geom.Triangle} toCompare - The second triangle to check.
+ *
+ * @return {boolean} `true` if the two given triangles have the exact same coordinates, otherwise `false`.
+ */
+var Equals = function (triangle, toCompare)
+{
+    return (
+        triangle.x1 === toCompare.x1 &&
+        triangle.y1 === toCompare.y1 &&
+        triangle.x2 === toCompare.x2 &&
+        triangle.y2 === toCompare.y2 &&
+        triangle.x3 === toCompare.x3 &&
+        triangle.y3 === toCompare.y3
+    );
+};
+
+module.exports = Equals;
+
+
+/***/ }),
+/* 879 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Length = __webpack_require__(27);
+
+/**
+ * Gets the length of the perimeter of the given triangle.
+ * Calculated by adding together the length of each of the three sides.
+ *
+ * @function Phaser.Geom.Triangle.Perimeter
+ * @since 3.0.0
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to get the length from.
+ *
+ * @return {number} The length of the Triangle.
+ */
+var Perimeter = function (triangle)
+{
+    var line1 = triangle.getLineA();
+    var line2 = triangle.getLineB();
+    var line3 = triangle.getLineC();
+
+    return (Length(line1) + Length(line2) + Length(line3));
+};
+
+module.exports = Perimeter;
+
+
+/***/ }),
+/* 880 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var RotateAroundXY = __webpack_require__(132);
+var InCenter = __webpack_require__(309);
+
+/**
+ * Rotates a Triangle about its incenter, which is the point at which its three angle bisectors meet.
+ *
+ * @function Phaser.Geom.Triangle.Rotate
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Triangle} O - [triangle,$return]
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to rotate.
+ * @param {number} angle - The angle by which to rotate the Triangle, in radians.
+ *
+ * @return {Phaser.Geom.Triangle} The rotated Triangle.
+ */
+var Rotate = function (triangle, angle)
+{
+    var point = InCenter(triangle);
+
+    return RotateAroundXY(triangle, point.x, point.y, angle);
+};
+
+module.exports = Rotate;
+
+
+/***/ }),
+/* 881 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var RotateAroundXY = __webpack_require__(132);
+
+/**
+ * Rotates a Triangle at a certain angle about a given Point or object with public `x` and `y` properties.
+ *
+ * @function Phaser.Geom.Triangle.RotateAroundPoint
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Geom.Triangle} O - [triangle,$return]
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to rotate.
+ * @param {Phaser.Geom.Point} point - The Point to rotate the Triangle about.
+ * @param {number} angle - The angle by which to rotate the Triangle, in radians.
+ *
+ * @return {Phaser.Geom.Triangle} The rotated Triangle.
+ */
+var RotateAroundPoint = function (triangle, point, angle)
+{
+    return RotateAroundXY(triangle, point.x, point.y, angle);
+};
+
+module.exports = RotateAroundPoint;
+
+
+/***/ }),
+/* 882 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var CONST = __webpack_require__(111);
 var Extend = __webpack_require__(14);
 
 /**
@@ -104038,17 +114831,17 @@ var Extend = __webpack_require__(14);
 
 var Input = {
 
-    CreatePixelPerfectHandler: __webpack_require__(248),
-    CreateInteractiveObject: __webpack_require__(249),
-    Events: __webpack_require__(24),
-    Gamepad: __webpack_require__(707),
-    InputManager: __webpack_require__(206),
-    InputPlugin: __webpack_require__(719),
-    InputPluginCache: __webpack_require__(70),
-    Keyboard: __webpack_require__(729),
-    Mouse: __webpack_require__(743),
-    Pointer: __webpack_require__(209),
-    Touch: __webpack_require__(744)
+    CreatePixelPerfectHandler: __webpack_require__(310),
+    CreateInteractiveObject: __webpack_require__(311),
+    Events: __webpack_require__(29),
+    Gamepad: __webpack_require__(883),
+    InputManager: __webpack_require__(236),
+    InputPlugin: __webpack_require__(895),
+    InputPluginCache: __webpack_require__(87),
+    Keyboard: __webpack_require__(896),
+    Mouse: __webpack_require__(910),
+    Pointer: __webpack_require__(239),
+    Touch: __webpack_require__(911)
 
 };
 
@@ -104059,7 +114852,7 @@ module.exports = Input;
 
 
 /***/ }),
-/* 707 */
+/* 883 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -104074,18 +114867,18 @@ module.exports = Input;
 
 module.exports = {
 
-    Axis: __webpack_require__(250),
-    Button: __webpack_require__(251),
-    Events: __webpack_require__(104),
-    Gamepad: __webpack_require__(252),
-    GamepadPlugin: __webpack_require__(714),
+    Axis: __webpack_require__(312),
+    Button: __webpack_require__(313),
+    Events: __webpack_require__(133),
+    Gamepad: __webpack_require__(314),
+    GamepadPlugin: __webpack_require__(890),
     
-    Configs: __webpack_require__(715)
+    Configs: __webpack_require__(891)
 };
 
 
 /***/ }),
-/* 708 */
+/* 884 */
 /***/ (function(module, exports) {
 
 /**
@@ -104114,7 +114907,7 @@ module.exports = 'down';
 
 
 /***/ }),
-/* 709 */
+/* 885 */
 /***/ (function(module, exports) {
 
 /**
@@ -104143,7 +114936,7 @@ module.exports = 'up';
 
 
 /***/ }),
-/* 710 */
+/* 886 */
 /***/ (function(module, exports) {
 
 /**
@@ -104174,7 +114967,7 @@ module.exports = 'connected';
 
 
 /***/ }),
-/* 711 */
+/* 887 */
 /***/ (function(module, exports) {
 
 /**
@@ -104200,7 +114993,7 @@ module.exports = 'disconnected';
 
 
 /***/ }),
-/* 712 */
+/* 888 */
 /***/ (function(module, exports) {
 
 /**
@@ -104232,7 +115025,7 @@ module.exports = 'down';
 
 
 /***/ }),
-/* 713 */
+/* 889 */
 /***/ (function(module, exports) {
 
 /**
@@ -104264,7 +115057,7 @@ module.exports = 'up';
 
 
 /***/ }),
-/* 714 */
+/* 890 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -104274,12 +115067,12 @@ module.exports = 'up';
  */
 
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(104);
-var Gamepad = __webpack_require__(252);
-var GetValue = __webpack_require__(4);
-var InputPluginCache = __webpack_require__(70);
-var InputEvents = __webpack_require__(24);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(133);
+var Gamepad = __webpack_require__(314);
+var GetValue = __webpack_require__(5);
+var InputPluginCache = __webpack_require__(87);
+var InputEvents = __webpack_require__(29);
 
 /**
  * @classdesc
@@ -104910,7 +115703,7 @@ module.exports = GamepadPlugin;
 
 
 /***/ }),
-/* 715 */
+/* 891 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -104925,15 +115718,15 @@ module.exports = GamepadPlugin;
 
 module.exports = {
 
-    DUALSHOCK_4: __webpack_require__(716),
-    SNES_USB: __webpack_require__(717),
-    XBOX_360: __webpack_require__(718)
+    DUALSHOCK_4: __webpack_require__(892),
+    SNES_USB: __webpack_require__(893),
+    XBOX_360: __webpack_require__(894)
 
 };
 
 
 /***/ }),
-/* 716 */
+/* 892 */
 /***/ (function(module, exports) {
 
 /**
@@ -104983,7 +115776,7 @@ module.exports = {
 
 
 /***/ }),
-/* 717 */
+/* 893 */
 /***/ (function(module, exports) {
 
 /**
@@ -105022,7 +115815,7 @@ module.exports = {
 
 
 /***/ }),
-/* 718 */
+/* 894 */
 /***/ (function(module, exports) {
 
 /**
@@ -105073,7 +115866,7 @@ module.exports = {
 
 
 /***/ }),
-/* 719 */
+/* 895 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -105082,27 +115875,27 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Circle = __webpack_require__(720);
-var CircleContains = __webpack_require__(253);
+var Circle = __webpack_require__(84);
+var CircleContains = __webpack_require__(41);
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(92);
-var CreateInteractiveObject = __webpack_require__(249);
-var CreatePixelPerfectHandler = __webpack_require__(248);
-var DistanceBetween = __webpack_require__(88);
-var Ellipse = __webpack_require__(242);
-var EllipseContains = __webpack_require__(243);
-var Events = __webpack_require__(24);
-var EventEmitter = __webpack_require__(2);
+var CONST = __webpack_require__(111);
+var CreateInteractiveObject = __webpack_require__(311);
+var CreatePixelPerfectHandler = __webpack_require__(310);
+var DistanceBetween = __webpack_require__(73);
+var Ellipse = __webpack_require__(83);
+var EllipseContains = __webpack_require__(62);
+var Events = __webpack_require__(29);
+var EventEmitter = __webpack_require__(3);
 var GetFastValue = __webpack_require__(1);
-var GEOM_CONST = __webpack_require__(29);
-var InputPluginCache = __webpack_require__(70);
-var IsPlainObject = __webpack_require__(11);
-var PluginCache = __webpack_require__(9);
-var Rectangle = __webpack_require__(36);
-var RectangleContains = __webpack_require__(80);
-var SceneEvents = __webpack_require__(8);
-var Triangle = __webpack_require__(725);
-var TriangleContains = __webpack_require__(255);
+var GEOM_CONST = __webpack_require__(21);
+var InputPluginCache = __webpack_require__(87);
+var IsPlainObject = __webpack_require__(15);
+var PluginCache = __webpack_require__(12);
+var Rectangle = __webpack_require__(10);
+var RectangleContains = __webpack_require__(38);
+var SceneEvents = __webpack_require__(11);
+var Triangle = __webpack_require__(45);
+var TriangleContains = __webpack_require__(64);
 
 /**
  * @classdesc
@@ -108284,1232 +119077,7 @@ module.exports = InputPlugin;
 
 
 /***/ }),
-/* 720 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Class = __webpack_require__(0);
-var Contains = __webpack_require__(253);
-var GetPoint = __webpack_require__(721);
-var GetPoints = __webpack_require__(722);
-var GEOM_CONST = __webpack_require__(29);
-var Random = __webpack_require__(724);
-
-/**
- * @classdesc
- * A Circle object.
- *
- * This is a geometry object, containing numerical values and related methods to inspect and modify them.
- * It is not a Game Object, in that you cannot add it to the display list, and it has no texture.
- * To render a Circle you should look at the capabilities of the Graphics class.
- *
- * @class Circle
- * @memberof Phaser.Geom
- * @constructor
- * @since 3.0.0
- *
- * @param {number} [x=0] - The x position of the center of the circle.
- * @param {number} [y=0] - The y position of the center of the circle.
- * @param {number} [radius=0] - The radius of the circle.
- */
-var Circle = new Class({
-
-    initialize:
-
-    function Circle (x, y, radius)
-    {
-        if (x === undefined) { x = 0; }
-        if (y === undefined) { y = 0; }
-        if (radius === undefined) { radius = 0; }
-
-        /**
-         * The geometry constant type of this object: `GEOM_CONST.CIRCLE`.
-         * Used for fast type comparisons.
-         *
-         * @name Phaser.Geom.Circle#type
-         * @type {number}
-         * @readonly
-         * @since 3.19.0
-         */
-        this.type = GEOM_CONST.CIRCLE;
-
-        /**
-         * The x position of the center of the circle.
-         *
-         * @name Phaser.Geom.Circle#x
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x = x;
-
-        /**
-         * The y position of the center of the circle.
-         *
-         * @name Phaser.Geom.Circle#y
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y = y;
-
-        /**
-         * The internal radius of the circle.
-         *
-         * @name Phaser.Geom.Circle#_radius
-         * @type {number}
-         * @private
-         * @since 3.0.0
-         */
-        this._radius = radius;
-
-        /**
-         * The internal diameter of the circle.
-         *
-         * @name Phaser.Geom.Circle#_diameter
-         * @type {number}
-         * @private
-         * @since 3.0.0
-         */
-        this._diameter = radius * 2;
-    },
-
-    /**
-     * Check to see if the Circle contains the given x / y coordinates.
-     *
-     * @method Phaser.Geom.Circle#contains
-     * @since 3.0.0
-     *
-     * @param {number} x - The x coordinate to check within the circle.
-     * @param {number} y - The y coordinate to check within the circle.
-     *
-     * @return {boolean} True if the coordinates are within the circle, otherwise false.
-     */
-    contains: function (x, y)
-    {
-        return Contains(this, x, y);
-    },
-
-    /**
-     * Returns a Point object containing the coordinates of a point on the circumference of the Circle
-     * based on the given angle normalized to the range 0 to 1. I.e. a value of 0.5 will give the point
-     * at 180 degrees around the circle.
-     *
-     * @method Phaser.Geom.Circle#getPoint
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point} O - [out,$return]
-     *
-     * @param {number} position - A value between 0 and 1, where 0 equals 0 degrees, 0.5 equals 180 degrees and 1 equals 360 around the circle.
-     * @param {(Phaser.Geom.Point|object)} [out] - An object to store the return values in. If not given a Point object will be created.
-     *
-     * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point around the circle.
-     */
-    getPoint: function (position, point)
-    {
-        return GetPoint(this, position, point);
-    },
-
-    /**
-     * Returns an array of Point objects containing the coordinates of the points around the circumference of the Circle,
-     * based on the given quantity or stepRate values.
-     *
-     * @method Phaser.Geom.Circle#getPoints
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point[]} O - [output,$return]
-     *
-     * @param {number} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
-     * @param {number} [stepRate] - Sets the quantity by getting the circumference of the circle and dividing it by the stepRate.
-     * @param {(array|Phaser.Geom.Point[])} [output] - An array to insert the points in to. If not provided a new array will be created.
-     *
-     * @return {(array|Phaser.Geom.Point[])} An array of Point objects pertaining to the points around the circumference of the circle.
-     */
-    getPoints: function (quantity, stepRate, output)
-    {
-        return GetPoints(this, quantity, stepRate, output);
-    },
-
-    /**
-     * Returns a uniformly distributed random point from anywhere within the Circle.
-     *
-     * @method Phaser.Geom.Circle#getRandomPoint
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point} O - [point,$return]
-     *
-     * @param {(Phaser.Geom.Point|object)} [point] - A Point or point-like object to set the random `x` and `y` values in.
-     *
-     * @return {(Phaser.Geom.Point|object)} A Point object with the random values set in the `x` and `y` properties.
-     */
-    getRandomPoint: function (point)
-    {
-        return Random(this, point);
-    },
-
-    /**
-     * Sets the x, y and radius of this circle.
-     *
-     * @method Phaser.Geom.Circle#setTo
-     * @since 3.0.0
-     *
-     * @param {number} [x=0] - The x position of the center of the circle.
-     * @param {number} [y=0] - The y position of the center of the circle.
-     * @param {number} [radius=0] - The radius of the circle.
-     *
-     * @return {this} This Circle object.
-     */
-    setTo: function (x, y, radius)
-    {
-        this.x = x;
-        this.y = y;
-        this._radius = radius;
-        this._diameter = radius * 2;
-
-        return this;
-    },
-
-    /**
-     * Sets this Circle to be empty with a radius of zero.
-     * Does not change its position.
-     *
-     * @method Phaser.Geom.Circle#setEmpty
-     * @since 3.0.0
-     *
-     * @return {this} This Circle object.
-     */
-    setEmpty: function ()
-    {
-        this._radius = 0;
-        this._diameter = 0;
-
-        return this;
-    },
-
-    /**
-     * Sets the position of this Circle.
-     *
-     * @method Phaser.Geom.Circle#setPosition
-     * @since 3.0.0
-     *
-     * @param {number} [x=0] - The x position of the center of the circle.
-     * @param {number} [y=0] - The y position of the center of the circle.
-     *
-     * @return {this} This Circle object.
-     */
-    setPosition: function (x, y)
-    {
-        if (y === undefined) { y = x; }
-
-        this.x = x;
-        this.y = y;
-
-        return this;
-    },
-
-    /**
-     * Checks to see if the Circle is empty: has a radius of zero.
-     *
-     * @method Phaser.Geom.Circle#isEmpty
-     * @since 3.0.0
-     *
-     * @return {boolean} True if the Circle is empty, otherwise false.
-     */
-    isEmpty: function ()
-    {
-        return (this._radius <= 0);
-    },
-
-    /**
-     * The radius of the Circle.
-     *
-     * @name Phaser.Geom.Circle#radius
-     * @type {number}
-     * @since 3.0.0
-     */
-    radius: {
-
-        get: function ()
-        {
-            return this._radius;
-        },
-
-        set: function (value)
-        {
-            this._radius = value;
-            this._diameter = value * 2;
-        }
-
-    },
-
-    /**
-     * The diameter of the Circle.
-     *
-     * @name Phaser.Geom.Circle#diameter
-     * @type {number}
-     * @since 3.0.0
-     */
-    diameter: {
-
-        get: function ()
-        {
-            return this._diameter;
-        },
-
-        set: function (value)
-        {
-            this._diameter = value;
-            this._radius = value * 0.5;
-        }
-
-    },
-
-    /**
-     * The left position of the Circle.
-     *
-     * @name Phaser.Geom.Circle#left
-     * @type {number}
-     * @since 3.0.0
-     */
-    left: {
-
-        get: function ()
-        {
-            return this.x - this._radius;
-        },
-
-        set: function (value)
-        {
-            this.x = value + this._radius;
-        }
-
-    },
-
-    /**
-     * The right position of the Circle.
-     *
-     * @name Phaser.Geom.Circle#right
-     * @type {number}
-     * @since 3.0.0
-     */
-    right: {
-
-        get: function ()
-        {
-            return this.x + this._radius;
-        },
-
-        set: function (value)
-        {
-            this.x = value - this._radius;
-        }
-
-    },
-
-    /**
-     * The top position of the Circle.
-     *
-     * @name Phaser.Geom.Circle#top
-     * @type {number}
-     * @since 3.0.0
-     */
-    top: {
-
-        get: function ()
-        {
-            return this.y - this._radius;
-        },
-
-        set: function (value)
-        {
-            this.y = value + this._radius;
-        }
-
-    },
-
-    /**
-     * The bottom position of the Circle.
-     *
-     * @name Phaser.Geom.Circle#bottom
-     * @type {number}
-     * @since 3.0.0
-     */
-    bottom: {
-
-        get: function ()
-        {
-            return this.y + this._radius;
-        },
-
-        set: function (value)
-        {
-            this.y = value - this._radius;
-        }
-
-    }
-
-});
-
-module.exports = Circle;
-
-
-/***/ }),
-/* 721 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var CircumferencePoint = __webpack_require__(254);
-var FromPercent = __webpack_require__(43);
-var MATH_CONST = __webpack_require__(13);
-var Point = __webpack_require__(12);
-
-/**
- * Returns a Point object containing the coordinates of a point on the circumference of the Circle
- * based on the given angle normalized to the range 0 to 1. I.e. a value of 0.5 will give the point
- * at 180 degrees around the circle.
- *
- * @function Phaser.Geom.Circle.GetPoint
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Point} O - [out,$return]
- *
- * @param {Phaser.Geom.Circle} circle - The Circle to get the circumference point on.
- * @param {number} position - A value between 0 and 1, where 0 equals 0 degrees, 0.5 equals 180 degrees and 1 equals 360 around the circle.
- * @param {(Phaser.Geom.Point|object)} [out] - An object to store the return values in. If not given a Point object will be created.
- *
- * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point around the circle.
- */
-var GetPoint = function (circle, position, out)
-{
-    if (out === undefined) { out = new Point(); }
-
-    var angle = FromPercent(position, 0, MATH_CONST.PI2);
-
-    return CircumferencePoint(circle, angle, out);
-};
-
-module.exports = GetPoint;
-
-
-/***/ }),
-/* 722 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Circumference = __webpack_require__(723);
-var CircumferencePoint = __webpack_require__(254);
-var FromPercent = __webpack_require__(43);
-var MATH_CONST = __webpack_require__(13);
-
-/**
- * Returns an array of Point objects containing the coordinates of the points around the circumference of the Circle,
- * based on the given quantity or stepRate values.
- *
- * @function Phaser.Geom.Circle.GetPoints
- * @since 3.0.0
- *
- * @param {Phaser.Geom.Circle} circle - The Circle to get the points from.
- * @param {number} quantity - The amount of points to return. If a falsey value the quantity will be derived from the `stepRate` instead.
- * @param {number} [stepRate] - Sets the quantity by getting the circumference of the circle and dividing it by the stepRate.
- * @param {array} [output] - An array to insert the points in to. If not provided a new array will be created.
- *
- * @return {Phaser.Geom.Point[]} An array of Point objects pertaining to the points around the circumference of the circle.
- */
-var GetPoints = function (circle, quantity, stepRate, out)
-{
-    if (out === undefined) { out = []; }
-
-    //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
-    if (!quantity && stepRate > 0)
-    {
-        quantity = Circumference(circle) / stepRate;
-    }
-
-    for (var i = 0; i < quantity; i++)
-    {
-        var angle = FromPercent(i / quantity, 0, MATH_CONST.PI2);
-
-        out.push(CircumferencePoint(circle, angle));
-    }
-
-    return out;
-};
-
-module.exports = GetPoints;
-
-
-/***/ }),
-/* 723 */
-/***/ (function(module, exports) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-/**
- * Returns the circumference of the given Circle.
- *
- * @function Phaser.Geom.Circle.Circumference
- * @since 3.0.0
- *
- * @param {Phaser.Geom.Circle} circle - The Circle to get the circumference of.
- *
- * @return {number} The circumference of the Circle.
- */
-var Circumference = function (circle)
-{
-    return 2 * (Math.PI * circle.radius);
-};
-
-module.exports = Circumference;
-
-
-/***/ }),
-/* 724 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Point = __webpack_require__(12);
-
-/**
- * Returns a uniformly distributed random point from anywhere within the given Circle.
- *
- * @function Phaser.Geom.Circle.Random
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Point} O - [out,$return]
- *
- * @param {Phaser.Geom.Circle} circle - The Circle to get a random point from.
- * @param {(Phaser.Geom.Point|object)} [out] - A Point or point-like object to set the random `x` and `y` values in.
- *
- * @return {(Phaser.Geom.Point|object)} A Point object with the random values set in the `x` and `y` properties.
- */
-var Random = function (circle, out)
-{
-    if (out === undefined) { out = new Point(); }
-
-    var t = 2 * Math.PI * Math.random();
-    var u = Math.random() + Math.random();
-    var r = (u > 1) ? 2 - u : u;
-    var x = r * Math.cos(t);
-    var y = r * Math.sin(t);
-
-    out.x = circle.x + (x * circle.radius);
-    out.y = circle.y + (y * circle.radius);
-
-    return out;
-};
-
-module.exports = Random;
-
-
-/***/ }),
-/* 725 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Class = __webpack_require__(0);
-var Contains = __webpack_require__(255);
-var GetPoint = __webpack_require__(726);
-var GetPoints = __webpack_require__(727);
-var GEOM_CONST = __webpack_require__(29);
-var Line = __webpack_require__(129);
-var Random = __webpack_require__(728);
-
-/**
- * @classdesc
- * A triangle is a plane created by connecting three points.
- * The first two arguments specify the first point, the middle two arguments
- * specify the second point, and the last two arguments specify the third point.
- *
- * @class Triangle
- * @memberof Phaser.Geom
- * @constructor
- * @since 3.0.0
- *
- * @param {number} [x1=0] - `x` coordinate of the first point.
- * @param {number} [y1=0] - `y` coordinate of the first point.
- * @param {number} [x2=0] - `x` coordinate of the second point.
- * @param {number} [y2=0] - `y` coordinate of the second point.
- * @param {number} [x3=0] - `x` coordinate of the third point.
- * @param {number} [y3=0] - `y` coordinate of the third point.
- */
-var Triangle = new Class({
-
-    initialize:
-
-    function Triangle (x1, y1, x2, y2, x3, y3)
-    {
-        if (x1 === undefined) { x1 = 0; }
-        if (y1 === undefined) { y1 = 0; }
-        if (x2 === undefined) { x2 = 0; }
-        if (y2 === undefined) { y2 = 0; }
-        if (x3 === undefined) { x3 = 0; }
-        if (y3 === undefined) { y3 = 0; }
-
-        /**
-         * The geometry constant type of this object: `GEOM_CONST.TRIANGLE`.
-         * Used for fast type comparisons.
-         *
-         * @name Phaser.Geom.Triangle#type
-         * @type {number}
-         * @readonly
-         * @since 3.19.0
-         */
-        this.type = GEOM_CONST.TRIANGLE;
-
-        /**
-         * `x` coordinate of the first point.
-         *
-         * @name Phaser.Geom.Triangle#x1
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x1 = x1;
-
-        /**
-         * `y` coordinate of the first point.
-         *
-         * @name Phaser.Geom.Triangle#y1
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y1 = y1;
-
-        /**
-         * `x` coordinate of the second point.
-         *
-         * @name Phaser.Geom.Triangle#x2
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x2 = x2;
-
-        /**
-         * `y` coordinate of the second point.
-         *
-         * @name Phaser.Geom.Triangle#y2
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y2 = y2;
-
-        /**
-         * `x` coordinate of the third point.
-         *
-         * @name Phaser.Geom.Triangle#x3
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x3 = x3;
-
-        /**
-         * `y` coordinate of the third point.
-         *
-         * @name Phaser.Geom.Triangle#y3
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y3 = y3;
-    },
-
-    /**
-     * Checks whether a given points lies within the triangle.
-     *
-     * @method Phaser.Geom.Triangle#contains
-     * @since 3.0.0
-     *
-     * @param {number} x - The x coordinate of the point to check.
-     * @param {number} y - The y coordinate of the point to check.
-     *
-     * @return {boolean} `true` if the coordinate pair is within the triangle, otherwise `false`.
-     */
-    contains: function (x, y)
-    {
-        return Contains(this, x, y);
-    },
-
-    /**
-     * Returns a specific point  on the triangle.
-     *
-     * @method Phaser.Geom.Triangle#getPoint
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point} O - [output,$return]
-     *
-     * @param {number} position - Position as float within `0` and `1`. `0` equals the first point.
-     * @param {(Phaser.Geom.Point|object)} [output] - Optional Point, or point-like object, that the calculated point will be written to.
-     *
-     * @return {(Phaser.Geom.Point|object)} Calculated `Point` that represents the requested position. It is the same as `output` when this parameter has been given.
-     */
-    getPoint: function (position, output)
-    {
-        return GetPoint(this, position, output);
-    },
-
-    /**
-     * Calculates a list of evenly distributed points on the triangle. It is either possible to pass an amount of points to be generated (`quantity`) or the distance between two points (`stepRate`).
-     *
-     * @method Phaser.Geom.Triangle#getPoints
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point[]} O - [output,$return]
-     *
-     * @param {number} quantity - Number of points to be generated. Can be falsey when `stepRate` should be used. All points have the same distance along the triangle.
-     * @param {number} [stepRate] - Distance between two points. Will only be used when `quantity` is falsey.
-     * @param {(array|Phaser.Geom.Point[])} [output] - Optional Array for writing the calculated points into. Otherwise a new array will be created.
-     *
-     * @return {(array|Phaser.Geom.Point[])} Returns a list of calculated `Point` instances or the filled array passed as parameter `output`.
-     */
-    getPoints: function (quantity, stepRate, output)
-    {
-        return GetPoints(this, quantity, stepRate, output);
-    },
-
-    /**
-     * Returns a random point along the triangle.
-     *
-     * @method Phaser.Geom.Triangle#getRandomPoint
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Point} O - [point,$return]
-     *
-     * @param {Phaser.Geom.Point} [point] - Optional `Point` that should be modified. Otherwise a new one will be created.
-     *
-     * @return {Phaser.Geom.Point} Random `Point`. When parameter `point` has been provided it will be returned.
-     */
-    getRandomPoint: function (point)
-    {
-        return Random(this, point);
-    },
-
-    /**
-     * Sets all three points of the triangle. Leaving out any coordinate sets it to be `0`.
-     *
-     * @method Phaser.Geom.Triangle#setTo
-     * @since 3.0.0
-     *
-     * @param {number} [x1=0] - `x` coordinate of the first point.
-     * @param {number} [y1=0] - `y` coordinate of the first point.
-     * @param {number} [x2=0] - `x` coordinate of the second point.
-     * @param {number} [y2=0] - `y` coordinate of the second point.
-     * @param {number} [x3=0] - `x` coordinate of the third point.
-     * @param {number} [y3=0] - `y` coordinate of the third point.
-     *
-     * @return {this} This Triangle object.
-     */
-    setTo: function (x1, y1, x2, y2, x3, y3)
-    {
-        if (x1 === undefined) { x1 = 0; }
-        if (y1 === undefined) { y1 = 0; }
-        if (x2 === undefined) { x2 = 0; }
-        if (y2 === undefined) { y2 = 0; }
-        if (x3 === undefined) { x3 = 0; }
-        if (y3 === undefined) { y3 = 0; }
-
-        this.x1 = x1;
-        this.y1 = y1;
-
-        this.x2 = x2;
-        this.y2 = y2;
-
-        this.x3 = x3;
-        this.y3 = y3;
-
-        return this;
-    },
-
-    /**
-     * Returns a Line object that corresponds to Line A of this Triangle.
-     *
-     * @method Phaser.Geom.Triangle#getLineA
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Line} O - [line,$return]
-     *
-     * @param {Phaser.Geom.Line} [line] - A Line object to set the results in. If `undefined` a new Line will be created.
-     *
-     * @return {Phaser.Geom.Line} A Line object that corresponds to line A of this Triangle.
-     */
-    getLineA: function (line)
-    {
-        if (line === undefined) { line = new Line(); }
-
-        line.setTo(this.x1, this.y1, this.x2, this.y2);
-
-        return line;
-    },
-
-    /**
-     * Returns a Line object that corresponds to Line B of this Triangle.
-     *
-     * @method Phaser.Geom.Triangle#getLineB
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Line} O - [line,$return]
-     *
-     * @param {Phaser.Geom.Line} [line] - A Line object to set the results in. If `undefined` a new Line will be created.
-     *
-     * @return {Phaser.Geom.Line} A Line object that corresponds to line B of this Triangle.
-     */
-    getLineB: function (line)
-    {
-        if (line === undefined) { line = new Line(); }
-
-        line.setTo(this.x2, this.y2, this.x3, this.y3);
-
-        return line;
-    },
-
-    /**
-     * Returns a Line object that corresponds to Line C of this Triangle.
-     *
-     * @method Phaser.Geom.Triangle#getLineC
-     * @since 3.0.0
-     *
-     * @generic {Phaser.Geom.Line} O - [line,$return]
-     *
-     * @param {Phaser.Geom.Line} [line] - A Line object to set the results in. If `undefined` a new Line will be created.
-     *
-     * @return {Phaser.Geom.Line} A Line object that corresponds to line C of this Triangle.
-     */
-    getLineC: function (line)
-    {
-        if (line === undefined) { line = new Line(); }
-
-        line.setTo(this.x3, this.y3, this.x1, this.y1);
-
-        return line;
-    },
-
-    /**
-     * Left most X coordinate of the triangle. Setting it moves the triangle on the X axis accordingly.
-     *
-     * @name Phaser.Geom.Triangle#left
-     * @type {number}
-     * @since 3.0.0
-     */
-    left: {
-
-        get: function ()
-        {
-            return Math.min(this.x1, this.x2, this.x3);
-        },
-
-        set: function (value)
-        {
-            var diff = 0;
-
-            if (this.x1 <= this.x2 && this.x1 <= this.x3)
-            {
-                diff = this.x1 - value;
-            }
-            else if (this.x2 <= this.x1 && this.x2 <= this.x3)
-            {
-                diff = this.x2 - value;
-            }
-            else
-            {
-                diff = this.x3 - value;
-            }
-
-            this.x1 -= diff;
-            this.x2 -= diff;
-            this.x3 -= diff;
-        }
-
-    },
-
-    /**
-     * Right most X coordinate of the triangle. Setting it moves the triangle on the X axis accordingly.
-     *
-     * @name Phaser.Geom.Triangle#right
-     * @type {number}
-     * @since 3.0.0
-     */
-    right: {
-
-        get: function ()
-        {
-            return Math.max(this.x1, this.x2, this.x3);
-        },
-
-        set: function (value)
-        {
-            var diff = 0;
-
-            if (this.x1 >= this.x2 && this.x1 >= this.x3)
-            {
-                diff = this.x1 - value;
-            }
-            else if (this.x2 >= this.x1 && this.x2 >= this.x3)
-            {
-                diff = this.x2 - value;
-            }
-            else
-            {
-                diff = this.x3 - value;
-            }
-
-            this.x1 -= diff;
-            this.x2 -= diff;
-            this.x3 -= diff;
-        }
-
-    },
-
-    /**
-     * Top most Y coordinate of the triangle. Setting it moves the triangle on the Y axis accordingly.
-     *
-     * @name Phaser.Geom.Triangle#top
-     * @type {number}
-     * @since 3.0.0
-     */
-    top: {
-
-        get: function ()
-        {
-            return Math.min(this.y1, this.y2, this.y3);
-        },
-
-        set: function (value)
-        {
-            var diff = 0;
-
-            if (this.y1 <= this.y2 && this.y1 <= this.y3)
-            {
-                diff = this.y1 - value;
-            }
-            else if (this.y2 <= this.y1 && this.y2 <= this.y3)
-            {
-                diff = this.y2 - value;
-            }
-            else
-            {
-                diff = this.y3 - value;
-            }
-
-            this.y1 -= diff;
-            this.y2 -= diff;
-            this.y3 -= diff;
-        }
-
-    },
-
-    /**
-     * Bottom most Y coordinate of the triangle. Setting it moves the triangle on the Y axis accordingly.
-     *
-     * @name Phaser.Geom.Triangle#bottom
-     * @type {number}
-     * @since 3.0.0
-     */
-    bottom: {
-
-        get: function ()
-        {
-            return Math.max(this.y1, this.y2, this.y3);
-        },
-
-        set: function (value)
-        {
-            var diff = 0;
-
-            if (this.y1 >= this.y2 && this.y1 >= this.y3)
-            {
-                diff = this.y1 - value;
-            }
-            else if (this.y2 >= this.y1 && this.y2 >= this.y3)
-            {
-                diff = this.y2 - value;
-            }
-            else
-            {
-                diff = this.y3 - value;
-            }
-
-            this.y1 -= diff;
-            this.y2 -= diff;
-            this.y3 -= diff;
-        }
-
-    }
-
-});
-
-module.exports = Triangle;
-
-
-/***/ }),
-/* 726 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Point = __webpack_require__(12);
-var Length = __webpack_require__(81);
-
-/**
- * Returns a Point from around the perimeter of a Triangle.
- *
- * @function Phaser.Geom.Triangle.GetPoint
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Point} O - [out,$return]
- *
- * @param {Phaser.Geom.Triangle} triangle - The Triangle to get the point on its perimeter from.
- * @param {number} position - The position along the perimeter of the triangle. A value between 0 and 1.
- * @param {(Phaser.Geom.Point|object)} [out] - An option Point, or Point-like object to store the value in. If not given a new Point will be created.
- *
- * @return {(Phaser.Geom.Point|object)} A Point object containing the given position from the perimeter of the triangle.
- */
-var GetPoint = function (triangle, position, out)
-{
-    if (out === undefined) { out = new Point(); }
-
-    var line1 = triangle.getLineA();
-    var line2 = triangle.getLineB();
-    var line3 = triangle.getLineC();
-
-    if (position <= 0 || position >= 1)
-    {
-        out.x = line1.x1;
-        out.y = line1.y1;
-
-        return out;
-    }
-
-    var length1 = Length(line1);
-    var length2 = Length(line2);
-    var length3 = Length(line3);
-
-    var perimeter = length1 + length2 + length3;
-
-    var p = perimeter * position;
-    var localPosition = 0;
-
-    //  Which line is it on?
-
-    if (p < length1)
-    {
-        //  Line 1
-        localPosition = p / length1;
-
-        out.x = line1.x1 + (line1.x2 - line1.x1) * localPosition;
-        out.y = line1.y1 + (line1.y2 - line1.y1) * localPosition;
-    }
-    else if (p > length1 + length2)
-    {
-        //  Line 3
-        p -= length1 + length2;
-        localPosition = p / length3;
-
-        out.x = line3.x1 + (line3.x2 - line3.x1) * localPosition;
-        out.y = line3.y1 + (line3.y2 - line3.y1) * localPosition;
-    }
-    else
-    {
-        //  Line 2
-        p -= length1;
-        localPosition = p / length2;
-
-        out.x = line2.x1 + (line2.x2 - line2.x1) * localPosition;
-        out.y = line2.y1 + (line2.y2 - line2.y1) * localPosition;
-    }
-
-    return out;
-};
-
-module.exports = GetPoint;
-
-
-/***/ }),
-/* 727 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Length = __webpack_require__(81);
-var Point = __webpack_require__(12);
-
-/**
- * Returns an array of evenly spaced points on the perimeter of a Triangle.
- *
- * @function Phaser.Geom.Triangle.GetPoints
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Point} O - [out,$return]
- *
- * @param {Phaser.Geom.Triangle} triangle - The Triangle to get the points from.
- * @param {number} quantity - The number of evenly spaced points to return. Set to 0 to return an arbitrary number of points based on the `stepRate`.
- * @param {number} stepRate - If `quantity` is 0, the distance between each returned point.
- * @param {(array|Phaser.Geom.Point[])} [out] - An array to which the points should be appended.
- *
- * @return {(array|Phaser.Geom.Point[])} The modified `out` array, or a new array if none was provided.
- */
-var GetPoints = function (triangle, quantity, stepRate, out)
-{
-    if (out === undefined) { out = []; }
-
-    var line1 = triangle.getLineA();
-    var line2 = triangle.getLineB();
-    var line3 = triangle.getLineC();
-
-    var length1 = Length(line1);
-    var length2 = Length(line2);
-    var length3 = Length(line3);
-
-    var perimeter = length1 + length2 + length3;
-
-    //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
-    if (!quantity && stepRate > 0)
-    {
-        quantity = perimeter / stepRate;
-    }
-
-    for (var i = 0; i < quantity; i++)
-    {
-        var p = perimeter * (i / quantity);
-        var localPosition = 0;
-
-        var point = new Point();
-
-        //  Which line is it on?
-
-        if (p < length1)
-        {
-            //  Line 1
-            localPosition = p / length1;
-
-            point.x = line1.x1 + (line1.x2 - line1.x1) * localPosition;
-            point.y = line1.y1 + (line1.y2 - line1.y1) * localPosition;
-        }
-        else if (p > length1 + length2)
-        {
-            //  Line 3
-            p -= length1 + length2;
-            localPosition = p / length3;
-
-            point.x = line3.x1 + (line3.x2 - line3.x1) * localPosition;
-            point.y = line3.y1 + (line3.y2 - line3.y1) * localPosition;
-        }
-        else
-        {
-            //  Line 2
-            p -= length1;
-            localPosition = p / length2;
-
-            point.x = line2.x1 + (line2.x2 - line2.x1) * localPosition;
-            point.y = line2.y1 + (line2.y2 - line2.y1) * localPosition;
-        }
-
-        out.push(point);
-    }
-
-    return out;
-};
-
-module.exports = GetPoints;
-
-
-/***/ }),
-/* 728 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var Point = __webpack_require__(12);
-
-/**
- * Returns a random Point from within the area of the given Triangle.
- *
- * @function Phaser.Geom.Triangle.Random
- * @since 3.0.0
- *
- * @generic {Phaser.Geom.Point} O - [out,$return]
- *
- * @param {Phaser.Geom.Triangle} triangle - The Triangle to get a random point from.
- * @param {Phaser.Geom.Point} [out] - The Point object to store the position in. If not given, a new Point instance is created.
- *
- * @return {Phaser.Geom.Point} A Point object holding the coordinates of a random position within the Triangle.
- */
-var Random = function (triangle, out)
-{
-    if (out === undefined) { out = new Point(); }
-
-    //  Basis vectors
-    var ux = triangle.x2 - triangle.x1;
-    var uy = triangle.y2 - triangle.y1;
-
-    var vx = triangle.x3 - triangle.x1;
-    var vy = triangle.y3 - triangle.y1;
-
-    //  Random point within the unit square
-    var r = Math.random();
-    var s = Math.random();
-
-    //  Point outside the triangle? Remap it.
-    if (r + s >= 1)
-    {
-        r = 1 - r;
-        s = 1 - s;
-    }
-
-    out.x = triangle.x1 + ((ux * r) + (vx * s));
-    out.y = triangle.y1 + ((uy * r) + (vy * s));
-
-    return out;
-};
-
-module.exports = Random;
-
-
-/***/ }),
-/* 729 */
+/* 896 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -109524,30 +119092,30 @@ module.exports = Random;
 
 module.exports = {
 
-    Events: __webpack_require__(71),
+    Events: __webpack_require__(88),
 
-    KeyboardManager: __webpack_require__(207),
-    KeyboardPlugin: __webpack_require__(737),
+    KeyboardManager: __webpack_require__(237),
+    KeyboardPlugin: __webpack_require__(904),
 
-    Key: __webpack_require__(256),
-    KeyCodes: __webpack_require__(64),
+    Key: __webpack_require__(315),
+    KeyCodes: __webpack_require__(77),
 
-    KeyCombo: __webpack_require__(257),
+    KeyCombo: __webpack_require__(316),
 
-    AdvanceKeyCombo: __webpack_require__(259),
-    ProcessKeyCombo: __webpack_require__(258),
-    ResetKeyCombo: __webpack_require__(260),
+    AdvanceKeyCombo: __webpack_require__(318),
+    ProcessKeyCombo: __webpack_require__(317),
+    ResetKeyCombo: __webpack_require__(319),
 
-    JustDown: __webpack_require__(739),
-    JustUp: __webpack_require__(740),
-    DownDuration: __webpack_require__(741),
-    UpDuration: __webpack_require__(742)
+    JustDown: __webpack_require__(906),
+    JustUp: __webpack_require__(907),
+    DownDuration: __webpack_require__(908),
+    UpDuration: __webpack_require__(909)
 
 };
 
 
 /***/ }),
-/* 730 */
+/* 897 */
 /***/ (function(module, exports) {
 
 /**
@@ -109583,7 +119151,7 @@ module.exports = 'keydown';
 
 
 /***/ }),
-/* 731 */
+/* 898 */
 /***/ (function(module, exports) {
 
 /**
@@ -109612,7 +119180,7 @@ module.exports = 'keyup';
 
 
 /***/ }),
-/* 732 */
+/* 899 */
 /***/ (function(module, exports) {
 
 /**
@@ -109646,7 +119214,7 @@ module.exports = 'keycombomatch';
 
 
 /***/ }),
-/* 733 */
+/* 900 */
 /***/ (function(module, exports) {
 
 /**
@@ -109680,7 +119248,7 @@ module.exports = 'down';
 
 
 /***/ }),
-/* 734 */
+/* 901 */
 /***/ (function(module, exports) {
 
 /**
@@ -109719,7 +119287,7 @@ module.exports = 'keydown-';
 
 
 /***/ }),
-/* 735 */
+/* 902 */
 /***/ (function(module, exports) {
 
 /**
@@ -109751,7 +119319,7 @@ module.exports = 'keyup-';
 
 
 /***/ }),
-/* 736 */
+/* 903 */
 /***/ (function(module, exports) {
 
 /**
@@ -109785,7 +119353,7 @@ module.exports = 'up';
 
 
 /***/ }),
-/* 737 */
+/* 904 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -109795,18 +119363,18 @@ module.exports = 'up';
  */
 
 var Class = __webpack_require__(0);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(71);
-var GameEvents = __webpack_require__(7);
-var GetValue = __webpack_require__(4);
-var InputEvents = __webpack_require__(24);
-var InputPluginCache = __webpack_require__(70);
-var Key = __webpack_require__(256);
-var KeyCodes = __webpack_require__(64);
-var KeyCombo = __webpack_require__(257);
-var KeyMap = __webpack_require__(738);
-var SceneEvents = __webpack_require__(8);
-var SnapFloor = __webpack_require__(61);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(88);
+var GameEvents = __webpack_require__(9);
+var GetValue = __webpack_require__(5);
+var InputEvents = __webpack_require__(29);
+var InputPluginCache = __webpack_require__(87);
+var Key = __webpack_require__(315);
+var KeyCodes = __webpack_require__(77);
+var KeyCombo = __webpack_require__(316);
+var KeyMap = __webpack_require__(905);
+var SceneEvents = __webpack_require__(11);
+var SnapFloor = __webpack_require__(75);
 
 /**
  * @classdesc
@@ -110731,7 +120299,7 @@ module.exports = KeyboardPlugin;
 
 
 /***/ }),
-/* 738 */
+/* 905 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -110740,7 +120308,7 @@ module.exports = KeyboardPlugin;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var KeyCodes = __webpack_require__(64);
+var KeyCodes = __webpack_require__(77);
 
 var KeyMap = {};
 
@@ -110753,7 +120321,7 @@ module.exports = KeyMap;
 
 
 /***/ }),
-/* 739 */
+/* 906 */
 /***/ (function(module, exports) {
 
 /**
@@ -110795,7 +120363,7 @@ module.exports = JustDown;
 
 
 /***/ }),
-/* 740 */
+/* 907 */
 /***/ (function(module, exports) {
 
 /**
@@ -110837,7 +120405,7 @@ module.exports = JustUp;
 
 
 /***/ }),
-/* 741 */
+/* 908 */
 /***/ (function(module, exports) {
 
 /**
@@ -110871,7 +120439,7 @@ module.exports = DownDuration;
 
 
 /***/ }),
-/* 742 */
+/* 909 */
 /***/ (function(module, exports) {
 
 /**
@@ -110905,7 +120473,7 @@ module.exports = UpDuration;
 
 
 /***/ }),
-/* 743 */
+/* 910 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -110921,14 +120489,14 @@ module.exports = UpDuration;
 /* eslint-disable */
 module.exports = {
 
-    MouseManager: __webpack_require__(208)
+    MouseManager: __webpack_require__(238)
        
 };
 /* eslint-enable */
 
 
 /***/ }),
-/* 744 */
+/* 911 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -110944,14 +120512,14 @@ module.exports = {
 /* eslint-disable */
 module.exports = {
 
-    TouchManager: __webpack_require__(210)
+    TouchManager: __webpack_require__(240)
        
 };
 /* eslint-enable */
 
 
 /***/ }),
-/* 745 */
+/* 912 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -110961,9 +120529,9 @@ module.exports = {
  */
 
 var Class = __webpack_require__(0);
-var FileTypesManager = __webpack_require__(10);
-var JSONFile = __webpack_require__(52);
-var LoaderEvents = __webpack_require__(48);
+var FileTypesManager = __webpack_require__(13);
+var JSONFile = __webpack_require__(65);
+var LoaderEvents = __webpack_require__(58);
 
 /**
  * @classdesc
@@ -111152,7 +120720,7 @@ module.exports = AnimationJSONFile;
 
 
 /***/ }),
-/* 746 */
+/* 913 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -111162,12 +120730,12 @@ module.exports = AnimationJSONFile;
  */
 
 var Class = __webpack_require__(0);
-var FileTypesManager = __webpack_require__(10);
+var FileTypesManager = __webpack_require__(13);
 var GetFastValue = __webpack_require__(1);
-var ImageFile = __webpack_require__(73);
-var IsPlainObject = __webpack_require__(11);
-var JSONFile = __webpack_require__(52);
-var MultiFile = __webpack_require__(74);
+var ImageFile = __webpack_require__(90);
+var IsPlainObject = __webpack_require__(15);
+var JSONFile = __webpack_require__(65);
+var MultiFile = __webpack_require__(91);
 
 /**
  * @classdesc
@@ -111401,7 +120969,7 @@ module.exports = AtlasJSONFile;
 
 
 /***/ }),
-/* 747 */
+/* 914 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -111410,13 +120978,13 @@ module.exports = AtlasJSONFile;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var AudioFile = __webpack_require__(262);
+var AudioFile = __webpack_require__(321);
 var Class = __webpack_require__(0);
-var FileTypesManager = __webpack_require__(10);
+var FileTypesManager = __webpack_require__(13);
 var GetFastValue = __webpack_require__(1);
-var IsPlainObject = __webpack_require__(11);
-var JSONFile = __webpack_require__(52);
-var MultiFile = __webpack_require__(74);
+var IsPlainObject = __webpack_require__(15);
+var JSONFile = __webpack_require__(65);
+var MultiFile = __webpack_require__(91);
 
 /**
  * @classdesc
@@ -111691,7 +121259,7 @@ FileTypesManager.register('audioSprite', function (key, jsonURL, audioURL, audio
 
 
 /***/ }),
-/* 748 */
+/* 915 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -111701,12 +121269,12 @@ FileTypesManager.register('audioSprite', function (key, jsonURL, audioURL, audio
  */
 
 var Class = __webpack_require__(0);
-var FileTypesManager = __webpack_require__(10);
+var FileTypesManager = __webpack_require__(13);
 var GetFastValue = __webpack_require__(1);
-var ImageFile = __webpack_require__(73);
-var IsPlainObject = __webpack_require__(11);
-var JSONFile = __webpack_require__(52);
-var MultiFile = __webpack_require__(74);
+var ImageFile = __webpack_require__(90);
+var IsPlainObject = __webpack_require__(15);
+var JSONFile = __webpack_require__(65);
+var MultiFile = __webpack_require__(91);
 
 /**
  * @classdesc
@@ -112024,7 +121592,7 @@ module.exports = MultiAtlasFile;
 
 
 /***/ }),
-/* 749 */
+/* 916 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -112034,11 +121602,11 @@ module.exports = MultiAtlasFile;
  */
 
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(21);
-var File = __webpack_require__(22);
-var FileTypesManager = __webpack_require__(10);
+var CONST = __webpack_require__(24);
+var File = __webpack_require__(25);
+var FileTypesManager = __webpack_require__(13);
 var GetFastValue = __webpack_require__(1);
-var IsPlainObject = __webpack_require__(11);
+var IsPlainObject = __webpack_require__(15);
 
 /**
  * @classdesc
@@ -112236,7 +121804,7 @@ module.exports = PluginFile;
 
 
 /***/ }),
-/* 750 */
+/* 917 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -112246,11 +121814,11 @@ module.exports = PluginFile;
  */
 
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(21);
-var File = __webpack_require__(22);
-var FileTypesManager = __webpack_require__(10);
+var CONST = __webpack_require__(24);
+var File = __webpack_require__(25);
+var FileTypesManager = __webpack_require__(13);
 var GetFastValue = __webpack_require__(1);
-var IsPlainObject = __webpack_require__(11);
+var IsPlainObject = __webpack_require__(15);
 
 /**
  * @classdesc
@@ -112407,7 +121975,7 @@ module.exports = ScriptFile;
 
 
 /***/ }),
-/* 751 */
+/* 918 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -112417,8 +121985,8 @@ module.exports = ScriptFile;
  */
 
 var Class = __webpack_require__(0);
-var FileTypesManager = __webpack_require__(10);
-var ImageFile = __webpack_require__(73);
+var FileTypesManager = __webpack_require__(13);
+var ImageFile = __webpack_require__(90);
 
 /**
  * @classdesc
@@ -112598,7 +122166,7 @@ module.exports = SpriteSheetFile;
 
 
 /***/ }),
-/* 752 */
+/* 919 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -112608,11 +122176,11 @@ module.exports = SpriteSheetFile;
  */
 
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(21);
-var File = __webpack_require__(22);
-var FileTypesManager = __webpack_require__(10);
+var CONST = __webpack_require__(24);
+var File = __webpack_require__(25);
+var FileTypesManager = __webpack_require__(13);
 var GetFastValue = __webpack_require__(1);
-var IsPlainObject = __webpack_require__(11);
+var IsPlainObject = __webpack_require__(15);
 
 /**
  * @classdesc
@@ -112777,7 +122345,7 @@ module.exports = TextFile;
 
 
 /***/ }),
-/* 753 */
+/* 920 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -112787,12 +122355,12 @@ module.exports = TextFile;
  */
 
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(21);
-var File = __webpack_require__(22);
-var FileTypesManager = __webpack_require__(10);
+var CONST = __webpack_require__(24);
+var File = __webpack_require__(25);
+var FileTypesManager = __webpack_require__(13);
 var GetFastValue = __webpack_require__(1);
-var IsPlainObject = __webpack_require__(11);
-var ParseXML = __webpack_require__(204);
+var IsPlainObject = __webpack_require__(15);
+var ParseXML = __webpack_require__(234);
 
 /**
  * @classdesc
@@ -112962,7 +122530,7 @@ module.exports = XMLFile;
 
 
 /***/ }),
-/* 754 */
+/* 921 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -112972,15 +122540,15 @@ module.exports = XMLFile;
  */
 
 var Class = __webpack_require__(0);
-var CONST = __webpack_require__(21);
-var CustomSet = __webpack_require__(264);
-var EventEmitter = __webpack_require__(2);
-var Events = __webpack_require__(48);
-var FileTypesManager = __webpack_require__(10);
+var CONST = __webpack_require__(24);
+var CustomSet = __webpack_require__(323);
+var EventEmitter = __webpack_require__(3);
+var Events = __webpack_require__(58);
+var FileTypesManager = __webpack_require__(13);
 var GetFastValue = __webpack_require__(1);
-var PluginCache = __webpack_require__(9);
-var SceneEvents = __webpack_require__(8);
-var XHRSettings = __webpack_require__(72);
+var PluginCache = __webpack_require__(12);
+var SceneEvents = __webpack_require__(11);
+var XHRSettings = __webpack_require__(89);
 
 /**
  * @classdesc
@@ -114045,7 +123613,7 @@ module.exports = LoaderPlugin;
 
 
 /***/ }),
-/* 755 */
+/* 922 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -114060,17 +123628,17 @@ module.exports = LoaderPlugin;
 
 module.exports = {
 
-    BasePlugin: __webpack_require__(265),
-    DefaultPlugins: __webpack_require__(89),
-    PluginCache: __webpack_require__(9),
-    PluginManager: __webpack_require__(211),
-    ScenePlugin: __webpack_require__(756)
+    BasePlugin: __webpack_require__(324),
+    DefaultPlugins: __webpack_require__(107),
+    PluginCache: __webpack_require__(12),
+    PluginManager: __webpack_require__(241),
+    ScenePlugin: __webpack_require__(923)
 
 };
 
 
 /***/ }),
-/* 756 */
+/* 923 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -114079,9 +123647,9 @@ module.exports = {
 * @license      {@link https://github.com/photonstorm/phaser3-plugin-template/blob/master/LICENSE|MIT License}
 */
 
-var BasePlugin = __webpack_require__(265);
+var BasePlugin = __webpack_require__(324);
 var Class = __webpack_require__(0);
-var SceneEvents = __webpack_require__(8);
+var SceneEvents = __webpack_require__(11);
 
 /**
  * @classdesc
@@ -114198,7 +123766,7 @@ module.exports = ScenePlugin;
 
 
 /***/ }),
-/* 757 */
+/* 924 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -114217,16 +123785,16 @@ module.exports = ScenePlugin;
 
 module.exports = {
 
-    Canvas: __webpack_require__(758),
-    Events: __webpack_require__(32),
-    Snapshot: __webpack_require__(759),
-    WebGL: __webpack_require__(760)
+    Canvas: __webpack_require__(925),
+    Events: __webpack_require__(39),
+    Snapshot: __webpack_require__(926),
+    WebGL: __webpack_require__(927)
 
 };
 
 
 /***/ }),
-/* 758 */
+/* 925 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -114241,15 +123809,15 @@ module.exports = {
 
 module.exports = {
 
-    CanvasRenderer: __webpack_require__(174),
-    GetBlendModes: __webpack_require__(176),
-    SetTransform: __webpack_require__(247)
+    CanvasRenderer: __webpack_require__(204),
+    GetBlendModes: __webpack_require__(206),
+    SetTransform: __webpack_require__(278)
 
 };
 
 
 /***/ }),
-/* 759 */
+/* 926 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -114264,14 +123832,14 @@ module.exports = {
 
 module.exports = {
 
-    Canvas: __webpack_require__(175),
-    WebGL: __webpack_require__(190)
+    Canvas: __webpack_require__(205),
+    WebGL: __webpack_require__(220)
 
 };
 
 
 /***/ }),
-/* 760 */
+/* 927 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -114280,7 +123848,7 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var WEBGL_CONST = __webpack_require__(45);
+var WEBGL_CONST = __webpack_require__(55);
 var Extend = __webpack_require__(14);
 
 /**
@@ -114289,13 +123857,13 @@ var Extend = __webpack_require__(14);
 
 var WebGL = {
 
-    PipelineManager: __webpack_require__(178),
-    Pipelines: __webpack_require__(761),
-    RenderTarget: __webpack_require__(90),
-    Utils: __webpack_require__(34),
-    WebGLPipeline: __webpack_require__(20),
-    WebGLRenderer: __webpack_require__(177),
-    WebGLShader: __webpack_require__(181)
+    PipelineManager: __webpack_require__(208),
+    Pipelines: __webpack_require__(928),
+    RenderTarget: __webpack_require__(108),
+    Utils: __webpack_require__(35),
+    WebGLPipeline: __webpack_require__(23),
+    WebGLRenderer: __webpack_require__(207),
+    WebGLShader: __webpack_require__(211)
 
 };
 
@@ -114309,7 +123877,7 @@ module.exports = WebGL;
 
 
 /***/ }),
-/* 761 */
+/* 928 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -114318,7 +123886,7 @@ module.exports = WebGL;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = __webpack_require__(56);
+var CONST = __webpack_require__(68);
 var Extend = __webpack_require__(14);
 
 /**
@@ -114327,16 +123895,16 @@ var Extend = __webpack_require__(14);
 
 var Pipelines = {
 
-    BitmapMaskPipeline: __webpack_require__(179),
-    Events: __webpack_require__(180),
-    GraphicsPipeline: __webpack_require__(182),
-    LightPipeline: __webpack_require__(183),
-    MultiPipeline: __webpack_require__(46),
-    PointLightPipeline: __webpack_require__(184),
-    PostFXPipeline: __webpack_require__(762),
-    RopePipeline: __webpack_require__(185),
-    SinglePipeline: __webpack_require__(186),
-    UtilityPipeline: __webpack_require__(187)
+    BitmapMaskPipeline: __webpack_require__(209),
+    Events: __webpack_require__(210),
+    GraphicsPipeline: __webpack_require__(212),
+    LightPipeline: __webpack_require__(213),
+    MultiPipeline: __webpack_require__(56),
+    PointLightPipeline: __webpack_require__(214),
+    PostFXPipeline: __webpack_require__(929),
+    RopePipeline: __webpack_require__(215),
+    SinglePipeline: __webpack_require__(216),
+    UtilityPipeline: __webpack_require__(217)
 
 };
 
@@ -114350,7 +123918,7 @@ module.exports = Pipelines;
 
 
 /***/ }),
-/* 762 */
+/* 929 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -114360,11 +123928,11 @@ module.exports = Pipelines;
  */
 
 var Class = __webpack_require__(0);
-var ColorMatrix = __webpack_require__(188);
+var ColorMatrix = __webpack_require__(218);
 var GetFastValue = __webpack_require__(1);
-var ShaderSourceFS = __webpack_require__(763);
-var ShaderSourceVS = __webpack_require__(189);
-var WebGLPipeline = __webpack_require__(20);
+var ShaderSourceFS = __webpack_require__(930);
+var ShaderSourceVS = __webpack_require__(219);
+var WebGLPipeline = __webpack_require__(23);
 
 /**
  * @classdesc
@@ -114844,7 +124412,7 @@ module.exports = PostFXPipeline;
 
 
 /***/ }),
-/* 763 */
+/* 930 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -114865,7 +124433,7 @@ module.exports = [
 
 
 /***/ }),
-/* 764 */
+/* 931 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -114875,7 +124443,7 @@ module.exports = [
  */
 
 var Extend = __webpack_require__(14);
-var CONST = __webpack_require__(91);
+var CONST = __webpack_require__(110);
 
 /**
  * @namespace Phaser.Scale
@@ -114903,12 +124471,12 @@ var CONST = __webpack_require__(91);
 
 var Scale = {
 
-    Center: __webpack_require__(199),
-    Events: __webpack_require__(40),
-    Orientation: __webpack_require__(200),
-    ScaleManager: __webpack_require__(212),
-    ScaleModes: __webpack_require__(201),
-    Zoom: __webpack_require__(202)
+    Center: __webpack_require__(229),
+    Events: __webpack_require__(51),
+    Orientation: __webpack_require__(230),
+    ScaleManager: __webpack_require__(242),
+    ScaleModes: __webpack_require__(231),
+    Zoom: __webpack_require__(232)
 
 };
 
@@ -114921,7 +124489,7 @@ module.exports = Scale;
 
 
 /***/ }),
-/* 765 */
+/* 932 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -114930,7 +124498,7 @@ module.exports = Scale;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = __webpack_require__(65);
+var CONST = __webpack_require__(78);
 var Extend = __webpack_require__(14);
 
 /**
@@ -114939,13 +124507,13 @@ var Extend = __webpack_require__(14);
 
 var Scene = {
 
-    Events: __webpack_require__(8),
-    GetPhysicsPlugins: __webpack_require__(216),
-    GetScenePlugins: __webpack_require__(218),
-    SceneManager: __webpack_require__(214),
-    ScenePlugin: __webpack_require__(766),
-    Settings: __webpack_require__(219),
-    Systems: __webpack_require__(93)
+    Events: __webpack_require__(11),
+    GetPhysicsPlugins: __webpack_require__(246),
+    GetScenePlugins: __webpack_require__(248),
+    SceneManager: __webpack_require__(244),
+    ScenePlugin: __webpack_require__(933),
+    Settings: __webpack_require__(249),
+    Systems: __webpack_require__(112)
 
 };
 
@@ -114956,7 +124524,7 @@ module.exports = Scene;
 
 
 /***/ }),
-/* 766 */
+/* 933 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -114965,11 +124533,11 @@ module.exports = Scene;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = __webpack_require__(5);
+var Clamp = __webpack_require__(8);
 var Class = __webpack_require__(0);
-var Events = __webpack_require__(8);
+var Events = __webpack_require__(11);
 var GetFastValue = __webpack_require__(1);
-var PluginCache = __webpack_require__(9);
+var PluginCache = __webpack_require__(12);
 
 /**
  * @classdesc
@@ -115966,7 +125534,7 @@ module.exports = ScenePlugin;
 
 
 /***/ }),
-/* 767 */
+/* 934 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -115981,19 +125549,19 @@ module.exports = ScenePlugin;
 
 module.exports = {
 
-    Events: __webpack_require__(240),
-    List: __webpack_require__(95),
-    Map: __webpack_require__(35),
-    ProcessQueue: __webpack_require__(239),
-    RTree: __webpack_require__(768),
-    Set: __webpack_require__(264),
-    Size: __webpack_require__(213)
+    Events: __webpack_require__(270),
+    List: __webpack_require__(114),
+    Map: __webpack_require__(46),
+    ProcessQueue: __webpack_require__(269),
+    RTree: __webpack_require__(935),
+    Set: __webpack_require__(323),
+    Size: __webpack_require__(243)
 
 };
 
 
 /***/ }),
-/* 768 */
+/* 935 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -116003,7 +125571,7 @@ module.exports = {
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var quickselect = __webpack_require__(237);
+var quickselect = __webpack_require__(267);
 
 /**
  * @classdesc
@@ -116604,7 +126172,7 @@ function multiSelect (arr, left, right, n, compare)
 module.exports = rbush;
 
 /***/ }),
-/* 769 */
+/* 936 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -116614,7 +126182,7 @@ module.exports = rbush;
  */
 
 var Extend = __webpack_require__(14);
-var FilterMode = __webpack_require__(770);
+var FilterMode = __webpack_require__(937);
 
 /**
  * @namespace Phaser.Textures
@@ -116640,14 +126208,14 @@ var FilterMode = __webpack_require__(770);
 
 var Textures = {
 
-    CanvasTexture: __webpack_require__(221),
-    Events: __webpack_require__(44),
+    CanvasTexture: __webpack_require__(251),
+    Events: __webpack_require__(54),
     FilterMode: FilterMode,
-    Frame: __webpack_require__(222),
-    Parsers: __webpack_require__(224),
-    Texture: __webpack_require__(94),
-    TextureManager: __webpack_require__(220),
-    TextureSource: __webpack_require__(223)
+    Frame: __webpack_require__(252),
+    Parsers: __webpack_require__(254),
+    Texture: __webpack_require__(113),
+    TextureManager: __webpack_require__(250),
+    TextureSource: __webpack_require__(253)
 
 };
 
@@ -116657,7 +126225,7 @@ module.exports = Textures;
 
 
 /***/ }),
-/* 770 */
+/* 937 */
 /***/ (function(module, exports) {
 
 /**
@@ -116701,7 +126269,7 @@ module.exports = CONST;
 
 
 /***/ }),
-/* 771 */
+/* 938 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -116716,14 +126284,14 @@ module.exports = CONST;
 
 module.exports = {
 
-    Clock: __webpack_require__(772),
-    TimerEvent: __webpack_require__(266)
+    Clock: __webpack_require__(939),
+    TimerEvent: __webpack_require__(325)
 
 };
 
 
 /***/ }),
-/* 772 */
+/* 939 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -116733,10 +126301,10 @@ module.exports = {
  */
 
 var Class = __webpack_require__(0);
-var PluginCache = __webpack_require__(9);
-var SceneEvents = __webpack_require__(8);
-var TimerEvent = __webpack_require__(266);
-var Remove = __webpack_require__(33);
+var PluginCache = __webpack_require__(12);
+var SceneEvents = __webpack_require__(11);
+var TimerEvent = __webpack_require__(325);
+var Remove = __webpack_require__(40);
 
 /**
  * @classdesc
@@ -117179,7 +126747,7 @@ module.exports = Clock;
 
 
 /***/ }),
-/* 773 */
+/* 940 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -117188,7 +126756,7 @@ module.exports = Clock;
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = __webpack_require__(38);
+var CONST = __webpack_require__(49);
 var Extend = __webpack_require__(14);
 
 /**
@@ -117197,13 +126765,13 @@ var Extend = __webpack_require__(14);
 
 var Tweens = {
 
-    Builders: __webpack_require__(774),
-    Events: __webpack_require__(111),
+    Builders: __webpack_require__(941),
+    Events: __webpack_require__(140),
 
-    TweenManager: __webpack_require__(790),
-    Tween: __webpack_require__(110),
-    TweenData: __webpack_require__(112),
-    Timeline: __webpack_require__(272)
+    TweenManager: __webpack_require__(957),
+    Tween: __webpack_require__(139),
+    TweenData: __webpack_require__(141),
+    Timeline: __webpack_require__(331)
 
 };
 
@@ -117214,7 +126782,7 @@ module.exports = Tweens;
 
 
 /***/ }),
-/* 774 */
+/* 941 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -117229,23 +126797,23 @@ module.exports = Tweens;
 
 module.exports = {
 
-    GetBoolean: __webpack_require__(37),
-    GetEaseFunction: __webpack_require__(53),
-    GetNewValue: __webpack_require__(75),
-    GetProps: __webpack_require__(267),
-    GetTargets: __webpack_require__(107),
-    GetTweens: __webpack_require__(268),
-    GetValueOp: __webpack_require__(108),
-    NumberTweenBuilder: __webpack_require__(269),
-    StaggerBuilder: __webpack_require__(270),
-    TimelineBuilder: __webpack_require__(271),
-    TweenBuilder: __webpack_require__(76)
+    GetBoolean: __webpack_require__(48),
+    GetEaseFunction: __webpack_require__(44),
+    GetNewValue: __webpack_require__(92),
+    GetProps: __webpack_require__(326),
+    GetTargets: __webpack_require__(136),
+    GetTweens: __webpack_require__(327),
+    GetValueOp: __webpack_require__(137),
+    NumberTweenBuilder: __webpack_require__(328),
+    StaggerBuilder: __webpack_require__(329),
+    TimelineBuilder: __webpack_require__(330),
+    TweenBuilder: __webpack_require__(93)
 
 };
 
 
 /***/ }),
-/* 775 */
+/* 942 */
 /***/ (function(module, exports) {
 
 /**
@@ -117323,7 +126891,7 @@ module.exports = [
 
 
 /***/ }),
-/* 776 */
+/* 943 */
 /***/ (function(module, exports) {
 
 /**
@@ -117359,7 +126927,7 @@ module.exports = 'complete';
 
 
 /***/ }),
-/* 777 */
+/* 944 */
 /***/ (function(module, exports) {
 
 /**
@@ -117396,7 +126964,7 @@ module.exports = 'loop';
 
 
 /***/ }),
-/* 778 */
+/* 945 */
 /***/ (function(module, exports) {
 
 /**
@@ -117433,7 +127001,7 @@ module.exports = 'pause';
 
 
 /***/ }),
-/* 779 */
+/* 946 */
 /***/ (function(module, exports) {
 
 /**
@@ -117470,7 +127038,7 @@ module.exports = 'resume';
 
 
 /***/ }),
-/* 780 */
+/* 947 */
 /***/ (function(module, exports) {
 
 /**
@@ -117506,7 +127074,7 @@ module.exports = 'start';
 
 
 /***/ }),
-/* 781 */
+/* 948 */
 /***/ (function(module, exports) {
 
 /**
@@ -117543,7 +127111,7 @@ module.exports = 'update';
 
 
 /***/ }),
-/* 782 */
+/* 949 */
 /***/ (function(module, exports) {
 
 /**
@@ -117583,7 +127151,7 @@ module.exports = 'active';
 
 
 /***/ }),
-/* 783 */
+/* 950 */
 /***/ (function(module, exports) {
 
 /**
@@ -117624,7 +127192,7 @@ module.exports = 'complete';
 
 
 /***/ }),
-/* 784 */
+/* 951 */
 /***/ (function(module, exports) {
 
 /**
@@ -117668,7 +127236,7 @@ module.exports = 'loop';
 
 
 /***/ }),
-/* 785 */
+/* 952 */
 /***/ (function(module, exports) {
 
 /**
@@ -117713,7 +127281,7 @@ module.exports = 'repeat';
 
 
 /***/ }),
-/* 786 */
+/* 953 */
 /***/ (function(module, exports) {
 
 /**
@@ -117753,7 +127321,7 @@ module.exports = 'start';
 
 
 /***/ }),
-/* 787 */
+/* 954 */
 /***/ (function(module, exports) {
 
 /**
@@ -117789,7 +127357,7 @@ module.exports = 'stop';
 
 
 /***/ }),
-/* 788 */
+/* 955 */
 /***/ (function(module, exports) {
 
 /**
@@ -117832,7 +127400,7 @@ module.exports = 'update';
 
 
 /***/ }),
-/* 789 */
+/* 956 */
 /***/ (function(module, exports) {
 
 /**
@@ -117878,7 +127446,7 @@ module.exports = 'yoyo';
 
 
 /***/ }),
-/* 790 */
+/* 957 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -117887,15 +127455,15 @@ module.exports = 'yoyo';
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var ArrayRemove = __webpack_require__(33);
+var ArrayRemove = __webpack_require__(40);
 var Class = __webpack_require__(0);
-var NumberTweenBuilder = __webpack_require__(269);
-var PluginCache = __webpack_require__(9);
-var SceneEvents = __webpack_require__(8);
-var StaggerBuilder = __webpack_require__(270);
-var TimelineBuilder = __webpack_require__(271);
-var TWEEN_CONST = __webpack_require__(38);
-var TweenBuilder = __webpack_require__(76);
+var NumberTweenBuilder = __webpack_require__(328);
+var PluginCache = __webpack_require__(12);
+var SceneEvents = __webpack_require__(11);
+var StaggerBuilder = __webpack_require__(329);
+var TimelineBuilder = __webpack_require__(330);
+var TWEEN_CONST = __webpack_require__(49);
+var TweenBuilder = __webpack_require__(93);
 
 /**
  * @classdesc
@@ -118667,7 +128235,7 @@ module.exports = TweenManager;
 
 
 /***/ }),
-/* 791 */
+/* 958 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -118683,21 +128251,21 @@ module.exports = TweenManager;
 
 module.exports = {
 
-    SoundManagerCreator: __webpack_require__(225),
+    SoundManagerCreator: __webpack_require__(255),
 
-    Events: __webpack_require__(30),
+    Events: __webpack_require__(36),
 
-    BaseSound: __webpack_require__(67),
-    BaseSoundManager: __webpack_require__(66),
+    BaseSound: __webpack_require__(80),
+    BaseSoundManager: __webpack_require__(79),
 
-    WebAudioSound: __webpack_require__(233),
-    WebAudioSoundManager: __webpack_require__(232),
+    WebAudioSound: __webpack_require__(263),
+    WebAudioSoundManager: __webpack_require__(262),
 
-    HTML5AudioSound: __webpack_require__(229),
-    HTML5AudioSoundManager: __webpack_require__(226),
+    HTML5AudioSound: __webpack_require__(259),
+    HTML5AudioSoundManager: __webpack_require__(256),
 
-    NoAudioSound: __webpack_require__(231),
-    NoAudioSoundManager: __webpack_require__(230)
+    NoAudioSound: __webpack_require__(261),
+    NoAudioSoundManager: __webpack_require__(260)
 
 };
 
