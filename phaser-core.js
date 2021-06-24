@@ -30,6 +30,7 @@ var Phaser = {
         DisplayList: require('gameobjects/DisplayList'),
         GameObjectCreator: require('gameobjects/GameObjectCreator'),
         GameObjectFactory: require('gameobjects/GameObjectFactory'),
+        GetCalcMatrix: require('gameobjects/GetCalcMatrix'),
         UpdateList: require('gameobjects/UpdateList'),
         Components: require('gameobjects/components'),
         BuildGameObject: require('gameobjects/BuildGameObject'),
@@ -88,13 +89,7 @@ var Phaser = {
         XHRLoader: require('loader/XHRLoader'),
         XHRSettings: require('loader/XHRSettings')
     },
-    Math: {
-        Between: require('math/Between'),
-        DegToRad: require('math/DegToRad'),
-        FloatBetween: require('math/FloatBetween'),
-        RadToDeg: require('math/RadToDeg'),
-        Vector2: require('math/Vector2')
-    },
+    Math: require('math'),
     Plugins: require('plugins'),
     Renderer: require('renderer'),
     Scale: require('scale'),
