@@ -2,7 +2,9 @@
   "name": "phaser3-custom-build",
   "version": "1.0.3",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/phaser-core.min.js",
+  "types": "./types/phaser.d.ts",
+  "browser": "./dist/phaser-core.min.js",
   "scripts": {
     "build": "webpack --display-modules",
     "buildlog": "webpack --json --profile > webpack.build-log.json",
